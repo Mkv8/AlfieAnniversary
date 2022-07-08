@@ -1,0 +1,31 @@
+{
+	"storyName": "Bleat Beats...",
+	"difficulties": "",
+	"hideFreeplay": false,
+	"weekBackground": "siiva",
+	"weekBefore": "tutorial",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"startUnlocked": true,
+	"hideStoryMode": false,
+	"songs": [
+		[
+			"spectral sonnet beta",
+			"Alfie",
+			[
+				106,
+				113,
+				253
+			]
+		]
+	],
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"weekName": "SiivaGunner"
+}

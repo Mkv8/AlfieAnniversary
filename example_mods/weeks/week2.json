@@ -1,0 +1,31 @@
+{
+	"songs": [
+		[
+			"spectral sonnet",
+			"Alfie",
+			[
+				215,
+				0,
+				73
+			]
+		]
+	],
+	"hideFreeplay": false,
+	"weekBackground": "spectral",
+	"difficulties": "",
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"storyName": "",
+	"weekName": "Specters",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}
