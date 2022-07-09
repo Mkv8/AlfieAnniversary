@@ -2050,7 +2050,7 @@ Lua_helper.add_callback(lua, "clearShadersFromCamera", function(cameraName)
 	}
 }
 
-class ModchartSprite extends FlxSprite
+class ModchartSprite extends FlxSpriteExtra
 {
 	public var wasAdded:Bool = false;
 	//public var isInFront:Bool = false;

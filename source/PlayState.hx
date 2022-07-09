@@ -116,7 +116,7 @@ class PlayState extends MusicBeatState
 	public var songSpeed(default, set):Float = 1;
 	public var songSpeedType:String = "multiplicative";
 	public var noteKillOffset:Float = 350;
-	
+
 	public var boyfriendGroup:FlxSpriteGroup;
 	public var dadGroup:FlxSpriteGroup;
 	public var gfGroup:FlxSpriteGroup;
@@ -165,12 +165,12 @@ class PlayState extends MusicBeatState
 
 	private var timeBarBG:AttachedSprite;
 	public var timeBar:FlxBar;
-	
+
 	public var sicks:Int = 0;
 	public var goods:Int = 0;
 	public var bads:Int = 0;
 	public var shits:Int = 0;
-	
+
 	private var generatedMusic:Bool = false;
 	public var endingSong:Bool = false;
 	private var startingSong:Bool = false;
@@ -313,7 +313,7 @@ class PlayState extends MusicBeatState
 	// Debug buttons
 	private var debugKeysChart:Array<FlxKey>;
 	private var debugKeysCharacter:Array<FlxKey>;
-	
+
 	// Less laggy controls
 	private var keysArray:Array<Dynamic>;
 
@@ -400,7 +400,7 @@ class PlayState extends MusicBeatState
 		scanlines.blend = OVERLAY;
 		scanlines.scale.set(2.5, 2.5);
 		scanlines.alpha = 0;
-	
+
 		oldstripes = new BGSprite('oldtimeyeffect', -1, -1, 1, 1);
 		oldstripes.updateHitbox();
 		oldstripes.cameras = [camHUD];
@@ -499,7 +499,7 @@ class PlayState extends MusicBeatState
 				directory: "",
 				defaultZoom: 0.9,
 				isPixelStage: false,
-			
+
 				boyfriend: [770, 100],
 				girlfriend: [400, 130],
 				opponent: [100, 100]
@@ -579,7 +579,7 @@ class PlayState extends MusicBeatState
 
 
 			case 'dark':
-				var bg:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 3, FlxG.height * 3, 0xFF0A0808);
+				var bg = new FlxSpriteExtra(-100, -100).makeSolid(FlxG.width * 3, FlxG.height * 3, 0xFF0A0808);
 				bg.updateHitbox();
 				bg.screenCenter(XY);
 				add(bg);
@@ -678,7 +678,7 @@ class PlayState extends MusicBeatState
 				add(halloweenBG);
 
 				halloweenWhite = new BGSprite(null, -FlxG.width, -FlxG.height, 0, 0);
-				halloweenWhite.makeGraphic(Std.int(FlxG.width * 3), Std.int(FlxG.height * 3), FlxColor.WHITE);
+				halloweenWhite.makeSolid(Std.int(FlxG.width * 3), Std.int(FlxG.height * 3), FlxColor.WHITE);
 				halloweenWhite.alpha = 0;
 				halloweenWhite.blend = ADD;
 
@@ -691,7 +691,7 @@ class PlayState extends MusicBeatState
 					var bg:BGSprite = new BGSprite('philly/sky', -100, 0, 0.1, 0.1);
 					add(bg);
 				}
-				
+
 				//addShaderToCamera('game', chromAb);
 				//chromAb.setChrome(0.01);
 
@@ -931,7 +931,7 @@ class PlayState extends MusicBeatState
 
 		add(dadGroup);
 		add(boyfriendGroup);
-		
+
 		if(curStage == 'spooky') {
 			add(halloweenWhite);
 		}
@@ -981,7 +981,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 		#end
-		
+
 
 		// STAGE SCRIPTS
 		#if (MODS_ALLOWED && LUA_ALLOWED)
@@ -997,13 +997,13 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if(doPush) 
+		if(doPush)
 			luaArray.push(new FunkinLua(luaFile));
 		#end
 
 		if(!modchartSprites.exists('blammedLightsBlack')) { //Creates blammed light black fade in case you didn't make your own
 			blammedLightsBlack = new ModchartSprite(FlxG.width * -0.5, FlxG.height * -0.5);
-			blammedLightsBlack.makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+			blammedLightsBlack.makeSolid(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
 			var position:Int = members.indexOf(gfGroup);
 			if(members.indexOf(boyfriendGroup) < position) {
 				position = members.indexOf(boyfriendGroup);
@@ -1045,12 +1045,12 @@ class PlayState extends MusicBeatState
 		startCharacterPos(dad, true);
 		dadGroup.add(dad);
 		startCharacterLua(dad.curCharacter);
-		
+
 		boyfriend = new Boyfriend(0, 0, SONG.player1);
 		startCharacterPos(boyfriend);
 		boyfriendGroup.add(boyfriend);
 		startCharacterLua(boyfriend.curCharacter);
-		
+
 		var camPos:FlxPoint = new FlxPoint(gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y);
 		camPos.x += gf.cameraPosition[0];
 		camPos.y += gf.cameraPosition[1];
@@ -1065,7 +1065,7 @@ class PlayState extends MusicBeatState
 			case 'limo':
 				resetFastCar();
 				insert(members.indexOf(gfGroup) - 1, fastCar);
-			
+
 			case 'schoolEvil':
 				var evilTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069); //nice
 				insert(members.indexOf(dadGroup) - 1, evilTrail);
@@ -1282,11 +1282,6 @@ class PlayState extends MusicBeatState
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 
-		// if (SONG.song == 'South')
-		// FlxG.camera.alpha = 0.7;
-		// UI_camera.zoom = 1;
-
-		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 
 		// SONG SPECIFIC SCRIPTS
@@ -1315,327 +1310,29 @@ class PlayState extends MusicBeatState
 			}
 		}
 		#end
-		
+
 		var daSong:String = Paths.formatToSongPath(curSong);
+
+		var data = new Map<String, Array<String>>();
+
+		data.set("bopeebo", ["NowPOld", "ForestTitle"]);
+		data.set("forest-fire", ["NowPOld", "ForestTitle"]);
+		data.set("spectral-sonnet", ["NowP", "Sremititle"]);
+		data.set("spectral-sonnet-beta", ["NowP", "Siivatitle"]);
+		data.set("goated", ["NowP", "GOATED"]);
+		data.set("after-dark", ["NowPdark", "AFTER DARK"]);
+		data.set("candlelit-clash", ["NowP", "Siivatitle"]);
+
+		var shouldShowCassette:Bool = false;
+
 		if (isStoryMode && !seenCutscene)
 		{
-			if ( daSong == 'bopeebo' ||daSong ==  'forest-fire')
-				{
-					darkenscreen = new FlxSprite(-FlxG.width * FlxG.camera.zoom, -FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, 0xFF000000);
-					darkenscreen.alpha = 0.4;
-					darkenscreen.scrollFactor.set();
-					darkenscreen.scale.set(1.20, 1.20);
-					add(darkenscreen);
-
-					cassound = new FlxSound().loadEmbedded(Paths.sound("CasAudio"));
-					casette = new FlxSprite(-700, 200);
-					casette.frames = Paths.getSparrowAtlas('casette', 'shared');
-					casette.animation.addByPrefix('play', "CasettePlay0", 40, false);
-					//casette.animation.play('play');
-					casette.scrollFactor.set(1, 1);
-					casette.scale.set(0.55, 0.55);
-					casette.cameras = [camHUD];
-
-					//cassound.play(true);
-
-					playing = new FlxSprite(500, 200);
-					playing.loadGraphic(Paths.image('NowPOld', 'shared'));
-					playing.scrollFactor.set(1, 1);
-					playing.active = false;
-					playing.scale.set(0.85, 0.85);
-					playing.cameras = [camHUD];
-					playing.alpha = 0;
-
-					songtitle = new FlxSprite(500, 200);
-					songtitle.loadGraphic(Paths.image('ForestTitle', 'shared'));
-					songtitle.scrollFactor.set(1, 1);
-					songtitle.active = false;
-					songtitle.scale.set(0.85, 0.85);
-					songtitle.cameras = [camHUD];
-					songtitle.alpha = 0;
-
-					add(playing);
-					add(songtitle);
-					add(cassound);
-					add(casette);		
-					
-					new FlxTimer().start(0.5, function(tmr:FlxTimer)
-						{
-							casette.animation.play('play');
-							cassound.play(true);
-						});
-
-					new FlxTimer().start(1.7, function(tmr:FlxTimer)
-						{
-							playing.alpha = 1;
-						});
-					
-					new FlxTimer().start(2.3, function(tmr:FlxTimer)
-						{
-							songtitle.alpha = 1;
-						});							
-
-					new FlxTimer().start(4.5, function(tmr:FlxTimer)
-						{
-							FlxTween.tween(casette, {alpha: 0}, 0.5);
-							FlxTween.tween(playing, {alpha: 0}, 0.5);
-							FlxTween.tween(songtitle, {alpha: 0}, 0.5);
-							FlxTween.tween(darkenscreen, {alpha: 0}, 0.5);
-
-						});
-				
-	
-					new FlxTimer().start(5, function(tmr:FlxTimer) 
-						{
-							startCountdown(); trace('this should wait a bit');
-							remove(casette);
-							remove(playing);
-							remove(songtitle);
-							remove(cassound);
-						});
-
-			
-			}
-
-			if ( daSong ==  'spectral-sonnet')
-				{
-					darkenscreen = new FlxSprite(-FlxG.width * FlxG.camera.zoom, -FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, 0xFF000000);
-					darkenscreen.alpha = 0.4;
-					darkenscreen.scrollFactor.set();
-					darkenscreen.scale.set(1.20, 1.20);
-					add(darkenscreen);
-
-					cassound = new FlxSound().loadEmbedded(Paths.sound("CasAudio"));
-					casette = new FlxSprite(-700, 200);
-					casette.frames = Paths.getSparrowAtlas('casette', 'shared');
-					casette.animation.addByPrefix('play', "CasettePlay0", 40, false);
-					//casette.animation.play('play');
-					casette.scrollFactor.set(1, 1);
-					casette.scale.set(0.55, 0.55);
-					casette.cameras = [camHUD];
-
-					//cassound.play(true);
-
-					playing = new FlxSprite(500, 200);
-					playing.loadGraphic(Paths.image('NowP', 'shared'));
-					playing.scrollFactor.set(1, 1);
-					playing.active = false;
-					playing.scale.set(0.85, 0.85);
-					playing.cameras = [camHUD];
-					playing.alpha = 0;
-
-					songtitle = new FlxSprite(500, 200);
-					songtitle.loadGraphic(Paths.image('Sremititle', 'shared'));
-					songtitle.scrollFactor.set(1, 1);
-					songtitle.active = false;
-					songtitle.scale.set(0.85, 0.85);
-					songtitle.cameras = [camHUD];
-					songtitle.alpha = 0;
-
-					add(playing);
-					add(songtitle);
-					add(cassound);
-					add(casette);		
-					
-					new FlxTimer().start(0.5, function(tmr:FlxTimer)
-						{
-							casette.animation.play('play');
-							cassound.play(true);
-						});
-
-					new FlxTimer().start(1.7, function(tmr:FlxTimer)
-						{
-							playing.alpha = 1;
-						});
-					
-					new FlxTimer().start(2.3, function(tmr:FlxTimer)
-						{
-							songtitle.alpha = 1;
-						});							
-
-					new FlxTimer().start(4.5, function(tmr:FlxTimer)
-						{
-							FlxTween.tween(casette, {alpha: 0}, 0.5);
-							FlxTween.tween(playing, {alpha: 0}, 0.5);
-							FlxTween.tween(songtitle, {alpha: 0}, 0.5);
-							FlxTween.tween(darkenscreen, {alpha: 0}, 0.5);
-
-						});
-				
-	
-					new FlxTimer().start(5, function(tmr:FlxTimer) 
-						{
-							startCountdown(); trace('this should wait a bit');
-							remove(casette);
-							remove(playing);
-							remove(songtitle);
-							remove(cassound);
-						});
-
-			
-			}
-
-			if ( daSong ==  'spectral-sonnet-beta')
-				{
-					darkenscreen = new FlxSprite(-FlxG.width * FlxG.camera.zoom, -FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, 0xFF000000);
-					darkenscreen.alpha = 0.4;
-					darkenscreen.scrollFactor.set();
-					darkenscreen.scale.set(1.20, 1.20);
-					add(darkenscreen);
-
-					cassound = new FlxSound().loadEmbedded(Paths.sound("CasAudio"));
-					casette = new FlxSprite(-700, 200);
-					casette.frames = Paths.getSparrowAtlas('casette', 'shared');
-					casette.animation.addByPrefix('play', "CasettePlay0", 40, false);
-					//casette.animation.play('play');
-					casette.scrollFactor.set(1, 1);
-					casette.scale.set(0.55, 0.55);
-					casette.cameras = [camHUD];
-
-					//cassound.play(true);
-
-					playing = new FlxSprite(500, 200);
-					playing.loadGraphic(Paths.image('NowP', 'shared'));
-					playing.scrollFactor.set(1, 1);
-					playing.active = false;
-					playing.scale.set(0.85, 0.85);
-					playing.cameras = [camHUD];
-					playing.alpha = 0;
-
-					songtitle = new FlxSprite(500, 200);
-					songtitle.loadGraphic(Paths.image('Siivatitle', 'shared'));
-					songtitle.scrollFactor.set(1, 1);
-					songtitle.active = false;
-					songtitle.scale.set(0.85, 0.85);
-					songtitle.cameras = [camHUD];
-					songtitle.alpha = 0;
-
-					add(playing);
-					add(songtitle);
-					add(cassound);
-					add(casette);		
-					
-					new FlxTimer().start(0.5, function(tmr:FlxTimer)
-						{
-							casette.animation.play('play');
-							cassound.play(true);
-						});
-
-					new FlxTimer().start(1.7, function(tmr:FlxTimer)
-						{
-							playing.alpha = 1;
-						});
-					
-					new FlxTimer().start(2.3, function(tmr:FlxTimer)
-						{
-							songtitle.alpha = 1;
-						});							
-
-					new FlxTimer().start(4.5, function(tmr:FlxTimer)
-						{
-							FlxTween.tween(casette, {alpha: 0}, 0.5);
-							FlxTween.tween(playing, {alpha: 0}, 0.5);
-							FlxTween.tween(songtitle, {alpha: 0}, 0.5);
-							FlxTween.tween(darkenscreen, {alpha: 0}, 0.5);
-
-						});
-				
-	
-					new FlxTimer().start(5, function(tmr:FlxTimer) 
-						{
-							startCountdown(); trace('this should wait a bit');
-							remove(casette);
-							remove(playing);
-							remove(songtitle);
-							remove(cassound);
-						});
-
-			
-			}
-
-			if ( daSong ==  'goated')
-				{
-					darkenscreen = new FlxSprite(-FlxG.width * FlxG.camera.zoom, -FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, 0xFF000000);
-					darkenscreen.alpha = 0.4;
-					darkenscreen.scrollFactor.set();
-					darkenscreen.scale.set(1.20, 1.20);
-					add(darkenscreen);
-
-					cassound = new FlxSound().loadEmbedded(Paths.sound("CasAudio"));
-					casette = new FlxSprite(-700, 200);
-					casette.frames = Paths.getSparrowAtlas('casette', 'shared');
-					casette.animation.addByPrefix('play', "CasettePlay0", 40, false);
-					//casette.animation.play('play');
-					casette.scrollFactor.set(1, 1);
-					casette.scale.set(0.55, 0.55);
-					casette.cameras = [camHUD];
-
-					//cassound.play(true);
-
-					playing = new FlxSprite(500, 200);
-					playing.loadGraphic(Paths.image('NowP', 'shared'));
-					playing.scrollFactor.set(1, 1);
-					playing.active = false;
-					playing.scale.set(0.85, 0.85);
-					playing.cameras = [camHUD];
-					playing.alpha = 0;
-
-					songtitle = new FlxSprite(500, 200);
-					songtitle.loadGraphic(Paths.image('GOATED', 'shared'));
-					songtitle.scrollFactor.set(1, 1);
-					songtitle.active = false;
-					songtitle.scale.set(0.85, 0.85);
-					songtitle.cameras = [camHUD];
-					songtitle.alpha = 0;
-
-					add(playing);
-					add(songtitle);
-					add(cassound);
-					add(casette);		
-					
-					new FlxTimer().start(0.5, function(tmr:FlxTimer)
-						{
-							casette.animation.play('play');
-							cassound.play(true);
-						});
-
-					new FlxTimer().start(1.7, function(tmr:FlxTimer)
-						{
-							playing.alpha = 1;
-						});
-					
-					new FlxTimer().start(2.3, function(tmr:FlxTimer)
-						{
-							songtitle.alpha = 1;
-						});							
-
-					new FlxTimer().start(4.5, function(tmr:FlxTimer)
-						{
-							FlxTween.tween(casette, {alpha: 0}, 0.5);
-							FlxTween.tween(playing, {alpha: 0}, 0.5);
-							FlxTween.tween(songtitle, {alpha: 0}, 0.5);
-							FlxTween.tween(darkenscreen, {alpha: 0}, 0.5);
-
-						});
-				
-	
-					new FlxTimer().start(5, function(tmr:FlxTimer) 
-						{
-							startCountdown(); trace('this should wait a bit');
-							remove(casette);
-							remove(playing);
-							remove(songtitle);
-							remove(cassound);
-						});
-
-			
-			}
-
+			shouldShowCassette = true;
 
 			switch (daSong)
 			{
 				case "monster":
-					var whiteScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.WHITE);
+					var whiteScreen = new FlxSpriteExtra(0, 0).makeSolid(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.WHITE);
 					add(whiteScreen);
 					whiteScreen.scrollFactor.set();
 					whiteScreen.blend = ADD;
@@ -1658,7 +1355,7 @@ class PlayState extends MusicBeatState
 					boyfriend.playAnim('scared', true);
 
 				case "winter-horrorland":
-					var blackScreen:FlxSprite = new FlxSprite().makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+					var blackScreen = new FlxSpriteExtra().makeSolid(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
 					add(blackScreen);
 					blackScreen.scrollFactor.set();
 					camHUD.visible = false;
@@ -1688,508 +1385,103 @@ class PlayState extends MusicBeatState
 						});
 					});
 
-				
-
-				/*case 'senpai' | 'roses' | 'thorns':
-					if(daSong == 'roses') FlxG.sound.play(Paths.sound('ANGRY'));
-					schoolIntro(doof);*/
-
 				/*default:
 					startCountdown();*/
 			}
 			seenCutscene = true;
 		}
-	
-
 		else if (!isStoryMode)
-			{
-
-					if ( daSong == 'bopeebo' ||daSong ==  'forest-fire')
-					{
-						darkenscreen = new FlxSprite(-FlxG.width * FlxG.camera.zoom, -FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, 0xFF000000);
-						darkenscreen.alpha = 0.4;
-						darkenscreen.scrollFactor.set();
-						darkenscreen.scale.set(1.20, 1.20);
-						add(darkenscreen);
-
-						cassound = new FlxSound().loadEmbedded(Paths.sound("CasAudio"));
-						casette = new FlxSprite(-700, 200);
-						casette.frames = Paths.getSparrowAtlas('casette', 'shared');
-						casette.animation.addByPrefix('play', "CasettePlay0", 40, false);
-						//casette.animation.play('play');
-						casette.scrollFactor.set(1, 1);
-						casette.scale.set(0.55, 0.55);
-						casette.cameras = [camHUD];
-
-						//cassound.play(true);
-
-						playing = new FlxSprite(500, 200);
-						playing.loadGraphic(Paths.image('NowPOld', 'shared'));
-						playing.scrollFactor.set(1, 1);
-						playing.active = false;
-						playing.scale.set(0.85, 0.85);
-						playing.cameras = [camHUD];
-						playing.alpha = 0;
-
-						songtitle = new FlxSprite(500, 200);
-						songtitle.loadGraphic(Paths.image('ForestTitle', 'shared'));
-						songtitle.scrollFactor.set(1, 1);
-						songtitle.active = false;
-						songtitle.scale.set(0.85, 0.85);
-						songtitle.cameras = [camHUD];
-						songtitle.alpha = 0;
-
-						add(playing);
-						add(songtitle);
-						add(cassound);
-						add(casette);		
-						
-						new FlxTimer().start(0.5, function(tmr:FlxTimer)
-							{
-								casette.animation.play('play');
-								cassound.play(true);
-							});
-
-						new FlxTimer().start(1.7, function(tmr:FlxTimer)
-							{
-								playing.alpha = 1;
-							});
-						
-						new FlxTimer().start(2.3, function(tmr:FlxTimer)
-							{
-								songtitle.alpha = 1;
-							});							
-
-						new FlxTimer().start(4.5, function(tmr:FlxTimer)
-							{
-								FlxTween.tween(casette, {alpha: 0}, 0.5);
-								FlxTween.tween(playing, {alpha: 0}, 0.5);
-								FlxTween.tween(songtitle, {alpha: 0}, 0.5);
-								FlxTween.tween(darkenscreen, {alpha: 0}, 0.5);
-
-							});
-					
-		
-						new FlxTimer().start(5, function(tmr:FlxTimer) 
-							{
-								startCountdown(); trace('this should wait a bit');
-								remove(casette);
-								remove(playing);
-								remove(songtitle);
-								remove(cassound);
-							});
-
-				
-				}
-
-				if ( daSong ==  'spectral-sonnet')
-					{
-						darkenscreen = new FlxSprite(-FlxG.width * FlxG.camera.zoom, -FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, 0xFF000000);
-						darkenscreen.alpha = 0.4;
-						darkenscreen.scrollFactor.set();
-						darkenscreen.scale.set(1.20, 1.20);
-						add(darkenscreen);
-
-						cassound = new FlxSound().loadEmbedded(Paths.sound("CasAudio"));
-						casette = new FlxSprite(-700, 200);
-						casette.frames = Paths.getSparrowAtlas('casette', 'shared');
-						casette.animation.addByPrefix('play', "CasettePlay0", 40, false);
-						//casette.animation.play('play');
-						casette.scrollFactor.set(1, 1);
-						casette.scale.set(0.55, 0.55);
-						casette.cameras = [camHUD];
-
-						//cassound.play(true);
-
-						playing = new FlxSprite(500, 200);
-						playing.loadGraphic(Paths.image('NowP', 'shared'));
-						playing.scrollFactor.set(1, 1);
-						playing.active = false;
-						playing.scale.set(0.85, 0.85);
-						playing.cameras = [camHUD];
-						playing.alpha = 0;
-
-						songtitle = new FlxSprite(500, 200);
-						songtitle.loadGraphic(Paths.image('Sremititle', 'shared'));
-						songtitle.scrollFactor.set(1, 1);
-						songtitle.active = false;
-						songtitle.scale.set(0.85, 0.85);
-						songtitle.cameras = [camHUD];
-						songtitle.alpha = 0;
-
-						add(playing);
-						add(songtitle);
-						add(cassound);
-						add(casette);		
-						
-						new FlxTimer().start(0.5, function(tmr:FlxTimer)
-							{
-								casette.animation.play('play');
-								cassound.play(true);
-							});
-
-						new FlxTimer().start(1.7, function(tmr:FlxTimer)
-							{
-								playing.alpha = 1;
-							});
-						
-						new FlxTimer().start(2.3, function(tmr:FlxTimer)
-							{
-								songtitle.alpha = 1;
-							});							
-
-						new FlxTimer().start(4.5, function(tmr:FlxTimer)
-							{
-								FlxTween.tween(casette, {alpha: 0}, 0.5);
-								FlxTween.tween(playing, {alpha: 0}, 0.5);
-								FlxTween.tween(songtitle, {alpha: 0}, 0.5);
-								FlxTween.tween(darkenscreen, {alpha: 0}, 0.5);
-
-							});
-					
-		
-						new FlxTimer().start(5, function(tmr:FlxTimer) 
-							{
-								startCountdown(); trace('this should wait a bit');
-								remove(casette);
-								remove(playing);
-								remove(songtitle);
-								remove(cassound);
-							});
-
-				
-				}
-
-				if ( daSong ==  'spectral-sonnet-beta')
-					{
-						darkenscreen = new FlxSprite(-FlxG.width * FlxG.camera.zoom, -FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, 0xFF000000);
-						darkenscreen.alpha = 0.4;
-						darkenscreen.scrollFactor.set();
-						darkenscreen.scale.set(1.20, 1.20);
-						add(darkenscreen);
-
-						cassound = new FlxSound().loadEmbedded(Paths.sound("CasAudio"));
-						casette = new FlxSprite(-700, 200);
-						casette.frames = Paths.getSparrowAtlas('casette', 'shared');
-						casette.animation.addByPrefix('play', "CasettePlay0", 40, false);
-						//casette.animation.play('play');
-						casette.scrollFactor.set(1, 1);
-						casette.scale.set(0.55, 0.55);
-						casette.cameras = [camHUD];
-
-						//cassound.play(true);
-
-						playing = new FlxSprite(500, 200);
-						playing.loadGraphic(Paths.image('NowP', 'shared'));
-						playing.scrollFactor.set(1, 1);
-						playing.active = false;
-						playing.scale.set(0.85, 0.85);
-						playing.cameras = [camHUD];
-						playing.alpha = 0;
-
-						songtitle = new FlxSprite(500, 200);
-						songtitle.loadGraphic(Paths.image('Siivatitle', 'shared'));
-						songtitle.scrollFactor.set(1, 1);
-						songtitle.active = false;
-						songtitle.scale.set(0.85, 0.85);
-						songtitle.cameras = [camHUD];
-						songtitle.alpha = 0;
-
-						add(playing);
-						add(songtitle);
-						add(cassound);
-						add(casette);		
-						
-						new FlxTimer().start(0.5, function(tmr:FlxTimer)
-							{
-								casette.animation.play('play');
-								cassound.play(true);
-							});
-
-						new FlxTimer().start(1.7, function(tmr:FlxTimer)
-							{
-								playing.alpha = 1;
-							});
-						
-						new FlxTimer().start(2.3, function(tmr:FlxTimer)
-							{
-								songtitle.alpha = 1;
-							});							
-
-						new FlxTimer().start(4.5, function(tmr:FlxTimer)
-							{
-								FlxTween.tween(casette, {alpha: 0}, 0.5);
-								FlxTween.tween(playing, {alpha: 0}, 0.5);
-								FlxTween.tween(songtitle, {alpha: 0}, 0.5);
-								FlxTween.tween(darkenscreen, {alpha: 0}, 0.5);
-
-							});
-					
-		
-						new FlxTimer().start(5, function(tmr:FlxTimer) 
-							{
-								startCountdown(); trace('this should wait a bit');
-								remove(casette);
-								remove(playing);
-								remove(songtitle);
-								remove(cassound);
-							});
-
-				
-				}
-
-	
-				if ( daSong ==  'goated')
-					{
-						darkenscreen = new FlxSprite(-FlxG.width * FlxG.camera.zoom, -FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, 0xFF000000);
-						darkenscreen.alpha = 0.4;
-						darkenscreen.scrollFactor.set();
-						darkenscreen.scale.set(1.20, 1.20);
-						add(darkenscreen);
-	
-						cassound = new FlxSound().loadEmbedded(Paths.sound("CasAudio"));
-						casette = new FlxSprite(-700, 200);
-						casette.frames = Paths.getSparrowAtlas('casette', 'shared');
-						casette.animation.addByPrefix('play', "CasettePlay0", 40, false);
-						//casette.animation.play('play');
-						casette.scrollFactor.set(1, 1);
-						casette.scale.set(0.55, 0.55);
-						casette.cameras = [camHUD];
-	
-						//cassound.play(true);
-	
-						playing = new FlxSprite(500, 200);
-						playing.loadGraphic(Paths.image('NowP', 'shared'));
-						playing.scrollFactor.set(1, 1);
-						playing.active = false;
-						playing.scale.set(0.85, 0.85);
-						playing.cameras = [camHUD];
-						playing.alpha = 0;
-	
-						songtitle = new FlxSprite(500, 200);
-						songtitle.loadGraphic(Paths.image('GOATED', 'shared'));
-						songtitle.scrollFactor.set(1, 1);
-						songtitle.active = false;
-						songtitle.scale.set(0.85, 0.85);
-						songtitle.cameras = [camHUD];
-						songtitle.alpha = 0;
-	
-						add(playing);
-						add(songtitle);
-						add(cassound);
-						add(casette);		
-						
-						new FlxTimer().start(0.5, function(tmr:FlxTimer)
-							{
-								casette.animation.play('play');
-								cassound.play(true);
-							});
-	
-						new FlxTimer().start(1.7, function(tmr:FlxTimer)
-							{
-								playing.alpha = 1;
-							});
-						
-						new FlxTimer().start(2.3, function(tmr:FlxTimer)
-							{
-								songtitle.alpha = 1;
-							});							
-	
-						new FlxTimer().start(4.5, function(tmr:FlxTimer)
-							{
-								FlxTween.tween(casette, {alpha: 0}, 0.5);
-								FlxTween.tween(playing, {alpha: 0}, 0.5);
-								FlxTween.tween(songtitle, {alpha: 0}, 0.5);
-								FlxTween.tween(darkenscreen, {alpha: 0}, 0.5);
-	
-							});
-					
-		
-						new FlxTimer().start(5, function(tmr:FlxTimer) 
-							{
-								startCountdown(); trace('this should wait a bit');
-								remove(casette);
-								remove(playing);
-								remove(songtitle);
-								remove(cassound);
-							});
-	
-				
-				}
-	
-				
-
-				if ( daSong ==  'after-dark')
-					{
-						darkenscreen = new FlxSprite(-FlxG.width * FlxG.camera.zoom, -FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, 0xFF000000);
-						darkenscreen.alpha = 0.4;
-						darkenscreen.scrollFactor.set();
-						darkenscreen.scale.set(1.20, 1.20);
-						add(darkenscreen);
-	
-						cassound = new FlxSound().loadEmbedded(Paths.sound("CasAudio"));
-						casette = new FlxSprite(-700, 200);
-						casette.frames = Paths.getSparrowAtlas('casette', 'shared');
-						casette.animation.addByPrefix('play', "CasettePlay0", 40, false);
-						//casette.animation.play('play');
-						casette.scrollFactor.set(1, 1);
-						casette.scale.set(0.55, 0.55);
-						casette.cameras = [camHUD];
-	
-						//cassound.play(true);
-	
-						playing = new FlxSprite(500, 200);
-						playing.loadGraphic(Paths.image('NowPdark', 'shared'));
-						playing.scrollFactor.set(1, 1);
-						playing.active = false;
-						playing.scale.set(0.85, 0.85);
-						playing.cameras = [camHUD];
-						playing.alpha = 0;
-	
-						songtitle = new FlxSprite(500, 200);
-						songtitle.loadGraphic(Paths.image('AFTER DARK', 'shared'));
-						songtitle.scrollFactor.set(1, 1);
-						songtitle.active = false;
-						songtitle.scale.set(0.85, 0.85);
-						songtitle.cameras = [camHUD];
-						songtitle.alpha = 0;
-	
-						add(playing);
-						add(songtitle);
-						add(cassound);
-						add(casette);		
-						
-						new FlxTimer().start(0.5, function(tmr:FlxTimer)
-							{
-								casette.animation.play('play');
-								cassound.play(true);
-							});
-	
-						new FlxTimer().start(1.7, function(tmr:FlxTimer)
-							{
-								playing.alpha = 1;
-							});
-						
-						new FlxTimer().start(2.3, function(tmr:FlxTimer)
-							{
-								songtitle.alpha = 1;
-							});							
-	
-						new FlxTimer().start(4.5, function(tmr:FlxTimer)
-							{
-								FlxTween.tween(casette, {alpha: 0}, 0.5);
-								FlxTween.tween(playing, {alpha: 0}, 0.5);
-								FlxTween.tween(songtitle, {alpha: 0}, 0.5);
-								FlxTween.tween(darkenscreen, {alpha: 0}, 0.5);
-	
-							});
-					
-		
-						new FlxTimer().start(5, function(tmr:FlxTimer) 
-							{
-								startCountdown(); trace('this should wait a bit');
-								remove(casette);
-								remove(playing);
-								remove(songtitle);
-								remove(cassound);
-							});
-
-					}
-	
-				if ( daSong ==  'candlelit-clash')
-					{
-						darkenscreen = new FlxSprite(-FlxG.width * FlxG.camera.zoom, -FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, 0xFF000000);
-						darkenscreen.alpha = 0.4;
-						darkenscreen.scrollFactor.set();
-						darkenscreen.scale.set(1.20, 1.20);
-						add(darkenscreen);
-	
-						cassound = new FlxSound().loadEmbedded(Paths.sound("CasAudio"));
-						casette = new FlxSprite(-700, 200);
-						casette.frames = Paths.getSparrowAtlas('casette', 'shared');
-						casette.animation.addByPrefix('play', "CasettePlay0", 40, false);
-						//casette.animation.play('play');
-						casette.scrollFactor.set(1, 1);
-						casette.scale.set(0.55, 0.55);
-						casette.cameras = [camHUD];
-	
-						//cassound.play(true);
-	
-						playing = new FlxSprite(500, 200);
-						playing.loadGraphic(Paths.image('NowP', 'shared'));
-						playing.scrollFactor.set(1, 1);
-						playing.active = false;
-						playing.scale.set(0.85, 0.85);
-						playing.cameras = [camHUD];
-						playing.alpha = 0;
-	
-						songtitle = new FlxSprite(500, 200);
-						songtitle.loadGraphic(Paths.image('Siivatitle', 'shared'));
-						songtitle.scrollFactor.set(1, 1);
-						songtitle.active = false;
-						songtitle.scale.set(0.85, 0.85);
-						songtitle.cameras = [camHUD];
-						songtitle.alpha = 0;
-	
-						add(playing);
-						add(songtitle);
-						add(cassound);
-						add(casette);		
-						
-						new FlxTimer().start(0.5, function(tmr:FlxTimer)
-							{
-								casette.animation.play('play');
-								cassound.play(true);
-							});
-	
-						new FlxTimer().start(1.7, function(tmr:FlxTimer)
-							{
-								playing.alpha = 1;
-							});
-						
-						new FlxTimer().start(2.3, function(tmr:FlxTimer)
-							{
-								songtitle.alpha = 1;
-							});							
-	
-						new FlxTimer().start(4.5, function(tmr:FlxTimer)
-							{
-								FlxTween.tween(casette, {alpha: 0}, 0.5);
-								FlxTween.tween(playing, {alpha: 0}, 0.5);
-								FlxTween.tween(songtitle, {alpha: 0}, 0.5);
-								FlxTween.tween(darkenscreen, {alpha: 0}, 0.5);
-	
-							});
-					
-		
-						new FlxTimer().start(5, function(tmr:FlxTimer) 
-							{
-								startCountdown(); trace('this should wait a bit');
-								remove(casette);
-								remove(playing);
-								remove(songtitle);
-								remove(cassound);
-							});
-	
-					}
-
-
-
-				
-			}
+		{
+			shouldShowCassette = true;
+		}
 		else
 		{
-		startCountdown();
+			startCountdown();
 		}
-	
-		if (daSong == 'after-dark')
+
+		if(shouldShowCassette && data.exists(daSong)) {
+			var casData = data.get(daSong);
+
+			darkenscreen = new FlxSpriteExtra(-FlxG.width * FlxG.camera.zoom, -FlxG.height * FlxG.camera.zoom).makeSolid(FlxG.width * 3, FlxG.height * 3, 0xFF000000);
+			darkenscreen.alpha = 0.4;
+			darkenscreen.scrollFactor.set();
+			//darkenscreen.scale.set(1.20, 1.20);
+			add(darkenscreen);
+
+			cassound = new FlxSound().loadEmbedded(Paths.sound("CasAudio"));
+			casette = new FlxSprite(-700, 200);
+			casette.frames = Paths.getSparrowAtlas('casette', 'shared');
+			casette.animation.addByPrefix('play', "CasettePlay0", 40, false);
+			//casette.animation.play('play');
+			casette.scrollFactor.set(1, 1);
+			casette.scale.set(0.55, 0.55);
+			casette.cameras = [camHUD];
+
+			playing = new FlxSprite(500, 200);
+			playing.loadGraphic(Paths.image(casData[0], 'shared'));
+			playing.scrollFactor.set(1, 1);
+			playing.active = false;
+			playing.scale.set(0.85, 0.85);
+			playing.cameras = [camHUD];
+			playing.alpha = 0;
+
+			songtitle = new FlxSprite(500, 200);
+			songtitle.loadGraphic(Paths.image(casData[1], 'shared'));
+			songtitle.scrollFactor.set(1, 1);
+			songtitle.active = false;
+			songtitle.scale.set(0.85, 0.85);
+			songtitle.cameras = [camHUD];
+			songtitle.alpha = 0;
+
+			add(playing);
+			add(songtitle);
+			add(cassound);
+			add(casette);
+
+			new FlxTimer().start(0.5, function(tmr:FlxTimer)
 			{
+				casette.animation.play('play');
+				cassound.play(true);
+			});
+
+			new FlxTimer().start(1.7, function(tmr:FlxTimer)
+			{
+				playing.alpha = 1;
+			});
+
+			new FlxTimer().start(2.3, function(tmr:FlxTimer)
+			{
+				songtitle.alpha = 1;
+			});
+
+			new FlxTimer().start(4.5, function(tmr:FlxTimer)
+			{
+				FlxTween.tween(casette, {alpha: 0}, 0.5);
+				FlxTween.tween(playing, {alpha: 0}, 0.5);
+				FlxTween.tween(songtitle, {alpha: 0}, 0.5);
+				FlxTween.tween(darkenscreen, {alpha: 0}, 0.5);
+
+			});
+
+
+			new FlxTimer().start(5, function(tmr:FlxTimer)
+			{
+				startCountdown(); trace('this should wait a bit');
+				remove(casette);
+				remove(playing);
+				remove(songtitle);
+				remove(cassound);
+			});
+		} else {
+			startCountdown();
+		}
+
+		if (daSong == 'after-dark')
+		{
 			black = new BGSprite('black', 0, 0, 1, 1);
 			black.scale.set(2.5, 2.5);
 			add(black);
-			}
-
-
+		}
 
 		RecalculateRating();
 
@@ -2212,7 +1504,7 @@ class PlayState extends MusicBeatState
 
 		Conductor.safeZoneOffset = (ClientPrefs.safeFrames / 60) * 1000;
 		callOnLuas('onCreatePost', []);
-		
+
 		super.create();
 
 		Paths.clearUnusedMemory();
@@ -2264,7 +1556,7 @@ class PlayState extends MusicBeatState
 	public function reloadHealthBarColors() {
 		healthBar.createFilledBar(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
 			FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
-			
+
 		healthBar.updateBar();
 	}
 
@@ -2317,7 +1609,7 @@ class PlayState extends MusicBeatState
 				doPush = true;
 			}
 		}
-		
+
 		if(doPush)
 		{
 			for (lua in luaArray)
@@ -2328,33 +1620,30 @@ class PlayState extends MusicBeatState
 		}
 		#end
 	}
-	
-  public function addShaderToCamera(cam:String,effect:Dynamic){//STOLE FROM ANDROMEDA
-	  
-	  
-	  
+
+	public function addShaderToCamera(cam:String,effect:Dynamic){//STOLE FROM ANDROMEDA
 		switch(cam.toLowerCase()) {
 			case 'camhud' | 'hud':
-					camHUDShaders.push(effect);
-					var newCamEffects:Array<BitmapFilter>=[]; // IT SHUTS HAXE UP IDK WHY BUT WHATEVER IDK WHY I CANT JUST ARRAY<SHADERFILTER>
-					for(i in camHUDShaders){
-					  newCamEffects.push(new ShaderFilter(i.shader));
-					}
-					camHUD.setFilters(newCamEffects);
+				camHUDShaders.push(effect);
+				var newCamEffects:Array<BitmapFilter>=[]; // IT SHUTS HAXE UP IDK WHY BUT WHATEVER IDK WHY I CANT JUST ARRAY<SHADERFILTER>
+				for(i in camHUDShaders){
+					newCamEffects.push(new ShaderFilter(i.shader));
+				}
+				camHUD.setFilters(newCamEffects);
 			case 'camother' | 'other':
-					camOtherShaders.push(effect);
-					var newCamEffects:Array<BitmapFilter>=[]; // IT SHUTS HAXE UP IDK WHY BUT WHATEVER IDK WHY I CANT JUST ARRAY<SHADERFILTER>
-					for(i in camOtherShaders){
-					  newCamEffects.push(new ShaderFilter(i.shader));
-					}
-					camOther.setFilters(newCamEffects);
+				camOtherShaders.push(effect);
+				var newCamEffects:Array<BitmapFilter>=[]; // IT SHUTS HAXE UP IDK WHY BUT WHATEVER IDK WHY I CANT JUST ARRAY<SHADERFILTER>
+				for(i in camOtherShaders){
+					newCamEffects.push(new ShaderFilter(i.shader));
+				}
+				camOther.setFilters(newCamEffects);
 			case 'camgame' | 'game':
-					camGameShaders.push(effect);
-					var newCamEffects:Array<BitmapFilter>=[]; // IT SHUTS HAXE UP IDK WHY BUT WHATEVER IDK WHY I CANT JUST ARRAY<SHADERFILTER>
-					for(i in camGameShaders){
-					  newCamEffects.push(new ShaderFilter(i.shader));
-					}
-					camGame.setFilters(newCamEffects);
+				camGameShaders.push(effect);
+				var newCamEffects:Array<BitmapFilter>=[]; // IT SHUTS HAXE UP IDK WHY BUT WHATEVER IDK WHY I CANT JUST ARRAY<SHADERFILTER>
+				for(i in camGameShaders){
+					newCamEffects.push(new ShaderFilter(i.shader));
+				}
+				camGame.setFilters(newCamEffects);
 			default:
 				if(modchartSprites.exists(cam)) {
 					Reflect.setProperty(modchartSprites.get(cam),"shader",effect.shader);
@@ -2364,36 +1653,26 @@ class PlayState extends MusicBeatState
 					var OBJ = Reflect.getProperty(PlayState.instance,cam);
 					Reflect.setProperty(OBJ,"shader", effect.shader);
 				}
-			
-			
-				
-				
 		}
-	  
-	  
-	  
-	  
-  }
+	}
 
-  public function removeShaderFromCamera(cam:String,effect:ShaderEffect){
-	  
-	  
+	public function removeShaderFromCamera(cam:String,effect:ShaderEffect){
 		switch(cam.toLowerCase()) {
-			case 'camhud' | 'hud': 
-    camHUDShaders.remove(effect);
-    var newCamEffects:Array<BitmapFilter>=[];
-    for(i in camHUDShaders){
-      newCamEffects.push(new ShaderFilter(i.shader));
-    }
-    camHUD.setFilters(newCamEffects);
-			case 'camother' | 'other': 
-					camOtherShaders.remove(effect);
-					var newCamEffects:Array<BitmapFilter>=[];
-					for(i in camOtherShaders){
-					  newCamEffects.push(new ShaderFilter(i.shader));
-					}
-					camOther.setFilters(newCamEffects);
-			default: 
+			case 'camhud' | 'hud':
+				camHUDShaders.remove(effect);
+				var newCamEffects:Array<BitmapFilter>=[];
+				for(i in camHUDShaders){
+					newCamEffects.push(new ShaderFilter(i.shader));
+				}
+				camHUD.setFilters(newCamEffects);
+			case 'camother' | 'other':
+				camOtherShaders.remove(effect);
+				var newCamEffects:Array<BitmapFilter>=[];
+				for(i in camOtherShaders){
+					newCamEffects.push(new ShaderFilter(i.shader));
+				}
+				camOther.setFilters(newCamEffects);
+			default:
 				if(modchartSprites.exists(cam)) {
 					Reflect.setProperty(modchartSprites.get(cam),"shader",null);
 				} else if(modchartTexts.exists(cam)) {
@@ -2402,42 +1681,30 @@ class PlayState extends MusicBeatState
 					var OBJ = Reflect.getProperty(PlayState.instance,cam);
 					Reflect.setProperty(OBJ,"shader", null);
 				}
-				
 		}
-		
-	  
-  }
-	
-	
-	
-  public function clearShaderFromCamera(cam:String){
-	  
-	  
+	}
+
+  	public function clearShaderFromCamera(cam:String){
 		switch(cam.toLowerCase()) {
-			case 'camhud' | 'hud': 
+			case 'camhud' | 'hud':
 				camHUDShaders = [];
 				var newCamEffects:Array<BitmapFilter>=[];
 				camHUD.setFilters(newCamEffects);
-			case 'camother' | 'other': 
+			case 'camother' | 'other':
 				camOtherShaders = [];
 				var newCamEffects:Array<BitmapFilter>=[];
 				camOther.setFilters(newCamEffects);
-			case 'camgame' | 'game': 
+			case 'camgame' | 'game':
 				camGameShaders = [];
 				var newCamEffects:Array<BitmapFilter>=[];
 				camGame.setFilters(newCamEffects);
-			default: 
+			default:
 				camGameShaders = [];
 				var newCamEffects:Array<BitmapFilter>=[];
 				camGame.setFilters(newCamEffects);
 		}
-		
-	  
-  }
-	
-	
-	
-	
+	}
+
 	function startCharacterPos(char:Character, ?gfCheck:Bool = false) {
 		if(gfCheck && char.curCharacter.startsWith('gf')) { //IF DAD IS GIRLFRIEND, HE GOES TO HER POSITION
 			char.setPosition(GF_X, GF_Y);
@@ -2470,7 +1737,7 @@ class PlayState extends MusicBeatState
 
 		if(foundFile) {
 			inCutscene = true;
-			var bg = new FlxSprite(-FlxG.width, -FlxG.height).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
+			var bg = new FlxSpriteExtra(-FlxG.width, -FlxG.height).makeSolid(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
 			bg.scrollFactor.set();
 			bg.cameras = [camHUD];
 			add(bg);
@@ -2537,93 +1804,6 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	function schoolIntro(?dialogueBox:DialogueBox):Void
-	{
-		inCutscene = true;
-		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
-		black.scrollFactor.set();
-		add(black);
-
-		var red:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFFff1b31);
-		red.scrollFactor.set();
-
-		var senpaiEvil:FlxSprite = new FlxSprite();
-		senpaiEvil.frames = Paths.getSparrowAtlas('weeb/senpaiCrazy');
-		senpaiEvil.animation.addByPrefix('idle', 'Senpai Pre Explosion', 24, false);
-		senpaiEvil.setGraphicSize(Std.int(senpaiEvil.width * 6));
-		senpaiEvil.scrollFactor.set();
-		senpaiEvil.updateHitbox();
-		senpaiEvil.screenCenter();
-		senpaiEvil.x += 300;
-
-		var songName:String = Paths.formatToSongPath(SONG.song);
-		if (songName == 'roses' || songName == 'thorns')
-		{
-			remove(black);
-
-			if (songName == 'thorns')
-			{
-				add(red);
-				camHUD.visible = false;
-			}
-		}
-
-		new FlxTimer().start(0.3, function(tmr:FlxTimer)
-		{
-			black.alpha -= 0.15;
-
-			if (black.alpha > 0)
-			{
-				tmr.reset(0.3);
-			}
-			else
-			{
-				if (dialogueBox != null)
-				{
-					if (Paths.formatToSongPath(SONG.song) == 'thorns')
-					{
-						add(senpaiEvil);
-						senpaiEvil.alpha = 0;
-						new FlxTimer().start(0.3, function(swagTimer:FlxTimer)
-						{
-							senpaiEvil.alpha += 0.15;
-							if (senpaiEvil.alpha < 1)
-							{
-								swagTimer.reset();
-							}
-							else
-							{
-								senpaiEvil.animation.play('idle');
-								FlxG.sound.play(Paths.sound('Senpai_Dies'), 1, false, null, true, function()
-								{
-									remove(senpaiEvil);
-									remove(red);
-									FlxG.camera.fade(FlxColor.WHITE, 0.01, true, function()
-									{
-										add(dialogueBox);
-										camHUD.visible = true;
-									}, true);
-								});
-								new FlxTimer().start(3.2, function(deadTime:FlxTimer)
-								{
-									FlxG.camera.fade(FlxColor.WHITE, 1.6, false);
-								});
-							}
-						});
-					}
-					else
-					{
-						add(dialogueBox);
-					}
-				}
-				else
-					startCountdown();
-
-				remove(black);
-			}
-		});
-	}
-
 	var startTimer:FlxTimer;
 	var finishTimer:FlxTimer = null;
 
@@ -2651,7 +1831,6 @@ class PlayState extends MusicBeatState
 			for (i in 0...opponentStrums.length) {
 				setOnLuas('defaultOpponentStrumX' + i, opponentStrums.members[i].x);
 				setOnLuas('defaultOpponentStrumY' + i, opponentStrums.members[i].y);
-				//if(ClientPrefs.middleScroll) opponentStrums.members[i].visible = false;
 			}
 
 			startedCountdown = true;
@@ -2659,6 +1838,17 @@ class PlayState extends MusicBeatState
 			Conductor.songPosition -= Conductor.crochet * 5;
 			setOnLuas('startedCountdown', true);
 			callOnLuas('onCountdownStarted', []);
+
+			var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
+			introAssets.set('default', ['ready', 'set', 'go']);
+			introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel']);
+
+			var introAlts:Array<String> = introAssets.get('default');
+			var antialias:Bool = ClientPrefs.globalAntialiasing;
+			if(isPixelStage) {
+				introAlts = introAssets.get('pixel');
+				antialias = false;
+			}
 
 			var swagCounter:Int = 0;
 
@@ -2688,22 +1878,11 @@ class PlayState extends MusicBeatState
 					dad.dance();
 				}
 
-				var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
-				introAssets.set('default', ['ready', 'set', 'go']);
-				introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel']);
-
-				var introAlts:Array<String> = introAssets.get('default');
-				var antialias:Bool = ClientPrefs.globalAntialiasing;
-				if(isPixelStage) {
-					introAlts = introAssets.get('pixel');
-					antialias = false;
-				}
-
 				// head bopping for bg characters on Mall
 				if(curStage == 'mall') {
 					if(!ClientPrefs.lowQuality)
 						upperBoppers.dance(true);
-	
+
 					bottomBoppers.dance(true);
 					santa.dance(true);
 				}
@@ -2826,7 +2005,7 @@ class PlayState extends MusicBeatState
 		songLength = FlxG.sound.music.length;
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
-		
+
 		#if desktop
 		// Updating Discord Rich Presence (with Time Left)
 		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength);
@@ -2850,10 +2029,10 @@ class PlayState extends MusicBeatState
 			case "constant":
 				songSpeed = ClientPrefs.getGameplaySetting('scrollspeed', 1);
 		}
-		
+
 		var songData = SONG;
 		Conductor.changeBPM(songData.bpm);
-		
+
 		curSong = songData.song;
 
 		if (SONG.needsVoices)
@@ -2928,7 +2107,7 @@ class PlayState extends MusicBeatState
 				swagNote.gfNote = (section.gfSection && (songNotes[1]<4));
 				swagNote.noteType = songNotes[3];
 				if(!Std.isOfType(songNotes[3], String)) swagNote.noteType = editors.ChartingState.noteTypeList[songNotes[3]]; //Backward compatibility + compatibility with Week 7 charts
-				
+
 				swagNote.scrollFactor.set();
 
 				var susLength:Float = swagNote.sustainLength;
@@ -2977,9 +2156,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 
-				if(!noteTypeMap.exists(swagNote.noteType)) {
-					noteTypeMap.set(swagNote.noteType, true);
-				}
+				noteTypeMap.set(swagNote.noteType, true);
 			}
 			daBeats += 1;
 		}
@@ -3029,9 +2206,7 @@ class PlayState extends MusicBeatState
 				addCharacterToList(newCharacter, charType);
 		}
 
-		if(!eventPushedMap.exists(event.event)) {
-			eventPushedMap.set(event.event, true);
-		}
+		eventPushedMap.set(event.event, true);
 	}
 
 	function eventNoteEarlyTrigger(event:EventNote):Float {
@@ -3161,7 +2336,7 @@ class PlayState extends MusicBeatState
 				blammedLightsBlackTween.active = true;
 			if(phillyCityLightsEventTween != null)
 				phillyCityLightsEventTween.active = true;
-			
+
 			if(carTimer != null) carTimer.active = true;
 
 			var chars:Array<Character> = [boyfriend, gf, dad];
@@ -3170,7 +2345,7 @@ class PlayState extends MusicBeatState
 					chars[i].colorTween.active = true;
 				}
 			}
-			
+
 			for (tween in modchartTweens) {
 				tween.active = true;
 			}
@@ -3213,7 +2388,7 @@ class PlayState extends MusicBeatState
 
 		super.onFocus();
 	}
-	
+
 	override public function onFocusLost():Void
 	{
 		#if desktop
@@ -3427,7 +2602,7 @@ class PlayState extends MusicBeatState
 				}
 				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				//}
-		
+
 				#if desktop
 				DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
 				#end
@@ -3490,18 +2665,6 @@ class PlayState extends MusicBeatState
 
 			if (!paused)
 			{
-				songTime += FlxG.game.ticks - previousFrameTime;
-				previousFrameTime = FlxG.game.ticks;
-
-				// Interpolation type beat
-				if (Conductor.lastSongPos != Conductor.songPosition)
-				{
-					songTime = (songTime + Conductor.songPosition) / 2;
-					Conductor.lastSongPos = Conductor.songPosition;
-					// Conductor.songPosition += FlxG.elapsed * 1000;
-					// trace('MISSED FRAME');
-				}
-
 				if(updateTime) {
 					var curTime:Float = Conductor.songPosition - ClientPrefs.noteOffset;
 					if(curTime < 0) curTime = 0;
@@ -3590,7 +2753,7 @@ class PlayState extends MusicBeatState
 
 				if(daNote.copyAlpha)
 					daNote.alpha = strumAlpha;
-				
+
 				if(daNote.copyX)
 					daNote.x = strumX + Math.cos(angleDir) * daNote.distance;
 
@@ -3609,7 +2772,7 @@ class PlayState extends MusicBeatState
 							} else {
 								daNote.y -= 19;
 							}
-						} 
+						}
 						daNote.y += (Note.swagWidth / 2) - (60.5 * (songSpeed - 1));
 						daNote.y += 27.5 * ((SONG.bpm / 100) - 1) * (songSpeed - 1);
 					}
@@ -3629,7 +2792,7 @@ class PlayState extends MusicBeatState
 						goodNoteHit(daNote);
 					}
 				}
-				
+
 				var center:Float = strumY + Note.swagWidth / 2;
 				if(strumGroup.members[daNote.noteData].sustainReduce && daNote.isSustainNote && (daNote.mustPress || !daNote.ignoreNote) &&
 					(!daNote.mustPress || (daNote.wasGoodHit || (daNote.prevNote.wasGoodHit && !daNote.canBeHit))))
@@ -3683,7 +2846,7 @@ class PlayState extends MusicBeatState
 				boyfriend.dance();
 			}
 		}
-		
+
 		#if debug
 		if(!endingSong && !startingSong) {
 			if (FlxG.keys.justPressed.ONE) {
@@ -3731,13 +2894,13 @@ class PlayState extends MusicBeatState
 		setOnLuas('cameraX', camFollowPos.x);
 		setOnLuas('cameraY', camFollowPos.y);
 		setOnLuas('botPlay', cpuControlled);
-		
+
 		for (shader in animatedShaders)
 		{
 			shader.update(elapsed);
 		}
 		#if LUA_ALLOWED
-		
+
 for (key => value in luaShaders)
 {
 	value.update(elapsed);
@@ -3787,7 +2950,7 @@ for (key => value in luaShaders)
 				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x - boyfriend.positionArray[0], boyfriend.getScreenPosition().y - boyfriend.positionArray[1], camFollowPos.x, camFollowPos.y));
 
 				// MusicBeatState.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
-				
+
 				#if desktop
 				// Game Over doesn't get his own variable because it's only used here
 				DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
@@ -3925,7 +3088,7 @@ for (key => value in luaShaders)
 						boyfriend.color = color;
 						gf.color = color;
 					}
-					
+
 					if(curStage == 'philly') {
 						if(phillyCityLightsEvent != null) {
 							phillyCityLightsEvent.forEach(function(spr:BGSprite) {
@@ -4013,7 +3176,7 @@ for (key => value in luaShaders)
 					default:
 						var val2:Int = Std.parseInt(value2);
 						if(Math.isNaN(val2)) val2 = 0;
-		
+
 						switch(val2) {
 							case 1: char = boyfriend;
 							case 2: char = gf;
@@ -4135,10 +3298,10 @@ for (key => value in luaShaders)
 						setOnLuas('gfName', gf.curCharacter);
 				}
 				reloadHealthBarColors();
-			
+
 			case 'BG Freaks Expression':
 				if(bgGirls != null) bgGirls.swapDanceType();
-			
+
 			case 'Change Scroll Speed':
 				if (songSpeedType == "constant")
 					return;
@@ -4283,7 +3446,7 @@ for (key => value in luaShaders)
 				return;
 			}
 		}
-		
+
 		timeBarBG.visible = false;
 		timeBar.visible = false;
 		timeTxt.visible = false;
@@ -4309,7 +3472,7 @@ for (key => value in luaShaders)
 		}
 		#end
 */
-		
+
 		#if LUA_ALLOWED
 		var ret:Dynamic = callOnLuas('onEndSong', []);
 		#else
@@ -4373,8 +3536,7 @@ for (key => value in luaShaders)
 					var winterHorrorlandNext = (Paths.formatToSongPath(SONG.song) == "eggnog");
 					if (winterHorrorlandNext)
 					{
-						var blackShit:FlxSprite = new FlxSprite(-FlxG.width * FlxG.camera.zoom,
-							-FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
+						var blackShit = new FlxSpriteExtra(-FlxG.width * FlxG.camera.zoom, -FlxG.height * FlxG.camera.zoom).makeSolid(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
 						blackShit.scrollFactor.set();
 						add(blackShit);
 						camHUD.visible = false;
@@ -4627,7 +3789,7 @@ for (key => value in luaShaders)
 
 			daLoop++;
 		}
-		/* 
+		/*
 			trace(combo);
 			trace(seperatedScore);
 		 */
@@ -4698,7 +3860,7 @@ for (key => value in luaShaders)
 							} else
 								notesStopped = true;
 						}
-							
+
 						// eee jack detection before was not super good
 						if (!notesStopped) {
 							goodNoteHit(epicNote);
@@ -4733,7 +3895,7 @@ for (key => value in luaShaders)
 		}
 		//trace('pressed: ' + controlArray);
 	}
-	
+
 	private function onKeyRelease(event:KeyboardEvent):Void
 	{
 		var eventKey:FlxKey = event.keyCode;
@@ -4778,7 +3940,7 @@ for (key => value in luaShaders)
 		var down = controls.NOTE_DOWN;
 		var left = controls.NOTE_LEFT;
 		var controlHoldArray:Array<Bool> = [left, down, up, right];
-		
+
 		// TO DO: Find a better way to handle controller inputs, this should work for now
 		if(ClientPrefs.controllerMode)
 		{
@@ -4800,7 +3962,7 @@ for (key => value in luaShaders)
 			notes.forEachAlive(function(daNote:Note)
 			{
 				// hold note functions
-				if (daNote.isSustainNote && controlHoldArray[daNote.noteData] && daNote.canBeHit 
+				if (daNote.isSustainNote && controlHoldArray[daNote.noteData] && daNote.canBeHit
 				&& daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit) {
 					goodNoteHit(daNote);
 				}
@@ -4856,7 +4018,7 @@ for (key => value in luaShaders)
 		songMisses++;
 		vocals.volume = 0;
 		if(!practiceMode) songScore -= 10;
-		
+
 		totalPlayed++;
 		RecalculateRating();
 
@@ -4991,7 +4153,7 @@ for (key => value in luaShaders)
 							boyfriend.specialAnim = true;
 						}
 				}
-				
+
 				note.wasGoodHit = true;
 				if (!note.isSustainNote)
 				{
@@ -5013,11 +4175,11 @@ for (key => value in luaShaders)
 			if(!note.noAnimation) {
 				var daAlt = '';
 				if(note.noteType == 'Alt Animation') daAlt = '-alt';
-	
+
 				var animToPlay:String = singAnimations[Std.int(Math.abs(note.noteData))];
 
 				//if (note.isSustainNote){ wouldn't this be fun : P. i think it would be swell
-					
+
 					//if(note.gfNote) {
 					//  var anim = animToPlay +"-hold" + daAlt;
 					//	if(gf.animation.getByName(anim) == null)anim = animToPlay + daAlt;
@@ -5044,7 +4206,7 @@ for (key => value in luaShaders)
 						boyfriend.specialAnim = true;
 						boyfriend.heyTimer = 0.6;
 					}
-	
+
 					if(gf.animOffsets.exists('cheer')) {
 						gf.playAnim('cheer', true);
 						gf.specialAnim = true;
@@ -5097,7 +4259,7 @@ for (key => value in luaShaders)
 	public function spawnNoteSplash(x:Float, y:Float, data:Int, ?note:Note = null) {
 		var skin:String = 'noteSplashes';
 		if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
-		
+
 		var hue:Float = ClientPrefs.arrowHSV[data % 4][0] / 360;
 		var sat:Float = ClientPrefs.arrowHSV[data % 4][1] / 100;
 		var brt:Float = ClientPrefs.arrowHSV[data % 4][2] / 100;
@@ -5320,10 +4482,7 @@ for (key => value in luaShaders)
 	var lightningOffset:Int = 8;
 
 	var lastBeatHit:Int = -1;
-	
-	
-	
-	
+
 	override function beatHit()
 	{
 		super.beatHit();
@@ -5392,141 +4551,124 @@ for (key => value in luaShaders)
 
 		//shillton
 		if (curSong == 'Forest Fire' && curStage == 'shillton' && !ClientPrefs.lowQuality)
-			{
-				switch (curBeat)
-				{
-					case 1:
-					{
-					add(oldstripes);
-					add(vignette);
-					FlxTween.tween(vignette, {alpha: 1}, 1);
-					FlxTween.tween(camHUD, {alpha: 0}, 1);
-
-
-					}
-
-					case 16:
-					{
-					//	FlxTween.tween(oldstripes, {alpha: 0}, 1);
-						//FlxTween.tween(black, {alpha: 0.4}, 1);
-						FlxTween.tween(vignette, {alpha: 1}, 1);
-						camHUD.alpha = 1;
-
-					}
-
-					case 79:
-					{
-						FlxTween.tween(oldstripes, {alpha: 1}, 1);
-						//FlxTween.tween(black, {alpha: 0.4}, 1);
-						FlxTween.tween(vignette, {alpha: 0}, 1);
-						//camHUD.alpha = 1;
-
-					}
-				
-					case 111:
-					{
-						FlxTween.tween(oldstripes, {alpha: 0}, 1);
-						FlxTween.tween(black, {alpha: 0.5}, 1);
-						FlxTween.tween(vignette, {alpha: 1}, 1);
-						//camHUD.alpha = 1;
-
-					}
-
-					case 143:
-					{
-						//FlxTween.tween(oldstripes, {alpha: 0}, 1);
-						FlxTween.tween(black, {alpha: 0}, 1);
-						//FlxTween.tween(vignette, {alpha: 1}, 1);
-						//camHUD.alpha = 1;
-
-					}
-
-					case 175:
-					{
-						FlxTween.tween(oldstripes, {alpha: 1}, 1);
-						//FlxTween.tween(black, {alpha: 0.4}, 1);
-						FlxTween.tween(vignette, {alpha: 0}, 1);
-						//camHUD.alpha = 1;
-
-					}
-
-					case 207:
-						{
-							//FlxTween.tween(oldstripes, {alpha: 1}, 1);
-							FlxTween.tween(black, {alpha: 0.5}, 1);
-							//FlxTween.tween(vignette, {alpha: 0}, 1);
-							//camHUD.alpha = 1;
-	
-						}
-
-					case 271:
-						{
-							//FlxTween.tween(oldstripes, {alpha: 1}, 1);
-							FlxTween.tween(black, {alpha: 0}, 1);
-							//FlxTween.tween(vignette, {alpha: 0}, 1);
-							//camHUD.alpha = 1;
-	
-						}
-
-					case 303:
-						{
-							FlxTween.tween(oldstripes, {alpha: 0}, 1);
-							//FlxTween.tween(black, {alpha: 0}, 1);
-							FlxTween.tween(vignette, {alpha: 1}, 1);
-							//camHUD.alpha = 1;
-	
-						}
-
-				}
-			}
-
-
-			if (curSong == 'after-dark' && curStage == 'dark' && !ClientPrefs.lowQuality)
-				{
-					switch (curBeat)
-					{
-						case 1:
-						{
-						dad.alpha = 0.3;
-						FlxTween.tween(black, {alpha: 0}, 0.5);	
-						add(redglow);
-						add(scanlines);
-						add(vignette);
-						FlxTween.tween(redglow, {alpha: 1}, 1);	
-						FlxTween.tween(scanlines, {alpha: 0.3}, 1);	
-						FlxTween.tween(vignette, {alpha: 0.5}, 1);	
-						}
-
-
-						case 5:
-						{
-							FlxTween.tween(eyes, {alpha: 1}, 0.5);	
-							eyes.animation.play('eyes', true);
-
-							new FlxTimer().start(3, function(tmr:FlxTimer)
-								{
-								eyes.animation.pause();
-								});
-
-						}
-
-
-						case 30:
-							{
-								eyes.animation.resume();
-	
-							}
-					}
-				}
-
-
-		//mansiontop
-		if (curSong == 'spectral-sonnet' && curStage == 'mansiontop' && !ClientPrefs.lowQuality) 
 		{
 			switch (curBeat)
 			{
 				case 1:
 				{
+					add(oldstripes);
+					add(vignette);
+					FlxTween.tween(vignette, {alpha: 1}, 1);
+					FlxTween.tween(camHUD, {alpha: 0}, 1);
+				}
+
+				case 16:
+				{
+					//	FlxTween.tween(oldstripes, {alpha: 0}, 1);
+					//FlxTween.tween(black, {alpha: 0.4}, 1);
+					FlxTween.tween(vignette, {alpha: 1}, 1);
+					camHUD.alpha = 1;
+				}
+
+				case 79:
+				{
+					FlxTween.tween(oldstripes, {alpha: 1}, 1);
+					//FlxTween.tween(black, {alpha: 0.4}, 1);
+					FlxTween.tween(vignette, {alpha: 0}, 1);
+					//camHUD.alpha = 1;
+				}
+
+				case 111:
+				{
+					FlxTween.tween(oldstripes, {alpha: 0}, 1);
+					FlxTween.tween(black, {alpha: 0.5}, 1);
+					FlxTween.tween(vignette, {alpha: 1}, 1);
+					//camHUD.alpha = 1;
+				}
+
+				case 143:
+				{
+					//FlxTween.tween(oldstripes, {alpha: 0}, 1);
+					FlxTween.tween(black, {alpha: 0}, 1);
+					//FlxTween.tween(vignette, {alpha: 1}, 1);
+					//camHUD.alpha = 1;
+				}
+
+				case 175:
+				{
+					FlxTween.tween(oldstripes, {alpha: 1}, 1);
+					//FlxTween.tween(black, {alpha: 0.4}, 1);
+					FlxTween.tween(vignette, {alpha: 0}, 1);
+					//camHUD.alpha = 1;
+				}
+
+				case 207:
+				{
+					//FlxTween.tween(oldstripes, {alpha: 1}, 1);
+					FlxTween.tween(black, {alpha: 0.5}, 1);
+					//FlxTween.tween(vignette, {alpha: 0}, 1);
+					//camHUD.alpha = 1;
+				}
+
+				case 271:
+				{
+					//FlxTween.tween(oldstripes, {alpha: 1}, 1);
+					FlxTween.tween(black, {alpha: 0}, 1);
+					//FlxTween.tween(vignette, {alpha: 0}, 1);
+					//camHUD.alpha = 1;
+				}
+
+				case 303:
+				{
+					FlxTween.tween(oldstripes, {alpha: 0}, 1);
+					//FlxTween.tween(black, {alpha: 0}, 1);
+					FlxTween.tween(vignette, {alpha: 1}, 1);
+					//camHUD.alpha = 1;
+				}
+			}
+		}
+
+
+		if (curSong == 'after-dark' && curStage == 'dark' && !ClientPrefs.lowQuality)
+		{
+			switch (curBeat)
+			{
+				case 1: {
+				dad.alpha = 0.3;
+				FlxTween.tween(black, {alpha: 0}, 0.5);
+				add(redglow);
+				add(scanlines);
+				add(vignette);
+				FlxTween.tween(redglow, {alpha: 1}, 1);
+				FlxTween.tween(scanlines, {alpha: 0.3}, 1);
+				FlxTween.tween(vignette, {alpha: 0.5}, 1);
+				}
+
+
+				case 5: {
+					FlxTween.tween(eyes, {alpha: 1}, 0.5);
+					eyes.animation.play('eyes', true);
+
+					new FlxTimer().start(3, function(tmr:FlxTimer)
+					{
+						eyes.animation.pause();
+					});
+				}
+
+
+				case 30: {
+					eyes.animation.resume();
+				}
+			}
+		}
+
+
+		//mansiontop
+		if (curSong == 'spectral-sonnet' && curStage == 'mansiontop' && !ClientPrefs.lowQuality)
+		{
+			switch (curBeat)
+			{
+				case 1: {
 					add(blackOverlay);
 					add(rainweak);
 					add(rainsmall);
@@ -5536,96 +4678,73 @@ for (key => value in luaShaders)
 				}
 
 
-				case 56:
-				{
+				case 56: {
 					FlxTween.tween(blackOverlay, {alpha: 1}, 2);
-
 				}
 
 
-				case 63:
-				{	
-					blackOverlay.alpha = 0;		
+				case 63: {
+					blackOverlay.alpha = 0;
 					week1old.alpha = 0;
 					vignette.alpha = 0;
 				}
 
-				case 64:
-				{	
-						remove(week1old);
-						remove(vignette);
-						remove(blackOverlay);		
+				case 64: {
+					remove(week1old);
+					remove(vignette);
+					remove(blackOverlay);
 				}
 
 
-				case 128:
-				{
+				case 128: {
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
 					rainweak.alpha = 0.5;
 					rainsmall.alpha = 0.5;
 					rainbig.alpha = 0.5;
-
 				}
 
-				case 160:
-				{
+				case 160: {
 					FlxTween.tween(flowers1, {alpha: 1}, 0.3);
-
 				}
 
-				case 164:
-				{
+				case 164: {
 					FlxTween.tween(flowers2, {alpha: 1}, 0.3);
-
 				}
-			
-				case 168:
-				{
+
+				case 168: {
 					FlxTween.tween(flowers3, {alpha: 1}, 0.3);
-
 				}
 
-				case 172:
-				{
+				case 172: {
 					FlxTween.tween(flowers4, {alpha: 1}, 0.3);
-
 				}
-			
-				case 256:
-				{
+
+				case 256: {
 					FlxG.camera.flash(FlxColor.BLACK,3,false);
 					black.alpha = 0.8;
 					rainweak.alpha = 0;
 					rainsmall.alpha = 0;
 					rainbig.alpha = 0;
 					FlxTween.tween(sun, {alpha: 1}, 1);
-
 				}
 
-				case 288:
-				{
+				case 288: {
 					FlxTween.tween(bells, {alpha: 1}, 1);
-
-
 				}
 
-				case 320:
-				{
+				case 320: {
 					bells.alpha = 0;
 					sun.alpha = 0;
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
 					black.alpha = 0;
 				}
 
-				case 321:
-				{
+				case 321: {
 					remove(bells);
 					remove(sun);
 				}
 
-
-				case 360:
-				{
+				case 360: {
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
 					black.alpha = 0.35;
 					rainweak.alpha = 0.5;
@@ -5633,24 +4752,23 @@ for (key => value in luaShaders)
 					rainbig.alpha = 0.5;
 				}
 
-				case 448:
-				{
+				case 448: {
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
 					FlxTween.tween(black, {alpha: 0}, 5);
 					FlxTween.tween(rainweak, {alpha: 0}, 5);
 					FlxTween.tween(rainsmall, {alpha: 0}, 5);
 					FlxTween.tween(rainbig, {alpha: 0}, 5);
-					
+
 				}
 
 			}
 
 		}
-		
+
 
 
 	//mansiontop
-		if (curSong == 'spectral-sonnet' && curStage == 'mansiontop' && ClientPrefs.lowQuality) 
+		if (curSong == 'spectral-sonnet' && curStage == 'mansiontop' && ClientPrefs.lowQuality)
 		{
 			switch (curBeat)
 			{
@@ -5670,24 +4788,24 @@ for (key => value in luaShaders)
 
 
 				case 63:
-				{	
-					blackOverlay.alpha = 0;		
+				{
+					blackOverlay.alpha = 0;
 					week1old.alpha = 0;
 					vignette.alpha = 0;
 				}
 
 				case 64:
-				{	
+				{
 						remove(week1old);
 						remove(vignette);
-						remove(blackOverlay);		
+						remove(blackOverlay);
 				}
 			}
 		}
 
 
 
-		if (curSong == 'spectral-sonnet-beta' && curStage == 'siivagunner' && !ClientPrefs.lowQuality) 
+		if (curSong == 'spectral-sonnet-beta' && curStage == 'siivagunner' && !ClientPrefs.lowQuality)
 			{
 				switch (curBeat)
 				{
@@ -5696,7 +4814,7 @@ for (key => value in luaShaders)
 
 						black.alpha = 1;
 						dad.alpha = 0;
-						gf.alpha = 0; 
+						gf.alpha = 0;
 						remove(dad);
 						remove(gf);
 						boyfriend.playAnim('dies',true, false);
@@ -5706,7 +4824,7 @@ for (key => value in luaShaders)
 				}
 			}
 
-			if (curSong == 'GOATED' && curStage == 'erect' && !ClientPrefs.lowQuality) 
+			if (curSong == 'GOATED' && curStage == 'erect' && !ClientPrefs.lowQuality)
 				{
 					switch (curBeat)
 					{
@@ -5717,40 +4835,40 @@ for (key => value in luaShaders)
 							add(light2);
 
 							}
-						case 256 | 456:	
+						case 256 | 456:
 							{
 							FlxG.camera.flash(FlxColor.WHITE,1,false);
 							black.alpha = 0.5;
 							ballsowo.alpha = 1;
 							light1.alpha = 1;
 							}
-						
-						
+
+
 
 						case 262 | 278 | 294 | 310 | 326 | 342 | 358 | 374 | 472 | 488 | 504 | 520 | 536 | 552 | 568 | 584 | 600 | 616:
 						{
 							light2.alpha = 1;
 							light1.alpha = 0;
-					
+
 						}
 
 						case 270 | 286 | 302 | 318 | 334 | 350 | 366 | 480 | 496 | 512 | 528 | 544 | 560 | 576 | 592 | 608:
 						{
 							light2.alpha = 0;
 							light1.alpha = 1;
-					
+
 						}
 
-						case 384 | 624:	
+						case 384 | 624:
 							{
 								FlxTween.tween(black, {alpha: 0}, 1);
 								FlxTween.tween(ballsowo, {alpha: 0}, 1);
 								FlxTween.tween(light1, {alpha: 0}, 1);
 								FlxTween.tween(light2, {alpha: 0}, 1);
 							}
-					
+
 				}
-				
+
 			}
 
 		switch (curStage)
