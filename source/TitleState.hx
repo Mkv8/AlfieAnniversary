@@ -63,7 +63,6 @@ class TitleState extends MusicBeatState
 
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
-	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
 
@@ -258,33 +257,31 @@ class TitleState extends MusicBeatState
 		persistentUpdate = true;
 
 		var bg:FlxSprite = new FlxSprite();
-			bg.loadGraphic(Paths.image('bgg', 'preload'));
-			//bg.screenCenter(XY);
-			add(bg);
+		bg.loadGraphic(Paths.image('bgg', 'preload'));
+		//bg.screenCenter(XY);
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		add(bg);
 
 		var confetti:FlxBackdrop = new FlxBackdrop(Paths.image('confettititle'), 0.2, 0, true, true);
 		confetti.velocity.set(20, 60);
 		confetti.updateHitbox();
 		//confetti.screenCenter(XY);
 		confetti.alpha = 1;
-			add(confetti);
-
+		confetti.antialiasing = ClientPrefs.globalAntialiasing;
+		add(confetti);
 
 		// bg.antialiasing = ClientPrefs.globalAntialiasing;
 		// bg.setGraphicSize(Std.int(bg.width * 0.6));
 		// bg.updateHitbox();
-				
-		
-		
+
 		cdspin = new FlxSprite(-400, -40);
 		cdspin.loadGraphic(Paths.image('titleCD', 'preload'));
 		cdspin.scale.set(0.9, 0.9);
+		cdspin.antialiasing = ClientPrefs.globalAntialiasing;
 		add(cdspin);
 
-
 		logoBl = new FlxSprite(565, 60);
-		
-		
+
 		#if (desktop && MODS_ALLOWED)
 		var path = "mods/" + Paths.currentModDirectory + "/images/logoBumpin.png";
 		//trace(path, FileSystem.exists(path));
@@ -310,7 +307,7 @@ class TitleState extends MusicBeatState
 		// logoBl.color = FlxColor.BLACK;
 
 		swagShader = new ColorSwap();
-			gfDance = new FlxSprite(titleJSON.gfx, titleJSON.gfy);
+		/*gfDance = new FlxSprite(titleJSON.gfx, titleJSON.gfy);
 		
 		#if (desktop && MODS_ALLOWED)
 		var path = "mods/" + Paths.currentModDirectory + "/images/gfDanceTitle.png";
@@ -333,7 +330,7 @@ class TitleState extends MusicBeatState
 	
 		gfDance.antialiasing = ClientPrefs.globalAntialiasing;
 		//add(gfDance);
-		gfDance.shader = swagShader.shader;
+		gfDance.shader = swagShader.shader;*/
 		logoBl.scale.set(0.90, 0.90);
 		add(logoBl);
 		logoBl.shader = swagShader.shader;
@@ -360,12 +357,12 @@ class TitleState extends MusicBeatState
 		titleText.antialiasing = ClientPrefs.globalAntialiasing;
 		titleText.animation.play('idle');
 		titleText.updateHitbox();
-		// titleText.screenCenter(X);
+		titleText.screenCenter(X);
 		add(titleText);
 
-		var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo'));
-		logo.screenCenter();
-		logo.antialiasing = ClientPrefs.globalAntialiasing;
+		//var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo'));
+		//logo.screenCenter();
+		//logo.antialiasing = ClientPrefs.globalAntialiasing;
 		// add(logo);
 
 		// FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
@@ -375,15 +372,8 @@ class TitleState extends MusicBeatState
 		add(credGroup);
 		textGroup = new FlxGroup();
 
-		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		blackScreen = new FlxSpriteExtra().makeSolid(FlxG.width, FlxG.height, FlxColor.BLACK);
 		credGroup.add(blackScreen);
-
-		credTextShit = new Alphabet(0, 0, "", true);
-		credTextShit.screenCenter();
-
-		// credTextShit.alignment = CENTER;
-
-		credTextShit.visible = false;
 
 		ngSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('newgrounds_logo'));
 		add(ngSpr);
@@ -392,8 +382,6 @@ class TitleState extends MusicBeatState
 		ngSpr.updateHitbox();
 		ngSpr.screenCenter(X);
 		ngSpr.antialiasing = ClientPrefs.globalAntialiasing;
-
-		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
 		if (initialized)
 			skipIntro();
@@ -423,9 +411,9 @@ class TitleState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		if(cdspin != null)
-			{
-			 cdspin.angle += 2;
-			}
+		{
+			cdspin.angle += 2 * 60 * elapsed;
+		}
 
 
 
@@ -586,14 +574,14 @@ class TitleState extends MusicBeatState
 		if(logoBl != null) 
 			logoBl.animation.play('bump', true);
 
-		if(gfDance != null) {
+		/*if(gfDance != null) {
 			danceLeft = !danceLeft;
 
 			if (danceLeft)
 				gfDance.animation.play('danceRight');
 			else
 				gfDance.animation.play('danceLeft');
-		}
+		}*/
 
 		if(!closedState) {
 			sickBeats++;
@@ -605,7 +593,6 @@ class TitleState extends MusicBeatState
 					#else
 					createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
 					#end
-				// credTextShit.visible = true;
 				case 3:
 					#if PSYCH_WATERMARKS
 					addMoreText('Shadow Mario', 15);
@@ -614,13 +601,8 @@ class TitleState extends MusicBeatState
 					#else
 					addMoreText('present');
 					#end
-				// credTextShit.text += '\npresent...';
-				// credTextShit.addText();
 				case 4:
 					deleteCoolText();
-				// credTextShit.visible = false;
-				// credTextShit.text = 'In association \nwith';
-				// credTextShit.screenCenter();
 				case 5:
 					#if PSYCH_WATERMARKS
 					createCoolText(['Not associated', 'with'], -40);
@@ -630,33 +612,21 @@ class TitleState extends MusicBeatState
 				case 7:
 					addMoreText('newgrounds', -40);
 					ngSpr.visible = true;
-				// credTextShit.text += '\nNewgrounds';
 				case 8:
 					deleteCoolText();
 					ngSpr.visible = false;
-				// credTextShit.visible = false;
-
-				// credTextShit.text = 'Shoutouts Tom Fulp';
-				// credTextShit.screenCenter();
 				case 9:
 					createCoolText([curWacky[0]]);
-				// credTextShit.visible = true;
 				case 11:
 					addMoreText(curWacky[1]);
-				// credTextShit.text += '\nlmao';
 				case 12:
 					deleteCoolText();
-				// credTextShit.visible = false;
-				// credTextShit.text = "Friday";
-				// credTextShit.screenCenter();
 				case 13:
 					addMoreText('Friday');
-				// credTextShit.visible = true;
 				case 14:
 					addMoreText('Night');
-				// credTextShit.text += '\nNight';
 				case 15:
-					addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
+					addMoreText('Funkin');
 
 				case 16:
 					skipIntro();
