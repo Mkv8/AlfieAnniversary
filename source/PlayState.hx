@@ -240,8 +240,9 @@ class PlayState extends MusicBeatState
 	var rainweak:FlxBackdrop;
 	var rainsmall:FlxBackdrop;
 	var rainbig:FlxBackdrop;
-
+	var darksparks:FlxBackdrop;
 	var eyes:BGSprite;
+	var circles:BGSprite;
 
 	var week1old:BGSprite;
 	var week1:BGSprite;
@@ -392,6 +393,12 @@ class PlayState extends MusicBeatState
 			scanlines.blend = OVERLAY;
 			scanlines.scale.set(2.5, 2.5);
 			scanlines.alpha = 0;
+
+			darksparks = new FlxBackdrop(Paths.image('darksparks'), 0.2, 0, true, true);
+			darksparks.velocity.set(25, -200);
+			darksparks.updateHitbox();
+			darksparks.screenCenter(XY);
+			darksparks.alpha = 0;
 		}
 
 		if(formattedSong == 'forest-fire') {
@@ -584,10 +591,17 @@ class PlayState extends MusicBeatState
 				eyes = new BGSprite('iSeeYou', 0, 0, 1, 1, ['eyes'], false);
 				eyes.updateHitbox();
 				eyes.screenCenter(XY);
-				eyes.scale.set(1.10, 1.10);
+				eyes.scale.set(1.05, 1.05);
 				add(eyes);
 				eyes.antialiasing = true;
 				eyes.alpha = 0;
+
+				circles = new BGSprite('circles', 0, 0, 1, 1);
+				circles.updateHitbox();
+				circles.screenCenter(XY);
+				circles.scale.set(1.05, 1.05);
+				circles.alpha = 0;
+				add(circles);
 
 
 
@@ -4267,8 +4281,7 @@ class PlayState extends MusicBeatState
 
 				case 16:
 				{
-					//	FlxTween.tween(oldstripes, {alpha: 0}, 1);
-					//FlxTween.tween(black, {alpha: 0.4}, 1);
+
 					FlxTween.tween(vignette, {alpha: 1}, 1);
 					camHUD.alpha = 1;
 				}
@@ -4276,9 +4289,7 @@ class PlayState extends MusicBeatState
 				case 79:
 				{
 					FlxTween.tween(oldstripes, {alpha: 1}, 1);
-					//FlxTween.tween(black, {alpha: 0.4}, 1);
 					FlxTween.tween(vignette, {alpha: 0}, 1);
-					//camHUD.alpha = 1;
 				}
 
 				case 111:
@@ -4286,47 +4297,34 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(oldstripes, {alpha: 0}, 1);
 					FlxTween.tween(black, {alpha: 0.5}, 1);
 					FlxTween.tween(vignette, {alpha: 1}, 1);
-					//camHUD.alpha = 1;
 				}
 
 				case 143:
 				{
-					//FlxTween.tween(oldstripes, {alpha: 0}, 1);
 					FlxTween.tween(black, {alpha: 0}, 1);
-					//FlxTween.tween(vignette, {alpha: 1}, 1);
-					//camHUD.alpha = 1;
 				}
 
 				case 175:
 				{
 					FlxTween.tween(oldstripes, {alpha: 1}, 1);
-					//FlxTween.tween(black, {alpha: 0.4}, 1);
 					FlxTween.tween(vignette, {alpha: 0}, 1);
-					//camHUD.alpha = 1;
 				}
 
 				case 207:
 				{
-					//FlxTween.tween(oldstripes, {alpha: 1}, 1);
 					FlxTween.tween(black, {alpha: 0.5}, 1);
-					//FlxTween.tween(vignette, {alpha: 0}, 1);
-					//camHUD.alpha = 1;
+
 				}
 
 				case 271:
 				{
-					//FlxTween.tween(oldstripes, {alpha: 1}, 1);
 					FlxTween.tween(black, {alpha: 0}, 1);
-					//FlxTween.tween(vignette, {alpha: 0}, 1);
-					//camHUD.alpha = 1;
 				}
 
 				case 303:
 				{
 					FlxTween.tween(oldstripes, {alpha: 0}, 1);
-					//FlxTween.tween(black, {alpha: 0}, 1);
 					FlxTween.tween(vignette, {alpha: 1}, 1);
-					//camHUD.alpha = 1;
 				}
 			}
 		}
@@ -4339,10 +4337,11 @@ class PlayState extends MusicBeatState
 					case 8:
 					{
 					dad.alpha = 0.3;
-					dad.scale.set(1.10, 1.10);
+					dad.scale.set(1.05, 1.05);
 					FlxTween.tween(black, {alpha: 0}, 0.5);
 					add(redglow);
 					add(scanlines);
+					add(darksparks);
 					add(vignette);
 					FlxTween.tween(redglow, {alpha: 1}, 0.5);
 					FlxTween.tween(scanlines, {alpha: 0.3}, 0.5);
@@ -4364,7 +4363,8 @@ class PlayState extends MusicBeatState
 
 					case 256:
 					{
-
+						FlxTween.tween(circles, {alpha: 0.5}, 1);
+						FlxTween.tween(darksparks, {alpha: 0.85}, 1);
 					}
 
 					case 640:
@@ -4375,7 +4375,8 @@ class PlayState extends MusicBeatState
 
 					case 704:
 					{
-
+						FlxTween.tween(circles, {alpha: 0}, 1);
+						FlxTween.tween(darksparks, {alpha: 0}, 1);
 					}
 
 					case 774:
