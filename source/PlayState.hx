@@ -4332,39 +4332,59 @@ class PlayState extends MusicBeatState
 		}
 
 
-		if (formattedSong == 'after-dark' && curStage == 'dark' && !ClientPrefs.lowQuality)
-		{
-			switch (curBeat)
+		if (curSong == 'after-dark' && curStage == 'dark' && !ClientPrefs.lowQuality)
 			{
-				case 1: {
-				dad.alpha = 0.3;
-				FlxTween.tween(black, {alpha: 0}, 0.5);
-				add(redglow);
-				add(scanlines);
-				add(vignette);
-				FlxTween.tween(redglow, {alpha: 1}, 1);
-				FlxTween.tween(scanlines, {alpha: 0.3}, 1);
-				FlxTween.tween(vignette, {alpha: 0.5}, 1);
-				}
-
-
-				case 5: {
-					FlxTween.tween(eyes, {alpha: 1}, 0.5);
-					eyes.animation.play('eyes', true);
-
-					new FlxTimer().start(3, function(tmr:FlxTimer)
+				switch (curBeat)
+				{
+					case 8:
 					{
-						eyes.animation.pause();
-					});
-				}
+					dad.alpha = 0.3;
+					dad.scale.set(1.10, 1.10);
+					FlxTween.tween(black, {alpha: 0}, 0.5);
+					add(redglow);
+					add(scanlines);
+					add(vignette);
+					FlxTween.tween(redglow, {alpha: 1}, 0.5);
+					FlxTween.tween(scanlines, {alpha: 0.3}, 0.5);
+					FlxTween.tween(vignette, {alpha: 0.5}, 0.5);
+					}
 
 
-				case 30: {
-					eyes.animation.resume();
+					case 188:
+					{
+						FlxTween.tween(eyes, {alpha: 1}, 0.5);
+						eyes.animation.play('eyes', true);
+
+						new FlxTimer().start(3, function(tmr:FlxTimer)
+							{
+							eyes.animation.pause();
+							});
+
+					}
+
+					case 256:
+					{
+
+					}
+
+					case 640:
+					{
+						eyes.animation.resume();
+
+					}
+
+					case 704:
+					{
+
+					}
+
+					case 774:
+					{
+						FlxTween.tween(black, {alpha: 1}, 2);
+
+					}
 				}
 			}
-		}
-
 
 		//mansiontop
 		if (formattedSong == 'spectral-sonnet' && curStage == 'mansiontop' && !ClientPrefs.lowQuality)
