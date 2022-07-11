@@ -45,7 +45,7 @@ class Note extends FlxSprite
 	public var eventVal2:String = '';
 
 	public var colorSwap:CSData;
-	public var staticColorSwap:ColorSwap;
+	public static var staticColorSwap:ColorSwap;
 	public var inEditor:Bool = false;
 	public var gfNote:Bool = false;
 	private var earlyHitMult:Float = 0.5;
