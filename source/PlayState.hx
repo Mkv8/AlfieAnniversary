@@ -1937,6 +1937,7 @@ class PlayState extends MusicBeatState
 		FlxG.sound.list.add(new FlxSound().loadEmbedded(Paths.inst(PlayState.SONG.song)));
 
 		notes = new FlxTypedGroup<Note>();
+		notes.active = false;
 		add(notes);
 
 		var noteData:Array<SwagSection> = songData.notes;
@@ -2504,6 +2505,8 @@ class PlayState extends MusicBeatState
 
 		if (generatedMusic)
 		{
+			notes.update(elapsed);
+
 			var fakeCrochet:Float = (60 / SONG.bpm) * 1000;
 			notes.forEachAlive(function(daNote:Note)
 			{
