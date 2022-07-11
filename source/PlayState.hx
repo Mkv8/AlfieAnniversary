@@ -1923,10 +1923,9 @@ class PlayState extends MusicBeatState
 				songSpeed = ClientPrefs.getGameplaySetting('scrollspeed', 1);
 		}
 
-		var songData = SONG;
-		Conductor.changeBPM(songData.bpm);
+		Conductor.changeBPM(SONG.bpm);
 
-		curSong = songData.song;
+		curSong = SONG.song;
 
 		if (SONG.needsVoices)
 			vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
@@ -1940,7 +1939,7 @@ class PlayState extends MusicBeatState
 		notes.active = false;
 		add(notes);
 
-		var noteData:Array<SwagSection> = songData.notes;
+		var noteData:Array<SwagSection> = SONG.notes;
 
 		var songName:String = Paths.formatToSongPath(SONG.song);
 		var file:String = Paths.json(songName + '/events');
@@ -2049,7 +2048,7 @@ class PlayState extends MusicBeatState
 				noteTypeMap.set(swagNote.noteType, true);
 			}
 		}
-		for (event in songData.events) //Event Notes
+		for (event in SONG.events) //Event Notes
 		{
 			for (i in 0...event[1].length)
 			{

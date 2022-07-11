@@ -1,5 +1,6 @@
 package;
 
+import flixel.math.FlxRect;
 import ColorSwap;
 import flixel.graphics.frames.FlxFrame;
 import flixel.FlxCamera;
@@ -370,6 +371,16 @@ class Note extends FlxSprite
 			if (alpha > 0.3)
 				alpha = 0.3;
 		}
+	}
+
+	override function set_clipRect(rect:FlxRect):FlxRect
+	{
+		clipRect = rect;
+
+		if (frames != null)
+			frame = frames.frames[animation.frameIndex];
+
+		return rect;
 	}
 
 	@:noCompletion
