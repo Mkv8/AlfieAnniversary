@@ -4393,6 +4393,7 @@ class PlayState extends MusicBeatState
 					case 774:
 					{
 						FlxTween.tween(black, {alpha: 1}, 2);
+						FlxTween.tween(camHUD, {alpha: 0}, 2);
 
 					}
 				}
