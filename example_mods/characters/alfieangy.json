@@ -1,0 +1,89 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				90,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "idle"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				130,
+				-36
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				160,
+				-30
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				145,
+				64
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				50,
+				13
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "right",
+			"indices": []
+		},
+		{
+			"offsets": [
+				100,
+				24
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "shock",
+			"loop": false,
+			"name": "shock"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/AlfieAngy",
+	"position": [
+		-20,
+		10
+	],
+	"healthicon": "alfieangy",
+	"flip_x": false,
+	"healthbar_colors": [
+		179,
+		32,
+		61
+	],
+	"camera_position": [
+		-60,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

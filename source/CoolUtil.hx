@@ -1,5 +1,6 @@
 package;
 
+import flixel.tweens.FlxEase.EaseFunction;
 import flixel.FlxG;
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
@@ -134,5 +135,9 @@ class CoolUtil
 		#else
 		FlxG.openURL(site);
 		#end
+	}
+
+	public static function getFlxEaseByString(arg0:String):EaseFunction {
+		throw new haxe.exceptions.NotImplementedException();
 	}
 }

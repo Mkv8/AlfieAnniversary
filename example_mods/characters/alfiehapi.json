@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				90,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": false,
+			"name": "idlee"
+		},
+		{
+			"offsets": [
+				130,
+				-36
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "leftt"
+		},
+		{
+			"offsets": [
+				160,
+				-30
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "downn"
+		},
+		{
+			"offsets": [
+				145,
+				64
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singUP",
+			"loop": false,
+			"name": "upp"
+		},
+		{
+			"offsets": [
+				50,
+				13
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "rightt"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/AlfieHappy",
+	"position": [
+		-20,
+		10
+	],
+	"healthicon": "alfiehapi",
+	"flip_x": false,
+	"healthbar_colors": [
+		179,
+		32,
+		61
+	],
+	"camera_position": [
+		-60,
+		0
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

@@ -1,0 +1,254 @@
+{
+	"song": {
+		"speed": 2.7,
+		"stage": "candlelit",
+		"player1": "bf",
+		"player2": "pooky",
+		"player3": null,
+		"events": [
+			[
+				6829.26829268293,
+				[
+					[
+						"Play Animation",
+						"appear",
+						"dad"
+					]
+				]
+			],
+			[
+				72195.1219512195,
+				[
+					[
+						"Change Character",
+						"dad",
+						"gharper"
+					]
+				]
+			],
+			[
+				155673.382820785,
+				[
+					[
+						"Change Character",
+						"dad",
+						"galfie"
+					]
+				]
+			],
+			[
+				239151.64369035,
+				[
+					[
+						"Change Character",
+						"dad",
+						"pookyangy"
+					]
+				]
+			],
+			[
+				319151.64369035,
+				[
+					[
+						"Change Character",
+						"dad",
+						"gethlyn"
+					]
+				]
+			],
+			[
+				401102.863202543,
+				[
+					[
+						"Change Character",
+						"dad",
+						"glaura"
+					]
+				]
+			],
+			[
+				474949.017048698,
+				[
+					[
+						"Black Bars",
+						"10%",
+						"0.4"
+					]
+				]
+			],
+			[
+				476795.170894852,
+				[
+					[
+						"Black Bars",
+						"20%",
+						"0.4"
+					]
+				]
+			],
+			[
+				482333.632433314,
+				[
+					[
+						"Black Bars",
+						"0",
+						""
+					],
+					[
+						"Change Character",
+						"dad",
+						"pookyhapi"
+					]
+				]
+			],
+			[
+				511872.093971776,
+				[
+					[
+						"Change Character",
+						"dad",
+						"gharper"
+					]
+				]
+			],
+			[
+				513718.24781793,
+				[
+					[
+						"Change Character",
+						"dad",
+						"galfie"
+					]
+				]
+			],
+			[
+				515564.401664084,
+				[
+					[
+						"Change Character",
+						"dad",
+						"gethlyn"
+					]
+				]
+			],
+			[
+				517410.555510237,
+				[
+					[
+						"Change Character",
+						"dad",
+						"glaura"
+					]
+				]
+			],
+			[
+				526641.324741007,
+				[
+					[
+						"Change Character",
+						"dad",
+						"galfie"
+					]
+				]
+			],
+			[
+				528487.478587161,
+				[
+					[
+						"Change Character",
+						"dad",
+						"gharper"
+					]
+				]
+			],
+			[
+				530333.632433315,
+				[
+					[
+						"Change Character",
+						"dad",
+						"glaura"
+					]
+				]
+			],
+			[
+				532179.786279468,
+				[
+					[
+						"Change Character",
+						"dad",
+						"gethlyn"
+					]
+				]
+			],
+			[
+				541525.940125622,
+				[
+					[
+						"Change Character",
+						"dad",
+						"pookyhapi"
+					]
+				]
+			],
+			[
+				570949.0170487,
+				[
+					[
+						"Change Character",
+						"dad",
+						"galfie"
+					]
+				]
+			],
+			[
+				574641.324741008,
+				[
+					[
+						"Change Character",
+						"dad",
+						"gharper"
+					]
+				]
+			],
+			[
+				578333.632433315,
+				[
+					[
+						"Change Character",
+						"dad",
+						"gethlyn"
+					]
+				]
+			],
+			[
+				582025.940125623,
+				[
+					[
+						"Change Character",
+						"dad",
+						"glaura"
+					]
+				]
+			],
+			[
+				585718.247817931,
+				[
+					[
+						"Change Character",
+						"dad",
+						"pookyhapi"
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": "noteSplashes",
+		"validScore": false,
+		"gfVersion": "gf",
+		"bpm": 123,
+		"arrowSkin": "",
+		"needsVoices": true,
+		"song": "candlelit-clash"
+	}
+}

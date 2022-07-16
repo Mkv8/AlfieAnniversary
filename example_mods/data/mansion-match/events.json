@@ -1,0 +1,74 @@
+{
+	"song": {
+		"speed": 2.9,
+		"stage": "hotline",
+		"player1": "nikkuangy",
+		"player2": "alfieangy",
+		"player3": null,
+		"events": [
+			[
+				0,
+				[
+					[
+						"Black Bars",
+						"100%",
+						""
+					]
+				]
+			],
+			[
+				93.75,
+				[
+					[
+						"Black Bars",
+						"22%",
+						"1"
+					]
+				]
+			],
+			[
+				48937.5,
+				[
+					[
+						"Play Animation",
+						"shock",
+						"Dad"
+					]
+				]
+			],
+			[
+				84000,
+				[
+					[
+						"Change Character",
+						"bf",
+						"nikkuhapi"
+					],
+					[
+						"Change Character",
+						"dad",
+						"alfiehapi"
+					]
+				]
+			],
+			[
+				156562.5,
+				[
+					[
+						"Black Bars",
+						"100%",
+						"2"
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": "noteSplashes",
+		"validScore": false,
+		"gfVersion": "gf",
+		"bpm": 160,
+		"arrowSkin": "",
+		"needsVoices": true,
+		"song": "mansion-match"
+	}
+}

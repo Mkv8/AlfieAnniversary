@@ -264,6 +264,19 @@ class PlayState extends MusicBeatState
 	var light2:BGSprite;
 	var ballsowo:BGSprite;
 
+	private var upperBlackBar:FlxSpriteExtra;
+    private var bottomBlackBar:FlxSpriteExtra;
+
+	var candlebg:BGSprite;
+	var hcandlebg:BGSprite;
+	var acandlebg:BGSprite;
+	var lcandlebg:BGSprite;
+	var ecandlebg:BGSprite;
+	var blackcandlebg:BGSprite;
+	var candleglow:BGSprite;
+	var candledark:BGSprite;
+	var candlespotlight:BGSprite;
+
 
 
 
@@ -368,6 +381,19 @@ class PlayState extends MusicBeatState
 		persistentUpdate = true;
 		persistentDraw = true;
 
+		upperBlackBar = new FlxSpriteExtra(0, 0).makeSolid(FlxG.width, Math.floor(FlxG.height / 2), FlxColor.BLACK);
+        upperBlackBar.y = 0 - upperBlackBar.height;
+        upperBlackBar.active = false;
+        bottomBlackBar = new FlxSpriteExtra(0, 0).makeSolid(FlxG.width, Math.floor(FlxG.height / 2), FlxColor.BLACK);
+        bottomBlackBar.y = FlxG.height;// + bottomBlackBar.height;
+        bottomBlackBar.active = false;
+
+        upperBlackBar.cameras = [camHUD];
+        bottomBlackBar.cameras = [camHUD];
+
+        add(upperBlackBar);
+        add(bottomBlackBar);
+
 		if (SONG == null)
 			SONG = Song.loadFromJson('tutorial');
 
@@ -405,6 +431,23 @@ class PlayState extends MusicBeatState
 			darksparks.updateHitbox();
 			darksparks.screenCenter(XY);
 			darksparks.alpha = 0;
+		}
+
+		if(formattedSong == 'candlelit-clash') {
+			candledark = new BGSprite('candledark', 0, -280, 1, 1);
+			candledark.updateHitbox();
+			candledark.blend = MULTIPLY;
+			candledark.scale.set(1.4, 1.4);
+			candledark.alpha = 1;
+
+			candleglow = new BGSprite('candleglow', 0, -280, 1, 1);
+			candleglow.updateHitbox();
+			candleglow.blend = ADD;
+			candleglow.scale.set(1.4, 1.4);
+			candledark.alpha = 1;
+
+			add(candleglow); trace('im sadddd');
+
 		}
 
 		if(formattedSong == 'forest-fire') {
@@ -586,6 +629,13 @@ class PlayState extends MusicBeatState
 				add(black);
 				black.alpha = 0;
 
+			case 'hotline':
+				var bgh:BGSprite = new BGSprite('HotlineBG', -600, -100, 1, 1);
+				bgh.updateHitbox();
+				bgh.antialiasing = true;
+				bgh.scale.set(1.5, 1.5);
+				add(bgh);
+
 
 			case 'dark':
 				var bg = new FlxSpriteExtra(-100, -100).makeSolid(FlxG.width * 3, FlxG.height * 3, 0xFF0A0808);
@@ -621,7 +671,7 @@ class PlayState extends MusicBeatState
 				FlxG.game.setFilters(shaders);
 				FlxG.game.filtersEnabled = true;
 
-			case 'shillton': //Forest Fire
+				case 'shillton': //Forest Fire
 				town = new BGSprite('bgold', -2000, -800, 1, 1);
 				town.updateHitbox();
 				add(town);
@@ -634,13 +684,43 @@ class PlayState extends MusicBeatState
 				black.alpha = 0;
 
 
-				if(!ClientPrefs.lowQuality) {
-					/*var stageLight:BGSprite = new BGSprite('stage_light', -125, -100, 0.9, 0.9);
-					stageLight.setGraphicSize(Std.int(stageLight.width * 1.1));
-					stageLight.updateHitbox();
-					add(stageLight);*/
 
-				}
+			case 'candlelit': //candlelit clash
+
+				candlebg = new BGSprite('candlebg', 0, -280, 1, 1);
+				candlebg.updateHitbox();
+				candlebg.scale.set(1.4, 1.4);
+				add(candlebg);
+
+				acandlebg = new BGSprite('acandlebg', 0, -280, 1, 1);
+				acandlebg.updateHitbox();
+				acandlebg.scale.set(1.4, 1.4);
+				acandlebg.alpha = 0;
+
+				add(acandlebg);
+
+				ecandlebg = new BGSprite('ecandlebg', 0, -280, 1, 1);
+				ecandlebg.updateHitbox();
+				ecandlebg.scale.set(1.4, 1.4);
+				ecandlebg.alpha = 0;
+
+				add(ecandlebg);
+
+				hcandlebg = new BGSprite('hcandlebg', 0, -280, 1, 1);
+				hcandlebg.updateHitbox();
+				hcandlebg.scale.set(1.4, 1.4);
+				hcandlebg.alpha = 0;
+
+				add(hcandlebg);
+
+				lcandlebg = new BGSprite('lcandlebg', 0, -280, 1, 1);
+				lcandlebg.updateHitbox();
+				lcandlebg.scale.set(1.4, 1.4);
+				lcandlebg.alpha = 0;
+
+				add(lcandlebg);
+
+
 
 			case 'mansiontop':
 
@@ -1121,12 +1201,27 @@ class PlayState extends MusicBeatState
 		strumLine.scrollFactor.set();
 
 		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
+
+		if (SONG.song == 'mansion-match')
+		{
+		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
+		timeTxt.setFormat(Paths.font("porque.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		timeTxt.scrollFactor.set();
+		timeTxt.alpha = 0;
+		timeTxt.borderSize = 2;
+		timeTxt.visible = showTime;
+		timeTxt.scale.set(0.8, 0.8);
+		}
+
+		else
+		{
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
 		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		timeTxt.scrollFactor.set();
 		timeTxt.alpha = 0;
 		timeTxt.borderSize = 2;
 		timeTxt.visible = showTime;
+		}
 		if(ClientPrefs.downScroll) timeTxt.y = FlxG.height - 44;
 
 		if(ClientPrefs.timeBarType == 'Song Name')
@@ -1281,19 +1376,47 @@ class PlayState extends MusicBeatState
 		add(iconP2);
 		reloadHealthBarColors();
 
+		if (SONG.song == 'mansion-match')
+		{
+		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
+		scoreTxt.setFormat(Paths.font("porque.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt.scrollFactor.set();
+		scoreTxt.borderSize = 1.25;
+		scoreTxt.visible = !ClientPrefs.hideHud;
+		scoreTxt.scale.set(0.8, 0.8);
+		}
+		else
+		{
 		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.hideHud;
+		}
+
 		add(scoreTxt);
 
+		if (SONG.song == 'mansion-match')
+		{
+		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
+		botplayTxt.setFormat(Paths.font("porque.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		botplayTxt.scrollFactor.set();
+		botplayTxt.borderSize = 1.25;
+		botplayTxt.visible = cpuControlled;	
+		botplayTxt.scale.set(0.8, 0.8);
+		}
+
+		else
+		{
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
 		botplayTxt.visible = cpuControlled;
+		}
+
 		add(botplayTxt);
+
 		if(ClientPrefs.downScroll) {
 			botplayTxt.y = timeBarBG.y - 78;
 		}
@@ -1351,7 +1474,8 @@ class PlayState extends MusicBeatState
 		data.set("spectral-sonnet-beta", ["NowP", "Siivatitle"]);
 		data.set("goated", ["NowP", "GOATED"]);
 		data.set("after-dark", ["NowPdark", "AFTER DARK"]);
-		data.set("candlelit-clash", ["NowP", "Siivatitle"]);
+		data.set("mansion-match", ["NowPhotline", "hotlinetitle"]);
+		data.set("candlelit-clash", ["NowP", "CandleTitle"]);
 
 		var shouldShowCassette:Bool = false;
 
@@ -1459,6 +1583,24 @@ class PlayState extends MusicBeatState
 			black.scale.set(2.5, 2.5);
 			add(black);
 		}
+
+		if (daSong == 'mansion-match')
+			{
+				black = new BGSprite('black', 0, 0, 1, 1);
+				black.scale.set(2.5, 2.5);
+				add(black);
+				new FlxTimer().start(7, function(tmr:FlxTimer)
+					{
+						remove(black);
+					});
+			}
+
+		if (daSong == 'candlelit-clash')
+			{
+				add(candledark);
+				add(candleglow);
+				dad.alpha = 0;
+			}
 
 		RecalculateRating();
 
@@ -3097,6 +3239,38 @@ class PlayState extends MusicBeatState
 			case 'BG Freaks Expression':
 				if(bgGirls != null) bgGirls.swapDanceType();
 
+
+			case 'Black Bars':
+                var val1:Float = Std.parseFloat(value1.trim());
+                if(Math.isNaN(val1)) val1 = 0;
+                if(value1.trim().endsWith("%")) val1 = (val1 / 100) * FlxG.height / 2;
+
+                var ease:EaseFunction = FlxEase.linear;
+                var duration:Float = -1;
+
+                var v2data = value2.split(",");
+                if(v2data.length >= 1) {
+                    duration = Std.parseFloat(v2data[0].trim());
+                    if(Math.isNaN(duration)) duration = -1;
+                }
+                if(v2data.length >= 2) {
+                    ease = CoolUtil.getFlxEaseByString(v2data[1].trim());
+                }
+
+                FlxTween.cancelTweensOf(upperBlackBar);
+                FlxTween.cancelTweensOf(bottomBlackBar);
+
+                var upperY = 0 - upperBlackBar.height + val1;
+                var bottomY = FlxG.height - val1;
+
+                if(duration == -1) {
+                    upperBlackBar.y = upperY;
+                    bottomBlackBar.y = bottomY;
+                } else {
+                    FlxTween.tween(upperBlackBar, {y: upperY}, duration, {ease: ease});
+                    FlxTween.tween(bottomBlackBar, {y: bottomY}, duration, {ease: ease});
+                }
+
 			case 'Change Scroll Speed':
 				if (songSpeedType == "constant")
 					return;
@@ -4341,6 +4515,17 @@ class PlayState extends MusicBeatState
 		}
 
 
+		/*if (curSong == 'after-dark' && curStage == 'dark' && !ClientPrefs.lowQuality)
+			{
+				switch (curStep)
+				{
+					case 1:
+					{
+					FlxTween.tween(black, {alpha: 0}, 0.2);
+					}
+				}
+			}*/
+
 		if (curSong == 'after-dark' && curStage == 'dark' && !ClientPrefs.lowQuality)
 			{
 				switch (curBeat)
@@ -4604,8 +4789,20 @@ class PlayState extends MusicBeatState
 				}
 
 			}
-
 		}
+
+		if (curSong == 'candlelit-clash' && curStage == 'candlelit' && !ClientPrefs.lowQuality)
+			{
+
+				switch (curBeat)
+				{
+					case 14:
+					{
+						FlxTween.tween(dad, {alpha: 1}, 0.4);
+					}
+
+				}
+			}
 
 		switch (curStage)
 		{
