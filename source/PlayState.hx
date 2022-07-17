@@ -272,11 +272,13 @@ class PlayState extends MusicBeatState
 	var acandlebg:BGSprite;
 	var lcandlebg:BGSprite;
 	var ecandlebg:BGSprite;
-	var blackcandlebg:BGSprite;
+	var brokencandlebg:BGSprite;
 	var candleglow:BGSprite;
 	var candledark:BGSprite;
 	var candlespotlight:BGSprite;
-
+	var candlebells:FlxBackdrop;
+	var funkyassoverlay:BGSprite;
+	var cshaders:Array<BitmapFilter> = [new ShaderFilter(new VCRShader())];
 
 
 
@@ -444,9 +446,21 @@ class PlayState extends MusicBeatState
 			candleglow.updateHitbox();
 			candleglow.blend = ADD;
 			candleglow.scale.set(1.4, 1.4);
-			candledark.alpha = 1;
+			candleglow.alpha = 1;
 
-			add(candleglow); trace('im sadddd');
+			candlespotlight = new BGSprite('candlespotlight', 0, -280, 1, 1);
+			candlespotlight.updateHitbox();
+			candlespotlight.scale.set(1.4, 1.4);
+			candlespotlight.alpha = 1;
+
+			funkyassoverlay = new BGSprite('FUNKY', 0, 0, 1, 1);
+			funkyassoverlay.updateHitbox();
+			funkyassoverlay.setGraphicSize(FlxG.width, FlxG.height);
+			funkyassoverlay.cameras = [camOther];
+			funkyassoverlay.screenCenter(XY);
+			funkyassoverlay.alpha = 0;
+
+			add(funkyassoverlay);
 
 		}
 
@@ -719,6 +733,30 @@ class PlayState extends MusicBeatState
 				lcandlebg.alpha = 0;
 
 				add(lcandlebg);
+
+				brokencandlebg = new BGSprite('candlebgbroken', 0, -280, 1, 1);
+				brokencandlebg.updateHitbox();
+				brokencandlebg.scale.set(1.4, 1.4);
+				add(brokencandlebg);
+				brokencandlebg.alpha = 0;
+
+				black = new BGSprite('black', 0, 0, 1, 1);
+				black.scale.set(3.5, 3.5);
+				black.updateHitbox();
+				black.screenCenter(XY);
+				add(black);
+				black.alpha = 0;
+
+				candlebells = new FlxBackdrop(Paths.image('bells'), 0.4, 0, true, false);
+				candlebells.velocity.set(100, 0);
+				candlebells.scale.set(1.4, 1.4);
+				candlebells.updateHitbox();
+				candlebells.x -= 0;
+				candlebells.y -= 800;
+
+				//bells.screenCenter();
+				candlebells.alpha = 0;
+				add(candlebells);
 
 
 
@@ -4010,6 +4048,11 @@ class PlayState extends MusicBeatState
 			char.holdTimer = 0;
 		}
 
+		if(SONG.player2 == 'gethlyn') {
+			var drain = 0.02;
+			if((health - drain)/2 >= 0.5) {health-=drain;}
+		  }
+
 		if (SONG.needsVoices)
 			vocals.volume = 1;
 
@@ -4796,11 +4839,174 @@ class PlayState extends MusicBeatState
 
 				switch (curBeat)
 				{
+
 					case 14:
 					{
 						FlxTween.tween(dad, {alpha: 1}, 0.4);
 					}
 
+					case 148:
+					{
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						hcandlebg.alpha = 1;
+					}
+
+					case 212:
+					{
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						brokencandlebg.alpha = 1;
+						FlxG.game.setFilters(cshaders);
+						FlxG.game.filtersEnabled = true;
+						candledark.alpha = 0;
+						candleglow.alpha = 0;
+					}
+
+					case 276:
+					{
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						brokencandlebg.alpha = 0;
+						FlxG.game.filtersEnabled = false;
+						candledark.alpha = 1;
+						candleglow.alpha = 1;
+
+					}
+
+					case 308:
+					{
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						acandlebg.alpha = 1;
+						remove(hcandlebg);
+					}
+
+					case 340:
+					{
+						FlxTween.tween(candlebells, {alpha: 1}, 2);
+						FlxTween.tween(black, {alpha: 0.4}, 2);
+
+					}
+
+					case 435:
+					{
+						FlxTween.tween(candlebells, {alpha: 0}, 3);
+						FlxTween.tween(black, {alpha: 0}, 2);
+					}
+
+					case 468:
+					{
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						remove(acandlebg);
+					}
+
+					case 632:
+					{
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						ecandlebg.alpha = 1;
+					}
+
+					case 728:
+					{
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						add(candlespotlight);
+					}
+
+					case 776:
+					{
+						FlxTween.tween(candlespotlight, {alpha: 0}, 2);
+					}
+
+					case 800:
+					{
+						remove(candlespotlight);
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						remove(ecandlebg);
+						lcandlebg.alpha = 1;
+					}
+
+					case 976:
+					{
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						remove(lcandlebg);
+					}
+						
+					case 1132:
+					{
+					FlxG.sound.play(Paths.sound('intro3' + introSoundsSuffix), 0.6);
+					}
+					case 1133:
+					{
+						countdownReady = new FlxSprite().loadGraphic(Paths.image('ready'));
+						countdownReady.scrollFactor.set();
+						countdownReady.updateHitbox();
+						countdownReady.screenCenter();
+						countdownReady.cameras = [camHUD];
+						countdownReady.antialiasing = true;
+						add(countdownReady);
+						FlxTween.tween(countdownReady, {alpha: 0}, 0.3, {
+							ease: FlxEase.cubeInOut,
+							onComplete: function(twn:FlxTween)
+							{
+								remove(countdownReady);
+								countdownReady.destroy();
+							}
+						});
+						FlxG.sound.play(Paths.sound('intro2' + introSoundsSuffix), 0.6);
+					}
+					case 1134:
+						{
+						countdownSet = new FlxSprite().loadGraphic(Paths.image('set'));
+						countdownSet.scrollFactor.set();
+						countdownSet.screenCenter();
+						countdownSet.cameras = [camHUD];
+						countdownSet.antialiasing = true;
+						add(countdownSet);
+						FlxTween.tween(countdownSet, {alpha: 0}, 0.3, {
+							ease: FlxEase.cubeInOut,
+							onComplete: function(twn:FlxTween)
+							{
+								remove(countdownSet);
+								countdownSet.destroy();
+							}
+						});
+						FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);
+						}
+					case 1135:
+						{
+						countdownGo = new FlxSprite().loadGraphic(Paths.image('go'));
+						countdownGo.scrollFactor.set();
+						countdownGo.updateHitbox();
+						countdownGo.screenCenter();
+						countdownGo.cameras = [camHUD];
+						countdownGo.antialiasing = true;
+						add(countdownGo);
+						FlxTween.tween(countdownGo, {alpha: 0}, 0.3, {
+							ease: FlxEase.cubeInOut,
+							onComplete: function(twn:FlxTween)
+							{
+								remove(countdownGo);
+								countdownGo.destroy();
+							}
+						});
+						FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);
+						}
+
+					case 1136:
+					{
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						FlxTween.tween(funkyassoverlay, {alpha: 1}, 0.5);
+					}
+
+					case 1200:
+					{
+						FlxTween.tween(funkyassoverlay, {alpha: 0}, 1);
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						dad.alpha = 0.6;
+					}
+
+					case 1232:
+					{
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						FlxTween.tween(dad, {alpha: 0}, 2.5);
+					}
 				}
 			}
 
