@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="gameoverRetry.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="retry0000" x="11" y="11" width="309" height="149"/>
+	<SubTexture name="retry0001" x="11" y="11" width="309" height="149"/>
+	<SubTexture name="retry0002" x="360" y="11" width="297" height="146" frameX="-4" frameY="-2" frameWidth="309" frameHeight="149"/>
+	<SubTexture name="retry0003" x="360" y="11" width="297" height="146" frameX="-4" frameY="-2" frameWidth="309" frameHeight="149"/>
+	<SubTexture name="retry0004" x="697" y="11" width="294" height="145" frameX="-5" frameY="-3" frameWidth="309" frameHeight="149"/>
+	<SubTexture name="retry0005" x="697" y="11" width="294" height="145" frameX="-5" frameY="-3" frameWidth="309" frameHeight="149"/>
+	<SubTexture name="retry0006" x="1031" y="11" width="291" height="143" frameX="-6" frameY="-4" frameWidth="309" frameHeight="149"/>
+	<SubTexture name="retry0007" x="1031" y="11" width="291" height="143" frameX="-6" frameY="-4" frameWidth="309" frameHeight="149"/>
+	<SubTexture name="retry0008" x="1031" y="11" width="291" height="143" frameX="-6" frameY="-4" frameWidth="309" frameHeight="149"/>
+	<SubTexture name="retry0009" x="1031" y="11" width="291" height="143" frameX="-6" frameY="-4" frameWidth="309" frameHeight="149"/>
+	<SubTexture name="retry0010" x="1031" y="11" width="291" height="143" frameX="-6" frameY="-4" frameWidth="309" frameHeight="149"/>
+	<SubTexture name="retry0011" x="1031" y="11" width="291" height="143" frameX="-6" frameY="-4" frameWidth="309" frameHeight="149"/>
+	<SubTexture name="retry0012" x="1031" y="11" width="291" height="143" frameX="-6" frameY="-4" frameWidth="309" frameHeight="149"/>
+	<SubTexture name="retry0013" x="1031" y="11" width="291" height="143" frameX="-6" frameY="-4" frameWidth="309" frameHeight="149"/>
+	<SubTexture name="retry0014" x="1031" y="11" width="291" height="143" frameX="-6" frameY="-4" frameWidth="309" frameHeight="149"/>
+	<SubTexture name="retryenter0000" x="1362" y="11" width="418" height="293"/>
+	<SubTexture name="retryenter0001" x="11" y="344" width="418" height="293"/>
+	<SubTexture name="retryenter0002" x="469" y="344" width="418" height="293"/>
+	<SubTexture name="retryenter0003" x="927" y="344" width="418" height="293"/>
+	<SubTexture name="retryenter0004" x="1385" y="344" width="418" height="293"/>
+	<SubTexture name="retryenter0005" x="11" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0006" x="469" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0007" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0008" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0009" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0010" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0011" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0012" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0013" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0014" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0015" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0016" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0017" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0018" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0019" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0020" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0021" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0022" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0023" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0024" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0025" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0026" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0027" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0028" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0029" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0030" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0031" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0032" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0033" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0034" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0035" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0036" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0037" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0038" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0039" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0040" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0041" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0042" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0043" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0044" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0045" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0046" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0047" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0048" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0049" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0050" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0051" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0052" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0053" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0054" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0055" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0056" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0057" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0058" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0059" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0060" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0061" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0062" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0063" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0064" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0065" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0066" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0067" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0068" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0069" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0070" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0071" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0072" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0073" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0074" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0075" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0076" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0077" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0078" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0079" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0080" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0081" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0082" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0083" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0084" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0085" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0086" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0087" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0088" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0089" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0090" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0091" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0092" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0093" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0094" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0095" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0096" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0097" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0098" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0099" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0100" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0101" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0102" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0103" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0104" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0105" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0106" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0107" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0108" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0109" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0110" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0111" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0112" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0113" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0114" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0115" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0116" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0117" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0118" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0119" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0120" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0121" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0122" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0123" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0124" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0125" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0126" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0127" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0128" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0129" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0130" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0131" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0132" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0133" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0134" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0135" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0136" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0137" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0138" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0139" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0140" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0141" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0142" x="927" y="677" width="418" height="293"/>
+	<SubTexture name="retryenter0143" x="927" y="677" width="418" height="293"/>
+</TextureAtlas>

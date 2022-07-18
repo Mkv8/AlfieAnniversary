@@ -16,7 +16,9 @@ class GameOverSubstate extends MusicBeatSubstate
 	var camFollow:FlxPoint;
 	var camFollowPos:FlxObject;
 	var updateCamera:Bool = false;
-	var dontstop:BGSprite;
+	var crack:BGSprite;
+	var alfie:BGSprite;
+	var retry:BGSprite;
 	var stageSuffix:String = "";
 
 	public static var characterName:String = 'bf';
@@ -49,19 +51,41 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		Conductor.songPosition = 0;
 
-		dontstop = new BGSprite('DontStop', x, y, 1, 1);
-		
+		crack = new BGSprite('crack', 0, 0, 0, 0);
+		crack.updateHitbox();
+		crack.antialiasing = true;
+		crack.alpha = 0.0001;
+		crack.screenCenter(XY);
+		crack.scale.set(0.7, 0.7);
+		//crack.scale.set(1/defaultCamZoom, 1/defaultCamZoom);
 
-		add(dontstop);
+
+		alfie = new BGSprite('gameoverAlfie', -100, 70, 0, 0, ['alfiedance0', 'alfieenter'], true);
+		alfie.updateHitbox();
+		alfie.animation.addByIndices("danceLeft", "alfiedance0", [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15], "", 24, false);
+		alfie.animation.addByIndices("danceRight", "alfiedance0", [16,17,18,19,20,21,22,23,24,25,26,27,28,29,30], "", 24, false);
+		alfie.antialiasing = true;
+		alfie.alpha = 0.0001;
+		alfie.scale.set(0.7, 0.7);
+
+
+		retry = new BGSprite('gameoverRetry', 660, 330, 0, 0, ['retry0', 'retryenter'], true);
+		retry.updateHitbox();
+		retry.antialiasing = true;
+		retry.alpha = 0.001;
+		retry.scale.set(0.7, 0.7);
+
+
+		add(crack);
+		add(alfie);
+		add(retry);
 
 		boyfriend = new Boyfriend(x, y, characterName);
 		boyfriend.x += boyfriend.positionArray[0];
 		boyfriend.y += boyfriend.positionArray[1];
 		add(boyfriend);
-		
-		dontstop.x = boyfriend.x - 1240;
-		dontstop.y = boyfriend.y - 1050;
-		dontstop.alpha = 0;
+		boyfriend.alpha = 0;
+
 		
 		camFollow = new FlxPoint(boyfriend.getGraphicMidpoint().x, boyfriend.getGraphicMidpoint().y);
 
@@ -69,14 +93,17 @@ class GameOverSubstate extends MusicBeatSubstate
 		Conductor.changeBPM(100);
 		// FlxG.camera.followLerp = 1;
 		// FlxG.camera.focusOn(FlxPoint.get(FlxG.width / 2, FlxG.height / 2));
-		FlxG.camera.scroll.set();
-		FlxG.camera.target = null;
+		FlxG.camera.scroll.set(0, 0);
+		FlxG.camera.target = crack;
 
 		boyfriend.playAnim('firstDeath');
 
-		new FlxTimer().start(2.5, function(tmr:FlxTimer)
+		new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
-				FlxTween.tween(dontstop, {alpha: 1}, 1);
+				FlxTween.tween(crack, {alpha: 1}, 1);
+				FlxTween.tween(alfie, {alpha: 1}, 1);
+				FlxTween.tween(retry, {alpha: 1}, 1);
+
 
 			});
 
@@ -142,10 +169,23 @@ class GameOverSubstate extends MusicBeatSubstate
 		PlayState.instance.callOnLuas('onUpdatePost', [elapsed]);
 	}
 
+	public var startVibin = false;
+
+
 	override function beatHit()
 	{
 		super.beatHit();
 
+		if (startVibin && !isEnding)
+			{
+				if(curBeat % 2 == 0) {
+					alfie.animation.play("danceLeft", true);
+				} else {
+					alfie.animation.play("danceRight", true);
+				}
+			//alfie.animation.play('alfiedance0', true);
+			retry.animation.play('retry0', true);
+			}
 		//FlxG.log.add('beat');
 	}
 
@@ -154,6 +194,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	function coolStartDeath(?volume:Float = 1):Void
 	{
 		FlxG.sound.playMusic(Paths.music(loopSoundName), volume);
+		startVibin = true;
 	}
 
 	function endBullshit():Void
@@ -162,6 +203,11 @@ class GameOverSubstate extends MusicBeatSubstate
 		{
 			isEnding = true;
 			boyfriend.playAnim('deathConfirm', true);
+			alfie.animation.play('alfieenter', true);
+			retry.animation.play('retryenter', true);
+			retry.x -= 47;
+			retry.y -= 55;
+			alfie.x += 30;
 			FlxG.sound.music.stop();
 			FlxG.sound.play(Paths.music(endSoundName));
 			new FlxTimer().start(0.7, function(tmr:FlxTimer)
