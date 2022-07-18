@@ -82,4 +82,5 @@
 	<SubTexture name="up0008" x="7282" y="894" width="675" height="814" frameX="0" frameY="-24" frameWidth="682" frameHeight="842"/>
 	<SubTexture name="up0009" x="7282" y="894" width="675" height="814" frameX="0" frameY="-24" frameWidth="682" frameHeight="842"/>
 	<SubTexture name="up0010" x="7282" y="894" width="675" height="814" frameX="0" frameY="-24" frameWidth="682" frameHeight="842"/>
+	<SubTexture name="none0000" x="0" y="0" width="1" height="1"/>
 </TextureAtlas>

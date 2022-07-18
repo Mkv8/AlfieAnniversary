@@ -432,6 +432,7 @@ class PlayState extends MusicBeatState
 			darksparks.velocity.set(25, -200);
 			darksparks.updateHitbox();
 			darksparks.screenCenter(XY);
+			darksparks.antialiasing = ClientPrefs.globalAntialiasing;
 			darksparks.alpha = 0;
 		}
 
@@ -484,18 +485,21 @@ class PlayState extends MusicBeatState
 			rainweak.velocity.set(1500, 5000);
 			rainweak.updateHitbox();
 			rainweak.screenCenter(XY);
+			rainweak.antialiasing = ClientPrefs.globalAntialiasing;
 			rainweak.alpha = 0;
 
 			rainsmall = new FlxBackdrop(Paths.image('smalldrops'), 0.2, 0, true, true);
 			rainsmall.velocity.set(1200, 4000);
 			rainsmall.updateHitbox();
 			rainsmall.screenCenter(XY);
+			rainsmall.antialiasing = ClientPrefs.globalAntialiasing;
 			rainsmall.alpha = 0;
 
 			rainbig = new FlxBackdrop(Paths.image('bigdrops'), 0.2, 0, true, true);
 			rainbig.velocity.set(1000, 3000);
 			rainbig.updateHitbox();
 			rainbig.screenCenter(XY);
+			rainbig.antialiasing = ClientPrefs.globalAntialiasing;
 			rainbig.alpha = 0;
 		}
 
@@ -751,6 +755,7 @@ class PlayState extends MusicBeatState
 				candlebells.velocity.set(100, 0);
 				candlebells.scale.set(1.4, 1.4);
 				candlebells.updateHitbox();
+				candlebells.antialiasing = ClientPrefs.globalAntialiasing;
 				candlebells.x -= 0;
 				candlebells.y -= 800;
 
@@ -810,6 +815,7 @@ class PlayState extends MusicBeatState
 				bells.x -= 830;
 				bells.y -= 720;
 				//bells.screenCenter();
+				bells.antialiasing = ClientPrefs.globalAntialiasing;
 				bells.alpha = 0;
 				add(bells);
 
@@ -1242,23 +1248,22 @@ class PlayState extends MusicBeatState
 
 		if (SONG.song == 'mansion-match')
 		{
-		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
-		timeTxt.setFormat(Paths.font("porque.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		timeTxt.scrollFactor.set();
-		timeTxt.alpha = 0;
-		timeTxt.borderSize = 2;
-		timeTxt.visible = showTime;
-		timeTxt.scale.set(0.8, 0.8);
+			timeTxt = new FlxFixedText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
+			timeTxt.setFormat(Paths.font("porque.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			timeTxt.scrollFactor.set();
+			timeTxt.alpha = 0;
+			timeTxt.borderSize = 2;
+			timeTxt.visible = showTime;
+			timeTxt.scale.set(0.8, 0.8);
 		}
-
 		else
 		{
-		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
-		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		timeTxt.scrollFactor.set();
-		timeTxt.alpha = 0;
-		timeTxt.borderSize = 2;
-		timeTxt.visible = showTime;
+			timeTxt = new FlxFixedText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
+			timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			timeTxt.scrollFactor.set();
+			timeTxt.alpha = 0;
+			timeTxt.borderSize = 2;
+			timeTxt.visible = showTime;
 		}
 		if(ClientPrefs.downScroll) timeTxt.y = FlxG.height - 44;
 
@@ -1283,7 +1288,7 @@ class PlayState extends MusicBeatState
 			'songPercent', 0, 1);
 		timeBar.scrollFactor.set();
 		timeBar.createFilledBar(0xFF000000, 0xFFFFFFFF);
-		timeBar.numDivisions = 800; //How much lag this causes?? Should i tone it down to idk, 400 or 200?
+		timeBar.numDivisions = 800000; //How much lag this causes?? Should i tone it down to idk, 400 or 200?
 		timeBar.alpha = 0;
 		timeBar.visible = showTime;
 		add(timeBar);
@@ -1398,6 +1403,7 @@ class PlayState extends MusicBeatState
 		// healthBar
 		healthBar.visible = !ClientPrefs.hideHud;
 		healthBar.alpha = ClientPrefs.healthBarAlpha;
+		healthBar.numDivisions = 800000;
 		add(healthBar);
 		healthBarBG.sprTracker = healthBar;
 
@@ -1416,27 +1422,27 @@ class PlayState extends MusicBeatState
 
 		if (SONG.song == 'mansion-match')
 		{
-		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
-		scoreTxt.setFormat(Paths.font("porque.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		scoreTxt.scrollFactor.set();
-		scoreTxt.borderSize = 1.25;
-		scoreTxt.visible = !ClientPrefs.hideHud;
-		scoreTxt.scale.set(0.8, 0.8);
+			scoreTxt = new FlxFixedText(0, healthBarBG.y + 36, FlxG.width, "", 20);
+			scoreTxt.setFormat(Paths.font("porque.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			scoreTxt.scrollFactor.set();
+			scoreTxt.borderSize = 1.25;
+			scoreTxt.visible = !ClientPrefs.hideHud;
+			scoreTxt.scale.set(0.8, 0.8);
 		}
 		else
 		{
-		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		scoreTxt.scrollFactor.set();
-		scoreTxt.borderSize = 1.25;
-		scoreTxt.visible = !ClientPrefs.hideHud;
+			scoreTxt = new FlxFixedText(0, healthBarBG.y + 36, FlxG.width, "", 20);
+			scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			scoreTxt.scrollFactor.set();
+			scoreTxt.borderSize = 1.25;
+			scoreTxt.visible = !ClientPrefs.hideHud;
 		}
 
 		add(scoreTxt);
 
 		if (SONG.song == 'mansion-match')
 		{
-		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
+		botplayTxt = new FlxFixedText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("porque.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
@@ -1446,7 +1452,7 @@ class PlayState extends MusicBeatState
 
 		else
 		{
-		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
+		botplayTxt = new FlxFixedText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
@@ -2359,7 +2365,7 @@ class PlayState extends MusicBeatState
 				vocals.pause();
 			}
 
-			if (!startTimer.finished)
+			if (startTimer != null && !startTimer.finished)
 				startTimer.active = false;
 			if (finishTimer != null && !finishTimer.finished)
 				finishTimer.active = false;
@@ -2400,7 +2406,7 @@ class PlayState extends MusicBeatState
 				resyncVocals();
 			}
 
-			if (!startTimer.finished)
+			if (startTimer != null && !startTimer.finished)
 				startTimer.active = true;
 			if (finishTimer != null && !finishTimer.finished)
 				finishTimer.active = true;
@@ -4393,6 +4399,7 @@ class PlayState extends MusicBeatState
 	}
 
 	public static function cancelMusicFadeTween() {
+		if(FlxG.sound.music == null) return;
 		if(FlxG.sound.music.fadeTween != null) {
 			FlxG.sound.music.fadeTween.cancel();
 		}
@@ -4571,11 +4578,11 @@ class PlayState extends MusicBeatState
 			}*/
 
 		if (curSong == 'after-dark' && curStage == 'dark' && !ClientPrefs.lowQuality)
+		{
+			switch (curBeat)
 			{
-				switch (curBeat)
+				case 8:
 				{
-					case 8:
-					{
 					dad.alpha = 0.3;
 					dad.scale.set(1.05, 1.05);
 					FlxTween.tween(black, {alpha: 0}, 0.5);
@@ -4586,47 +4593,49 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(redglow, {alpha: 1}, 0.5);
 					FlxTween.tween(scanlines, {alpha: 0.3}, 0.5);
 					FlxTween.tween(vignette, {alpha: 0.5}, 0.5);
-					}
+				}
 
 
-					case 188:
+				case 188:
+				{
+					FlxTween.tween(eyes, {alpha: 1}, 0.5);
+					eyes.animation.play('eyes', true);
+
+					new FlxTimer().start(3, function(tmr:FlxTimer)
 					{
-						FlxTween.tween(eyes, {alpha: 1}, 0.5);
-						eyes.animation.play('eyes', true);
+						eyes.animation.pause();
+						eyes.animation.curAnim.curFrame = 72;
+					});
 
-						new FlxTimer().start(3, function(tmr:FlxTimer)
-							{
-							eyes.animation.pause();
-							});
+				}
 
-					}
+				case 256:
+				{
+					FlxTween.tween(circles, {alpha: 0.5}, 1);
+					FlxTween.tween(darksparks, {alpha: 0.85}, 1);
+				}
 
-					case 256:
-					{
-						FlxTween.tween(circles, {alpha: 0.5}, 1);
-						FlxTween.tween(darksparks, {alpha: 0.85}, 1);
-					}
+				case 640:
+				{
+					eyes.animation.curAnim.curFrame = 72;
+					eyes.animation.resume();
 
-					case 640:
-					{
-						eyes.animation.resume();
+				}
 
-					}
+				case 704:
+				{
+					FlxTween.tween(circles, {alpha: 0}, 1);
+					FlxTween.tween(darksparks, {alpha: 0}, 1);
+				}
 
-					case 704:
-					{
-						FlxTween.tween(circles, {alpha: 0}, 1);
-						FlxTween.tween(darksparks, {alpha: 0}, 1);
-					}
+				case 774:
+				{
+					FlxTween.tween(black, {alpha: 1}, 2);
+					FlxTween.tween(camHUD, {alpha: 0}, 2);
 
-					case 774:
-					{
-						FlxTween.tween(black, {alpha: 1}, 2);
-						FlxTween.tween(camHUD, {alpha: 0}, 2);
-
-					}
 				}
 			}
+		}
 
 		//mansiontop
 		if (formattedSong == 'spectral-sonnet' && curStage == 'mansiontop' && !ClientPrefs.lowQuality)
@@ -4881,6 +4890,7 @@ class PlayState extends MusicBeatState
 
 					case 340:
 					{
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
 						FlxTween.tween(candlebells, {alpha: 1}, 2);
 						FlxTween.tween(black, {alpha: 0.4}, 2);
 

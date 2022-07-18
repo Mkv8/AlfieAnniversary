@@ -128,7 +128,7 @@ class CharacterEditorState extends MusicBeatState
 		add(dumbTexts);
 		dumbTexts.cameras = [camHUD];
 
-		textAnim = new FlxText(300, 16);
+		textAnim = new FlxFixedText(300, 16);
 		textAnim.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		textAnim.borderSize = 1;
 		textAnim.size = 32;

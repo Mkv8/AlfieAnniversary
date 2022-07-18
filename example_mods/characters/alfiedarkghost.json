@@ -9,7 +9,7 @@
 			"fps": 24,
 			"anim": "idle",
 			"indices": [],
-			"name": "idle"
+			"name": "none"
 		},
 		{
 			"loop": false,
@@ -101,7 +101,7 @@
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/AlfieDarka",
+	"image": "characters/AlfieDark",
 	"position": [
 		-40,
 		0

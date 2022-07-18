@@ -80,7 +80,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		add(alfie);
 		add(retry);
 
-		boyfriend = new Boyfriend(x, y, characterName);
+		boyfriend = new Boyfriend(x, y, "bf-opti");
 		boyfriend.x += boyfriend.positionArray[0];
 		boyfriend.y += boyfriend.positionArray[1];
 		add(boyfriend);
@@ -99,16 +99,11 @@ class GameOverSubstate extends MusicBeatSubstate
 		boyfriend.playAnim('firstDeath');
 
 		new FlxTimer().start(2, function(tmr:FlxTimer)
-			{
-				FlxTween.tween(crack, {alpha: 1}, 1);
-				FlxTween.tween(alfie, {alpha: 1}, 1);
-				FlxTween.tween(retry, {alpha: 1}, 1);
-
-
-			});
-
-
-		var exclude:Array<Int> = [];
+		{
+			FlxTween.tween(crack, {alpha: 1}, 1);
+			FlxTween.tween(alfie, {alpha: 1}, 1);
+			FlxTween.tween(retry, {alpha: 1}, 1);
+		});
 
 		camFollowPos = new FlxObject(0, 0, 1, 1);
 		camFollowPos.setPosition(FlxG.camera.scroll.x + (FlxG.camera.width / 2), FlxG.camera.scroll.y + (FlxG.camera.height / 2));
@@ -177,16 +172,15 @@ class GameOverSubstate extends MusicBeatSubstate
 		super.beatHit();
 
 		if (startVibin && !isEnding)
-			{
-				if(curBeat % 2 == 0) {
-					alfie.animation.play("danceLeft", true);
-				} else {
-					alfie.animation.play("danceRight", true);
-				}
+		{
+			if(curBeat % 2 == 0) {
+				alfie.animation.play("danceLeft", true);
+			} else {
+				alfie.animation.play("danceRight", true);
+			}
 			//alfie.animation.play('alfiedance0', true);
 			retry.animation.play('retry0', true);
-			}
-		//FlxG.log.add('beat');
+		}
 	}
 
 	var isEnding:Bool = false;
