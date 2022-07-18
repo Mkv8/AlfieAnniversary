@@ -4436,6 +4436,8 @@ class PlayState extends MusicBeatState
 
 	var lastBeatHit:Int = -1;
 
+	var eventNum:Int = 0;
+
 	override function beatHit()
 	{
 		super.beatHit();
@@ -4505,63 +4507,53 @@ class PlayState extends MusicBeatState
 		//shillton
 		if (formattedSong == 'forest-fire' && curStage == 'shillton' && !ClientPrefs.lowQuality)
 		{
-			switch (curBeat)
-			{
-				case 1:
-				{
-					add(oldstripes);
-					add(vignette);
-					FlxTween.tween(vignette, {alpha: 1}, 1);
-					FlxTween.tween(camHUD, {alpha: 0}, 1);
-				}
+			if(eventNum == 0 && curBeat >= 1) {
+				eventNum++;
+				add(oldstripes);
+				add(vignette);
+				FlxTween.tween(vignette, {alpha: 1}, 1);
+				FlxTween.tween(camHUD, {alpha: 0}, 1);
+			}
 
-				case 16:
-				{
 
-					FlxTween.tween(vignette, {alpha: 1}, 1);
-					camHUD.alpha = 1;
-				}
+			if(eventNum == 1 && curBeat >= 16) {
+				eventNum++;
+				FlxTween.tween(vignette, {alpha: 1}, 1);
+				camHUD.alpha = 1;
+			}
 
-				case 79:
-				{
-					FlxTween.tween(oldstripes, {alpha: 1}, 1);
-					FlxTween.tween(vignette, {alpha: 0}, 1);
-				}
-
-				case 111:
-				{
-					FlxTween.tween(oldstripes, {alpha: 0}, 1);
-					FlxTween.tween(black, {alpha: 0.5}, 1);
-					FlxTween.tween(vignette, {alpha: 1}, 1);
-				}
-
-				case 143:
-				{
-					FlxTween.tween(black, {alpha: 0}, 1);
-				}
-
-				case 175:
-				{
-					FlxTween.tween(oldstripes, {alpha: 1}, 1);
-					FlxTween.tween(vignette, {alpha: 0}, 1);
-				}
-
-				case 207:
-				{
-					FlxTween.tween(black, {alpha: 0.5}, 1);
-
-				}
-
-				case 271:
-				{
-					FlxTween.tween(black, {alpha: 0}, 1);
-				}
-
-				case 303:
-				{
-					FlxTween.tween(oldstripes, {alpha: 0}, 1);
-					FlxTween.tween(vignette, {alpha: 1}, 1);
-				}
+			if(eventNum == 2 && curBeat >= 79) {
+				eventNum++;
+				FlxTween.tween(oldstripes, {alpha: 1}, 1);
+				FlxTween.tween(vignette, {alpha: 0}, 1);
+			}
+			if(eventNum == 3 && curBeat >= 111) {
+				eventNum++;
+				FlxTween.tween(oldstripes, {alpha: 0}, 1);
+				FlxTween.tween(black, {alpha: 0.5}, 1);
+				FlxTween.tween(vignette, {alpha: 1}, 1);
+			}
+			if(eventNum == 4 && curBeat >= 143) {
+				eventNum++;
+				FlxTween.tween(black, {alpha: 0}, 1);
+			}
+			if(eventNum == 5 && curBeat >= 175) {
+				eventNum++;
+				FlxTween.tween(oldstripes, {alpha: 1}, 1);
+				FlxTween.tween(vignette, {alpha: 0}, 1);
+			}
+			if(eventNum == 6 && curBeat >= 207) {
+				eventNum++;
+				FlxTween.tween(black, {alpha: 0.5}, 1);
+			}
+			if(eventNum == 7 && curBeat >= 271) {
+				eventNum++;
+				FlxTween.tween(black, {alpha: 0}, 1);
+			}
+			if(eventNum == 8 && curBeat >= 303) {
+				eventNum++;
+				FlxTween.tween(oldstripes, {alpha: 0}, 1);
+				FlxTween.tween(vignette, {alpha: 1}, 1);
 			}
 		}
 
@@ -4579,61 +4571,54 @@ class PlayState extends MusicBeatState
 
 		if (curSong == 'after-dark' && curStage == 'dark' && !ClientPrefs.lowQuality)
 		{
-			switch (curBeat)
-			{
-				case 8:
+			if(eventNum == 0 && curBeat >= 8) {
+				eventNum++;
+				dad.alpha = 0.3;
+				dad.scale.set(1.05, 1.05);
+				FlxTween.tween(black, {alpha: 0}, 0.5);
+				add(redglow);
+				add(scanlines);
+				add(darksparks);
+				add(vignette);
+				FlxTween.tween(redglow, {alpha: 1}, 0.5);
+				FlxTween.tween(scanlines, {alpha: 0.3}, 0.5);
+				FlxTween.tween(vignette, {alpha: 0.5}, 0.5);
+			}
+
+			if(eventNum == 1 && curBeat >= 188) {
+				eventNum++;
+				FlxTween.tween(eyes, {alpha: 1}, 0.5);
+				eyes.animation.play('eyes', true);
+
+				new FlxTimer().start(3, function(tmr:FlxTimer)
 				{
-					dad.alpha = 0.3;
-					dad.scale.set(1.05, 1.05);
-					FlxTween.tween(black, {alpha: 0}, 0.5);
-					add(redglow);
-					add(scanlines);
-					add(darksparks);
-					add(vignette);
-					FlxTween.tween(redglow, {alpha: 1}, 0.5);
-					FlxTween.tween(scanlines, {alpha: 0.3}, 0.5);
-					FlxTween.tween(vignette, {alpha: 0.5}, 0.5);
-				}
-
-
-				case 188:
-				{
-					FlxTween.tween(eyes, {alpha: 1}, 0.5);
-					eyes.animation.play('eyes', true);
-
-					new FlxTimer().start(3, function(tmr:FlxTimer)
-					{
-						eyes.animation.pause();
-						eyes.animation.curAnim.curFrame = 72;
-					});
-
-				}
-
-				case 256:
-				{
-					FlxTween.tween(circles, {alpha: 0.5}, 1);
-					FlxTween.tween(darksparks, {alpha: 0.85}, 1);
-				}
-
-				case 640:
-				{
+					eyes.animation.pause();
 					eyes.animation.curAnim.curFrame = 72;
-					eyes.animation.resume();
+				});
+			}
 
-				}
+			if(eventNum == 2 && curBeat >= 256) {
+				eventNum++;
+				FlxTween.tween(circles, {alpha: 0.5}, 1);
+				FlxTween.tween(darksparks, {alpha: 0.85}, 1);
+			}
 
-				case 704:
-				{
-					FlxTween.tween(circles, {alpha: 0}, 1);
-					FlxTween.tween(darksparks, {alpha: 0}, 1);
-				}
+			if(eventNum == 3 && curBeat >= 640) {
+				eventNum++;
+				eyes.animation.curAnim.curFrame = 72;
+				eyes.animation.resume();
+			}
 
-				case 774:
-				{
-					FlxTween.tween(black, {alpha: 1}, 2);
-					FlxTween.tween(camHUD, {alpha: 0}, 2);
+			if(eventNum == 4 && curBeat >= 704) {
+				eventNum++;
+				FlxTween.tween(circles, {alpha: 0}, 1);
+				FlxTween.tween(darksparks, {alpha: 0}, 1);
+			}
 
-				}
+			if(eventNum == 5 && curBeat >= 774) {
+				eventNum++;
+				FlxTween.tween(black, {alpha: 1}, 2);
+				FlxTween.tween(camHUD, {alpha: 0}, 2);
 			}
 		}
 
