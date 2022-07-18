@@ -4939,8 +4939,8 @@ class PlayState extends MusicBeatState
 						countdownReady.scrollFactor.set();
 						countdownReady.updateHitbox();
 						countdownReady.screenCenter();
-						countdownReady.cameras = [camHUD];
-						countdownReady.antialiasing = true;
+						countdownReady.scale.set(0.8, 0.8);
+						countdownReady.cameras = [camOther];
 						add(countdownReady);
 						FlxTween.tween(countdownReady, {alpha: 0}, 0.3, {
 							ease: FlxEase.cubeInOut,
@@ -4957,8 +4957,8 @@ class PlayState extends MusicBeatState
 						countdownSet = new FlxSprite().loadGraphic(Paths.image('set'));
 						countdownSet.scrollFactor.set();
 						countdownSet.screenCenter();
-						countdownSet.cameras = [camHUD];
-						countdownSet.antialiasing = true;
+						countdownSet.cameras = [camOther];
+						countdownSet.scale.set(0.8, 0.8);
 						add(countdownSet);
 						FlxTween.tween(countdownSet, {alpha: 0}, 0.3, {
 							ease: FlxEase.cubeInOut,
@@ -4976,8 +4976,8 @@ class PlayState extends MusicBeatState
 						countdownGo.scrollFactor.set();
 						countdownGo.updateHitbox();
 						countdownGo.screenCenter();
-						countdownGo.cameras = [camHUD];
-						countdownGo.antialiasing = true;
+						countdownGo.cameras = [camOther];
+						countdownGo.scale.set(0.8, 0.8);
 						add(countdownGo);
 						FlxTween.tween(countdownGo, {alpha: 0}, 0.3, {
 							ease: FlxEase.cubeInOut,
