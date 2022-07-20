@@ -1,0 +1,29 @@
+{
+	"song": {
+		"speed": 2.5,
+		"stage": "dark",
+		"player1": "alfiedark",
+		"player2": "alfiedarkghost",
+		"player3": null,
+		"events": [
+			[
+				329552.238805971,
+				[
+					[
+						"Change Scroll Speed",
+						"0.8",
+						"16.12"
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": null,
+		"validScore": false,
+		"gfVersion": "gf",
+		"bpm": 134,
+		"arrowSkin": null,
+		"needsVoices": true,
+		"song": "after-dark"
+	}
+}
