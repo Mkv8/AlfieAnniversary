@@ -104,6 +104,7 @@ class CreditsState extends MusicBeatState
 			['Car',					'car',				'Candle-Lit Clash',										'https://www.youtube.com/c/carcarwoah',	'FF3021'],
 			['PpavlikosS',			'pav',				'Charter for Forest Fire, Spectral Beta, GOATED, Mansion Match and Candle-Lit Clash',	'https://twitter.com/ppavlikoss','BAE2FF'],
 			['Sayge',				'sayge',			'Charter for Spectral Sonnet and After Dark',			'https://twitter.com/Sayge3D',			'FFA44F'],
+			['Fogu',				'fogu',				'Charter Mansion Match (Normal Mode)',					'https://twitter.com/FoguAlt',			'D23B48'],
 			[''],
 			['Special Thanks'],
 			['Hotline 024 team',				'nikku',			'Thanks to Saruky for letting us use Nikku, press ENTER for mod link!','https://gamebanana.com/mods/373298',			'FF3021'],
