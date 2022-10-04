@@ -1,49 +1,31 @@
 {
-	"storyName": "for funsies",
-	"difficulties": "",
-	"hideFreeplay": false,
-	"weekBackground": "stage",
-	"freeplayColor": [
-		146,
-		113,
-		253
-	],
-	"weekBefore": "tutorial",
-	"startUnlocked": true,
-	"weekCharacters": [
-		"",
-		"",
-		""
-	],
 	"songs": [
 		[
-			"after dark",
+			"After Dark",
 			"alfiedark",
 			[
 				235,
 				113,
 				133
 			]
-		],
-		[
-			"mansion match",
-			"nikku",
-			[
-				215,
-				13,
-				133
-			]
-		],
-		[
-			"candlelit clash",
-			"pooky",
-			[
-				235,
-				235,
-				255
-			]
 		]
 	],
-	"hideStoryMode": true,
-	"weekName": "bonus content"
+	"hideFreeplay": false,
+	"weekBackground": "dark",
+	"difficulties": "",
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"storyName": "After dark (alfie mix)",
+	"weekName": "After dark (alfie mix)",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
 }

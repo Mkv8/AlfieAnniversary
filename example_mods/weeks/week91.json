@@ -1,0 +1,31 @@
+{
+	"songs": [
+		[
+			"Spooks",
+			"pooky90s",
+			[
+				235,
+				235,
+				255
+			]
+		]
+	],
+	"hideFreeplay": false,
+	"weekBackground": "90s",
+	"difficulties": "",
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"storyName": "Spooks",
+	"weekName": "Spooks",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}

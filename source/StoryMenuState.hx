@@ -55,6 +55,12 @@ class StoryMenuState extends MusicBeatState
 	var specters:FlxSprite = new FlxSprite().loadGraphic(Paths.image('specters'));
 	var erect:FlxSprite = new FlxSprite().loadGraphic(Paths.image('erect'));
 
+	var afterdark:FlxSprite = new FlxSprite().loadGraphic(Paths.image('afterdarkbg'));
+	var mansionmatch:FlxSprite = new FlxSprite().loadGraphic(Paths.image('hotlinebg'));
+	var candle:FlxSprite = new FlxSprite().loadGraphic(Paths.image('candleebg'));
+	var anime:FlxSprite = new FlxSprite().loadGraphic(Paths.image('90sbga'));
+	var goat:FlxSprite = new FlxSprite().loadGraphic(Paths.image('goatbg'));
+
 	override function create()
 	{
 		Paths.clearStoredMemory();
@@ -66,11 +72,12 @@ class StoryMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 
 		scoreText = new FlxFixedText(10, 10, 0, "SCORE: 49324858", 36);
-		scoreText.setFormat("VCR OSD Mono", 32);
+		scoreText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 
-		txtWeekTitle = new FlxFixedText(FlxG.width * 0.7, 10, 0, "", 32);
+		
+		txtWeekTitle = new FlxFixedText(FlxG.width * 0.7, 10, 0, "", 40);
 		txtWeekTitle.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, RIGHT);
-		txtWeekTitle.alpha = 0.7;
+		txtWeekTitle.alpha = 1;
 
 		var rankText:FlxText = new FlxFixedText(0, 10);
 		rankText.text = 'RANK: GREAT';
@@ -83,13 +90,28 @@ class StoryMenuState extends MusicBeatState
 		specters = new FlxSprite().loadGraphic(Paths.image('specters'));
 		erect = new FlxSprite().loadGraphic(Paths.image('erect'));
 
+		afterdark = new FlxSprite().loadGraphic(Paths.image('afterdarkbg'));
+		mansionmatch = new FlxSprite().loadGraphic(Paths.image('hotlinebg'));
+		candle = new FlxSprite().loadGraphic(Paths.image('candleebg'));
+		anime = new FlxSprite().loadGraphic(Paths.image('90sbga'));
+		goat = new FlxSprite().loadGraphic(Paths.image('goatbg'));
+
 		add(oldtimes);
 		add(specters);
 		add(erect);
+		add(afterdark);
+		add(mansionmatch);
+		add(candle);
+		add(anime);
+		add(goat);
 		erect.alpha = 0;
 		oldtimes.alpha = 0;
 		specters.alpha = 0;
-
+		afterdark.alpha = 0;
+		mansionmatch.alpha = 0;
+		candle.alpha = 0;
+		anime.alpha = 0;
+		goat.alpha = 0;
 
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
 		var bgYellow:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 386, 0xFFF9CF51);
@@ -211,30 +233,119 @@ class StoryMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-			if(curWeek == 0)
+			if(curWeek == 0) //swing remix
 			{
 				oldtimes.alpha = 1;
 				specters.alpha = 0;
 				erect.alpha = 0;
+				afterdark.alpha = 0;
+				mansionmatch.alpha = 0;
+				candle.alpha = 0;
+				anime.alpha = 0;
+				goat.alpha = 0;
 			}
-			if(curWeek == 1)
+			if(curWeek == 1) //spectral remix
 			{
 				oldtimes.alpha = 0;
 				specters.alpha = 1;
 				erect.alpha = 0;
+				afterdark.alpha = 0;
+				mansionmatch.alpha = 0;
+				candle.alpha = 0;
+				anime.alpha = 0;
+				goat.alpha = 0;
 			}	
-			if(curWeek == 2)
+			if(curWeek == 2) //siiva
 			{
 				oldtimes.alpha = 0;
 				specters.alpha = 0;
 				erect.alpha = 0;
+				afterdark.alpha = 0;
+				mansionmatch.alpha = 0;
+				candle.alpha = 0;
+				anime.alpha = 0;
+				goat.alpha = 0;
 			}
-			if(curWeek == 3)
-				{
-					oldtimes.alpha = 0;
-					specters.alpha = 0;
-					erect.alpha = 1;
-				}
+			if(curWeek == 3) //erect
+			{
+				oldtimes.alpha = 0;
+				specters.alpha = 0;
+				erect.alpha = 1;
+				afterdark.alpha = 0;
+				mansionmatch.alpha = 0;
+				candle.alpha = 0;
+				anime.alpha = 0;
+				goat.alpha = 0;
+			}
+
+			if(curWeek == 4)//after dark
+			{
+				oldtimes.alpha = 0;
+				specters.alpha = 0;
+				erect.alpha = 0;
+				afterdark.alpha = 1;
+				mansionmatch.alpha = 0;
+				candle.alpha = 0;
+				anime.alpha = 0;
+				goat.alpha = 0;
+			}
+			if(curWeek == 5)//nikku
+			{
+				oldtimes.alpha = 0;
+				specters.alpha = 0;
+				erect.alpha = 0;
+				afterdark.alpha = 0;
+				mansionmatch.alpha = 1;
+				candle.alpha = 0;
+				anime.alpha = 0;
+				goat.alpha = 0;
+			}	
+			if(curWeek == 6)//candle
+			{
+				oldtimes.alpha = 0;
+				specters.alpha = 0;
+				erect.alpha = 0;
+				afterdark.alpha = 0;
+				mansionmatch.alpha = 0;
+				candle.alpha = 1;
+				anime.alpha = 0;
+				goat.alpha = 0;
+			}
+			if(curWeek == 7)//remake
+			{
+				oldtimes.alpha = 0;
+				specters.alpha = 0;
+				erect.alpha = 0;
+				afterdark.alpha = 0;
+				mansionmatch.alpha = 0;
+				candle.alpha = 0;
+				anime.alpha = 0;
+				goat.alpha = 1;
+			}
+
+			if(curWeek == 8)//minus
+			{
+				oldtimes.alpha = 0;
+				specters.alpha = 0;
+				erect.alpha = 0;
+				afterdark.alpha = 0;
+				mansionmatch.alpha = 0;
+				candle.alpha = 0;
+				anime.alpha = 0;
+				goat.alpha = 0;
+			}
+
+			if(curWeek == 9)//90s
+			{
+				oldtimes.alpha = 0;
+				specters.alpha = 0;
+				erect.alpha = 0;
+				afterdark.alpha = 0;
+				mansionmatch.alpha = 0;
+				candle.alpha = 0;
+				anime.alpha = 1;
+				goat.alpha = 0;
+			}
 
 
 
@@ -243,7 +354,8 @@ class StoryMenuState extends MusicBeatState
 		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, CoolUtil.boundTo(elapsed * 30, 0, 1)));
 		if(Math.abs(intendedScore - lerpScore) < 10) lerpScore = intendedScore;
 
-		scoreText.text = "WEEK SCORE:" + lerpScore;
+		scoreText.text = "SONG SCORE:" + lerpScore;
+		scoreText.y = 450;
 
 		// FlxG.watch.addQuick('font', scoreText.font);
 
@@ -421,7 +533,8 @@ class StoryMenuState extends MusicBeatState
 
 		var leName:String = leWeek.storyName;
 		txtWeekTitle.text = leName.toUpperCase();
-		txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
+		//txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
+		txtWeekTitle.screenCenter(X);
 
 		var bullShit:Int = 0;
 
@@ -431,7 +544,7 @@ class StoryMenuState extends MusicBeatState
 			if (item.targetY == Std.int(0) && !weekIsLocked(curWeek))
 				item.alpha = 1;
 			else
-				item.alpha = 0.6;
+				item.alpha = 0.3;
 			bullShit++;
 		}
 

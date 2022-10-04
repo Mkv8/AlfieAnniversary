@@ -1,0 +1,31 @@
+{
+	"songs": [
+		[
+			"Goat Remake",
+			"alfiehapi",
+			[
+				185,
+				75,
+				115
+			]
+		]
+	],
+	"hideFreeplay": false,
+	"weekBackground": "goat",
+	"difficulties": "",
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"storyName": "G.o.a.t (remake)",
+	"weekName": "G.o.a.t (remake)",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}

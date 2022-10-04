@@ -1,0 +1,31 @@
+{
+	"songs": [
+		[
+			"Mansion Match",
+			"nikku",
+			[
+				215,
+				13,
+				135
+			]
+		]
+	],
+	"hideFreeplay": false,
+	"weekBackground": "nikku",
+	"difficulties": "",
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"storyName": "Mansion Match",
+	"weekName": "Mansion Match",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}

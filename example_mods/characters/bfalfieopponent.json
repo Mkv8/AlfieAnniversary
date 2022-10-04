@@ -1,0 +1,240 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				-5,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "idle"
+		},
+		{
+			"offsets": [
+				-20,
+				-20
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down0"
+		},
+		{
+			"offsets": [
+				1,
+				47
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "up0"
+		},
+		{
+			"offsets": [
+				-14,
+				42
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFTmiss",
+			"indices": [],
+			"name": "miss"
+		},
+		{
+			"offsets": [
+				-14,
+				42
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "miss"
+		},
+		{
+			"offsets": [
+				-14,
+				42
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "miss"
+		},
+		{
+			"offsets": [
+				-14,
+				42
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "miss"
+		},
+		{
+			"offsets": [
+				-2,
+				-6
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "hey",
+			"indices": [],
+			"name": "HEY!!"
+		},
+		{
+			"offsets": [
+				0,
+				-20
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "boo",
+			"indices": [],
+			"name": "boo"
+		},
+		{
+			"offsets": [
+				10,
+				-58
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN-alt",
+			"indices": [],
+			"name": "downalt0"
+		},
+		{
+			"offsets": [
+				40,
+				78
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP-alt",
+			"indices": [],
+			"name": "upalt0"
+		},
+		{
+			"offsets": [
+				-190,
+				-1
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "firstDeath",
+			"indices": [],
+			"name": "DEATH0"
+		},
+		{
+			"offsets": [
+				-190,
+				-1
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "deathLoop",
+			"indices": [
+				69,
+				70,
+				71
+			],
+			"name": "DEATH0"
+		},
+		{
+			"offsets": [
+				-190,
+				-1
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "deathConfirm",
+			"indices": [
+				69,
+				70,
+				71
+			],
+			"name": "DEATH0"
+		},
+		{
+			"offsets": [
+				-190,
+				-1
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "dies",
+			"indices": [],
+			"name": "DEATH0"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				59,
+				-22
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "right0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-40,
+				-3
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "left0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				30,
+				-10
+			],
+			"anim": "singLEFT-alt",
+			"fps": 24,
+			"name": "rightalt0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-16,
+				-10
+			],
+			"anim": "singRIGHT-alt",
+			"fps": 24,
+			"name": "leftalt0",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/bfalfie",
+	"position": [
+		-10,
+		170
+	],
+	"healthicon": "alfiebf",
+	"flip_x": true,
+	"healthbar_colors": [
+		179,
+		32,
+		61
+	],
+	"camera_position": [
+		240,
+		-10
+	],
+	"sing_duration": 5,
+	"scale": 1
+}

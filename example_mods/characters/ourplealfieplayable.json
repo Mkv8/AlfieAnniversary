@@ -1,0 +1,122 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				15,
+				110
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "idle"
+		},
+		{
+			"offsets": [
+				-29,
+				180
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "up0"
+		},
+		{
+			"offsets": [
+				135,
+				38
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down0"
+		},
+		{
+			"offsets": [
+				117,
+				94
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "left0"
+		},
+		{
+			"offsets": [
+				-122,
+				112
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "right0"
+		},
+		{
+			"offsets": [
+				117,
+				94
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFTmiss",
+			"indices": [],
+			"name": "leftmiss"
+		},
+		{
+			"offsets": [
+				135,
+				38
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "downmiss"
+		},
+		{
+			"offsets": [
+				-29,
+				180
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "upmiss"
+		},
+		{
+			"offsets": [
+				-122,
+				112
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "rightmiss"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/alfieourple",
+	"position": [
+		-10,
+		330
+	],
+	"healthicon": "ourplealfie",
+	"flip_x": true,
+	"healthbar_colors": [
+		211,
+		0,
+		20
+	],
+	"camera_position": [
+		90,
+		-110
+	],
+	"sing_duration": 4,
+	"scale": 1
+}

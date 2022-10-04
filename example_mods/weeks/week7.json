@@ -1,0 +1,31 @@
+{
+	"songs": [
+		[
+			"Candlelit Clash",
+			"pooky",
+			[
+				235,
+				235,
+				255
+			]
+		]
+	],
+	"hideFreeplay": false,
+	"weekBackground": "candle",
+	"difficulties": "",
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"storyName": "Candle-lit Clash",
+	"weekName": "Candle-lit clash",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}
