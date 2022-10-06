@@ -51,15 +51,15 @@ class StoryMenuState extends MusicBeatState
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
 
-	var oldtimes:FlxSprite = new FlxSprite().loadGraphic(Paths.image('oldtimes'));
-	var specters:FlxSprite = new FlxSprite().loadGraphic(Paths.image('specters'));
-	var erect:FlxSprite = new FlxSprite().loadGraphic(Paths.image('erect'));
+	var oldtimes:FlxSprite;
+	var specters:FlxSprite;
+	var erect:FlxSprite;
 
-	var afterdark:FlxSprite = new FlxSprite().loadGraphic(Paths.image('afterdarkbg'));
-	var mansionmatch:FlxSprite = new FlxSprite().loadGraphic(Paths.image('hotlinebg'));
-	var candle:FlxSprite = new FlxSprite().loadGraphic(Paths.image('candleebg'));
-	var anime:FlxSprite = new FlxSprite().loadGraphic(Paths.image('90sbga'));
-	var goat:FlxSprite = new FlxSprite().loadGraphic(Paths.image('goatbg'));
+	var afterdark:FlxSprite;
+	var mansionmatch:FlxSprite;
+	var candle:FlxSprite;
+	var anime:FlxSprite;
+	var goat:FlxSprite;
 
 	override function create()
 	{
@@ -104,14 +104,14 @@ class StoryMenuState extends MusicBeatState
 		add(candle);
 		add(anime);
 		add(goat);
-		erect.alpha = 0;
-		oldtimes.alpha = 0;
-		specters.alpha = 0;
-		afterdark.alpha = 0;
-		mansionmatch.alpha = 0;
-		candle.alpha = 0;
-		anime.alpha = 0;
-		goat.alpha = 0;
+		erect.alpha = 0.0001;
+		oldtimes.alpha = 0.0001;
+		specters.alpha = 0.0001;
+		afterdark.alpha = 0.0001;
+		mansionmatch.alpha = 0.0001;
+		candle.alpha = 0.0001;
+		anime.alpha = 0.0001;
+		goat.alpha = 0.0001;
 
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
 		var bgYellow:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 386, 0xFFF9CF51);
@@ -233,119 +233,119 @@ class StoryMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-			if(curWeek == 0) //swing remix
+			/*if(curWeek == 0) //swing remix
 			{
 				oldtimes.alpha = 1;
-				specters.alpha = 0;
-				erect.alpha = 0;
-				afterdark.alpha = 0;
-				mansionmatch.alpha = 0;
-				candle.alpha = 0;
-				anime.alpha = 0;
-				goat.alpha = 0;
+				specters.alpha = 0.0001;
+				erect.alpha = 0.0001;
+				afterdark.alpha = 0.0001;
+				mansionmatch.alpha = 0.0001;
+				candle.alpha = 0.0001;
+				anime.alpha = 0.0001;
+				goat.alpha = 0.0001;
 			}
 			if(curWeek == 1) //spectral remix
 			{
-				oldtimes.alpha = 0;
+				oldtimes.alpha = 0.0001;
 				specters.alpha = 1;
-				erect.alpha = 0;
-				afterdark.alpha = 0;
-				mansionmatch.alpha = 0;
-				candle.alpha = 0;
-				anime.alpha = 0;
-				goat.alpha = 0;
+				erect.alpha = 0.0001;
+				afterdark.alpha = 0.0001;
+				mansionmatch.alpha = 0.0001;
+				candle.alpha = 0.0001;
+				anime.alpha = 0.0001;
+				goat.alpha = 0.0001;
 			}	
 			if(curWeek == 2) //siiva
 			{
-				oldtimes.alpha = 0;
-				specters.alpha = 0;
-				erect.alpha = 0;
-				afterdark.alpha = 0;
-				mansionmatch.alpha = 0;
-				candle.alpha = 0;
-				anime.alpha = 0;
-				goat.alpha = 0;
+				oldtimes.alpha = 0.0001;
+				specters.alpha = 0.0001;
+				erect.alpha = 0.0001;
+				afterdark.alpha = 0.0001;
+				mansionmatch.alpha = 0.0001;
+				candle.alpha = 0.0001;
+				anime.alpha = 0.0001;
+				goat.alpha = 0.0001;
 			}
 			if(curWeek == 3) //erect
 			{
-				oldtimes.alpha = 0;
-				specters.alpha = 0;
+				oldtimes.alpha = 0.0001;
+				specters.alpha = 0.0001;
 				erect.alpha = 1;
-				afterdark.alpha = 0;
-				mansionmatch.alpha = 0;
-				candle.alpha = 0;
-				anime.alpha = 0;
-				goat.alpha = 0;
+				afterdark.alpha = 0.0001;
+				mansionmatch.alpha = 0.0001;
+				candle.alpha = 0.0001;
+				anime.alpha = 0.0001;
+				goat.alpha = 0.0001;
 			}
 
 			if(curWeek == 4)//after dark
 			{
-				oldtimes.alpha = 0;
-				specters.alpha = 0;
-				erect.alpha = 0;
+				oldtimes.alpha = 0.0001;
+				specters.alpha = 0.0001;
+				erect.alpha = 0.0001;
 				afterdark.alpha = 1;
-				mansionmatch.alpha = 0;
-				candle.alpha = 0;
-				anime.alpha = 0;
-				goat.alpha = 0;
+				mansionmatch.alpha = 0.0001;
+				candle.alpha = 0.0001;
+				anime.alpha = 0.0001;
+				goat.alpha = 0.0001;
 			}
 			if(curWeek == 5)//nikku
 			{
-				oldtimes.alpha = 0;
-				specters.alpha = 0;
-				erect.alpha = 0;
-				afterdark.alpha = 0;
+				oldtimes.alpha = 0.0001;
+				specters.alpha = 0.0001;
+				erect.alpha = 0.0001;
+				afterdark.alpha = 0.0001;
 				mansionmatch.alpha = 1;
-				candle.alpha = 0;
-				anime.alpha = 0;
-				goat.alpha = 0;
+				candle.alpha = 0.0001;
+				anime.alpha = 0.0001;
+				goat.alpha = 0.0001;
 			}	
 			if(curWeek == 6)//candle
 			{
-				oldtimes.alpha = 0;
-				specters.alpha = 0;
-				erect.alpha = 0;
-				afterdark.alpha = 0;
-				mansionmatch.alpha = 0;
+				oldtimes.alpha = 0.0001;
+				specters.alpha = 0.0001;
+				erect.alpha = 0.0001;
+				afterdark.alpha = 0.0001;
+				mansionmatch.alpha = 0.0001;
 				candle.alpha = 1;
-				anime.alpha = 0;
-				goat.alpha = 0;
+				anime.alpha = 0.0001;
+				goat.alpha = 0.0001;
 			}
 			if(curWeek == 7)//remake
 			{
-				oldtimes.alpha = 0;
-				specters.alpha = 0;
-				erect.alpha = 0;
-				afterdark.alpha = 0;
-				mansionmatch.alpha = 0;
-				candle.alpha = 0;
-				anime.alpha = 0;
+				oldtimes.alpha = 0.0001;
+				specters.alpha = 0.0001;
+				erect.alpha = 0.0001;
+				afterdark.alpha = 0.0001;
+				mansionmatch.alpha = 0.0001;
+				candle.alpha = 0.0001;
+				anime.alpha = 0.0001;
 				goat.alpha = 1;
 			}
 
 			if(curWeek == 8)//minus
 			{
-				oldtimes.alpha = 0;
-				specters.alpha = 0;
-				erect.alpha = 0;
-				afterdark.alpha = 0;
-				mansionmatch.alpha = 0;
-				candle.alpha = 0;
-				anime.alpha = 0;
-				goat.alpha = 0;
+				oldtimes.alpha = 0.0001;
+				specters.alpha = 0.0001;
+				erect.alpha = 0.0001;
+				afterdark.alpha = 0.0001;
+				mansionmatch.alpha = 0.0001;
+				candle.alpha = 0.0001;
+				anime.alpha = 0.0001;
+				goat.alpha = 0.0001;
 			}
 
 			if(curWeek == 9)//90s
 			{
-				oldtimes.alpha = 0;
-				specters.alpha = 0;
-				erect.alpha = 0;
-				afterdark.alpha = 0;
-				mansionmatch.alpha = 0;
-				candle.alpha = 0;
+				oldtimes.alpha = 0.0001;
+				specters.alpha = 0.0001;
+				erect.alpha = 0.0001;
+				afterdark.alpha = 0.0001;
+				mansionmatch.alpha = 0.0001;
+				candle.alpha = 0.0001;
 				anime.alpha = 1;
-				goat.alpha = 0;
-			}
+				goat.alpha = 0.0001;
+			}*/
 
 
 
@@ -555,7 +555,32 @@ class StoryMenuState extends MusicBeatState
 		} else {
 			bgSprite.loadGraphic(Paths.image('menubackgrounds/menu_' + assetName));
 		}
-		
+
+		oldtimes.alpha = 0;
+		specters.alpha = 0;
+		erect.alpha = 0;
+		afterdark.alpha = 0;
+		mansionmatch.alpha = 0;
+		candle.alpha = 0;
+		anime.alpha = 0;
+		goat.alpha = 0;
+
+		switch(curWeek) {
+			case 0: oldtimes.alpha = 1;
+			case 1: specters.alpha = 1;
+			case 2: {};
+			case 3: erect.alpha = 1;
+			case 4: afterdark.alpha = 1;
+			case 5: mansionmatch.alpha = 1;
+			case 6: candle.alpha = 1;
+			case 7: goat.alpha = 1;
+			case 8: {};
+			case 9: anime.alpha = 1;
+		}
+
+	
+
+
 		PlayState.storyWeek = curWeek;
 
 		CoolUtil.difficulties = CoolUtil.defaultDifficulties.copy();
