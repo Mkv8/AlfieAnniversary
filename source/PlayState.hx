@@ -267,6 +267,11 @@ class PlayState extends MusicBeatState
 	private var upperBlackBar:FlxSpriteExtra;
     private var bottomBlackBar:FlxSpriteExtra;
 
+	var animemap:BGSprite;
+	var animemultiply:BGSprite;
+	var animeoverlay:BGSprite;
+	var animeadd:BGSprite;
+
 	var candlebg:BGSprite;
 	var hcandlebg:BGSprite;
 	var acandlebg:BGSprite;
@@ -517,6 +522,31 @@ class PlayState extends MusicBeatState
 			ballsowo = new BGSprite('balls', -1000, -500, 1, 1);
 			ballsowo.alpha = 0;
 			//add(ballsowo);
+		}
+
+		if(formattedSong == 'spooks') {
+			animeadd = new BGSprite('add05', 1, 1, 1, 1);
+			animeadd.alpha = 0.07;
+			animeadd.blend = ADD;
+			//add(animeadd);
+
+			animemultiply = new BGSprite('multiply45', 1, 1, 1, 1);
+			animemultiply.alpha = 0.45;
+			animemultiply.blend = MULTIPLY;
+			//add(animemultiply);
+
+			animeoverlay = new BGSprite('overlay50', 1, 1, 1, 1);
+			animeoverlay.alpha = 0.45;
+			animeoverlay.blend = OVERLAY;
+			//add(animeoverlay);
+
+			scanlines = new BGSprite('scanlines2', 1, 1, 1, 1);
+			scanlines.updateHitbox();
+			scanlines.cameras = [camHUD];
+			scanlines.screenCenter(XY);
+			scanlines.blend = OVERLAY;
+			scanlines.scale.set(1.8, 1.8);
+			scanlines.alpha = 0;
 		}
 
 		#if desktop
@@ -819,15 +849,43 @@ class PlayState extends MusicBeatState
 				bells.alpha = 0;
 				add(bells);
 
+				
+			case '90s': //spooks
+				animemap = new BGSprite('map90s', 1, 1, 1, 1, ['boppin'], true);
+				animemap.updateHitbox();
+				add(animemap);
+				animemap.antialiasing = true;
+
+				var shaders:Array<BitmapFilter> = [new ShaderFilter(new VCRShader())];
+
+				//camHUD.setFilters(shaders);
+				//camHUD.filtersEnabled = true;
+				//camGame.setFilters(shaders);
+				//camGame.filtersEnabled = true;
+				//camOther.setFilters(shaders);
+				//camOther.filtersEnabled = true;
+
+				FlxG.game.setFilters(shaders);
+				FlxG.game.filtersEnabled = true;
 
 		}
 
+		add(dadGroup);
+		add(boyfriendGroup);
 		#if LUA_ALLOWED
 		luaDebugGroup = new FlxTypedGroup<DebugLuaText>();
 		luaDebugGroup.cameras = [camOther];
 		add(luaDebugGroup);
 		#end
 
+		if(curStage == '90s') {
+			add(animemultiply);
+			add(animeadd);
+			add(animeoverlay);
+			add(scanlines);
+			scanlines.alpha = 0.15;
+
+		}
 		if(curStage == 'philly') {
 			phillyCityLightsEvent = new FlxTypedGroup<BGSprite>();
 			for (i in 0...5)
@@ -1256,6 +1314,8 @@ class PlayState extends MusicBeatState
 		data.set("after-dark", ["NowPdark", "AFTER DARK"]);
 		data.set("mansion-match", ["NowPhotline", "hotlinetitle"]);
 		data.set("candlelit-clash", ["NowP", "CandleTitle"]);
+		data.set("spooks", ["NowP90s", "90stitle"]);
+
 
 		var shouldShowCassette:Bool = false;
 
@@ -1702,6 +1762,9 @@ class PlayState extends MusicBeatState
 					bottomBoppers.dance(true);
 					santa.dance(true);
 				}
+
+				if(curStage == '90s') {
+					animemap.dance(true);}
 
 				switch (swagCounter)
 				{

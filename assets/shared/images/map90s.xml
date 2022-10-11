@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="map90s.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="boppin0000" x="11" y="11" width="2342" height="1180"/>
+	<SubTexture name="boppin0001" x="11" y="11" width="2342" height="1180"/>
+	<SubTexture name="boppin0002" x="2393" y="11" width="2342" height="1180"/>
+	<SubTexture name="boppin0003" x="2393" y="11" width="2342" height="1180"/>
+	<SubTexture name="boppin0004" x="4775" y="11" width="2342" height="1180"/>
+	<SubTexture name="boppin0005" x="4775" y="11" width="2342" height="1180"/>
+	<SubTexture name="boppin0006" x="11" y="1231" width="2342" height="1180"/>
+	<SubTexture name="boppin0007" x="11" y="1231" width="2342" height="1180"/>
+	<SubTexture name="boppin0008" x="11" y="1231" width="2342" height="1180"/>
+	<SubTexture name="boppin0009" x="11" y="1231" width="2342" height="1180"/>
+	<SubTexture name="boppin0010" x="11" y="1231" width="2342" height="1180"/>
+	<SubTexture name="boppin0011" x="11" y="1231" width="2342" height="1180"/>
+	<SubTexture name="boppin0012" x="11" y="1231" width="2342" height="1180"/>
+	<SubTexture name="boppin0013" x="11" y="1231" width="2342" height="1180"/>
+	<SubTexture name="boppin0014" x="11" y="1231" width="2342" height="1180"/>
+	<SubTexture name="boppin0015" x="11" y="1231" width="2342" height="1180"/>
+</TextureAtlas>
