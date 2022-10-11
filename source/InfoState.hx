@@ -46,8 +46,6 @@ class InfoState extends MusicBeatState
 	];
 
 	var magenta:FlxSprite;
-	var camFollow:FlxObject;
-	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
 	var alfie:FlxSprite;
 	var boyfriend:FlxSprite;
@@ -142,53 +140,48 @@ class InfoState extends MusicBeatState
 		add(boyfriend);
 		
 
-		alfiedesc = new FlxSprite(250, 300).loadGraphic(Paths.image('biomenu/alfie description'));
+		alfiedesc = new FlxSprite(395, 200).loadGraphic(Paths.image('biomenu/alfie description'));
 		alfiedesc.scrollFactor.set(0, 0);
 		alfiedesc.updateHitbox();
 		alfiedesc.antialiasing = ClientPrefs.globalAntialiasing;
 		alfiedesc.alpha = 0;
 		add(alfiedesc);
 
-		pookydesc = new FlxSprite(350, 300).loadGraphic(Paths.image('biomenu/pooky description'));
+		pookydesc = new FlxSprite(580, 80).loadGraphic(Paths.image('biomenu/pooky description'));
 		pookydesc.scrollFactor.set(0, 0);
 		pookydesc.updateHitbox();
 		pookydesc.antialiasing = ClientPrefs.globalAntialiasing;
 		pookydesc.alpha = 0;
 		add(pookydesc);
 
-		boyfrienddesc = new FlxSprite(450, 300).loadGraphic(Paths.image('biomenu/boyfriend description'));
+		boyfrienddesc = new FlxSprite(170, 200).loadGraphic(Paths.image('biomenu/boyfriend description'));
 		boyfrienddesc.scrollFactor.set(0, 0);
 		boyfrienddesc.updateHitbox();
 		boyfrienddesc.antialiasing = ClientPrefs.globalAntialiasing;
 		boyfrienddesc.alpha = 0;
 		add(boyfrienddesc);
 
-		ethlyndesc = new FlxSprite(550, 300).loadGraphic(Paths.image('biomenu/ethlyn description'));
+		ethlyndesc = new FlxSprite(300, 130).loadGraphic(Paths.image('biomenu/ethlyn description'));
 		ethlyndesc.scrollFactor.set(0, 0);
 		ethlyndesc.updateHitbox();
 		ethlyndesc.antialiasing = ClientPrefs.globalAntialiasing;
 		ethlyndesc.alpha = 0;
 		add(ethlyndesc);
 
-		lauradesc = new FlxSprite(650, 300).loadGraphic(Paths.image('biomenu/laura description'));
+		lauradesc = new FlxSprite(280, 200).loadGraphic(Paths.image('biomenu/laura description'));
 		lauradesc.scrollFactor.set(0, 0);
 		lauradesc.updateHitbox();
 		lauradesc.antialiasing = ClientPrefs.globalAntialiasing;
 		lauradesc.alpha = 0;
 		add(lauradesc);
 
-		harperdesc = new FlxSprite(750, 300).loadGraphic(Paths.image('biomenu/harper description'));
+		harperdesc = new FlxSprite(200, 200).loadGraphic(Paths.image('biomenu/harper description'));
 		harperdesc.scrollFactor.set(0, 0);
 		harperdesc.updateHitbox();
 		harperdesc.antialiasing = ClientPrefs.globalAntialiasing;
 		harperdesc.alpha = 0;
 		add(harperdesc);
 
-
-		camFollow = new FlxObject(0, 0, 1, 1);
-		camFollowPos = new FlxObject(0, 0, 1, 1);
-		add(camFollow);
-		add(camFollowPos);
 
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
@@ -224,7 +217,6 @@ class InfoState extends MusicBeatState
 			//menuItem.x = -500; trace('hello???');*/
 		}
 
-		FlxG.camera.follow(camFollowPos, null, 1);
 
 		// NG.core.calls.event.logEvent('swag').send();
 
@@ -266,7 +258,12 @@ class InfoState extends MusicBeatState
 	}
 
 	private var isShowingAlfie = false;
-	
+	private var isShowingHarper = false;
+	private var isShowingPooky = false;
+	private var isShowingEthlyn = false;
+	private var isShowingLaura = false;
+	private var isShowingBoyfriend = false;
+
 	override function update(elapsed:Float)
 	{
 				var isHoveringAlfie = checkOverlap(alfie, 0);
@@ -278,13 +275,10 @@ class InfoState extends MusicBeatState
 
 		if(canChange) {
 			if(FlxG.mouse.justPressed) {
-
+			//alfie
 			if(isHoveringAlfie && !isShowingAlfie) {
 				isShowingAlfie = true;
-				if (alfie.colorTransform.redOffset == 0)
-				{
-				//FlxTween.tween(alfie.colorTransform, {redOffset: 22, blueOffset: 22, greenOffset: 22}, 0.6);
-				}
+
 				FlxTween.tween(alfiedesc, {alpha: 1}, 0.6); 
 				FlxTween.color(harper, 0.6, harper.color, 0xFF56526B);
 				FlxTween.color(ethlyn, 0.6, ethlyn.color, 0xFF56526B);
@@ -296,19 +290,142 @@ class InfoState extends MusicBeatState
 
 			if(!isHoveringAlfie && isShowingAlfie) {
 				isShowingAlfie = false;
-				if (alfie.colorTransform.redOffset != 0)
-				{
-				//FlxTween.tween(alfie.colorTransform, {redOffset: 0, blueOffset: 0, greenOffset: 0}, 0.6);
-				}
+
 				FlxTween.tween(alfiedesc, {alpha: 0}, 0.3); 
-				FlxTween.color(harper, 0.3, 0xFF56526B, harper.color);
-				FlxTween.color(ethlyn, 0.3, 0xFF56526B, ethlyn.color);
-				FlxTween.color(pooky, 0.3, 0xFF56526B, pooky.color);
-				FlxTween.color(boyfriend, 0.3, 0xFF56526B, boyfriend.color);
-				FlxTween.color(laura, 0.3, 0xFF56526B, laura.color);
-				FlxTween.color(bg, 0.3, 0xFF56526B, bg.color);
+				FlxTween.color(harper, 0.3, harper.color, 0xFFFFFFFF);
+				FlxTween.color(ethlyn, 0.3, ethlyn.color, 0xFFFFFFFF);
+				FlxTween.color(pooky, 0.3, pooky.color, 0xFFFFFFFF);
+				FlxTween.color(boyfriend, 0.3, boyfriend.color, 0xFFFFFFFF);
+				FlxTween.color(laura, 0.3, laura.color, 0xFFFFFFFF);
+				FlxTween.color(bg, 0.3, bg.color, 0xFFFFFFFF);
 			}
 
+			//harper
+			if(isHoveringHarper && !isShowingHarper) {
+				isShowingHarper = true;
+				
+				FlxTween.tween(harperdesc, {alpha: 1}, 0.6); 
+				FlxTween.color(alfie, 0.6, alfie.color, 0xFF56526B);
+				FlxTween.color(ethlyn, 0.6, ethlyn.color, 0xFF56526B);
+				FlxTween.color(pooky, 0.6, pooky.color, 0xFF56526B);
+				FlxTween.color(boyfriend, 0.6, boyfriend.color, 0xFF56526B);
+				FlxTween.color(laura, 0.6, laura.color, 0xFF56526B);
+				FlxTween.color(bg, 0.6, bg.color, 0xFF56526B);
+			}
+
+			if(!isHoveringHarper && isShowingHarper) {
+				isShowingHarper = false;
+
+				FlxTween.tween(harperdesc, {alpha: 0}, 0.3); 
+				FlxTween.color(alfie, 0.3, alfie.color, 0xFFFFFFFF);
+				FlxTween.color(ethlyn, 0.3, ethlyn.color, 0xFFFFFFFF);
+				FlxTween.color(pooky, 0.3, pooky.color, 0xFFFFFFFF);
+				FlxTween.color(boyfriend, 0.3, boyfriend.color, 0xFFFFFFFF);
+				FlxTween.color(laura, 0.3, laura.color, 0xFFFFFFFF);
+				FlxTween.color(bg, 0.3, bg.color, 0xFFFFFFFF);
+			}
+
+			//ethlyn Ethlyn
+			if(isHoveringEthlyn && !isShowingEthlyn) {
+				isShowingEthlyn = true;
+				
+				FlxTween.tween(ethlyndesc, {alpha: 1}, 0.6); 
+				FlxTween.color(alfie, 0.6, alfie.color, 0xFF56526B);
+				FlxTween.color(harper, 0.6, harper.color, 0xFF56526B);
+				FlxTween.color(pooky, 0.6, pooky.color, 0xFF56526B);
+				FlxTween.color(boyfriend, 0.6, boyfriend.color, 0xFF56526B);
+				FlxTween.color(laura, 0.6, laura.color, 0xFF56526B);
+				FlxTween.color(bg, 0.6, bg.color, 0xFF56526B);
+			}
+
+			if(!isHoveringEthlyn && isShowingEthlyn) {
+				isShowingEthlyn = false;
+
+				FlxTween.tween(ethlyndesc, {alpha: 0}, 0.3); 
+				FlxTween.color(alfie, 0.3, alfie.color, 0xFFFFFFFF);
+				FlxTween.color(harper, 0.3, harper.color, 0xFFFFFFFF);
+				FlxTween.color(pooky, 0.3, pooky.color, 0xFFFFFFFF);
+				FlxTween.color(boyfriend, 0.3, boyfriend.color, 0xFFFFFFFF);
+				FlxTween.color(laura, 0.3, laura.color, 0xFFFFFFFF);
+				FlxTween.color(bg, 0.3, bg.color, 0xFFFFFFFF);
+			}
+
+			//laura Laura
+			if(isHoveringLaura && !isShowingLaura) {
+				isShowingLaura = true;
+				
+				FlxTween.tween(lauradesc, {alpha: 1}, 0.6); 
+				FlxTween.color(alfie, 0.6, alfie.color, 0xFF56526B);
+				FlxTween.color(ethlyn, 0.6, ethlyn.color, 0xFF56526B);
+				FlxTween.color(pooky, 0.6, pooky.color, 0xFF56526B);
+				FlxTween.color(boyfriend, 0.6, boyfriend.color, 0xFF56526B);
+				FlxTween.color(harper, 0.6, harper.color, 0xFF56526B);
+				FlxTween.color(bg, 0.6, bg.color, 0xFF56526B);
+			}
+
+			if(!isHoveringLaura && isShowingLaura) {
+				isShowingLaura = false;
+
+				FlxTween.tween(lauradesc, {alpha: 0}, 0.3); 
+				FlxTween.color(alfie, 0.3, alfie.color, 0xFFFFFFFF);
+				FlxTween.color(ethlyn, 0.3, ethlyn.color, 0xFFFFFFFF);
+				FlxTween.color(pooky, 0.3, pooky.color, 0xFFFFFFFF);
+				FlxTween.color(boyfriend, 0.3, boyfriend.color, 0xFFFFFFFF);
+				FlxTween.color(harper, 0.3, harper.color, 0xFFFFFFFF);
+				FlxTween.color(bg, 0.3, bg.color, 0xFFFFFFFF);
+			}
+
+			//pooky Pooky
+			if(isHoveringPooky && !isShowingPooky) {
+				isShowingPooky = true;
+				
+				FlxTween.tween(pookydesc, {alpha: 1}, 0.6); 
+				FlxTween.color(alfie, 0.6, alfie.color, 0xFF56526B);
+				FlxTween.color(ethlyn, 0.6, ethlyn.color, 0xFF56526B);
+				FlxTween.color(laura, 0.6, laura.color, 0xFF56526B);
+				FlxTween.color(boyfriend, 0.6, boyfriend.color, 0xFF56526B);
+				FlxTween.color(harper, 0.6, harper.color, 0xFF56526B);
+				FlxTween.color(bg, 0.6, bg.color, 0xFF56526B);
+			}
+
+			if(!isHoveringPooky && isShowingPooky) {
+				isShowingPooky = false;
+
+				FlxTween.tween(pookydesc, {alpha: 0}, 0.3); 
+				FlxTween.color(alfie, 0.3, alfie.color, 0xFFFFFFFF);
+				FlxTween.color(ethlyn, 0.3, ethlyn.color, 0xFFFFFFFF);
+				FlxTween.color(laura, 0.3, laura.color, 0xFFFFFFFF);
+				FlxTween.color(boyfriend, 0.3, boyfriend.color, 0xFFFFFFFF);
+				FlxTween.color(harper, 0.3, harper.color, 0xFFFFFFFF);
+				FlxTween.color(bg, 0.3, bg.color, 0xFFFFFFFF);
+			}
+
+			
+			//boyfriend Boyfriend
+			if(isHoveringBoyfriend && !isShowingBoyfriend) {
+				isShowingBoyfriend = true;
+				
+				FlxTween.tween(boyfrienddesc, {alpha: 1}, 0.6); 
+				FlxTween.color(alfie, 0.6, alfie.color, 0xFF56526B);
+				FlxTween.color(ethlyn, 0.6, ethlyn.color, 0xFF56526B);
+				FlxTween.color(laura, 0.6, laura.color, 0xFF56526B);
+				FlxTween.color(pooky, 0.6, pooky.color, 0xFF56526B);
+				FlxTween.color(harper, 0.6, harper.color, 0xFF56526B);
+				FlxTween.color(bg, 0.6, bg.color, 0xFF56526B);
+			}
+
+			if(!isHoveringBoyfriend && isShowingBoyfriend) {
+				isShowingBoyfriend = false;
+
+				FlxTween.tween(boyfrienddesc, {alpha: 0}, 0.3); 
+				FlxTween.color(alfie, 0.3, alfie.color, 0xFFFFFFFF);
+				FlxTween.color(ethlyn, 0.3, ethlyn.color, 0xFFFFFFFF);
+				FlxTween.color(laura, 0.3, laura.color, 0xFFFFFFFF);
+				FlxTween.color(pooky, 0.3, pooky.color, 0xFFFFFFFF);
+				FlxTween.color(harper, 0.3, harper.color, 0xFFFFFFFF);
+				FlxTween.color(bg, 0.3, bg.color, 0xFFFFFFFF);
+			}
+		
 			}
 		}
 		if (FlxG.sound.music.volume < 0.8)
@@ -319,7 +436,6 @@ class InfoState extends MusicBeatState
 
 
 		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
-		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
 		if (!selectedSomethin)
 		{
@@ -399,6 +515,7 @@ class InfoState extends MusicBeatState
 		}
 
 		super.update(elapsed);
+		FlxG.mouse.visible = true;
 
 		/*menuItems.forEach(function(spr:FlxSprite)
 		{
