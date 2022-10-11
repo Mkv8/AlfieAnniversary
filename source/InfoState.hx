@@ -98,41 +98,49 @@ class InfoState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 
-		alfie = new FlxSprite(200, 300).loadGraphic(Paths.image('biomenu/alfie'));
+		alfie = new FlxSprite(248, 310).loadGraphic(Paths.image('biomenu/alfie'));
 		alfie.scrollFactor.set(0, 0);
 		alfie.updateHitbox();
 		alfie.antialiasing = ClientPrefs.globalAntialiasing;
-		add(alfie);
+		//add(alfie);
 
-		pooky = new FlxSprite(300, 300).loadGraphic(Paths.image('biomenu/pooky'));
+		pooky = new FlxSprite(370, 110).loadGraphic(Paths.image('biomenu/pooky'));
 		pooky.scrollFactor.set(0, 0);
 		pooky.updateHitbox();
 		pooky.antialiasing = ClientPrefs.globalAntialiasing;
-		add(pooky);
+		//add(pooky);
 
-		boyfriend = new FlxSprite(400, 300).loadGraphic(Paths.image('biomenu/bf'));
+		boyfriend = new FlxSprite(710, 330).loadGraphic(Paths.image('biomenu/bf'));
 		boyfriend.scrollFactor.set(0, 0);
 		boyfriend.updateHitbox();
 		boyfriend.antialiasing = ClientPrefs.globalAntialiasing;
-		add(boyfriend);
+		//add(boyfriend);
 
-		ethlyn = new FlxSprite(500, 300).loadGraphic(Paths.image('biomenu/ethlyn'));
+		ethlyn = new FlxSprite(172, 220).loadGraphic(Paths.image('biomenu/ethlyn'));
 		ethlyn.scrollFactor.set(0, 0);
 		ethlyn.updateHitbox();
 		ethlyn.antialiasing = ClientPrefs.globalAntialiasing;
-		add(ethlyn);
+		//add(ethlyn);
 
-		laura = new FlxSprite(600, 300).loadGraphic(Paths.image('biomenu/laura'));
+		laura = new FlxSprite(995, 315).loadGraphic(Paths.image('biomenu/laura'));
 		laura.scrollFactor.set(0, 0);
 		laura.updateHitbox();
 		laura.antialiasing = ClientPrefs.globalAntialiasing;
-		add(laura);
+		//add(laura);
 
-		harper = new FlxSprite(700, 300).loadGraphic(Paths.image('biomenu/harper'));
+		harper = new FlxSprite(865, 290).loadGraphic(Paths.image('biomenu/harper'));
 		harper.scrollFactor.set(0, 0);
 		harper.updateHitbox();
 		harper.antialiasing = ClientPrefs.globalAntialiasing;
-		add(harper);
+		//add(harper);
+
+		add(ethlyn);
+		add(alfie);
+		add(pooky);
+		add(laura);
+		add(harper);	
+		add(boyfriend);
+		
 
 		alfiedesc = new FlxSprite(250, 300).loadGraphic(Paths.image('biomenu/alfie description'));
 		alfiedesc.scrollFactor.set(0, 0);
@@ -227,6 +235,7 @@ class InfoState extends MusicBeatState
 		super.create();
 
 		FlxG.mouse.visible = true;
+		FlxTween.tween(FlxG.mouse.cursorContainer, {alpha: 1}, 0.3);
 
 	}
 
@@ -291,13 +300,13 @@ class InfoState extends MusicBeatState
 				{
 				//FlxTween.tween(alfie.colorTransform, {redOffset: 0, blueOffset: 0, greenOffset: 0}, 0.6);
 				}
-				FlxTween.tween(alfiedesc, {alpha: 0}, 0.6); 
-				FlxTween.color(harper, 0.6, 0xFF56526B, harper.color);
-				FlxTween.color(ethlyn, 0.6, 0xFF56526B, ethlyn.color);
-				FlxTween.color(pooky, 0.6, 0xFF56526B, pooky.color);
-				FlxTween.color(boyfriend, 0.6, 0xFF56526B, boyfriend.color);
-				FlxTween.color(laura, 0.6, 0xFF56526B, laura.color);
-				FlxTween.color(bg, 0.6, 0xFF56526B, bg.color);
+				FlxTween.tween(alfiedesc, {alpha: 0}, 0.3); 
+				FlxTween.color(harper, 0.3, 0xFF56526B, harper.color);
+				FlxTween.color(ethlyn, 0.3, 0xFF56526B, ethlyn.color);
+				FlxTween.color(pooky, 0.3, 0xFF56526B, pooky.color);
+				FlxTween.color(boyfriend, 0.3, 0xFF56526B, boyfriend.color);
+				FlxTween.color(laura, 0.3, 0xFF56526B, laura.color);
+				FlxTween.color(bg, 0.3, 0xFF56526B, bg.color);
 			}
 
 			}
@@ -391,10 +400,10 @@ class InfoState extends MusicBeatState
 
 		super.update(elapsed);
 
-		menuItems.forEach(function(spr:FlxSprite)
+		/*menuItems.forEach(function(spr:FlxSprite)
 		{
 			spr.screenCenter(X);
-		});
+		});*/
 	}
 
 	/*function changeItem(huh:Int = 0)
