@@ -1,5 +1,6 @@
 package;
 
+import flixel.system.FlxSound;
 import flixel.math.FlxRect;
 
 #if desktop
@@ -22,6 +23,7 @@ import lime.app.Application;
 import Achievements;
 import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
+import openfl.filters.ShaderFilter;
 
 using StringTools;
 
@@ -56,6 +58,8 @@ class InfoState extends MusicBeatState
 
 	var darken:FlxSprite;
 
+	var clicksound:FlxSound;
+	
 	var alfiedesc:FlxSprite;
 	var boyfrienddesc:FlxSprite;
 	var pookydesc:FlxSprite;
@@ -182,18 +186,33 @@ class InfoState extends MusicBeatState
 		harperdesc.alpha = 0;
 		add(harperdesc);
 
+		clicksound = new FlxSound().loadEmbedded(Paths.sound("harpermeow"));
+		add(clicksound);
+
+		cursortext = new FlxSprite(30, 10).loadGraphic(Paths.image('biomenu/cursor'));
+		cursortext.scrollFactor.set(0, 0);
+		cursortext.updateHitbox();
+		cursortext.antialiasing = ClientPrefs.globalAntialiasing;
+		add(cursortext);
+
+		backbutton = new FlxSprite(30, 650).loadGraphic(Paths.image('biomenu/backnobg'));
+		backbutton.scrollFactor.set(0, 0);
+		backbutton.updateHitbox();
+		backbutton.antialiasing = ClientPrefs.globalAntialiasing;
+		add(backbutton);
 
 
-		menuItems = new FlxTypedGroup<FlxSprite>();
-		add(menuItems);
+		
+		/*menuItems = new FlxTypedGroup<FlxSprite>();
+		add(menuItems);*/
 
-		var scale:Float = 1;
+		//var scale:Float = 1;
 		/*if(optionShit.length > 6) {
 			scale = 6 / optionShit.length;
 		}*/
 
-		for (i in 0...optionShit.length)
-		{
+		//for (i in 0...optionShit.length)
+		//{
 
 			/*var offsetx:Float = 1 - 500;
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
@@ -215,7 +234,7 @@ class InfoState extends MusicBeatState
 			menuItem.setGraphicSize(Std.int(menuItem.width * 0.9));
 			menuItem.updateHitbox();
 			//menuItem.x = -500; trace('hello???');*/
-		}
+		//}
 
 
 		// NG.core.calls.event.logEvent('swag').send();
@@ -228,6 +247,13 @@ class InfoState extends MusicBeatState
 
 		FlxG.mouse.visible = true;
 		FlxTween.tween(FlxG.mouse.cursorContainer, {alpha: 1}, 0.3);
+
+		for(spr in members) {
+			if((spr is FlxSprite)) {
+				var spr:FlxSprite = cast spr;
+				spr.color = 0xFF000000 | spr.color;
+			}
+		}
 
 	}
 
@@ -263,18 +289,37 @@ class InfoState extends MusicBeatState
 	private var isShowingEthlyn = false;
 	private var isShowingLaura = false;
 	private var isShowingBoyfriend = false;
+	private var isShowingBack = false;
 
 	override function update(elapsed:Float)
 	{
+		super.update(elapsed);
+		FlxG.mouse.visible = true;
+
 				var isHoveringAlfie = checkOverlap(alfie, 0);
 				var isHoveringPooky = checkOverlap(pooky, 0);
 				var isHoveringLaura = checkOverlap(laura, 0);
 				var isHoveringEthlyn = checkOverlap(ethlyn, 0);
 				var isHoveringHarper = checkOverlap(harper, 0);
 				var isHoveringBoyfriend = checkOverlap(boyfriend, 0);
+				var isHoveringBack = checkOverlap(backbutton, 20);
+
+				if(isHoveringAlfie) isHoveringEthlyn = false;
+				if(isHoveringHarper) isHoveringLaura = false;
+				if(isHoveringHarper) isHoveringBoyfriend = false;
+				if(isHoveringBoyfriend) isHoveringHarper = false;
+				if(isHoveringBoyfriend) isHoveringLaura = false;
+				if(isHoveringPooky) isHoveringAlfie = false;
+				if(isHoveringEthlyn) isHoveringAlfie = false;
 
 		if(canChange) {
 			if(FlxG.mouse.justPressed) {
+				if(isHoveringBack && !isShowingBack) {
+					isShowingBack = true;
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+					MusicBeatState.switchState(new MainMenuState());
+				}
+			
 			//alfie
 			if(isHoveringAlfie && !isShowingAlfie) {
 				isShowingAlfie = true;
@@ -286,6 +331,10 @@ class InfoState extends MusicBeatState
 				FlxTween.color(boyfriend, 0.6, boyfriend.color, 0xFF56526B);
 				FlxTween.color(laura, 0.6, laura.color, 0xFF56526B);
 				FlxTween.color(bg, 0.6, bg.color, 0xFF56526B);
+				FlxG.sound.play(Paths.sound('alfiebaa'));
+				/*clicksound = new FlxSound().loadEmbedded(Paths.sound("alfiebaa"));
+				clicksound.play(true);*/
+
 			}
 
 			if(!isHoveringAlfie && isShowingAlfie) {
@@ -311,6 +360,8 @@ class InfoState extends MusicBeatState
 				FlxTween.color(boyfriend, 0.6, boyfriend.color, 0xFF56526B);
 				FlxTween.color(laura, 0.6, laura.color, 0xFF56526B);
 				FlxTween.color(bg, 0.6, bg.color, 0xFF56526B);
+				clicksound = new FlxSound().loadEmbedded(Paths.sound("harpermeow"));
+				clicksound.play(true);
 			}
 
 			if(!isHoveringHarper && isShowingHarper) {
@@ -336,6 +387,8 @@ class InfoState extends MusicBeatState
 				FlxTween.color(boyfriend, 0.6, boyfriend.color, 0xFF56526B);
 				FlxTween.color(laura, 0.6, laura.color, 0xFF56526B);
 				FlxTween.color(bg, 0.6, bg.color, 0xFF56526B);
+				clicksound = new FlxSound().loadEmbedded(Paths.sound("ethlynbat"));
+				clicksound.play(true);
 			}
 
 			if(!isHoveringEthlyn && isShowingEthlyn) {
@@ -361,6 +414,8 @@ class InfoState extends MusicBeatState
 				FlxTween.color(boyfriend, 0.6, boyfriend.color, 0xFF56526B);
 				FlxTween.color(harper, 0.6, harper.color, 0xFF56526B);
 				FlxTween.color(bg, 0.6, bg.color, 0xFF56526B);
+				clicksound = new FlxSound().loadEmbedded(Paths.sound("laurasqueak"));
+				clicksound.play(true);
 			}
 
 			if(!isHoveringLaura && isShowingLaura) {
@@ -386,6 +441,8 @@ class InfoState extends MusicBeatState
 				FlxTween.color(boyfriend, 0.6, boyfriend.color, 0xFF56526B);
 				FlxTween.color(harper, 0.6, harper.color, 0xFF56526B);
 				FlxTween.color(bg, 0.6, bg.color, 0xFF56526B);
+				clicksound = new FlxSound().loadEmbedded(Paths.sound("ghostmelody"));
+				clicksound.play(true);
 			}
 
 			if(!isHoveringPooky && isShowingPooky) {
@@ -412,6 +469,8 @@ class InfoState extends MusicBeatState
 				FlxTween.color(pooky, 0.6, pooky.color, 0xFF56526B);
 				FlxTween.color(harper, 0.6, harper.color, 0xFF56526B);
 				FlxTween.color(bg, 0.6, bg.color, 0xFF56526B);
+				clicksound = new FlxSound().loadEmbedded(Paths.sound("boobf"));
+				clicksound.play(true);
 			}
 
 			if(!isHoveringBoyfriend && isShowingBoyfriend) {
@@ -432,6 +491,7 @@ class InfoState extends MusicBeatState
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
+
 
 
 
@@ -514,8 +574,6 @@ class InfoState extends MusicBeatState
 			#end*/
 		}
 
-		super.update(elapsed);
-		FlxG.mouse.visible = true;
 
 		/*menuItems.forEach(function(spr:FlxSprite)
 		{
