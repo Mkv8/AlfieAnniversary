@@ -40,7 +40,7 @@ class CreditsState extends MusicBeatState
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 
-		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg = new FlxSprite().loadGraphic(Paths.image('menucredits'));
 		add(bg);
 		bg.screenCenter();
 		
@@ -80,19 +80,6 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
-			['Psych Engine Team'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',						'https://twitter.com/Shadow_Mario_',	'444444'],
-			['RiverOaken',			'riveroaken',		'Main Artist/Animator of Psych Engine',					'https://twitter.com/river_oaken',		'C30085'],
-			['bb-panzu',			'bb-panzu',			'Additional Programmer of Psych Engine',				'https://twitter.com/bbsub3',			'389A58'],
-			[''],
-			['Engine Contributors'],
-			['shubs',				'shubs',			'New Input System Programmer',							'https://twitter.com/yoshubs',			'4494E6'],
-			['SqirraRNG',			'gedehari',			'Chart Editor\'s Sound Waveform base',					'https://twitter.com/gedehari',			'FF9300'],
-			['iFlicky',				'iflicky',			'Delay/Combo Menu Song Composer\nand Dialogue Sounds',	'https://twitter.com/flicky_i',			'C549DB'],
-			['PolybiusProxy',		'polybiusproxy',	'.MP4 Video Loader Extension',							'https://twitter.com/polybiusproxy',	'FFEAA6'],
-			['Keoiki',				'keoiki',			'Note Splash Animations',								'https://twitter.com/Keoiki_',			'FFFFFF'],
-			['Smokey',				'smokey',			'Spritemap Texture Support',							'https://twitter.com/Smokey_5_',		'0033CC'],			
-			[''],
 			['Mod Makers'],
 			['Mk',					'mk',				'Programmer and Artist for the mod',					'https://twitter.com/Mkv8Art',			'D23B48'],
 			['Ne_Eo',				'neo',				'Programmer, also optimized the mod a lot!!',			'https://twitter.com/Ne_Eo_Twitch',		'8A5F5C'],
@@ -107,18 +94,29 @@ class CreditsState extends MusicBeatState
 			['Fogu',				'fogu',				'Charter Mansion Match (Normal Mode)',					'https://twitter.com/FoguAlt',			'D23B48'],
 			[''],
 			['Special Thanks'],
-			['Hotline 024 team',				'nikku',			'Thanks to Saruky for letting us use Nikku, press ENTER for mod link!','https://gamebanana.com/mods/373298',			'FF3021'],
-			['bb-panzu',			'bb-panzu',			'Kaboom custom event',				'https://twitter.com/bbsub3',			'389A58'],
-			['MisterParakeet',					'blank',				'First programmer for vs Alfie :)',			' ',			'EBC400'],
-			['ThisIsBennyK',					'blank',				'Helped program vs Alfie :)',			' ',			'00D0DB'],
-			['StardustTunes',					'blank',				'Remixed The Bell',			' ',			'413CA6'],
-			['Josszzol',					'blank',				'Creator of Vs. Filip',			' ',			'FFB026'],
-			['IvnyRose Mod Team',					'blank',				'For the continued support of the mod <3',			' ',			'd184c2'],
-			['Flippy and Gegcoin',					'blank',				'For always playing vs Alfie',			' ',			'BDBCC4'],
-			['MattDoesGames',					'blank',				'For always playing vs Alfie',			' ',			'49E3E6'],
-			['Tesseption',					'blank',				'For always playing vs Alfie',			' ',			'D149E6'],
-			['Fans and Supporters',					'blank',				'For the fan content (we really appreciate it!!)',			' ',			'98ED87'],
-			['And you',					'blank',				'cuz we really do be cheesy like that',			' ',			'D42C3D'],
+			['Hotline 024 team',					'nikku',				'Thanks to Saruky for letting us use Nikku, press ENTER for the mod page!','https://gamebanana.com/mods/373298',			'FF3021'],
+			['MisterParakeet and ThisIsBennyK',		'blank',				'Helped program Vs. Alfie :)',					' ',			'EBC400'],
+			['StardustTunes',						'blank',				'Remixed The Bell in Vs. Alfie',				' ',			'413CA6'],
+			['Josszzol',							'blank',				'Creator of Vs. Filip',							' ',			'FFB026'],
+			['IvnyRose Mod Team',					'blank',				'For the continued support of the mod <3',		' ',			'd184c2'],
+			['Flippy and Gegcoin',					'blank',				'For always playing vs Alfie',					' ',			'BDBCC4'],
+			['MattDoesStuff',						'blank',				'For always playing vs Alfie',					' ',			'49E3E6'],
+			['Tesseption',							'blank',				'For always playing vs Alfie',					' ',			'D149E6'],
+			['Fans and Supporters',					'blank',				'For the fan content (we really appreciate it!!)',	' ',		'98ED87'],
+			['And you',								'blank',				'cuz we really do be cheesy like that',			' ',			'D42C3D'],
+			[''],
+			['Psych Engine Team'],
+			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',						'https://twitter.com/Shadow_Mario_',	'444444'],
+			['RiverOaken',			'riveroaken',		'Main Artist/Animator of Psych Engine',					'https://twitter.com/river_oaken',		'C30085'],
+			['bb-panzu',			'bb-panzu',			'Additional Programmer of Psych Engine',				'https://twitter.com/bbsub3',			'389A58'],
+			[''],
+			['Engine Contributors'],
+			['shubs',				'shubs',			'New Input System Programmer',							'https://twitter.com/yoshubs',			'4494E6'],
+			['SqirraRNG',			'gedehari',			'Chart Editor\'s Sound Waveform base',					'https://twitter.com/gedehari',			'FF9300'],
+			['iFlicky',				'iflicky',			'Delay/Combo Menu Song Composer\nand Dialogue Sounds',	'https://twitter.com/flicky_i',			'C549DB'],
+			['PolybiusProxy',		'polybiusproxy',	'.MP4 Video Loader Extension',							'https://twitter.com/polybiusproxy',	'FFEAA6'],
+			['Keoiki',				'keoiki',			'Note Splash Animations',								'https://twitter.com/Keoiki_',			'FFFFFF'],
+			['Smokey',				'smokey',			'Spritemap Texture Support',							'https://twitter.com/Smokey_5_',		'0033CC'],			
 			[''],
 			["Funkin' Crew"],
 			['ninjamuffin99',		'ninjamuffin99',	"Programmer of Friday Night Funkin'",					'https://twitter.com/ninja_muffin99',	'F73838'],

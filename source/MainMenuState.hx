@@ -108,13 +108,13 @@ class MainMenuState extends MusicBeatState
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
-		songListAlfie = new Item(400, 1800);
+		songListAlfie = new Item(200, 1800);
 		songListAlfie.loadGraphic(Paths.image('mainmenu/SonglistAlfie'));
-		infoBF = new Item(400, 1800);
+		infoBF = new Item(200, 1800);
 		infoBF.loadGraphic(Paths.image('mainmenu/InfoBoyfriend'));
-		creditsPortrait = new Item(400, 1800);
+		creditsPortrait = new Item(200, 1800);
 		creditsPortrait.loadGraphic(Paths.image('mainmenu/Creditsportrait'));
-		optionsPooky = new Item(400, 1800);
+		optionsPooky = new Item(200, 1800);
 		optionsPooky.loadGraphic(Paths.image('mainmenu/Optionspooky'));
 
 		add(songListAlfie);
@@ -287,6 +287,12 @@ class MainMenuState extends MusicBeatState
 		});*/
 	}
 
+	var alfTimer:FlxTimer;
+	var bfTimer:FlxTimer;
+	var portraitTimer:FlxTimer;
+	var pookyTimer:FlxTimer;
+
+
 	function changeItem(huh:Int = 0)
 	{
 		curSelected += huh;
@@ -315,79 +321,88 @@ class MainMenuState extends MusicBeatState
 
 
 
-		switch (optionShit[curSelected])
-		{
-		case 'story mode':
-		{
-			FlxTween.cancelTweensOf(Item);
-			FlxTween.tween(songListAlfie,{y: 200}, 1.2, {ease: FlxEase.expoInOut});
-			songListAlfie.angle = -4;
+FlxTween.cancelTweensOf(songListAlfie);
+FlxTween.cancelTweensOf(infoBF);
+FlxTween.cancelTweensOf(creditsPortrait);
+FlxTween.cancelTweensOf(optionsPooky);
 
-			new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
-					if(songListAlfie.angle == -4) 
-						FlxTween.angle(songListAlfie, songListAlfie.angle, 4, 4, {ease: FlxEase.quartInOut});
-					if (songListAlfie.angle == 4) 
-						FlxTween.angle(songListAlfie, songListAlfie.angle, -4, 4, {ease: FlxEase.quartInOut});
-				}, 0);
+if(alfTimer != null) alfTimer.cancel();
+if(bfTimer != null) bfTimer.cancel();
+if(portraitTimer != null) portraitTimer.cancel();
+if(pookyTimer != null) pookyTimer.cancel();
 
-			infoBF.y = 1800;
-			creditsPortrait.y = 1800;
-			optionsPooky.y = 1800;
-		}
-		case 'info':
-		{
-			FlxTween.cancelTweensOf(Item);
-			FlxTween.tween(infoBF,{y: 300}, 1.2, {ease: FlxEase.expoInOut});
-			infoBF.angle = -4;
+switch (optionShit[curSelected])
+{
+    case 'story mode':
+    {
+        FlxTween.tween(songListAlfie,{y: -210}, 1.2, {ease: FlxEase.expoInOut});
+        songListAlfie.angle = -4;
 
-			new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
-					if(infoBF.angle == -4) 
-						FlxTween.angle(infoBF, infoBF.angle, 4, 4, {ease: FlxEase.quartInOut});
-					if (infoBF.angle == 4) 
-						FlxTween.angle(infoBF, infoBF.angle, -4, 4, {ease: FlxEase.quartInOut});
-				}, 0);
+        alfTimer = new FlxTimer().start(1, function(tmr:FlxTimer)
+        {
+            if(songListAlfie.angle == -4)
+                FlxTween.angle(songListAlfie, songListAlfie.angle, 4, 4, {ease: FlxEase.quartInOut});
+            if (songListAlfie.angle == 4)
+                FlxTween.angle(songListAlfie, songListAlfie.angle, -4, 4, {ease: FlxEase.quartInOut});
+        }, 0);
 
-			songListAlfie.y = 1800;
-			creditsPortrait.y = 1800;
-			optionsPooky.y = 1800;
-		}
-		case 'credits':
-		{
-			FlxTween.tween(creditsPortrait,{y: 300}, 1.2, {ease: FlxEase.expoInOut});
-			creditsPortrait.angle = -4;
+        FlxTween.tween(infoBF,{y: 1800}, 1.2, {ease: FlxEase.expoInOut});
+        FlxTween.tween(creditsPortrait,{y: 1800}, 1.2, {ease: FlxEase.expoInOut});
+        FlxTween.tween(optionsPooky,{y: 1800}, 1.2, {ease: FlxEase.expoInOut});
+    }
+    case 'info':
+    {
+        FlxTween.cancelTweensOf(Item);
+        FlxTween.tween(infoBF,{y: -40}, 1.2, {ease: FlxEase.expoInOut});
+        infoBF.angle = -4;
 
-			new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
-					if(creditsPortrait.angle == -4) 
-						FlxTween.angle(creditsPortrait, creditsPortrait.angle, 4, 4, {ease: FlxEase.quartInOut});
-					if (creditsPortrait.angle == 4) 
-						FlxTween.angle(creditsPortrait, creditsPortrait.angle, -4, 4, {ease: FlxEase.quartInOut});
-				}, 0);
+        bfTimer = new FlxTimer().start(1, function(tmr:FlxTimer)
+        {
+            if(infoBF.angle == -4)
+                FlxTween.angle(infoBF, infoBF.angle, 4, 4, {ease: FlxEase.quartInOut});
+            if (infoBF.angle == 4)
+                FlxTween.angle(infoBF, infoBF.angle, -4, 4, {ease: FlxEase.quartInOut});
+        }, 0);
 
-			infoBF.y = 1800;
-			songListAlfie.y = 1800;
-			optionsPooky.y = 1800;
-		}
-		case 'options':
-		{
-			FlxTween.tween(optionsPooky,{y: 300}, 1.2, {ease: FlxEase.expoInOut});
-			optionsPooky.angle = -4;
+        FlxTween.tween(songListAlfie,{y: 1800}, 1.2, {ease: FlxEase.expoInOut});
+        FlxTween.tween(creditsPortrait,{y: 1800}, 1.2, {ease: FlxEase.expoInOut});
+        FlxTween.tween(optionsPooky,{y: 1800}, 1.2, {ease: FlxEase.expoInOut});
+    }
+    case 'credits':
+    {
+        FlxTween.tween(creditsPortrait,{y: 150}, 1.2, {ease: FlxEase.expoInOut});
+        creditsPortrait.angle = -4;
 
-			new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
-					if(optionsPooky.angle == -4) 
-						FlxTween.angle(optionsPooky, optionsPooky.angle, 4, 4, {ease: FlxEase.quartInOut});
-					if (optionsPooky.angle == 4) 
-						FlxTween.angle(optionsPooky, optionsPooky.angle, -4, 4, {ease: FlxEase.quartInOut});
-				}, 0);
+        portraitTimer = new FlxTimer().start(1, function(tmr:FlxTimer)
+        {
+            if(creditsPortrait.angle == -4)
+                FlxTween.angle(creditsPortrait, creditsPortrait.angle, 4, 4, {ease: FlxEase.quartInOut});
+            if (creditsPortrait.angle == 4)
+                FlxTween.angle(creditsPortrait, creditsPortrait.angle, -4, 4, {ease: FlxEase.quartInOut});
+        }, 0);
 
-			infoBF.y = 1800;
-			creditsPortrait.y = 1800;
-			songListAlfie.y = 1800;
-		}
-		}
+        FlxTween.tween(infoBF,{y: 1800}, 1.2, {ease: FlxEase.expoInOut});
+        FlxTween.tween(songListAlfie,{y: 1800}, 1.2, {ease: FlxEase.expoInOut});
+        FlxTween.tween(optionsPooky,{y: 1800}, 1.2, {ease: FlxEase.expoInOut});
+    }
+    case 'options':
+    {
+        FlxTween.tween(optionsPooky,{y: 350}, 1.2, {ease: FlxEase.expoInOut});
+        optionsPooky.angle = -4;
+
+        pookyTimer = new FlxTimer().start(1, function(tmr:FlxTimer)
+        {
+            if(optionsPooky.angle == -4)
+                FlxTween.angle(optionsPooky, optionsPooky.angle, 4, 4, {ease: FlxEase.quartInOut});
+            if (optionsPooky.angle == 4)
+                FlxTween.angle(optionsPooky, optionsPooky.angle, -4, 4, {ease: FlxEase.quartInOut});
+        }, 0);
+
+        FlxTween.tween(infoBF,{y: 1800}, 1.2, {ease: FlxEase.expoInOut});
+        FlxTween.tween(creditsPortrait,{y: 1800}, 1.2, {ease: FlxEase.expoInOut});
+        FlxTween.tween(songListAlfie,{y: 1800}, 1.2, {ease: FlxEase.expoInOut});
+    }
+}
 	}
 	
 }
