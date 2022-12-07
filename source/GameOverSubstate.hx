@@ -9,6 +9,9 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
+#if desktop
+import Discord.DiscordClient;
+#end
 
 class GameOverSubstate extends MusicBeatSubstate
 {
@@ -113,6 +116,9 @@ class GameOverSubstate extends MusicBeatSubstate
 	var isFollowingAlready:Bool = false;
 	override function update(elapsed:Float)
 	{
+		#if desktop
+		DiscordClient.changePresence("just died lmao what a dweeb !", null);
+		#end
 		super.update(elapsed);
 
 		PlayState.instance.callOnLuas('onUpdate', [elapsed]);

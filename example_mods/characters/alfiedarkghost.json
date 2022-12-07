@@ -1,107 +1,107 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				2
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "idle",
-			"indices": [],
-			"name": "none"
+			"fps": 24,
+			"name": "none",
+			"indices": []
 		},
 		{
-			"loop": false,
 			"offsets": [
-				-33,
-				12
+				164,
+				-8
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singLEFT",
-			"fps": 24,
-			"name": "left",
-			"indices": []
+			"indices": [],
+			"name": "left"
 		},
 		{
-			"loop": false,
 			"offsets": [
-				-70,
-				-17
+				-61,
+				-134
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singDOWN",
-			"fps": 24,
-			"name": "down",
-			"indices": []
+			"indices": [],
+			"name": "down"
 		},
 		{
-			"loop": false,
 			"offsets": [
-				-80,
-				26
+				100,
+				46
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singUP",
-			"fps": 24,
-			"name": "up",
-			"indices": []
+			"indices": [],
+			"name": "up"
 		},
 		{
-			"loop": false,
 			"offsets": [
-				-99,
-				5
+				-6,
+				-45
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singRIGHT",
+			"indices": [],
+			"name": "right"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-10,
+				22
+			],
+			"anim": "singLEFTmiss",
 			"fps": 24,
-			"name": "right",
+			"name": "miss",
 			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-50,
 				-8
 			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singLEFTmiss",
-			"indices": [],
-			"name": "miss"
-		},
-		{
-			"offsets": [
-				-50,
-				-8
-			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWNmiss",
-			"indices": [],
-			"name": "miss"
+			"fps": 24,
+			"name": "miss",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-50,
 				-8
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUPmiss",
-			"indices": [],
-			"name": "miss"
+			"fps": 24,
+			"name": "miss",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-50,
 				-8
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHTmiss",
-			"indices": [],
-			"name": "miss"
+			"fps": 24,
+			"name": "miss",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/AlfieDark",
+	"image": "characters/AlfieAD",
 	"position": [
 		-40,
 		0
@@ -114,7 +114,7 @@
 		18
 	],
 	"camera_position": [
-		-20,
+		-70,
 		0
 	],
 	"sing_duration": 6.1,

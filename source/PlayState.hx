@@ -244,10 +244,13 @@ class PlayState extends MusicBeatState
 	var oldstripes:BGSprite;
 	var rainweak:FlxBackdrop;
 	var rainsmall:FlxBackdrop;
+	var remixadd:BGSprite;
+	var remixThings:FlxBackdrop;
 	var rainbig:FlxBackdrop;
 	var darksparks:FlxBackdrop;
 	var eyes:BGSprite;
 	var circles:BGSprite;
+	var blackbg:FlxSpriteExtra;
 
 	var week1old:BGSprite;
 	var week1:BGSprite;
@@ -284,6 +287,16 @@ class PlayState extends MusicBeatState
 	var candlebells:FlxBackdrop;
 	var funkyassoverlay:BGSprite;
 	var cshaders:Array<BitmapFilter> = [new ShaderFilter(new VCRShader())];
+
+	var ourplebg:BGSprite;
+	var ourplelight:BGSprite;
+	
+	var goatmultiply:BGSprite;
+	var goatadd:BGSprite;
+	var goatstage1:BGSprite;
+	var goatstageblank:BGSprite;
+	var goatstage3:BGSprite;
+	var goatold:BGSprite;
 
 
 
@@ -506,6 +519,23 @@ class PlayState extends MusicBeatState
 			rainbig.screenCenter(XY);
 			rainbig.antialiasing = ClientPrefs.globalAntialiasing;
 			rainbig.alpha = 0;
+
+			remixadd = new BGSprite('remixadd', -830, -720, 1, 1);
+			remixadd.alpha = 0;
+			remixadd.blend = SCREEN;
+			remixadd.scale.set(1.40, 1.40);
+
+
+			remixThings = new FlxBackdrop(Paths.image('remixflyingstuff'), 0.2, 0, true, true);
+			remixThings.x = -830;
+			remixThings.y = -720;
+			remixThings.velocity.set(0, -400);
+			remixThings.updateHitbox();
+			//remixThings.screenCenter(XY);
+			remixThings.antialiasing = ClientPrefs.globalAntialiasing;
+			remixThings.alpha = 0;
+			remixThings.scale.set(1.40, 1.40);
+
 		}
 
 		if(formattedSong == 'goated') {
@@ -548,6 +578,18 @@ class PlayState extends MusicBeatState
 			scanlines.scale.set(1.8, 1.8);
 			scanlines.alpha = 0;
 		}
+		if(formattedSong == 'goat-remake') {
+			goatadd = new BGSprite('goatadd8', -1530, -720, 1, 1);
+			goatadd.alpha = 0;
+			goatadd.blend = ADD;
+			//add(light1);
+
+			goatmultiply = new BGSprite('goatmultiply53', -1530, -720, 1, 1);
+			goatmultiply.alpha = 0;
+			goatmultiply.blend = MULTIPLY;
+			//add(light2);
+
+		}
 
 		#if desktop
 		storyDifficultyText = CoolUtil.difficulties[storyDifficulty];
@@ -555,7 +597,7 @@ class PlayState extends MusicBeatState
 		// String that contains the mode defined here so it isn't necessary to call changePresence for each mode
 		if (isStoryMode)
 		{
-			detailsText = "Story Mode: " + WeekData.getCurrentWeek().weekName;
+			detailsText = WeekData.getCurrentWeek().weekName;
 		}
 		else
 		{
@@ -822,12 +864,15 @@ class PlayState extends MusicBeatState
 				add(flowers3);
 				add(flowers4);
 
-				black = new BGSprite('black', -800, -800, 1, 1);
-				black.scale.set(5.5, 5.5);
-				black.updateHitbox();
-				black.screenCenter(XY);
-				add(black);
-				black.alpha = 0;
+				blackbg = new FlxSpriteExtra(-1, -1).makeSolid(FlxG.width * 3, FlxG.height * 3, 0xFF0A0808);
+				blackbg.updateHitbox();
+				blackbg.screenCenter(XY);
+				blackbg.blend = MULTIPLY;
+				blackbg.alpha = 0;
+				add(blackbg);
+				blackbg.antialiasing = true;
+				blackbg.scale.set(1.40, 1.40);
+
 
 				week1old = new BGSprite('weekold', -1030, -580, 0.9, 0.9);
 				week1old.scale.set(1.10, 1.10);
@@ -844,7 +889,6 @@ class PlayState extends MusicBeatState
 				bells.updateHitbox();
 				bells.x -= 830;
 				bells.y -= 720;
-				//bells.screenCenter();
 				bells.antialiasing = ClientPrefs.globalAntialiasing;
 				bells.alpha = 0;
 				add(bells);
@@ -858,18 +902,34 @@ class PlayState extends MusicBeatState
 
 				var shaders:Array<BitmapFilter> = [new ShaderFilter(new VCRShader())];
 
-				//camHUD.setFilters(shaders);
-				//camHUD.filtersEnabled = true;
-				//camGame.setFilters(shaders);
-				//camGame.filtersEnabled = true;
-				//camOther.setFilters(shaders);
-				//camOther.filtersEnabled = true;
-
 				FlxG.game.setFilters(shaders);
 				FlxG.game.filtersEnabled = true;
 
-		}
+			case 'newstage': //goat remake
+			goatstage1 = new BGSprite('stage1', -1530, -720, 1, 1);
+			goatstageblank = new BGSprite('stage2blank', -1530, -720, 1, 1);
+			goatstage3 = new BGSprite('stage3', -1530, -720, 1, 1);
+			goatold = new BGSprite('stageold', -1530, -720, 1, 1);
+			add(goatstage1);
+			add(goatstageblank);
+			add(goatstage3);
+			add(goatold);
 
+			case 'ourple': //interrupted
+			ourplebg = new BGSprite('ourplebg', -830, -720, 1, 1);
+			ourplelight = new BGSprite('ourplelight', -830, -720, 1, 1);
+			ourplebg.antialiasing = false;
+			ourplelight.antialiasing = false;
+			add(ourplebg);
+			add(ourplelight);
+			ourplebg.scale.set(1.10, 1.10);
+			ourplelight.scale.set(1.10, 1.10);
+
+
+
+
+		}
+		add(gfGroup);
 		add(dadGroup);
 		add(boyfriendGroup);
 		#if LUA_ALLOWED
@@ -885,7 +945,14 @@ class PlayState extends MusicBeatState
 			add(scanlines);
 			scanlines.alpha = 0.15;
 
+			
 		}
+		if(curStage == 'newstage') {
+			add(goatmultiply);
+			add(goatadd);
+			dadGroup.alpha = 0;
+		}
+
 		if(curStage == 'philly') {
 			phillyCityLightsEvent = new FlxTypedGroup<BGSprite>();
 			for (i in 0...5)
@@ -1006,6 +1073,10 @@ class PlayState extends MusicBeatState
 
 		switch(curStage)
 		{
+			case 'newstage':
+				boyfriend.color = 0xFF000000;
+				gf.color = 0xFF000000;
+
 			case 'limo':
 				resetFastCar();
 				insert(members.indexOf(gfGroup) - 1, fastCar);
@@ -1213,7 +1284,13 @@ class PlayState extends MusicBeatState
 		iconP2.alpha = ClientPrefs.healthBarAlpha;
 		add(iconP2);
 		reloadHealthBarColors();
+		if (SONG.song == 'goat-remake')
+			{
+				iconP2.alpha = 0;
+				healthBar.color = 0xFF000000;
+				iconP1.color = 0xFF000000;
 
+			}
 		if (SONG.song == 'mansion-match')
 		{
 			scoreTxt = new FlxFixedText(0, healthBarBG.y + 36, FlxG.width, "", 20);
@@ -1314,6 +1391,7 @@ class PlayState extends MusicBeatState
 		data.set("after-dark", ["NowPdark", "AFTER DARK"]);
 		data.set("mansion-match", ["NowPhotline", "hotlinetitle"]);
 		data.set("candlelit-clash", ["NowP", "CandleTitle"]);
+		data.set("goat-remake", ["NowP", "GoatTitle"]);
 		data.set("spooks", ["NowP90s", "90stitle"]);
 
 
@@ -1452,7 +1530,7 @@ class PlayState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence.
-		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter().replace("icon-", ""));
 		#end
 
 		if(!ClientPrefs.controllerMode)
@@ -1763,8 +1841,8 @@ class PlayState extends MusicBeatState
 					santa.dance(true);
 				}
 
-				if(curStage == '90s') {
-					animemap.dance(true);}
+				/*if(curStage == '90s') {
+					animemap.dance(true);}*/
 
 				switch (swagCounter)
 				{
@@ -1886,7 +1964,7 @@ class PlayState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence (with Time Left)
-		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength);
+		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter().replace("icon-", ""), true, songLength);
 		#end
 		setOnLuas('songLength', songLength);
 		callOnLuas('onSongStart', []);
@@ -2238,11 +2316,11 @@ class PlayState extends MusicBeatState
 			#if desktop
 			if (startTimer.finished)
 			{
-				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset);
+				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter().replace("icon-", ""), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset);
 			}
 			else
 			{
-				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter().replace("icon-", ""));
 			}
 			#end
 		}
@@ -2257,11 +2335,11 @@ class PlayState extends MusicBeatState
 		{
 			if (Conductor.songPosition > 0.0)
 			{
-				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset);
+				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter().replace("icon-", ""), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset);
 			}
 			else
 			{
-				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter().replace("icon-", ""));
 			}
 		}
 		#end
@@ -2274,7 +2352,7 @@ class PlayState extends MusicBeatState
 		#if desktop
 		if (health > 0 && !paused)
 		{
-			DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+			DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter().replace("icon-", ""));
 		}
 		#end
 
@@ -2391,7 +2469,7 @@ class PlayState extends MusicBeatState
 				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 
 				#if desktop
-				DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter().replace("icon-", ""));
 				#end
 			}
 		}
@@ -2734,7 +2812,7 @@ class PlayState extends MusicBeatState
 
 				#if desktop
 				// Game Over doesn't get his own variable because it's only used here
-				DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter().replace("icon-", ""));
 				#end
 				isDead = true;
 				return true;
@@ -3017,6 +3095,8 @@ class PlayState extends MusicBeatState
 
 
 			case 'Change Character':
+
+				
 				var charType:Int = 0;
 				switch(value1) {
 					case 'gf' | 'girlfriend':
@@ -3079,7 +3159,16 @@ class PlayState extends MusicBeatState
 						setOnLuas('gfName', gf.curCharacter);
 				}
 				reloadHealthBarColors();
-
+							#if desktop
+				if (startTimer != null && startTimer.finished)
+					{
+						DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter().replace("icon-", ""), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset);
+					}
+					else
+					{
+						DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter().replace("icon-", ""));
+					}				
+					#end
 			case 'BG Freaks Expression':
 				if(bgGirls != null) bgGirls.swapDanceType();
 
@@ -3138,6 +3227,7 @@ class PlayState extends MusicBeatState
 						}
 					});
 				}
+
 		}
 		callOnLuas('onEvent', [eventName, value1, value2]);
 	}
@@ -4432,6 +4522,8 @@ class PlayState extends MusicBeatState
 					add(rainsmall);
 					add(rainbig);
 					add(vignette);
+					add(remixadd);
+					add(remixThings);
 					FlxTween.tween(vignette, {alpha: 1}, 1);
 				}
 
@@ -4463,6 +4555,7 @@ class PlayState extends MusicBeatState
 
 				case 160: {
 					FlxTween.tween(flowers1, {alpha: 1}, 0.3);
+					FlxTween.tween(remixadd, {alpha: 0.5}, 4);
 				}
 
 				case 164: {
@@ -4477,11 +4570,17 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(flowers4, {alpha: 1}, 0.3);
 				}
 
+				case 208: {
+					FlxTween.tween(remixThings, {alpha: 0.7}, 0.6);
+				}
+
 				case 256: {
 					FlxG.camera.flash(FlxColor.BLACK,3,false);
-					black.alpha = 0.8;
+					blackbg.alpha = 0.8;
 					rainweak.alpha = 0;
 					rainsmall.alpha = 0;
+					remixadd.alpha = 0;
+					remixThings.alpha = 0;
 					rainbig.alpha = 0;
 					FlxTween.tween(sun, {alpha: 1}, 1);
 				}
@@ -4494,7 +4593,7 @@ class PlayState extends MusicBeatState
 					bells.alpha = 0;
 					sun.alpha = 0;
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
-					black.alpha = 0;
+					blackbg.alpha = 0;
 				}
 
 				case 321: {
@@ -4502,20 +4601,29 @@ class PlayState extends MusicBeatState
 					remove(sun);
 				}
 
+				case 353: {
+					FlxTween.tween(remixadd, {alpha: 0.5}, 2.7);
+
+				}
+
 				case 360: {
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
-					black.alpha = 0.35;
+					blackbg.alpha = 0.35;
 					rainweak.alpha = 0.5;
 					rainsmall.alpha = 0.5;
 					rainbig.alpha = 0.5;
+					remixThings.alpha = 0.7;
 				}
 
 				case 448: {
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
-					FlxTween.tween(black, {alpha: 0}, 5);
+					FlxTween.tween(blackbg, {alpha: 0}, 5);
 					FlxTween.tween(rainweak, {alpha: 0}, 5);
 					FlxTween.tween(rainsmall, {alpha: 0}, 5);
 					FlxTween.tween(rainbig, {alpha: 0}, 5);
+					FlxTween.tween(remixadd, {alpha: 0}, 5);
+					FlxTween.tween(remixThings, {alpha: 0}, 5);
+
 
 				}
 
@@ -4805,11 +4913,55 @@ class PlayState extends MusicBeatState
 				}
 			}
 
+			
+		if (curSong == 'goat-remake' && curStage == 'newstage' && !ClientPrefs.lowQuality)
+			{
+
+				switch (curBeat)
+				{
+
+					case 8:
+					{
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						goatold.alpha = 0;
+						goatmultiply.alpha = 1;
+						goatadd.alpha = 1;
+						dadGroup.alpha = 1;
+						iconP2.alpha = 1;
+						healthBar.color = 0xFFFFFFFF;
+						boyfriend.color = 0xFFFFFFFF;
+						iconP1.color = 0xFFFFFFFF;
+						gf.color = 0xFFFFFFFF;
+					}
+
+					case 168:
+					{
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						goatold.alpha = 1;
+						goatmultiply.alpha = 0;
+						goatadd.alpha = 0;
+						healthBar.color = 0xFF000000;
+						boyfriend.color = 0xFF000000;
+						dad.color = 0xFF000000;
+						iconP2.color = 0xFF000000;
+						iconP1.color = 0xFF000000;
+						gf.color = 0xFF000000;
+						add(vignette);
+						vignette.alpha = 1;
+					}
+				}
+			}
+
 		switch (curStage)
 		{
 			case 'school':
 				if(!ClientPrefs.lowQuality) {
 					bgGirls.dance();
+				}
+
+			case '90s': //anime 
+				if(!ClientPrefs.lowQuality) {
+					animemap.dance();
 				}
 
 			case 'mall':

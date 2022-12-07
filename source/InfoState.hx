@@ -202,44 +202,7 @@ class InfoState extends MusicBeatState
 		add(backbutton);
 
 
-		
-		/*menuItems = new FlxTypedGroup<FlxSprite>();
-		add(menuItems);*/
 
-		//var scale:Float = 1;
-		/*if(optionShit.length > 6) {
-			scale = 6 / optionShit.length;
-		}*/
-
-		//for (i in 0...optionShit.length)
-		//{
-
-			/*var offsetx:Float = 1 - 500;
-			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(0 + offsetx, (i * 140)  + offset);
-			menuItem.scale.x = scale;
-			menuItem.scale.y = scale;
-			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
-			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
-			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
-			menuItem.animation.play('idle');
-			menuItem.ID = i;
-			//menuItem.screenCenter(X);
-			menuItem.x -= 500;
-			menuItems.add(menuItem);
-			var scr:Float = (optionShit.length - 4) * 0.135;
-			if(optionShit.length < 6) scr = 0;
-			menuItem.scrollFactor.set(0, scr);
-			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
-			menuItem.setGraphicSize(Std.int(menuItem.width * 0.9));
-			menuItem.updateHitbox();
-			//menuItem.x = -500; trace('hello???');*/
-		//}
-
-
-		// NG.core.calls.event.logEvent('swag').send();
-
-		//changeItem();
 
 		
 
@@ -293,6 +256,9 @@ class InfoState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		#if desktop
+		DiscordClient.changePresence("Reading up on character bios!", null);
+		#end
 		super.update(elapsed);
 		FlxG.mouse.visible = true;
 

@@ -37,7 +37,7 @@ class CreditsState extends MusicBeatState
 	{
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("Checking the credits!", null);
 		#end
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menucredits'));
@@ -83,15 +83,19 @@ class CreditsState extends MusicBeatState
 			['Mod Makers'],
 			['Mk',					'mk',				'Programmer and Artist for the mod',					'https://twitter.com/Mkv8Art',			'D23B48'],
 			['Ne_Eo',				'neo',				'Programmer, also optimized the mod a lot!!',			'https://twitter.com/Ne_Eo_Twitch',		'8A5F5C'],
-			['Aidan.XD',			'aidan',			'Spectral Sonnet Beta and After Dark',					'https://www.youtube.com/channel/UCvIvCI3NRiJEYpyes58LhqQ',	'FF9D87'],
+			['Aidan.XD',			'aidan',			'Spectral Sonnet Beta, After Dark and Gettin Freaky remix',	'https://www.youtube.com/channel/UCvIvCI3NRiJEYpyes58LhqQ',	'FF9D87'],
 			['Meta',				'meta',				'Forest Fire Remix and Spectral Sonnet Beta',			'https://metahumanboi.carrd.co/',		'4F3F5C'],
-			['Kamex',				'ace',				'Spectral Sonnet Remix',								'https://www.youtube.com/c/Kamex',		'BAE2FF'],
+			['Kamex',				'ace',				'Spectral Sonnet Remix and second song lol',			'https://www.youtube.com/c/Kamex',		'BAE2FF'],
 			['RayZord',				'ray',				'GOATED song',											'https://www.youtube.com/c/RayZord',	'49A7EB'],
-			['Coquers_',			'coquers',			'Mansion Match',										'https://www.youtube.com/c/coquers_',	'D15E56'],
+			['Coquers_',			'coquers',			'Mansion Match, Game over theme and G.O.A.T Remake',	'https://www.youtube.com/c/coquers_',	'D15E56'],
 			['Car',					'car',				'Candle-Lit Clash',										'https://www.youtube.com/c/carcarwoah',	'FF3021'],
+			['SplatterDash',		'blank',			'SplatterDash',											'https://mobile.twitter.com/splatterdash_ng',	'FF3021'],
 			['PpavlikosS',			'pav',				'Charter for Forest Fire, Spectral Beta, GOATED, Mansion Match and Candle-Lit Clash',	'https://twitter.com/ppavlikoss','BAE2FF'],
 			['Sayge',				'sayge',			'Charter for Spectral Sonnet and After Dark',			'https://twitter.com/Sayge3D',			'FFA44F'],
+			['Chubby',				'blank',			'Charter for Interruped and Kam songl ol',				'https://twitter.com/ChubbyAlt',		'FFA44F'],
 			['Fogu',				'fogu',				'Charter Mansion Match (Normal Mode)',					'https://twitter.com/FoguAlt',			'D23B48'],
+			['JunoSongs',			'blank',			'Lyrics for kamex song lol',							'https://www.youtube.com/@JunoSongs',	'FFA44F'],
+			['NinfiaVA',			'blank',			'Singer for kamex song lol',							'https://twitter.com/FoguAlt',			'D23B48'],
 			[''],
 			['Special Thanks'],
 			['Hotline 024 team',					'nikku',				'Thanks to Saruky for letting us use Nikku, press ENTER for the mod page!','https://gamebanana.com/mods/373298',			'FF3021'],

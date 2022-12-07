@@ -49,10 +49,10 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		super();
 
 		if(title == null) title = 'Options';
-		if(rpcTitle == null) rpcTitle = 'Options Menu';
+		if(rpcTitle == null) rpcTitle = 'Changing some settings';
 		
 		#if desktop
-		DiscordClient.changePresence(rpcTitle, null);
+		DiscordClient.changePresence("Changing some settings", null);
 		#end
 		
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuOptions'));

@@ -120,12 +120,12 @@
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/oldtimeyAlfie",
+	"image": "characters/oldtimeyalfie",
 	"position": [
 		0,
 		0
 	],
-	"healthicon": "oldtimeyAlfie",
+	"healthicon": "oldtimeyalfie",
 	"flip_x": false,
 	"healthbar_colors": [
 		255,

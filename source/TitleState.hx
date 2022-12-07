@@ -220,6 +220,7 @@ class TitleState extends MusicBeatState
 	var danceLeft:Bool = false;
 	var titleText:FlxSprite;
 	var swagShader:ColorSwap = null;
+	var megamix:FlxSprite;
 
 	function startIntro()
 	{
@@ -279,6 +280,15 @@ class TitleState extends MusicBeatState
 		cdspin.scale.set(0.9, 0.9);
 		cdspin.antialiasing = ClientPrefs.globalAntialiasing;
 		add(cdspin);
+
+		megamix = new FlxSprite(355, 500);
+		//megamix.loadGraphic(Paths.image('megamix', 'preload'));
+		megamix.frames = Paths.getSparrowAtlas('megamix');
+		megamix.animation.addByPrefix('bump', 'megamix', 24, false);
+		megamix.animation.play('bump');
+		megamix.scale.set(0.7, 0.7);
+		megamix.antialiasing = ClientPrefs.globalAntialiasing;
+		add(megamix);
 
 		logoBl = new FlxSprite(565, 60);
 
@@ -358,7 +368,7 @@ class TitleState extends MusicBeatState
 		titleText.animation.play('idle');
 		titleText.updateHitbox();
 		titleText.screenCenter(X);
-		add(titleText);
+		//add(titleText);
 
 		//var logo:FlxSprite = new FlxSprite().loadGraphic(Paths.image('logo'));
 		//logo.screenCenter();
@@ -573,6 +583,8 @@ class TitleState extends MusicBeatState
 
 		if(logoBl != null) 
 			logoBl.animation.play('bump', true);
+			megamix.animation.play('bump', true);
+
 
 		/*if(gfDance != null) {
 			danceLeft = !danceLeft;
