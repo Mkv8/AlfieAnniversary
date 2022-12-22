@@ -42,8 +42,11 @@ class GameOverSubstate extends MusicBeatSubstate
 	{
 		instance = this;
 		PlayState.instance.callOnLuas('onGameOverStart', []);
-
+		#if desktop
+		DiscordClient.changePresence("just died lmao what a dweeb !", null);
+		#end
 		super.create();
+		
 	}
 
 	public function new(x:Float, y:Float, camX:Float, camY:Float)
@@ -116,9 +119,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	var isFollowingAlready:Bool = false;
 	override function update(elapsed:Float)
 	{
-		#if desktop
-		DiscordClient.changePresence("just died lmao what a dweeb !", null);
-		#end
+
 		super.update(elapsed);
 
 		PlayState.instance.callOnLuas('onUpdate', [elapsed]);

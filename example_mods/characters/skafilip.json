@@ -1,0 +1,122 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				40,
+				-20
+			],
+			"loop": false,
+			"fps": 20,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "fLeft0"
+		},
+		{
+			"offsets": [
+				37,
+				-20
+			],
+			"loop": false,
+			"fps": 20,
+			"anim": "singLEFTmiss",
+			"indices": [],
+			"name": "fLeftmiss"
+		},
+		{
+			"offsets": [
+				51,
+				-79
+			],
+			"loop": false,
+			"fps": 20,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "fDown0"
+		},
+		{
+			"offsets": [
+				51,
+				-79
+			],
+			"loop": false,
+			"fps": 20,
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "fDownmiss"
+		},
+		{
+			"offsets": [
+				-130,
+				170
+			],
+			"loop": false,
+			"fps": 20,
+			"anim": "singUP",
+			"indices": [],
+			"name": "fUp0"
+		},
+		{
+			"offsets": [
+				-131,
+				169
+			],
+			"loop": false,
+			"fps": 20,
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "fUpmiss"
+		},
+		{
+			"offsets": [
+				-70,
+				70
+			],
+			"loop": false,
+			"fps": 20,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "fRight0"
+		},
+		{
+			"offsets": [
+				-70,
+				55
+			],
+			"loop": false,
+			"fps": 20,
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "fRightmiss"
+		},
+		{
+			"offsets": [
+				-1,
+				5
+			],
+			"loop": false,
+			"fps": 20,
+			"anim": "idle",
+			"indices": [],
+			"name": "IDLE"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/skafilip",
+	"position": [
+		-70,
+		140
+	],
+	"healthicon": "alffil",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		172,
+		28
+	],
+	"camera_position": [
+		70,
+		0
+	],
+	"sing_duration": 5,
+	"scale": 1
+}

@@ -60,6 +60,8 @@ class StoryMenuState extends MusicBeatState
 	var candle:FlxSprite;
 	var anime:FlxSprite;
 	var goat:FlxSprite;
+	var ourple:FlxSprite;
+	var ska:FlxSprite;
 
 	override function create()
 	{
@@ -95,6 +97,8 @@ class StoryMenuState extends MusicBeatState
 		candle = new FlxSprite().loadGraphic(Paths.image('candleebg'));
 		anime = new FlxSprite().loadGraphic(Paths.image('90sbga'));
 		goat = new FlxSprite().loadGraphic(Paths.image('goatbg'));
+		ourple = new FlxSprite().loadGraphic(Paths.image('ourplembg'));
+		ska = new FlxSprite().loadGraphic(Paths.image('skabg'));
 
 		add(oldtimes);
 		add(specters);
@@ -104,6 +108,8 @@ class StoryMenuState extends MusicBeatState
 		add(candle);
 		add(anime);
 		add(goat);
+		add(ourple);
+		add(ska);
 		erect.alpha = 0.0001;
 		oldtimes.alpha = 0.0001;
 		specters.alpha = 0.0001;
@@ -112,6 +118,7 @@ class StoryMenuState extends MusicBeatState
 		candle.alpha = 0.0001;
 		anime.alpha = 0.0001;
 		goat.alpha = 0.0001;
+		ska.alpha = 0.0001;
 
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
 		var bgYellow:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 386, 0xFFF9CF51);
@@ -233,124 +240,7 @@ class StoryMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-			/*if(curWeek == 0) //swing remix
-			{
-				oldtimes.alpha = 1;
-				specters.alpha = 0.0001;
-				erect.alpha = 0.0001;
-				afterdark.alpha = 0.0001;
-				mansionmatch.alpha = 0.0001;
-				candle.alpha = 0.0001;
-				anime.alpha = 0.0001;
-				goat.alpha = 0.0001;
-			}
-			if(curWeek == 1) //spectral remix
-			{
-				oldtimes.alpha = 0.0001;
-				specters.alpha = 1;
-				erect.alpha = 0.0001;
-				afterdark.alpha = 0.0001;
-				mansionmatch.alpha = 0.0001;
-				candle.alpha = 0.0001;
-				anime.alpha = 0.0001;
-				goat.alpha = 0.0001;
-			}	
-			if(curWeek == 2) //siiva
-			{
-				oldtimes.alpha = 0.0001;
-				specters.alpha = 0.0001;
-				erect.alpha = 0.0001;
-				afterdark.alpha = 0.0001;
-				mansionmatch.alpha = 0.0001;
-				candle.alpha = 0.0001;
-				anime.alpha = 0.0001;
-				goat.alpha = 0.0001;
-			}
-			if(curWeek == 3) //erect
-			{
-				oldtimes.alpha = 0.0001;
-				specters.alpha = 0.0001;
-				erect.alpha = 1;
-				afterdark.alpha = 0.0001;
-				mansionmatch.alpha = 0.0001;
-				candle.alpha = 0.0001;
-				anime.alpha = 0.0001;
-				goat.alpha = 0.0001;
-			}
-
-			if(curWeek == 4)//after dark
-			{
-				oldtimes.alpha = 0.0001;
-				specters.alpha = 0.0001;
-				erect.alpha = 0.0001;
-				afterdark.alpha = 1;
-				mansionmatch.alpha = 0.0001;
-				candle.alpha = 0.0001;
-				anime.alpha = 0.0001;
-				goat.alpha = 0.0001;
-			}
-			if(curWeek == 5)//nikku
-			{
-				oldtimes.alpha = 0.0001;
-				specters.alpha = 0.0001;
-				erect.alpha = 0.0001;
-				afterdark.alpha = 0.0001;
-				mansionmatch.alpha = 1;
-				candle.alpha = 0.0001;
-				anime.alpha = 0.0001;
-				goat.alpha = 0.0001;
-			}	
-			if(curWeek == 6)//candle
-			{
-				oldtimes.alpha = 0.0001;
-				specters.alpha = 0.0001;
-				erect.alpha = 0.0001;
-				afterdark.alpha = 0.0001;
-				mansionmatch.alpha = 0.0001;
-				candle.alpha = 1;
-				anime.alpha = 0.0001;
-				goat.alpha = 0.0001;
-			}
-			if(curWeek == 7)//remake
-			{
-				oldtimes.alpha = 0.0001;
-				specters.alpha = 0.0001;
-				erect.alpha = 0.0001;
-				afterdark.alpha = 0.0001;
-				mansionmatch.alpha = 0.0001;
-				candle.alpha = 0.0001;
-				anime.alpha = 0.0001;
-				goat.alpha = 1;
-			}
-
-			if(curWeek == 8)//minus
-			{
-				oldtimes.alpha = 0.0001;
-				specters.alpha = 0.0001;
-				erect.alpha = 0.0001;
-				afterdark.alpha = 0.0001;
-				mansionmatch.alpha = 0.0001;
-				candle.alpha = 0.0001;
-				anime.alpha = 0.0001;
-				goat.alpha = 0.0001;
-			}
-
-			if(curWeek == 9)//90s
-			{
-				oldtimes.alpha = 0.0001;
-				specters.alpha = 0.0001;
-				erect.alpha = 0.0001;
-				afterdark.alpha = 0.0001;
-				mansionmatch.alpha = 0.0001;
-				candle.alpha = 0.0001;
-				anime.alpha = 1;
-				goat.alpha = 0.0001;
-			}*/
-
-
-
-
-		// scoreText.setFormat('VCR OSD Mono', 32);
+			
 		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, CoolUtil.boundTo(elapsed * 30, 0, 1)));
 		if(Math.abs(intendedScore - lerpScore) < 10) lerpScore = intendedScore;
 
@@ -564,6 +454,8 @@ class StoryMenuState extends MusicBeatState
 		candle.alpha = 0;
 		anime.alpha = 0;
 		goat.alpha = 0;
+		ourple.alpha = 0;
+		ska.alpha = 0;
 
 		switch(curWeek) {
 			case 0: oldtimes.alpha = 1;
@@ -574,8 +466,9 @@ class StoryMenuState extends MusicBeatState
 			case 5: mansionmatch.alpha = 1;
 			case 6: candle.alpha = 1;
 			case 7: goat.alpha = 1;
-			case 8: {};
-			case 9: anime.alpha = 1;
+			case 8: ourple.alpha = 1;
+			case 9: ska.alpha = 1;
+			case 10: anime.alpha = 1;
 		}
 
 	

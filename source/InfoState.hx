@@ -76,8 +76,7 @@ class InfoState extends MusicBeatState
 	override function create()
 	{
 		#if desktop
-		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("Reading up on character bios!", null);
 		#end
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 
@@ -256,9 +255,7 @@ class InfoState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		#if desktop
-		DiscordClient.changePresence("Reading up on character bios!", null);
-		#end
+
 		super.update(elapsed);
 		FlxG.mouse.visible = true;
 

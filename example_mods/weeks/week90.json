@@ -1,0 +1,31 @@
+{
+	"songs": [
+		[
+			"All Saints Scramble",
+			"alffil",
+			[
+				255,
+				173,
+				28
+			]
+		]
+	],
+	"hideFreeplay": false,
+	"weekBackground": "ska",
+	"difficulties": "",
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"storyName": "All Saints Scramble Remix",
+	"weekName": "Off-season halloween concert",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}

@@ -916,7 +916,7 @@ class PlayState extends MusicBeatState
 			add(goatold);
 
 			case 'ourple': //interrupted
-			ourplebg = new BGSprite('ourplebg', -830, -720, 1, 1);
+			ourplebg = new BGSprite('ourplebgmap', -830, -720, 1, 1);
 			ourplelight = new BGSprite('ourplelight', -830, -720, 1, 1);
 			ourplebg.antialiasing = false;
 			ourplelight.antialiasing = false;

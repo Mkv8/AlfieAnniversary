@@ -13,6 +13,7 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.FlxCamera;
+import flixel.addons.display.FlxBackdrop;
 
 class PauseSubState extends MusicBeatSubstate
 {
@@ -26,6 +27,12 @@ class PauseSubState extends MusicBeatSubstate
 	var pauseMusic:FlxSound;
 	var practiceText:FlxText;
 	//var botplayText:FlxText;
+
+
+	var dots:FlxSprite;
+	var bells:FlxBackdrop;
+	var overlay:FlxSprite;
+	var bars:FlxSprite;
 
 	public function new(x:Float, y:Float)
 	{
@@ -52,9 +59,32 @@ class PauseSubState extends MusicBeatSubstate
 		FlxG.sound.list.add(pauseMusic);
 
 		var bg = new FlxSpriteExtra().makeSolid(FlxG.width, FlxG.height, FlxColor.BLACK);
-		bg.alpha = 0;
+		bg.alpha = 0.0001;
 		bg.scrollFactor.set();
 		add(bg);
+
+		dots = new FlxSprite(0, 380).loadGraphic(Paths.image('pausedots'));
+
+		bells = new FlxBackdrop(Paths.image('pausebells'), 0.2, 0, true, true);
+		bells.velocity.set(120, 50);
+		bells.updateHitbox();
+		bells.screenCenter(XY);
+		bells.antialiasing = ClientPrefs.globalAntialiasing;
+
+		overlay = new FlxSprite().loadGraphic(Paths.image('pauseoverlay'));
+		bars = new FlxSprite(-600, 0).loadGraphic(Paths.image('pausebars'));
+		dots.alpha = 0.0001;
+		bells.alpha = 0.0001;
+		overlay.alpha = 0.0001;
+		bars.alpha = 0.0001;
+		overlay.blend = OVERLAY;
+		add(dots);
+		add(bells);
+		add(overlay);
+		add(bars);
+
+
+
 
 		var levelInfo:FlxText = new FlxText(20, 15, 0, "", 32);
 		levelInfo.text += PlayState.SONG.song;
@@ -102,7 +132,13 @@ class PauseSubState extends MusicBeatSubstate
 		levelDifficulty.x = FlxG.width - (levelDifficulty.width + 20);
 		blueballedTxt.x = FlxG.width - (blueballedTxt.width + 20);
 
+
+		FlxTween.tween(dots, {alpha: 0.6}, 0.6, {ease: FlxEase.quartInOut});
+		FlxTween.tween(bells, {alpha: 0.5}, 0.8, {ease: FlxEase.quartInOut});
+		FlxTween.tween(overlay, {alpha: 0.3}, 1, {ease: FlxEase.quartInOut});
+		FlxTween.tween(bars, {alpha: 0.4}, 1.4, {ease: FlxEase.quartInOut});
 		FlxTween.tween(bg, {alpha: 0.6}, 0.4, {ease: FlxEase.quartInOut});
+		FlxTween.tween(bars,{x: -1}, 1.4, {ease: FlxEase.expoInOut});
 		FlxTween.tween(levelInfo, {alpha: 1, y: 20}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.3});
 		FlxTween.tween(levelDifficulty, {alpha: 1, y: levelDifficulty.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.5});
 		FlxTween.tween(blueballedTxt, {alpha: 1, y: blueballedTxt.y + 5}, 0.4, {ease: FlxEase.quartInOut, startDelay: 0.7});
