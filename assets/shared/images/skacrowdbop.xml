@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="skacrowdbop.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="skacrowdbop0000" x="10" y="10" width="3097" height="512" frameX="-25" frameY="0" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0001" x="10" y="10" width="3097" height="512" frameX="-25" frameY="0" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0002" x="10" y="542" width="3127" height="498" frameX="-10" frameY="-14" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0003" x="10" y="542" width="3127" height="498" frameX="-10" frameY="-14" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0004" x="10" y="1060" width="3137" height="493" frameX="-5" frameY="-19" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0005" x="10" y="1060" width="3137" height="493" frameX="-5" frameY="-19" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0006" x="10" y="1573" width="3147" height="487" frameX="0" frameY="-24" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0007" x="10" y="1573" width="3147" height="487" frameX="0" frameY="-24" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0008" x="10" y="1573" width="3147" height="487" frameX="0" frameY="-24" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0009" x="10" y="1573" width="3147" height="487" frameX="0" frameY="-24" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0010" x="10" y="1573" width="3147" height="487" frameX="0" frameY="-24" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0011" x="10" y="1573" width="3147" height="487" frameX="0" frameY="-24" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0012" x="10" y="1573" width="3147" height="487" frameX="0" frameY="-24" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0013" x="10" y="1573" width="3147" height="487" frameX="0" frameY="-24" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0014" x="10" y="1573" width="3147" height="487" frameX="0" frameY="-24" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0015" x="10" y="1573" width="3147" height="487" frameX="0" frameY="-24" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0016" x="10" y="1573" width="3147" height="487" frameX="0" frameY="-24" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0017" x="10" y="1573" width="3147" height="487" frameX="0" frameY="-24" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0018" x="10" y="1573" width="3147" height="487" frameX="0" frameY="-24" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0019" x="10" y="1573" width="3147" height="487" frameX="0" frameY="-24" frameWidth="3147" frameHeight="512"/>
+	<SubTexture name="skacrowdbop0020" x="10" y="1573" width="3147" height="487" frameX="0" frameY="-24" frameWidth="3147" frameHeight="512"/>
+</TextureAtlas>

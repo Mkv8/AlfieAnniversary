@@ -312,7 +312,10 @@ class PlayState extends MusicBeatState
 	var goatstage3:BGSprite;
 	var goatold:BGSprite;
 
-
+	var skabg:BGSprite;
+	var skacrowd:BGSprite;
+	var skamultiply:BGSprite;
+	var skaOverlay:BGSprite;
 
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
@@ -618,10 +621,24 @@ class PlayState extends MusicBeatState
 			ourpletheory.antialiasing = false;
 			ourplelogo.antialiasing = false;
 
-			
-
 		}
 
+		if(formattedSong == 'all-saints-scramble') {
+			skaOverlay = new BGSprite('skaadd10', -600, -300, 1, 1);
+			skaOverlay.updateHitbox();
+			skaOverlay.alpha = 0.12;
+			skaOverlay.blend = ADD;
+
+
+			skamultiply = new BGSprite('skamultiply100', -600, -300, 1, 1);
+			skamultiply.updateHitbox();
+			skamultiply.alpha = 1;
+			skamultiply.blend = MULTIPLY;
+
+			//skaOverlay.scale.set(1.05, 1.05);
+			//skamultiply.scale.set(1.05, 1.05);
+
+		}
 		#if desktop
 		storyDifficultyText = CoolUtil.difficulties[storyDifficulty];
 
@@ -957,6 +974,15 @@ class PlayState extends MusicBeatState
 			ourplebg.scale.set(1.10, 1.10);
 			ourplelight.scale.set(1.10, 1.10);
 
+			case 'skalloween': //all saints
+			skabg = new BGSprite('skabbg', -600, -300, 1, 1);
+			skacrowd = new BGSprite('skacrowdbop', -590, 850, 1, 1, ['skacrowdbop0'], true);
+
+			//skabg.scale.set(1.05, 1.05);
+			//skacrowd.scale.set(1.05, 1.05);
+			add(skabg);
+			//add(skacrowd);
+
 
 
 
@@ -988,6 +1014,12 @@ class PlayState extends MusicBeatState
 		if(curStage == 'ourple') {
 			add(ourpletheory);
 			add(ourplelogo);
+		}
+		
+		if(curStage == 'skalloween') {
+			add(skamultiply);
+			add(skaOverlay);
+			add(skacrowd);
 		}
 
 		if(curStage == 'philly') {
@@ -5009,6 +5041,11 @@ class PlayState extends MusicBeatState
 			case '90s': //anime 
 				if(!ClientPrefs.lowQuality) {
 					animemap.dance();
+				}
+
+			case 'skalloween': //all saints wooooo 
+				if(!ClientPrefs.lowQuality) {
+					skacrowd.dance();
 				}
 
 			case 'mall':
