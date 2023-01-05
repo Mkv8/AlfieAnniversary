@@ -290,6 +290,9 @@ class PlayState extends MusicBeatState
 
 	var ourplebg:BGSprite;
 	var ourplelight:BGSprite;
+	var ourpletheory:BGSprite;
+	var ourplelogo:BGSprite;
+
 	
 	var goatmultiply:BGSprite;
 	var goatadd:BGSprite;
@@ -588,6 +591,23 @@ class PlayState extends MusicBeatState
 			goatmultiply.alpha = 0;
 			goatmultiply.blend = MULTIPLY;
 			//add(light2);
+
+		}
+
+		if(formattedSong == 'interrupted') {
+			ourpletheory = new BGSprite('ourpletheory', -830, -720, 1, 1);
+			ourpletheory.alpha = 0;
+			//add(light1);
+
+			ourplelogo = new BGSprite('ourplelogo', -830, -720, 1, 1);
+			ourplelogo.alpha = 0;
+
+			ourpletheory.scale.set(1.10, 1.10);
+			ourplelogo.scale.set(1.10, 1.10);
+			ourpletheory.antialiasing = false;
+			ourplelogo.antialiasing = false;
+
+			
 
 		}
 
@@ -920,6 +940,7 @@ class PlayState extends MusicBeatState
 			ourplelight = new BGSprite('ourplelight', -830, -720, 1, 1);
 			ourplebg.antialiasing = false;
 			ourplelight.antialiasing = false;
+			ourplebg.alpha = 0.00001;
 			add(ourplebg);
 			add(ourplelight);
 			ourplebg.scale.set(1.10, 1.10);
@@ -951,6 +972,11 @@ class PlayState extends MusicBeatState
 			add(goatmultiply);
 			add(goatadd);
 			dadGroup.alpha = 0;
+		}
+
+		if(curStage == 'ourple') {
+			add(ourpletheory);
+			add(ourplelogo);
 		}
 
 		if(curStage == 'philly') {

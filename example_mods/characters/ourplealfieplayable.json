@@ -1,6 +1,94 @@
 {
 	"animations": [
 		{
+			"loop": false,
+			"offsets": [
+				-29,
+				180
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "up0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				135,
+				38
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "down0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				117,
+				94
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "left0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-122,
+				112
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "right0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				117,
+				94
+			],
+			"anim": "singLEFTmiss",
+			"fps": 24,
+			"name": "leftmiss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				135,
+				38
+			],
+			"anim": "singDOWNmiss",
+			"fps": 24,
+			"name": "downmiss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-29,
+				180
+			],
+			"anim": "singUPmiss",
+			"fps": 24,
+			"name": "upmiss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-122,
+				112
+			],
+			"anim": "singRIGHTmiss",
+			"fps": 24,
+			"name": "rightmiss",
+			"indices": []
+		},
+		{
 			"offsets": [
 				15,
 				110
@@ -9,40 +97,40 @@
 			"fps": 24,
 			"anim": "idle",
 			"indices": [],
-			"name": "idle"
+			"name": "idle0"
 		},
 		{
 			"offsets": [
 				-29,
-				180
+				179
 			],
 			"loop": false,
 			"fps": 24,
-			"anim": "singUP",
+			"anim": "singUP-alt",
 			"indices": [],
-			"name": "up0"
+			"name": "upangy"
 		},
 		{
 			"offsets": [
-				135,
-				38
+				134,
+				60
 			],
 			"loop": false,
 			"fps": 24,
-			"anim": "singDOWN",
+			"anim": "singDOWN-alt",
 			"indices": [],
-			"name": "down0"
+			"name": "downangy"
 		},
 		{
 			"offsets": [
-				117,
-				94
+				118,
+				102
 			],
 			"loop": false,
 			"fps": 24,
-			"anim": "singLEFT",
+			"anim": "singLEFT-alt",
 			"indices": [],
-			"name": "left0"
+			"name": "leftangy"
 		},
 		{
 			"offsets": [
@@ -51,56 +139,23 @@
 			],
 			"loop": false,
 			"fps": 24,
-			"anim": "singRIGHT",
+			"anim": "singRIGHT-alt",
 			"indices": [],
-			"name": "right0"
+			"name": "rightangy"
 		},
 		{
-			"offsets": [
-				117,
-				94
-			],
 			"loop": false,
-			"fps": 24,
-			"anim": "singLEFTmiss",
-			"indices": [],
-			"name": "leftmiss"
-		},
-		{
 			"offsets": [
-				135,
-				38
+				15,
+				110
 			],
-			"loop": false,
+			"anim": "idle-alt",
 			"fps": 24,
-			"anim": "singDOWNmiss",
-			"indices": [],
-			"name": "downmiss"
-		},
-		{
-			"offsets": [
-				-29,
-				180
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singUPmiss",
-			"indices": [],
-			"name": "upmiss"
-		},
-		{
-			"offsets": [
-				-122,
-				112
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singRIGHTmiss",
-			"indices": [],
-			"name": "rightmiss"
+			"name": "idleangy",
+			"indices": []
 		}
 	],
-	"no_antialiasing": false,
+	"no_antialiasing": true,
 	"image": "characters/alfieourple",
 	"position": [
 		-10,

@@ -98,6 +98,17 @@
 			"fps": 30,
 			"name": "altUp",
 			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				4,
+				517
+			],
+			"anim": "eat",
+			"fps": 24,
+			"name": "cheeseburguer",
+			"indices": []
 		}
 	],
 	"no_antialiasing": true,
