@@ -312,10 +312,25 @@ class PlayState extends MusicBeatState
 	var goatstage3:BGSprite;
 	var goatold:BGSprite;
 
+	/*var goatsenpai:BGSprite;
+	var goattankman:BGSprite;
+	var goatparents:BGSprite;
+	var goatfilip:BGSprite;
+	var goatace:BGSprite;
+	var goatzardy:BGSprite;
+	var goatsarvente:BGSprite;
+	var goatwhitty:BGSprite;*/
+
+	var monitors:BGSprite;
+
 	var skabg:BGSprite;
 	var skacrowd:BGSprite;
 	var skamultiply:BGSprite;
 	var skaOverlay:BGSprite;
+
+	var bkiss:BGSprite;
+	var bkissmultiply:BGSprite;
+	var bkissoverlay:BGSprite;
 
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
@@ -635,10 +650,24 @@ class PlayState extends MusicBeatState
 			skamultiply.alpha = 1;
 			skamultiply.blend = MULTIPLY;
 
-			//skaOverlay.scale.set(1.05, 1.05);
-			//skamultiply.scale.set(1.05, 1.05);
 
 		}
+
+		if(formattedSong == 'heart-attack') {
+			bkissoverlay = new BGSprite('bkissOverlay47', -600, -300, 1, 1);
+			bkissoverlay.updateHitbox();
+			bkissoverlay.alpha = 0.47;
+			bkissoverlay.blend = OVERLAY;
+
+
+			bkissmultiply = new BGSprite('bkissMultiply100', -600, -300, 1, 1);
+			bkissmultiply.updateHitbox();
+			bkissmultiply.alpha = 1;
+			bkissmultiply.blend = MULTIPLY;
+
+
+		}
+		
 		#if desktop
 		storyDifficultyText = CoolUtil.difficulties[storyDifficulty];
 
@@ -956,12 +985,22 @@ class PlayState extends MusicBeatState
 			case 'newstage': //goat remake
 			goatstage1 = new BGSprite('stage1', -1530, -720, 1, 1);
 			goatstageblank = new BGSprite('stage2blank', -1530, -720, 1, 1);
+
+			monitors = new BGSprite('monitors', -980, -515, 1, 1, ["ace", "filip", "sarvente", "tankman", "senapi", "parents", "zardy", "whitty"], false);
+			monitors.animation.play('tankman', true);
+			monitors.visible = false;
+
 			goatstage3 = new BGSprite('stage3', -1530, -720, 1, 1);
 			goatold = new BGSprite('stageold', -1530, -720, 1, 1);
+
 			add(goatstage1);
 			add(goatstageblank);
+
+			add(monitors);
+
 			add(goatstage3);
 			add(goatold);
+
 
 			case 'ourple': //interrupted
 			ourplebg = new BGSprite('ourplebgmap', -830, -720, 1, 1);
@@ -983,7 +1022,10 @@ class PlayState extends MusicBeatState
 			add(skabg);
 			//add(skacrowd);
 
+			case 'kpark': //heart attack
+			bkiss = new BGSprite('bkiss', -600, -300, 1, 1);
 
+			add(bkiss);
 
 
 		}
@@ -1014,12 +1056,20 @@ class PlayState extends MusicBeatState
 		if(curStage == 'ourple') {
 			add(ourpletheory);
 			add(ourplelogo);
+			dadGroup.alpha = 0.0001;
+			boyfriendGroup.alpha = 0.0001;
+
 		}
 		
 		if(curStage == 'skalloween') {
 			add(skamultiply);
 			add(skaOverlay);
 			add(skacrowd);
+		}
+
+		if(curStage == 'kpark') {
+			add(bkissmultiply);
+			add(bkissoverlay);
 		}
 
 		if(curStage == 'philly') {
@@ -5013,7 +5063,19 @@ class PlayState extends MusicBeatState
 						gf.color = 0xFFFFFFFF;
 					}
 
-					case 168:
+					case 72:
+					{
+						monitors.visible = true;
+					}
+					case 104:
+					{
+						monitors.animation.play('senapi');
+					}
+					case 120:
+					{
+						monitors.animation.play('parents');
+					}
+					case 136:
 					{
 						FlxG.camera.flash(FlxColor.WHITE,1,false);
 						goatold.alpha = 1;
@@ -5028,6 +5090,76 @@ class PlayState extends MusicBeatState
 						add(vignette);
 						vignette.alpha = 1;
 					}
+					case 168:
+					{
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						//remove(goatold);
+						goatold.alpha = 0;
+						goatmultiply.alpha = 1;
+						goatadd.alpha = 1;
+						healthBar.color = 0xFFFFFFFF;
+						boyfriend.color = 0xFFFFFFFF;
+						iconP1.color = 0xFFFFFFFF;
+						gf.color = 0xFFFFFFFF;				
+						dad.color = 0xFFFFFFFF;
+						iconP2.color = 0xFFFFFFFF;
+						remove(vignette);
+						//vignette.alpha = 1;
+						monitors.animation.play('whitty');
+					}
+					case 200:
+					{
+						monitors.animation.play('zardy');
+					}
+					case 232:
+					{
+						monitors.animation.play('filip');
+					}
+					case 264:
+					{
+						monitors.animation.play('sarvente');
+					}
+					case 296:
+					{
+						monitors.animation.play('ace');
+					}
+
+					case 328:
+					{
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						goatold.alpha = 1;
+						goatmultiply.alpha = 0;
+						goatadd.alpha = 0;
+						healthBar.color = 0xFF000000;
+						boyfriend.color = 0xFF000000;
+						dad.color = 0xFF000000;
+						iconP2.color = 0xFF000000;
+						iconP1.color = 0xFF000000;
+						gf.color = 0xFF000000;
+						add(vignette);
+						vignette.alpha = 1;
+					}
+					case 360:
+					{
+						add(blackOverlay);
+						blackOverlay.alpha = 1;
+					}
+				}
+			}
+
+		if (curSong == 'interrupted' && curStage == 'ourple' && !ClientPrefs.lowQuality)
+			{
+
+				switch (curBeat)
+				{
+
+					case 8:
+					{
+						FlxTween.tween(dadGroup, {alpha: 1}, 3);
+						FlxTween.tween(boyfriendGroup, {alpha: 1}, 3);
+
+					}
+
 				}
 			}
 

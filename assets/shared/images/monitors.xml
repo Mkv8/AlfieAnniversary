@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Free texture packer v0.6.7 http://free-tex-packer.com
+-->
+<TextureAtlas imagePath="monitors.png" width="2101" height="3056">
+  <SubTexture name="ace" x="10" y="10"  width="2081" height="362" frameX="-13" frameY="-8" frameWidth="2100" frameHeight="370"/>
+  <SubTexture name="filip" x="10" y="392"  width="2081" height="362" frameX="-13" frameY="-8" frameWidth="2100" frameHeight="370"/>
+  <SubTexture name="parents" x="10" y="774"  width="2081" height="362" frameX="-13" frameY="-8" frameWidth="2100" frameHeight="370"/>
+  <SubTexture name="sarvente" x="10" y="1156"  width="2081" height="362" frameX="-13" frameY="-8" frameWidth="2100" frameHeight="370"/>
+  <SubTexture name="senapi" x="10" y="1538"  width="2081" height="362" frameX="-13" frameY="-8" frameWidth="2100" frameHeight="370"/>
+  <SubTexture name="tankman" x="10" y="1920"  width="2081" height="362" frameX="-13" frameY="-8" frameWidth="2100" frameHeight="370"/>
+  <SubTexture name="whitty" x="10" y="2302"  width="2081" height="362" frameX="-13" frameY="-8" frameWidth="2100" frameHeight="370"/>
+  <SubTexture name="zardy" x="10" y="2684"  width="2081" height="362" frameX="-13" frameY="-8" frameWidth="2100" frameHeight="370"/>
+</TextureAtlas>

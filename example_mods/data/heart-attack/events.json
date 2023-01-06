@@ -1,0 +1,29 @@
+{
+	"song": {
+		"speed": 3.2,
+		"stage": "stage",
+		"player1": "bf",
+		"player2": "kisston",
+		"player3": null,
+		"events": [
+			[
+				76800,
+				[
+					[
+						"Change Character",
+						"dad",
+						"munchawake"
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": null,
+		"validScore": false,
+		"gfVersion": "gf",
+		"bpm": 125,
+		"arrowSkin": null,
+		"needsVoices": true,
+		"song": "heart-attack"
+	}
+}
