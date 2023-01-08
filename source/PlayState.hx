@@ -986,7 +986,7 @@ class PlayState extends MusicBeatState
 			goatstage1 = new BGSprite('stage1', -1530, -720, 1, 1);
 			goatstageblank = new BGSprite('stage2blank', -1530, -720, 1, 1);
 
-			monitors = new BGSprite('monitors', -980, -515, 1, 1, ["ace", "filip", "sarvente", "tankman", "senapi", "parents", "zardy", "whitty"], false);
+			monitors = new BGSprite('monitors', -985, -505, 1, 1, ["ace", "filip", "sarvente", "tankman", "senapi", "parents", "zardy", "whitty"], false);
 			monitors.animation.play('tankman', true);
 			monitors.visible = false;
 
@@ -1007,7 +1007,7 @@ class PlayState extends MusicBeatState
 			ourplelight = new BGSprite('ourplelight', -830, -720, 1, 1);
 			ourplebg.antialiasing = false;
 			ourplelight.antialiasing = false;
-			ourplebg.alpha = 0.00001;
+			//ourplebg.alpha = 0.00001;
 			add(ourplebg);
 			add(ourplelight);
 			ourplebg.scale.set(1.10, 1.10);
@@ -1017,10 +1017,8 @@ class PlayState extends MusicBeatState
 			skabg = new BGSprite('skabbg', -600, -300, 1, 1);
 			skacrowd = new BGSprite('skacrowdbop', -590, 850, 1, 1, ['skacrowdbop0'], true);
 
-			//skabg.scale.set(1.05, 1.05);
-			//skacrowd.scale.set(1.05, 1.05);
+
 			add(skabg);
-			//add(skacrowd);
 
 			case 'kpark': //heart attack
 			bkiss = new BGSprite('bkiss', -600, -300, 1, 1);
@@ -1054,9 +1052,14 @@ class PlayState extends MusicBeatState
 		}
 
 		if(curStage == 'ourple') {
+			//add(blackOverlay);
+			//blackOverlay.alpha = 1;
 			add(ourpletheory);
 			add(ourplelogo);
 			dadGroup.alpha = 0.0001;
+
+			//I tried making mark invisible through this place here but it crashed soooooo lol
+			
 			boyfriendGroup.alpha = 0.0001;
 
 		}
@@ -1512,7 +1515,11 @@ class PlayState extends MusicBeatState
 		data.set("mansion-match", ["NowPhotline", "hotlinetitle"]);
 		data.set("candlelit-clash", ["NowP", "CandleTitle"]);
 		data.set("goat-remake", ["NowP", "GoatTitle"]);
+		data.set("interrupted", ["NowPdark", "ourpletitle"]);
+		data.set("all-saints-scramble-remix", ["NowP", "skatitle"]);
 		data.set("spooks", ["NowP90s", "90stitle"]);
+		data.set("heart-attack", ["NowP", "ktitle"]);
+		data.set("slimy-business", ["NowP", "kaititle"]);
 
 
 		var shouldShowCassette:Bool = false;
@@ -5184,12 +5191,37 @@ class PlayState extends MusicBeatState
 
 				switch (curBeat)
 				{
+					case 2:
+					{
+						//dadGroup.members[2].visible = false;
+						//i don't want mark to be visible at the beginning of the song
+
+						//Phone guy and ourple guy aren't gonna be visible either, but that's because they'll be positioned off screen, and then later
+						//tweened to the right place as part of the joke of their entrance
+						//mark has an animation for arriving into the scene so he has to stay invisible at his normal spot until he's needed
+					}
+
+					case 3:
+					{
+						//the song starts with a black screen so i have time to make mark disappear in the previous event ^^
+						//FlxTween.tween(blackOverlay, {alpha: 0}, 1.5);
+
+					}
 
 					case 8:
 					{
-						FlxTween.tween(dadGroup, {alpha: 1}, 3);
+						//Crying child and alfie appear slowly
+						FlxTween.tween(dadGroup.members[4], {alpha: 1}, 3);
 						FlxTween.tween(boyfriendGroup, {alpha: 1}, 3);
+						dadGroup.members[2].visible = true;
 
+					}
+					case 174:
+					{
+						//ourple guy would appear here, there's an explosion sound effect and he'll be tweened from his position up top of the screen down onto
+						//crying child
+						ourplebg.alpha = 1;	
+						remove(ourplelight);
 					}
 
 				}
