@@ -1059,7 +1059,6 @@ class PlayState extends MusicBeatState
 			dadGroup.alpha = 0.0001;
 
 			//I tried making mark invisible through this place here but it crashed soooooo lol
-			
 			boyfriendGroup.alpha = 0.0001;
 
 		}
@@ -5193,6 +5192,10 @@ class PlayState extends MusicBeatState
 				{
 					case 2:
 					{
+						FlxTween.tween(dadGroup.members[1], {alpha: 1}, 3);
+						FlxTween.tween(dadGroup.members[2], {alpha: 1}, 3);
+						FlxTween.tween(dadGroup.members[3], {alpha: 1}, 3);
+
 						//dadGroup.members[2].visible = false;
 						//i don't want mark to be visible at the beginning of the song
 

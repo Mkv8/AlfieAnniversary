@@ -1,8 +1,10 @@
-function onCreatePost()trace("hi neo i agree alfie is p cute");
+function onCreatePost() 
+      print("hi neo i agree alfie is p cute");
+      luaDebugMode = true
       addHaxeLibrary("Character")
 	runHaxeCode([[
 	var charList:Array<String> = ["phone","ourplemark", "guy", "crying"];
-	var positions:Array<Array<Float>> = [   [-50, -400], [-180, -350 ] [-300, -300], [-300 , -100]    ];
+	var positions:Array<Array<Float>> = [ [-50, -400], [-180, -350 ], [-50, -10], [-50, 10] ];
 	var index = 0;
 
      // meow meow gay cat
@@ -34,28 +36,27 @@ function onCreatePost()trace("hi neo i agree alfie is p cute");
 end
 
 
-function onUpdate()
-	runHaxeCode([[
-	var dName:String = getVar('dName');
-	var chars:Array<Character> = getVar('CharScriptChars');
-	var charList:Array<String> = getVar('CharScriptList');
-	//Track Character changes and move the opponent to the correct position
-	if(dName!=game.dad.curCharacter){
-		dName = game.dad.curCharacter;
-		if(charList.indexOf(dName)<0)
-			return;
-		var char:Character = chars[charList.indexOf(dName)];
-		for (dad in chars){
-			dad.alpha=1;
-		}
-		if (char.alpha > 0.1){
-			//char.alpha = 0.00001; 
-			//game.dad.setPosition(char.x,char.y);
-		}
-	}
-	setVar('dName',dName); ]])
-end
-
+--function onUpdate()
+--	runHaxeCode([[
+--	var dName:String = getVar('dName');
+--	var chars:Array<Character> = getVar('CharScriptChars');
+--	var charList:Array<String> = getVar('CharScriptList');
+--	//Track Character changes and move the opponent to the correct position
+--	if(dName!=game.dad.curCharacter){
+--		dName = game.dad.curCharacter;
+--		if(charList.indexOf(dName)<0)
+--			return;
+--		var char:Character = chars[charList.indexOf(dName)];
+--		for (dad in chars){
+--			dad.alpha=1;
+--		}
+--		if (char.alpha > 0.1){
+--			//char.alpha = 0.00001; 
+--			//game.dad.setPosition(char.x,char.y);
+--		}
+--	}
+--	setVar('dName',dName); ]])
+--end
 function handleDance()
 	runHaxeCode([[
 	var counted:Bool = getVar('counted');
