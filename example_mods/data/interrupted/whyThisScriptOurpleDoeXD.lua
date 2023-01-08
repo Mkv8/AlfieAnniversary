@@ -5,14 +5,14 @@ end
 function onCreatePost()
 	runHaxeCode([[
 	var charList:Array<String> = ["crying","phone","ourplemark"];
-	var positions:Array<Array<Float>> = [   [-300, -400], [-50, -700], [-260 , -750]    ];
+	var positions:Array<Array<Float>> = [   [-300, -0], [-50, -50], [-260 , -50]    ];
 	var objectOrder:Array<Array<Float>> = [   1,2,3   ];
 	var index = 0;
 	
 	var chars:Array<Character> = [];
 	for (charStr in charList){
 		var char:Character = PlayState.instance.dadMap.get(charStr);
-		if(!PlayState.instance.dadMap.exists(charStr)){
+		if(!PlayState.instance.dadMap.exists(charStr))
 			char = new Character(0,0, charStr);
 		else
 			char.setPosition(0,0);
@@ -24,6 +24,7 @@ function onCreatePost()
 		index++;
 	}
 	
+	trace(chars.length);
 	//Unfortunately later hscript calls do not share the same context some reason
 	PlayState.instance.variables.set('CharScriptList',charList);
 	PlayState.instance.variables.set('CharScriptChars',chars);
@@ -53,9 +54,9 @@ function onUpdate()
 	PlayState.instance.variables.set('dName',dName); ]])
 end
 
-function handleDance(isCountedDown)
+function handleDance()
 	runHaxeCode([[
-	var counted:Bool = ]]..tostring(isCountedDown)..[[;
+	var counted:Bool = PlayState.instance.variables.get('counted');
 	var chars:Array<Character> = PlayState.instance.variables.get('CharScriptChars');
 	
 	for (dad in chars){
@@ -64,7 +65,7 @@ function handleDance(isCountedDown)
 		if(strAnim != null){
 			strAnim=strAnim.name;
 		}
-		if ((PlayState.instance.curBeat-(counted?0:1)) % 2 == 0 && strAnim !=null && !strAnim.indexOf('sing')>=0 && !dad.stunned)
+		if ((PlayState.instance.curBeat-(counted?0:1)) % 2 == 0 && strAnim !=null && !strAnim.indexOf('sing')>=0 && dad!=null && !dad.stunned)
 		{
 			dad.dance();
 		}
@@ -72,9 +73,11 @@ function handleDance(isCountedDown)
 end
 
 function onBeatHit()
-	handleDance(true)
+	runHaxeCode([[PlayState.instance.variables.set('counted', true);]]);
+	handleDance()
 end
 
 function onCountdownTick()
-	handleDance(false)
+	runHaxeCode([[PlayState.instance.variables.set('counted', false);]]);
+	handleDance()
 end

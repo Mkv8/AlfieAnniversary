@@ -1131,6 +1131,7 @@ class PlayState extends MusicBeatState
 			luaArray.push(new FunkinLua(luaFile));
 		#end
 
+		callOnLuas('onCreate', []);
 		if(!modchartSprites.exists('blammedLightsBlack')) { //Creates blammed light black fade in case you didn't make your own
 			blammedLightsBlack = new ModchartSprite(FlxG.width * -0.5, FlxG.height * -0.5);
 			blammedLightsBlack.makeSolid(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
@@ -2502,14 +2503,31 @@ class PlayState extends MusicBeatState
 	var canPause:Bool = true;
 	var limoSpeed:Float = 0;
 
+	
+	public static var maxLuaFPS = 30;
+	var fpsElapsed:Array<Float> = [0,0,0];
+	var numCalls:Array<Float> = [0,0,0];
 	override public function update(elapsed:Float)
 	{
 		/*if (FlxG.keys.justPressed.NINE)
 		{
 			iconP1.swapOldIcon();
 		}*/
-
-		callOnLuas('onUpdate', [elapsed]);
+		//Workaround for luajit memory leak at higher fps
+		if(ClientPrefs.framerate <= maxLuaFPS){
+			
+			callOnLuas('onUpdate', [elapsed]);
+		}
+		else {
+			numCalls[0]+=1;
+			fpsElapsed[0]+=elapsed;
+			if(numCalls[0] >= Std.int(ClientPrefs.framerate/maxLuaFPS)){
+				trace("New Update");
+				callOnLuas('onUpdate', [fpsElapsed[0]]);
+				fpsElapsed[0]=0;
+				numCalls[0]=0;
+			}
+		}
 
 		switch (curStage)
 		{
@@ -2857,8 +2875,22 @@ class PlayState extends MusicBeatState
 		setOnLuas('cameraY', camFollowPos.y);
 		setOnLuas('botPlay', cpuControlled);
 
-		callOnLuas('onUpdatePost', [elapsed]);
 
+		//Workaround for luajit memory leak at higher fps
+		if(ClientPrefs.framerate <= maxLuaFPS){
+			callOnLuas('onUpdatePost', [elapsed]);
+		}
+		else {
+			numCalls[1]+=1;
+			fpsElapsed[1]+=elapsed;
+			if(numCalls[1] >= Std.int(ClientPrefs.framerate/maxLuaFPS)){
+				trace("New UpdatePost");
+				callOnLuas('onUpdatePost', [fpsElapsed[1]]);
+				fpsElapsed[1]=0;
+				numCalls[1]=0;
+			}
+		}
+		
 		updateHealthGraphics();
 	}
 
@@ -5238,6 +5270,7 @@ class PlayState extends MusicBeatState
 		#if LUA_ALLOWED
 		if(exclusions == null) exclusions = [];
 		for (script in luaArray) {
+			//trace(script.scriptName+"."+event);
 			if(exclusions.contains(script.scriptName))
 				continue;
 
