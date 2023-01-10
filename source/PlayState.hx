@@ -304,7 +304,11 @@ class PlayState extends MusicBeatState
 	var ourpletheory:BGSprite;
 	var ourplelogo:BGSprite;
 
-	
+	var ourpleguy:Character;
+	var phoneguy:Character;
+	var markiplier:Character;
+	var cryingchild:Character;
+
 	var goatmultiply:BGSprite;
 	var goatadd:BGSprite;
 	var goatstage1:BGSprite;
@@ -383,6 +387,7 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+		FunkinLua.hscript = null;
 		Paths.clearStoredMemory();
 
 		// for lua
@@ -624,17 +629,20 @@ class PlayState extends MusicBeatState
 		}
 
 		if(formattedSong == 'interrupted') {
-			ourpletheory = new BGSprite('ourpletheory', -830, -720, 1, 1);
+			ourpletheory = new BGSprite('ourpletheory', 0, 0, 1, 1);
 			ourpletheory.alpha = 0;
-			//add(light1);
-
-			ourplelogo = new BGSprite('ourplelogo', -830, -720, 1, 1);
+			ourplelogo = new BGSprite('ourplelogo', 0, 0, 1, 1);
 			ourplelogo.alpha = 0;
 
-			ourpletheory.scale.set(1.10, 1.10);
-			ourplelogo.scale.set(1.10, 1.10);
 			ourpletheory.antialiasing = false;
 			ourplelogo.antialiasing = false;
+			ourplelogo.setGraphicSize(FlxG.width, FlxG.height);
+			ourpletheory.setGraphicSize(FlxG.width, FlxG.height);
+			ourplelogo.screenCenter(XY);
+			ourpletheory.screenCenter(XY);
+			ourpletheory.cameras = [camHUD];
+			ourplelogo.cameras = [camHUD];
+
 
 		}
 
@@ -1007,7 +1015,7 @@ class PlayState extends MusicBeatState
 			ourplelight = new BGSprite('ourplelight', -830, -720, 1, 1);
 			ourplebg.antialiasing = false;
 			ourplelight.antialiasing = false;
-			//ourplebg.alpha = 0.00001;
+			ourplebg.alpha = 0.00001;
 			add(ourplebg);
 			add(ourplelight);
 			ourplebg.scale.set(1.10, 1.10);
@@ -1052,13 +1060,11 @@ class PlayState extends MusicBeatState
 		}
 
 		if(curStage == 'ourple') {
-			//add(blackOverlay);
-			//blackOverlay.alpha = 1;
+			add(blackOverlay);
+			blackOverlay.alpha = 0;
 			add(ourpletheory);
 			add(ourplelogo);
 			dadGroup.alpha = 0.0001;
-
-			//I tried making mark invisible through this place here but it crashed soooooo lol
 			boyfriendGroup.alpha = 0.0001;
 
 		}
@@ -1134,6 +1140,8 @@ class PlayState extends MusicBeatState
 		#end
 
 		callOnLuas('onCreate', []);
+
+
 		if(!modchartSprites.exists('blammedLightsBlack')) { //Creates blammed light black fade in case you didn't make your own
 			blammedLightsBlack = new ModchartSprite(FlxG.width * -0.5, FlxG.height * -0.5);
 			blammedLightsBlack.makeSolid(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
@@ -1667,6 +1675,10 @@ class PlayState extends MusicBeatState
 
 		Conductor.safeZoneOffset = (ClientPrefs.safeFrames / 60) * 1000;
 		callOnLuas('onCreatePost', []);
+		ourpleguy = dadMap.get("guy");
+		phoneguy = dadMap.get("phone");
+		markiplier = dadMap.get("ourplemark");
+		cryingchild = dadMap.get("crying");
 
 		super.create();
 
@@ -5186,47 +5198,91 @@ class PlayState extends MusicBeatState
 			}
 
 		if (curSong == 'interrupted' && curStage == 'ourple' && !ClientPrefs.lowQuality)
-			{
+			{ //dad 1 is phone dad 2 is ourplemark dad 3 is guy and dad 4 is crying
 
 				switch (curBeat)
 				{
 					case 2:
 					{
-						FlxTween.tween(dadGroup.members[1], {alpha: 1}, 3);
-						FlxTween.tween(dadGroup.members[2], {alpha: 1}, 3);
-						FlxTween.tween(dadGroup.members[3], {alpha: 1}, 3);
-
-						//dadGroup.members[2].visible = false;
-						//i don't want mark to be visible at the beginning of the song
-
-						//Phone guy and ourple guy aren't gonna be visible either, but that's because they'll be positioned off screen, and then later
-						//tweened to the right place as part of the joke of their entrance
-						//mark has an animation for arriving into the scene so he has to stay invisible at his normal spot until he's needed
-					}
-
-					case 3:
-					{
-						//the song starts with a black screen so i have time to make mark disappear in the previous event ^^
-						//FlxTween.tween(blackOverlay, {alpha: 0}, 1.5);
+						FlxTween.tween(phoneguy, {alpha: 1}, 3);
+						FlxTween.tween(ourpleguy, {alpha: 1}, 3);
 
 					}
 
 					case 8:
 					{
-						//Crying child and alfie appear slowly
-						FlxTween.tween(dadGroup.members[4], {alpha: 1}, 3);
+						FlxTween.tween(cryingchild, {alpha: 1}, 3);
 						FlxTween.tween(boyfriendGroup, {alpha: 1}, 3);
-						dadGroup.members[2].visible = true;
 
+					}
+					case 172:
+					{
+						FlxTween.tween(ourpleguy, {y: -300}, 8 * Conductor.stepCrochet / 1000, {ease: FlxEase.expoIn});
 					}
 					case 174:
 					{
-						//ourple guy would appear here, there's an explosion sound effect and he'll be tweened from his position up top of the screen down onto
-						//crying child
+						cryingchild.playAnim('dead');
+						cryingchild.specialAnim = true;
+						//FlxTween.tween(ourpleguy, {y: -300}, 1000);
+						new FlxTimer().start(2, function(tmr:FlxTimer)
+							{
+								cryingchild.animation.pause();
+								cryingchild.animation.curAnim.curFrame = 93;
+							});
 						ourplebg.alpha = 1;	
 						remove(ourplelight);
 					}
+					case 354:
+					{
+						FlxTween.tween(phoneguy, {x: 1200}, 12 * Conductor.stepCrochet / 1000, {ease: FlxEase.expoInOut});
 
+					}
+
+					case 362:
+					{
+						FlxTween.tween(phoneguy, {x: 200}, 12 * Conductor.stepCrochet / 1000, {ease: FlxEase.expoInOut});
+
+					}
+					case 365:
+					{
+						//FlxTween.tween(phoneguy, {y: 200}, 1000);
+					}
+					case 513:
+					{
+						FlxTween.tween(ourpletheory, {alpha: 1}, 155 * Conductor.stepCrochet / 1000);
+
+					}
+					case 525:
+					{
+						FlxTween.tween(ourplelogo, {alpha: 1}, 107 * Conductor.stepCrochet / 1000);
+
+					}
+					case 558:
+					{
+						remove(ourpletheory);
+						remove(ourplelogo);
+						ourpleguy.playAnim('eat');
+						ourpleguy.specialAnim = true;
+						new FlxTimer().start(6, function(tmr:FlxTimer)
+							{
+								ourpleguy.animation.pause();
+								ourpleguy.animation.curAnim.curFrame = 158;
+							});
+					}
+					case 575:
+					{
+						markiplier.alpha = 1;
+						markiplier.playAnim('fall');
+						markiplier.specialAnim = true;
+					}
+					case 600:
+					{
+						ourpleguy.animation.resume();
+					}
+					case 768:
+					{
+					blackOverlay.alpha = 1;
+					}
 				}
 			}
 

@@ -1,0 +1,89 @@
+{
+	"song": {
+		"speed": 2.6,
+		"stage": "ourple",
+		"player1": "ourplealfieplayable",
+		"player2": "crying",
+		"player3": null,
+		"events": [
+			[
+				1509.81378963261,
+				[
+					[
+						"Change Character",
+						"dad",
+						"crying"
+					]
+				]
+			],
+			[
+				52843.4826371414,
+				[
+					[
+						"Change Character",
+						"dad",
+						"guy"
+					]
+				]
+			],
+			[
+				110291.897332662,
+				[
+					[
+						"Change Character",
+						"dad",
+						"phone"
+					]
+				]
+			],
+			[
+				145319.577252139,
+				[
+					[
+						"Change Character",
+						"dad",
+						"guy"
+					]
+				]
+			],
+			[
+				174760.946149974,
+				[
+					[
+						"Change Character",
+						"dad",
+						"ourplemark"
+					]
+				]
+			],
+			[
+				199219.929542023,
+				[
+					[
+						"Change Character",
+						"dad",
+						"guy"
+					]
+				]
+			],
+			[
+				210920.986411675,
+				[
+					[
+						"Alt Idle Animation",
+						"bf",
+						"-alt"
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": "ourple_arrowsplashes",
+		"validScore": false,
+		"gfVersion": "guy",
+		"bpm": 198.7,
+		"arrowSkin": "ourpleNOTE_assets",
+		"needsVoices": true,
+		"song": "interrupted"
+	}
+}

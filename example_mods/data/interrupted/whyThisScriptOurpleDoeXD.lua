@@ -4,7 +4,7 @@ function onCreatePost()
       addHaxeLibrary("Character")
 	runHaxeCode([[
 	var charList:Array<String> = ["phone","ourplemark", "guy", "crying"];
-	var positions:Array<Array<Float>> = [ [-50, -400], [-180, -350 ], [-50, -10], [-50, 10] ];
+	var positions:Array<Array<Float>> = [ [-1000, 0], [150, -50 ], [-45, -1000], [0, 40] ];
 	var index = 0;
 
      // meow meow gay cat
