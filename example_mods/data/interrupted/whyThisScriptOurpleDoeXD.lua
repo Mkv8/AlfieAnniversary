@@ -1,10 +1,13 @@
-function onCreatePost() 
+didStart = false
+function onCreatePost()
+	if didStart then return end
+	didStart = true 
       print("hi neo i agree alfie is p cute");
       luaDebugMode = true
       addHaxeLibrary("Character")
 	runHaxeCode([[
-	var charList:Array<String> = ["phone","ourplemark", "guy", "crying"];
-	var positions:Array<Array<Float>> = [ [-1000, 0], [150, -50 ], [-45, -1000], [0, 40] ];
+	var charList:Array<String> = ["crying","guy", "ourplemark", "phone"];
+  	var positions:Array<Array<Float>> = [ [0, 40], [-45, -1000], [150, -50 ], [-1000, 0] ];
 	var index = 0;
 
      // meow meow gay cat
@@ -36,27 +39,27 @@ function onCreatePost()
 end
 
 
---function onUpdate()
---	runHaxeCode([[
---	var dName:String = getVar('dName');
---	var chars:Array<Character> = getVar('CharScriptChars');
---	var charList:Array<String> = getVar('CharScriptList');
---	//Track Character changes and move the opponent to the correct position
---	if(dName!=game.dad.curCharacter){
---		dName = game.dad.curCharacter;
---		if(charList.indexOf(dName)<0)
---			return;
---		var char:Character = chars[charList.indexOf(dName)];
---		for (dad in chars){
---			dad.alpha=1;
---		}
---		if (char.alpha > 0.1){
---			//char.alpha = 0.00001; 
---			//game.dad.setPosition(char.x,char.y);
---		}
---	}
---	setVar('dName',dName); ]])
---end
+function onEvent()
+	runHaxeCode([[
+	var dName:String = getVar('dName');
+	//Track Character changes and move the opponent to the correct position
+	if(dName!=game.dad.curCharacter){
+		var chars:Array<Character> = getVar('CharScriptChars');
+		var charList:Array<String> = getVar('CharScriptList');
+		dName = game.dad.curCharacter;
+		if(charList.indexOf(dName)<0)
+			return;
+		var char:Character = chars[charList.indexOf(dName)];
+		for (dad in chars){
+			dad.alpha=1;
+		}
+		if (char.alpha > 0.1){
+			//char.alpha = 0.00001; 
+			//game.dad.setPosition(char.x,char.y);
+		}
+	}
+	setVar('dName',dName); ]])
+end
 function handleDance()
 	runHaxeCode([[
 	var counted:Bool = getVar('counted');

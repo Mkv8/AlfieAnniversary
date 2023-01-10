@@ -387,6 +387,7 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+		
 		FunkinLua.hscript = null;
 		Paths.clearStoredMemory();
 
@@ -1061,10 +1062,10 @@ class PlayState extends MusicBeatState
 
 		if(curStage == 'ourple') {
 			add(blackOverlay);
-			blackOverlay.alpha = 0;
+			blackOverlay.alpha = 1;
 			add(ourpletheory);
 			add(ourplelogo);
-			dadGroup.alpha = 0.0001;
+			//dadGroup.alpha = 0.0001;
 			boyfriendGroup.alpha = 0.0001;
 
 		}
@@ -2540,7 +2541,7 @@ class PlayState extends MusicBeatState
 			numCalls[0]+=1;
 			fpsElapsed[0]+=elapsed;
 			if(numCalls[0] >= Std.int(ClientPrefs.framerate/maxLuaFPS)){
-				trace("New Update");
+				//trace("New Update");
 				callOnLuas('onUpdate', [fpsElapsed[0]]);
 				fpsElapsed[0]=0;
 				numCalls[0]=0;
@@ -2902,7 +2903,7 @@ class PlayState extends MusicBeatState
 			numCalls[1]+=1;
 			fpsElapsed[1]+=elapsed;
 			if(numCalls[1] >= Std.int(ClientPrefs.framerate/maxLuaFPS)){
-				trace("New UpdatePost");
+				//trace("New UpdatePost");
 				callOnLuas('onUpdatePost', [fpsElapsed[1]]);
 				fpsElapsed[1]=0;
 				numCalls[1]=0;
@@ -5202,10 +5203,13 @@ class PlayState extends MusicBeatState
 
 				switch (curBeat)
 				{
+					case 1:
+						markiplier.visible = false;
+						cryingchild.alpha = 0.0001;
+
 					case 2:
 					{
-						FlxTween.tween(phoneguy, {alpha: 1}, 3);
-						FlxTween.tween(ourpleguy, {alpha: 1}, 3);
+						FlxTween.tween(blackOverlay, {alpha: 0}, 2, {ease: FlxEase.expoIn});
 
 					}
 
@@ -5271,7 +5275,7 @@ class PlayState extends MusicBeatState
 					}
 					case 575:
 					{
-						markiplier.alpha = 1;
+						markiplier.visible = true;
 						markiplier.playAnim('fall');
 						markiplier.specialAnim = true;
 					}

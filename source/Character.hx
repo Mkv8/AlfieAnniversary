@@ -17,6 +17,7 @@ import openfl.utils.AssetType;
 import openfl.utils.Assets;
 import haxe.Json;
 import haxe.format.JsonParser;
+import flixel.util.FlxStringUtil;
 
 using StringTools;
 
@@ -377,4 +378,9 @@ class Character extends FlxSprite
 	{
 		animation.addByPrefix(name, anim, 24, false);
 	}
+	public override function toString():String
+		{
+					return FlxStringUtil.getDebugString([LabelValuePair.weak("name", curCharacter), LabelValuePair.weak("x", x), LabelValuePair.weak("y", y), LabelValuePair.weak("alpha", alpha)]);
+		}
+
 }
