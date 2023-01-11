@@ -2,7 +2,7 @@ flipped = true
 flippedIdle = false
 defaultY = 0
 function onCreatePost()
-	defaultY = getProperty('gf.y')
+	defaultY = getProperty('ourpleguy.y')
 end
 function onBeatHit() 
 	if getProperty('healthBar.percent') < 80 then
@@ -10,19 +10,19 @@ function onBeatHit()
 		setProperty('iconP2.flipX', flipped)
 	end
 	
-	if curBeat % 1 == 0 and getProperty('gf.animation.curAnim.name') == 'idle' then
+	if curBeat % 1 == 0 and getProperty('ourpleguy.animation.curAnim.name') == 'idle' then
 		flippedIdle = not flippedIdle
-		setProperty('gf.flipX', flippedIdle)
-		setProperty('gf.y', getProperty('gf.y') + 20)
-		doTweenY('raise', 'gf', getProperty('gf.y') - 20, 0.15, 'cubeOut')
+		setProperty('ourpleguy.flipX', flippedIdle)
+		setProperty('ourpleguy.y', getProperty('ourpleguy.y') + 20)
+		doTweenY('raise', 'ourpleguy', getProperty('ourpleguy.y') - 20, 0.15, 'cubeOut')
 	end
 end
 
 function opponentNoteHit(id, direction, noteType, isSustainNote)
 	if not getPropertyFromGroup('notes', id, 'gfNote') then
 	cancelTween('raise')
-	setProperty('gf.y', defaultY)
-	setProperty('gf.flipX', false)
+	setProperty('ourpleguy.y', defaultY)
+	setProperty('ourpleguy.flipX', false)
 	end
 end
 

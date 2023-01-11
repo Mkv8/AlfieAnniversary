@@ -219,7 +219,7 @@ class Paths
 	inline static public function image(key:String, ?library:String):FlxGraphic
 	{
 		// streamlined the assets process more
-		var returnAsset:FlxGraphic = returnGraphic(key, library);
+		var returnAsset:FlxGraphic = returnGraphic(key, library, "image");
 		return returnAsset;
 	}
 	
@@ -279,7 +279,7 @@ class Paths
 	inline static public function getSparrowAtlas(key:String, ?library:String):FlxAtlasFrames
 	{
 		#if MODS_ALLOWED
-		var imageLoaded:FlxGraphic = returnGraphic(key);
+		var imageLoaded:FlxGraphic = returnGraphic(key, null, "getSparrowAtlas");
 		var xmlExists:Bool = false;
 		if(FileSystem.exists(modsXml(key))) {
 			xmlExists = true;
@@ -295,7 +295,7 @@ class Paths
 	inline static public function getPackerAtlas(key:String, ?library:String)
 	{
 		#if MODS_ALLOWED
-		var imageLoaded:FlxGraphic = returnGraphic(key);
+		var imageLoaded:FlxGraphic = returnGraphic(key, null, "getPackerAtlas");
 		var txtExists:Bool = false;
 		if(FileSystem.exists(modsTxt(key))) {
 			txtExists = true;
@@ -313,7 +313,7 @@ class Paths
 
 	// completely rewritten asset loading? fuck!
 	public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
-	public static function returnGraphic(key:String, ?library:String) {
+	public static function returnGraphic(key:String, ?library:String, ?callbackType:String) {
 		#if MODS_ALLOWED
 		if(FileSystem.exists(modsImages(key))) {
 			if(!currentTrackedAssets.exists(key)) {
@@ -335,7 +335,7 @@ class Paths
 			localTrackedAssets.push(key);
 			return currentTrackedAssets.get(key);
 		}
-		trace('oh no its returning null NOOOO', key, path);
+		trace(callbackType+': oh no its returning null NOOOO', key, path);
 		return null;
 	}
 

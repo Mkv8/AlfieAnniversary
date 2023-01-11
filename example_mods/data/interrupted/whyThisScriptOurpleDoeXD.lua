@@ -1,5 +1,6 @@
 didStart = false
 function onCreatePost()
+	setProperty('noteSplashGloballyDisabled', true);
 	if didStart then return end
 	didStart = true 
       print("hi neo i agree alfie is p cute");

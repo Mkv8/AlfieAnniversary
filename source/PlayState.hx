@@ -122,7 +122,8 @@ class PlayState extends MusicBeatState
 	public var songSpeed(default, set):Float = 1;
 	public var songSpeedType:String = "multiplicative";
 	public var noteKillOffset:Float = 350;
-	
+	public var noteSplashGloballyDisabled:Bool = false;
+
 	public var boyfriendGroup:FlxSpriteGroup;
 	public var dadGroup:FlxSpriteGroup;
 	public var gfGroup:FlxSpriteGroup;
@@ -3270,7 +3271,62 @@ class PlayState extends MusicBeatState
 					}
 				}
 
+			case 'Change Char EX':
+				var charType:Int = 0;
+				switch(value1) {
+					case 'gf' | 'girlfriend':
+						charType = 2;
+					case 'dad' | 'opponent':
+						charType = 1;
+					default:
+						charType = Std.parseInt(value1);
+						if(Math.isNaN(charType)) charType = 0;
+				} 
 
+				switch(charType) {
+					case 0:
+						if(boyfriend.curCharacter != value2) {
+							if(boyfriendMap.exists(value2)) {
+								var lastAlpha:Float = boyfriend.alpha;
+								boyfriend.alpha = 0.00001;
+								boyfriend = boyfriendMap.get(value2);
+								boyfriend.alpha = lastAlpha;
+								iconP1.changeIcon(boyfriend.healthIcon);
+							}
+						}
+						setOnLuas('boyfriendName', boyfriend.curCharacter);
+
+					case 1:
+						if(dad.curCharacter != value2) {
+							if(dadMap.exists(value2)) {
+								var wasGf:Bool = dad.curCharacter.startsWith('gf');
+								var lastAlpha:Float = dad.alpha;
+								dad.alpha = 0.00001;
+								dad = dadMap.get(value2);
+								if(!dad.curCharacter.startsWith('gf')) {
+									if(wasGf) {
+										gf.visible = true;
+									}
+								} else {
+									gf.visible = false;
+								}
+								dad.alpha = lastAlpha;
+								iconP2.changeIcon(dad.healthIcon);
+							}
+						}
+						setOnLuas('dadName', dad.curCharacter);
+
+					case 2:
+						if(gf.curCharacter != value2) {
+							if(gfMap.exists(value2)) {
+								var lastAlpha:Float = gf.alpha;
+								gf.alpha = 0.00001;
+								gf = gfMap.get(value2);
+								gf.alpha = lastAlpha;
+							}
+						}
+						setOnLuas('gfName', gf.curCharacter);
+				}
 			case 'Change Character':
 
 				
@@ -3700,7 +3756,7 @@ class PlayState extends MusicBeatState
 				totalNotesHit += 1;
 				sicks++;
 
-				if(!note.noteSplashDisabled)
+				if(!note.noteSplashDisabled && !noteSplashGloballyDisabled)
 				{
 					spawnNoteSplashOnNote(note);
 				}
