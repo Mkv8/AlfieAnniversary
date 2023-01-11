@@ -62,6 +62,7 @@ class StoryMenuState extends MusicBeatState
 	var goat:FlxSprite;
 	var ourple:FlxSprite;
 	var ska:FlxSprite;
+	var kisston:FlxSprite;
 
 	override function create()
 	{
@@ -99,6 +100,7 @@ class StoryMenuState extends MusicBeatState
 		goat = new FlxSprite().loadGraphic(Paths.image('goatbg'));
 		ourple = new FlxSprite().loadGraphic(Paths.image('ourplembg'));
 		ska = new FlxSprite().loadGraphic(Paths.image('skabg'));
+		kisston = new FlxSprite().loadGraphic(Paths.image('kisstonbg'));
 
 		add(oldtimes);
 		add(specters);
@@ -110,15 +112,9 @@ class StoryMenuState extends MusicBeatState
 		add(goat);
 		add(ourple);
 		add(ska);
-		erect.alpha = 0.0001;
-		oldtimes.alpha = 0.0001;
-		specters.alpha = 0.0001;
-		afterdark.alpha = 0.0001;
-		mansionmatch.alpha = 0.0001;
-		candle.alpha = 0.0001;
-		anime.alpha = 0.0001;
-		goat.alpha = 0.0001;
-		ska.alpha = 0.0001;
+		add(kisston);
+
+		updateBackground(true);
 
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
 		var bgYellow:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 386, 0xFFF9CF51);
@@ -409,6 +405,35 @@ class StoryMenuState extends MusicBeatState
 	var lerpScore:Int = 0;
 	var intendedScore:Int = 0;
 
+
+	function fixTween(Object:Dynamic, Values:Dynamic, Duration:Float = 1, ?Options:TweenOptions) {
+		FlxTween.cancelTweensOf(Object);
+		FlxTween.tween(Object, Values, Duration, Options);
+	}
+
+
+	function tweenBg(bg:FlxSprite, id:Int, instant:Bool) {
+		if(instant) {
+		bg.alpha = curWeek == id?1:0.0001;
+		return;
+		}
+		fixTween(bg, {alpha: curWeek == id?1:0.0001}, 0.2);
+		}
+
+	function updateBackground(instant:Bool = false) {
+		tweenBg(oldtimes, 0, instant);
+		tweenBg(specters, 1, instant);
+		tweenBg(erect, 3, instant);
+		tweenBg(afterdark, 4, instant);
+		tweenBg(mansionmatch, 5, instant);
+		tweenBg(candle, 6, instant);
+		tweenBg(goat, 7, instant);
+		tweenBg(ourple, 8, instant);
+		tweenBg(ska, 9, instant);
+		tweenBg(anime, 10, instant);
+		tweenBg(kisston, 11, instant);
+		}
+
 	function changeWeek(change:Int = 0):Void
 	{
 		curWeek += change;
@@ -446,33 +471,7 @@ class StoryMenuState extends MusicBeatState
 			bgSprite.loadGraphic(Paths.image('menubackgrounds/menu_' + assetName));
 		}
 
-		oldtimes.alpha = 0;
-		specters.alpha = 0;
-		erect.alpha = 0;
-		afterdark.alpha = 0;
-		mansionmatch.alpha = 0;
-		candle.alpha = 0;
-		anime.alpha = 0;
-		goat.alpha = 0;
-		ourple.alpha = 0;
-		ska.alpha = 0;
-
-		switch(curWeek) {
-			case 0: oldtimes.alpha = 1;
-			case 1: specters.alpha = 1;
-			case 2: {};
-			case 3: erect.alpha = 1;
-			case 4: afterdark.alpha = 1;
-			case 5: mansionmatch.alpha = 1;
-			case 6: candle.alpha = 1;
-			case 7: goat.alpha = 1;
-			case 8: ourple.alpha = 1;
-			case 9: ska.alpha = 1;
-			case 10: anime.alpha = 1;
-		}
-
-	
-
+		updateBackground();
 
 		PlayState.storyWeek = curWeek;
 

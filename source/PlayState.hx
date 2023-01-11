@@ -317,15 +317,6 @@ class PlayState extends MusicBeatState
 	var goatstage3:BGSprite;
 	var goatold:BGSprite;
 
-	/*var goatsenpai:BGSprite;
-	var goattankman:BGSprite;
-	var goatparents:BGSprite;
-	var goatfilip:BGSprite;
-	var goatace:BGSprite;
-	var goatzardy:BGSprite;
-	var goatsarvente:BGSprite;
-	var goatwhitty:BGSprite;*/
-
 	var monitors:BGSprite;
 
 	var skabg:BGSprite;
@@ -336,6 +327,8 @@ class PlayState extends MusicBeatState
 	var bkiss:BGSprite;
 	var bkissmultiply:BGSprite;
 	var bkissoverlay:BGSprite;
+	var kissuhoh:BGSprite;
+	var munchoverlay:BGSprite;
 
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
@@ -664,18 +657,42 @@ class PlayState extends MusicBeatState
 		}
 
 		if(formattedSong == 'heart-attack') {
-			bkissoverlay = new BGSprite('bkissOverlay47', -600, -300, 1, 1);
+			bkissoverlay = new BGSprite('cupid/bkissOverlay47', -600, -300, 1, 1);
 			bkissoverlay.updateHitbox();
-			bkissoverlay.alpha = 0.47;
+			bkissoverlay.alpha = 0.30;
 			bkissoverlay.blend = OVERLAY;
 
-
-			bkissmultiply = new BGSprite('bkissMultiply100', -600, -300, 1, 1);
+			bkissmultiply = new BGSprite('cupid/bkissMultiply100', -600, -300, 1, 1);
 			bkissmultiply.updateHitbox();
 			bkissmultiply.alpha = 1;
 			bkissmultiply.blend = MULTIPLY;
 
+			funkyassoverlay = new BGSprite('cupid/kissoverlay', 0, 0, 1, 1);
+			funkyassoverlay.updateHitbox();
+			funkyassoverlay.setGraphicSize(FlxG.width, FlxG.height);
+			funkyassoverlay.cameras = [camHUD];
+			funkyassoverlay.screenCenter(XY);
+			funkyassoverlay.alpha = 0;
+			funkyassoverlay.blend = ADD;
 
+			munchoverlay = new BGSprite('cupid/munchoverlay', 0, 0, 1, 1);
+			munchoverlay.updateHitbox();
+			munchoverlay.setGraphicSize(FlxG.width, FlxG.height);
+			munchoverlay.cameras = [camHUD];
+			munchoverlay.screenCenter(XY);
+			munchoverlay.alpha = 0;
+			munchoverlay.blend = ADD;
+
+
+
+
+			kissuhoh = new BGSprite('cupid/kissuhoh', 0, 0, 1, 1);
+			kissuhoh.updateHitbox();
+			kissuhoh.setGraphicSize(FlxG.width, FlxG.height);
+			kissuhoh.cameras = [camHUD];
+			kissuhoh.screenCenter(XY);
+			kissuhoh.blend = MULTIPLY;
+			kissuhoh.alpha = 0;
 		}
 		
 		#if desktop
@@ -1031,7 +1048,7 @@ class PlayState extends MusicBeatState
 			add(skabg);
 
 			case 'kpark': //heart attack
-			bkiss = new BGSprite('bkiss', -600, -300, 1, 1);
+			bkiss = new BGSprite('cupid/bkiss', -600, -300, 1, 1);
 
 			add(bkiss);
 
@@ -1080,6 +1097,8 @@ class PlayState extends MusicBeatState
 		if(curStage == 'kpark') {
 			add(bkissmultiply);
 			add(bkissoverlay);
+			add(kissuhoh);
+			add(blackOverlay);
 		}
 
 		if(curStage == 'philly') {
@@ -5345,6 +5364,51 @@ class PlayState extends MusicBeatState
 					}
 				}
 			}
+
+			if (curSong == 'heart-attack' && curStage == 'kpark' && !ClientPrefs.lowQuality)
+				{
+	
+					switch (curBeat)
+					{
+						case 2:
+						{
+							add(funkyassoverlay);
+							add(munchoverlay);
+						}
+	
+						case 36:
+						{
+							FlxG.camera.flash(FlxColor.WHITE,1,false);
+							funkyassoverlay.alpha = 0.45;
+						}
+						case 100:
+						{
+							FlxTween.tween(funkyassoverlay, {alpha: 0}, 2.5);
+						}
+						case 143:
+						{
+							FlxTween.tween(blackOverlay, {alpha: 1}, 1);
+						}
+						case 158:
+						{
+							FlxTween.tween(blackOverlay, {alpha: 0}, 2);
+							FlxTween.tween(kissuhoh, {alpha: 0.5}, 2 );
+						}
+						case 232:
+						{
+							FlxTween.tween(munchoverlay, {alpha: 0.45}, 0.4);
+						}
+						case 268:
+						{
+							FlxTween.tween(munchoverlay, {alpha: 0}, 2);
+						}
+						case 303:
+						{
+							FlxTween.tween(blackOverlay, {alpha: 1}, 2);
+						}
+					}
+				}
+
 
 		switch (curStage)
 		{

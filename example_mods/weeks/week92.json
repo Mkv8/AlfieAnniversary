@@ -1,0 +1,31 @@
+{
+	"songs": [
+		[
+			"Heart Attack",
+			"kissIco",
+			[
+				200,
+				250,
+				167
+			]
+		]
+	],
+	"hideFreeplay": false,
+	"weekBackground": "kiss",
+	"difficulties": "",
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"storyName": "Heart Attack",
+	"weekName": "The deadly embrace of love",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}
