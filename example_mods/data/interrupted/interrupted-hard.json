@@ -2,7 +2,7 @@
 	"song": {
 		"player1": "ourplealfieplayable",
 		"events": [],
-		"gfVersion": "guy",
+		"gfVersion": "bf-opti",
 		"notes": [
 			{
 				"sectionNotes": [],
@@ -2073,8 +2073,8 @@
 				"mustHitSection": true
 			}
 		],
-		"player2": "crying",
-		"player3": "guy",
+		"player2": "bf-opti",
+		"player3": "bf-opti",
 		"splashSkin": "ourple_arrowsplashes",
 		"song": "interrupted",
 		"stage": "ourple",

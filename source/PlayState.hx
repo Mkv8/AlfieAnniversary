@@ -1083,7 +1083,7 @@ class PlayState extends MusicBeatState
 			blackOverlay.alpha = 1;
 			add(ourpletheory);
 			add(ourplelogo);
-			//dadGroup.alpha = 0.0001;
+			
 			boyfriendGroup.alpha = 0.0001;
 
 		}
@@ -1440,6 +1440,14 @@ class PlayState extends MusicBeatState
 				iconP2.alpha = 0;
 				healthBar.color = 0xFF000000;
 				iconP1.color = 0xFF000000;
+
+			}
+
+		if (SONG.song == 'interrupted')
+			{
+				iconP2.alpha = 0;
+				iconP1.alpha = 0;
+				healthBar.alpha = 0;
 
 			}
 		if (SONG.song == 'mansion-match')
@@ -3346,6 +3354,18 @@ class PlayState extends MusicBeatState
 						}
 						setOnLuas('gfName', gf.curCharacter);
 				}
+			reloadHealthBarColors();
+        	     #if desktop
+            if (startTimer != null && startTimer.finished)
+                {
+                   DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter().replace("icon-", ""), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset);
+                }
+                else
+                {
+                    DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter().replace("icon-", ""));
+                }                
+                #end
+				
 			case 'Change Character':
 
 				
@@ -5285,11 +5305,13 @@ class PlayState extends MusicBeatState
 					case 2:
 					{
 						FlxTween.tween(blackOverlay, {alpha: 0}, 2, {ease: FlxEase.expoIn});
-
 					}
 
 					case 8:
 					{
+						FlxTween.tween(healthBar, {alpha: 1}, 3, {ease: FlxEase.expoIn});
+						FlxTween.tween(iconP2, {alpha: 1}, 3, {ease: FlxEase.expoIn});
+						FlxTween.tween(iconP1, {alpha: 1}, 3, {ease: FlxEase.expoIn});
 						FlxTween.tween(cryingchild, {alpha: 1}, 3);
 						FlxTween.tween(boyfriendGroup, {alpha: 1}, 3);
 

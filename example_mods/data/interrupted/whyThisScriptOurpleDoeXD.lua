@@ -37,6 +37,8 @@ function onCreatePost()
 	setVar('CharScriptChars',chars);
 	setVar('dName',"");
       ]])
+
+triggerEvent("Change Char EX", "dad", "crying") 
 end
 
 
@@ -64,18 +66,17 @@ end
 function handleDance()
 	runHaxeCode([[
 	var counted:Bool = getVar('counted');
-	var chars:Array<Character> = getVar('CharScriptChars');
-	
-	for (dad in chars){
-		//Strange glitch happens sometimes so new variable strAnim lol
-		var strAnim:String = dad.animation.curAnim; 
-		if(strAnim != null){
-			strAnim=strAnim.name;
-		}
-		if ((PlayState.instance.curBeat-(counted?0:1)) % 2 == 0 && strAnim !=null && !strAnim.indexOf('sing')>=0 && dad!=null && !dad.stunned)
-		{
-			dad.dance();
-		}
+	if((game.curBeat-(counted?0:1)) % 2 == 0) {
+   	 var chars:Array<Character> = getVar('CharScriptChars');
+    
+  	 for (dad in chars){
+        //Strange glitch happens sometimes so new variable strAnim lol
+        var strAnim = dad.animation.name; 
+        if (strAnim != null && strAnim.indexOf('sing')==-1 && !dad.stunned)
+        {
+            dad.dance();
+        }
+    	}
 	} ]])
 end
 
