@@ -39,7 +39,6 @@ function onCreatePost()
       ]])
 
 triggerEvent("Change Char EX", "dad", "crying") 
-Add game.reloadHealthbarColors();
 end
 
 
