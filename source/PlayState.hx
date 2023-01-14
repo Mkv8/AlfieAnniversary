@@ -1704,10 +1704,27 @@ class PlayState extends MusicBeatState
 
 		Conductor.safeZoneOffset = (ClientPrefs.safeFrames / 60) * 1000;
 		callOnLuas('onCreatePost', []);
+		function reorderCharacters(input:Array<Character>){
+			for(character in input){
+				if(character!=null){
+					var t = character.getPosition();
+					dadGroup.remove(character, true);
+					dadGroup.add(character);
+					character.setPosition(t.x,t.y);
+					t.put();
+				}
+			}			
+			
+		}
+
 		ourpleguy = dadMap.get("guy");
 		phoneguy = dadMap.get("phone");
 		markiplier = dadMap.get("ourplemark");
 		cryingchild = dadMap.get("crying");
+		if(formattedSong == 'interrupted'){
+			//trace(formattedSong);
+			reorderCharacters([markiplier,phoneguy,ourpleguy,cryingchild]);
+		}
 
 		super.create();
 
