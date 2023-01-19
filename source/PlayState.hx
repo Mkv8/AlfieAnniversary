@@ -4503,46 +4503,6 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	/*function killHenchmen():Void
-	{
-		if(!ClientPrefs.lowQuality && ClientPrefs.violence && curStage == 'limo') {
-			if(limoKillingState < 1) {
-				limoMetalPole.x = -400;
-				limoMetalPole.visible = true;
-				limoLight.visible = true;
-				limoCorpse.visible = false;
-				limoCorpseTwo.visible = false;
-				limoKillingState = 1;
-
-				#if ACHIEVEMENTS_ALLOWED
-				Achievements.henchmenDeath++;
-				FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
-				var achieve:String = checkForAchievement(['roadkill_enthusiast']);
-				if (achieve != null) {
-					startAchievement(achieve);
-				} else {
-					FlxG.save.flush();
-				}
-				FlxG.log.add('Deaths: ' + Achievements.henchmenDeath);
-				#end
-			}
-		}
-	}*/
-
-	/*function resetLimoKill():Void
-	{
-		if(curStage == 'limo') {
-			limoMetalPole.x = -500;
-			limoMetalPole.visible = false;
-			limoLight.x = -500;
-			limoLight.visible = false;
-			limoCorpse.x = -500;
-			limoCorpse.visible = false;
-			limoCorpseTwo.x = -500;
-			limoCorpseTwo.visible = false;
-		}
-	}*/
-
 	private var preventLuaRemove:Bool = false;
 	override function destroy() {
 		preventLuaRemove = true;
@@ -5341,7 +5301,6 @@ class PlayState extends MusicBeatState
 					{
 						cryingchild.playAnim('dead');
 						cryingchild.specialAnim = true;
-						//FlxTween.tween(ourpleguy, {y: -300}, 1000);
 						new FlxTimer().start(2, function(tmr:FlxTimer)
 							{
 								cryingchild.animation.pause();
@@ -5360,10 +5319,6 @@ class PlayState extends MusicBeatState
 					{
 						FlxTween.tween(phoneguy, {x: 200}, 12 * Conductor.stepCrochet / 1000, {ease: FlxEase.expoInOut});
 
-					}
-					case 365:
-					{
-						//FlxTween.tween(phoneguy, {y: 200}, 1000);
 					}
 					case 513:
 					{
