@@ -6,7 +6,7 @@
 				-20
 			],
 			"loop": false,
-			"fps": 20,
+			"fps": 24,
 			"anim": "singLEFT",
 			"indices": [],
 			"name": "fLeft0"
@@ -17,7 +17,7 @@
 				-20
 			],
 			"loop": false,
-			"fps": 20,
+			"fps": 24,
 			"anim": "singLEFTmiss",
 			"indices": [],
 			"name": "fLeftmiss"
@@ -28,7 +28,7 @@
 				-79
 			],
 			"loop": false,
-			"fps": 20,
+			"fps": 24,
 			"anim": "singDOWN",
 			"indices": [],
 			"name": "fDown0"
@@ -39,7 +39,7 @@
 				-79
 			],
 			"loop": false,
-			"fps": 20,
+			"fps": 24,
 			"anim": "singDOWNmiss",
 			"indices": [],
 			"name": "fDownmiss"
@@ -50,7 +50,7 @@
 				170
 			],
 			"loop": false,
-			"fps": 20,
+			"fps": 24,
 			"anim": "singUP",
 			"indices": [],
 			"name": "fUp0"
@@ -61,7 +61,7 @@
 				169
 			],
 			"loop": false,
-			"fps": 20,
+			"fps": 24,
 			"anim": "singUPmiss",
 			"indices": [],
 			"name": "fUpmiss"
@@ -72,7 +72,7 @@
 				70
 			],
 			"loop": false,
-			"fps": 20,
+			"fps": 24,
 			"anim": "singRIGHT",
 			"indices": [],
 			"name": "fRight0"
@@ -83,7 +83,7 @@
 				55
 			],
 			"loop": false,
-			"fps": 20,
+			"fps": 24,
 			"anim": "singRIGHTmiss",
 			"indices": [],
 			"name": "fRightmiss"
@@ -94,7 +94,7 @@
 				5
 			],
 			"loop": false,
-			"fps": 20,
+			"fps": 21,
 			"anim": "idle",
 			"indices": [],
 			"name": "IDLE"

@@ -321,6 +321,7 @@ class PlayState extends MusicBeatState
 
 	var skabg:BGSprite;
 	var skacrowd:BGSprite;
+	var skagf:BGSprite;
 	var skamultiply:BGSprite;
 	var skaOverlay:BGSprite;
 
@@ -1042,11 +1043,12 @@ class PlayState extends MusicBeatState
 
 			case 'skalloween': //all saints
 			skabg = new BGSprite('skabbg', -600, -300, 1, 1);
-			skacrowd = new BGSprite('skacrowdbop', -590, 850, 1, 1, ['skacrowdbop0'], true);
+			skagf = new BGSprite('skagf', 1000, 300, 1, 1, ['GF Dancing Beat0'], true);
+			skacrowd = new BGSprite('skacrowdbop', -590, 875, 1, 1, ['skacrowdbop0'], true);
 
 
 			add(skabg);
-
+			add(skagf);
 			case 'kpark': //heart attack
 			bkiss = new BGSprite('cupid/bkiss', -600, -300, 1, 1);
 
@@ -1552,7 +1554,7 @@ class PlayState extends MusicBeatState
 		data.set("candlelit-clash", ["NowP", "CandleTitle"]);
 		data.set("goat-remake", ["NowP", "GoatTitle"]);
 		data.set("interrupted", ["NowPdark", "ourpletitle"]);
-		data.set("all-saints-scramble-remix", ["NowP", "skatitle"]);
+		data.set("all-saints-scramble", ["NowP", "skatitle"]);
 		data.set("spooks", ["NowP90s", "90stitle"]);
 		data.set("heart-attack", ["NowP", "ktitle"]);
 		data.set("slimy-business", ["NowP", "kaititle"]);
