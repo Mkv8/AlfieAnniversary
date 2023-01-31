@@ -1043,7 +1043,7 @@ class PlayState extends MusicBeatState
 
 			case 'skalloween': //all saints
 			skabg = new BGSprite('skabbg', -600, -300, 1, 1);
-			skagf = new BGSprite('skagf', 1000, 300, 1, 1, ['GF Dancing Beat0'], true);
+			skagf = new BGSprite('skagf', 800, 200, 1, 1, ['GF Dancing Beat0'], true);
 			skacrowd = new BGSprite('skacrowdbop', -590, 875, 1, 1, ['skacrowdbop0'], true);
 
 
