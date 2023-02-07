@@ -74,6 +74,7 @@ class OptionsState extends MusicBeatState
 		{
 			var optionText:Alphabet = new Alphabet(0, 0, options[i], true, false);
 			optionText.screenCenter();
+			optionText.fontColor = 0xFFFFFF;
 			optionText.y += (100 * (i - (options.length / 2))) + 50;
 			grpOptions.add(optionText);
 		}

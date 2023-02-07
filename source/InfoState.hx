@@ -20,7 +20,9 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import lime.app.Application;
+#if ACHIEVEMENTS_ALLOWED
 import Achievements;
+#end
 import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
 import openfl.filters.ShaderFilter;
@@ -35,7 +37,7 @@ class InfoState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
-	
+
 	var optionShit:Array<String> = [
 		'story_mode',
 		'freeplay',
@@ -59,7 +61,7 @@ class InfoState extends MusicBeatState
 	var darken:FlxSprite;
 
 	var clicksound:FlxSound;
-	
+
 	var alfiedesc:FlxSprite;
 	var boyfrienddesc:FlxSprite;
 	var pookydesc:FlxSprite;
@@ -139,9 +141,9 @@ class InfoState extends MusicBeatState
 		add(alfie);
 		add(pooky);
 		add(laura);
-		add(harper);	
+		add(harper);
 		add(boyfriend);
-		
+
 
 		alfiedesc = new FlxSprite(395, 200).loadGraphic(Paths.image('biomenu/alfie description'));
 		alfiedesc.scrollFactor.set(0, 0);
@@ -203,7 +205,7 @@ class InfoState extends MusicBeatState
 
 
 
-		
+
 
 		super.create();
 
@@ -253,12 +255,20 @@ class InfoState extends MusicBeatState
 	private var isShowingBoyfriend = false;
 	private var isShowingBack = false;
 
+	function fixColorTween(?Sprite:FlxSprite, Duration:Float = 1, FromColor:FlxColor, ToColor:FlxColor, ?Options:TweenOptions) {
+		FlxTween.cancelTweensOf(Sprite);
+		FlxTween.color(Sprite, Duration, FromColor, ToColor, Options);
+	}
+
 	override function update(elapsed:Float)
 	{
 
 		super.update(elapsed);
 		FlxG.mouse.visible = true;
 
+
+		if(canChange) {
+			if(FlxG.mouse.justPressed) {
 				var isHoveringAlfie = checkOverlap(alfie, 0);
 				var isHoveringPooky = checkOverlap(pooky, 0);
 				var isHoveringLaura = checkOverlap(laura, 0);
@@ -275,308 +285,142 @@ class InfoState extends MusicBeatState
 				if(isHoveringPooky) isHoveringAlfie = false;
 				if(isHoveringEthlyn) isHoveringAlfie = false;
 
-		if(canChange) {
-			if(FlxG.mouse.justPressed) {
+				var shouldShowBg = isHoveringAlfie||isHoveringPooky||isHoveringLaura||isHoveringEthlyn||isHoveringHarper||isHoveringBoyfriend;
+
 				if(isHoveringBack && !isShowingBack) {
 					isShowingBack = true;
 					FlxG.sound.play(Paths.sound('cancelMenu'));
 					MusicBeatState.switchState(new MainMenuState());
 				}
-			
-			//alfie
-			if(isHoveringAlfie && !isShowingAlfie) {
-				isShowingAlfie = true;
 
-				FlxTween.tween(alfiedesc, {alpha: 1}, 0.6); 
-				FlxTween.color(harper, 0.6, harper.color, 0xFF56526B);
-				FlxTween.color(ethlyn, 0.6, ethlyn.color, 0xFF56526B);
-				FlxTween.color(pooky, 0.6, pooky.color, 0xFF56526B);
-				FlxTween.color(boyfriend, 0.6, boyfriend.color, 0xFF56526B);
-				FlxTween.color(laura, 0.6, laura.color, 0xFF56526B);
-				FlxTween.color(bg, 0.6, bg.color, 0xFF56526B);
-				FlxG.sound.play(Paths.sound('alfiebaa'));
-				/*clicksound = new FlxSound().loadEmbedded(Paths.sound("alfiebaa"));
-				clicksound.play(true);*/
+				//alfie
+				if(isHoveringAlfie && !isShowingAlfie) {
+					isShowingAlfie = true;
 
-			}
+					FlxTween.tween(alfiedesc, {alpha: 1}, 0.6);
+					FlxG.sound.play(Paths.sound('alfiebaa'));
+					/*clicksound = new FlxSound().loadEmbedded(Paths.sound("alfiebaa"));
+					clicksound.play(true);*/
 
-			if(!isHoveringAlfie && isShowingAlfie) {
-				isShowingAlfie = false;
+				}
+				if(!isHoveringAlfie && isShowingAlfie) {
+					isShowingAlfie = false;
 
-				FlxTween.tween(alfiedesc, {alpha: 0}, 0.3); 
-				FlxTween.color(harper, 0.3, harper.color, 0xFFFFFFFF);
-				FlxTween.color(ethlyn, 0.3, ethlyn.color, 0xFFFFFFFF);
-				FlxTween.color(pooky, 0.3, pooky.color, 0xFFFFFFFF);
-				FlxTween.color(boyfriend, 0.3, boyfriend.color, 0xFFFFFFFF);
-				FlxTween.color(laura, 0.3, laura.color, 0xFFFFFFFF);
-				FlxTween.color(bg, 0.3, bg.color, 0xFFFFFFFF);
-			}
+					FlxTween.tween(alfiedesc, {alpha: 0}, 0.3);
+				}
 
-			//harper
-			if(isHoveringHarper && !isShowingHarper) {
-				isShowingHarper = true;
-				
-				FlxTween.tween(harperdesc, {alpha: 1}, 0.6); 
-				FlxTween.color(alfie, 0.6, alfie.color, 0xFF56526B);
-				FlxTween.color(ethlyn, 0.6, ethlyn.color, 0xFF56526B);
-				FlxTween.color(pooky, 0.6, pooky.color, 0xFF56526B);
-				FlxTween.color(boyfriend, 0.6, boyfriend.color, 0xFF56526B);
-				FlxTween.color(laura, 0.6, laura.color, 0xFF56526B);
-				FlxTween.color(bg, 0.6, bg.color, 0xFF56526B);
-				clicksound = new FlxSound().loadEmbedded(Paths.sound("harpermeow"));
-				clicksound.play(true);
-			}
+				//harper
+				if(isHoveringHarper && !isShowingHarper) {
+					isShowingHarper = true;
 
-			if(!isHoveringHarper && isShowingHarper) {
-				isShowingHarper = false;
+					FlxTween.tween(harperdesc, {alpha: 1}, 0.6);
+					clicksound = new FlxSound().loadEmbedded(Paths.sound("harpermeow"));
+					clicksound.play(true);
+				}
 
-				FlxTween.tween(harperdesc, {alpha: 0}, 0.3); 
-				FlxTween.color(alfie, 0.3, alfie.color, 0xFFFFFFFF);
-				FlxTween.color(ethlyn, 0.3, ethlyn.color, 0xFFFFFFFF);
-				FlxTween.color(pooky, 0.3, pooky.color, 0xFFFFFFFF);
-				FlxTween.color(boyfriend, 0.3, boyfriend.color, 0xFFFFFFFF);
-				FlxTween.color(laura, 0.3, laura.color, 0xFFFFFFFF);
-				FlxTween.color(bg, 0.3, bg.color, 0xFFFFFFFF);
-			}
+				if(!isHoveringHarper && isShowingHarper) {
+					isShowingHarper = false;
 
-			//ethlyn Ethlyn
-			if(isHoveringEthlyn && !isShowingEthlyn) {
-				isShowingEthlyn = true;
-				
-				FlxTween.tween(ethlyndesc, {alpha: 1}, 0.6); 
-				FlxTween.color(alfie, 0.6, alfie.color, 0xFF56526B);
-				FlxTween.color(harper, 0.6, harper.color, 0xFF56526B);
-				FlxTween.color(pooky, 0.6, pooky.color, 0xFF56526B);
-				FlxTween.color(boyfriend, 0.6, boyfriend.color, 0xFF56526B);
-				FlxTween.color(laura, 0.6, laura.color, 0xFF56526B);
-				FlxTween.color(bg, 0.6, bg.color, 0xFF56526B);
-				clicksound = new FlxSound().loadEmbedded(Paths.sound("ethlynbat"));
-				clicksound.play(true);
-			}
+					FlxTween.tween(harperdesc, {alpha: 0}, 0.3);
+				}
 
-			if(!isHoveringEthlyn && isShowingEthlyn) {
-				isShowingEthlyn = false;
+				//ethlyn Ethlyn
+				if(isHoveringEthlyn && !isShowingEthlyn) {
+					isShowingEthlyn = true;
 
-				FlxTween.tween(ethlyndesc, {alpha: 0}, 0.3); 
-				FlxTween.color(alfie, 0.3, alfie.color, 0xFFFFFFFF);
-				FlxTween.color(harper, 0.3, harper.color, 0xFFFFFFFF);
-				FlxTween.color(pooky, 0.3, pooky.color, 0xFFFFFFFF);
-				FlxTween.color(boyfriend, 0.3, boyfriend.color, 0xFFFFFFFF);
-				FlxTween.color(laura, 0.3, laura.color, 0xFFFFFFFF);
-				FlxTween.color(bg, 0.3, bg.color, 0xFFFFFFFF);
-			}
+					FlxTween.tween(ethlyndesc, {alpha: 1}, 0.6);
+					clicksound = new FlxSound().loadEmbedded(Paths.sound("ethlynbat"));
+					clicksound.play(true);
+				}
 
-			//laura Laura
-			if(isHoveringLaura && !isShowingLaura) {
-				isShowingLaura = true;
-				
-				FlxTween.tween(lauradesc, {alpha: 1}, 0.6); 
-				FlxTween.color(alfie, 0.6, alfie.color, 0xFF56526B);
-				FlxTween.color(ethlyn, 0.6, ethlyn.color, 0xFF56526B);
-				FlxTween.color(pooky, 0.6, pooky.color, 0xFF56526B);
-				FlxTween.color(boyfriend, 0.6, boyfriend.color, 0xFF56526B);
-				FlxTween.color(harper, 0.6, harper.color, 0xFF56526B);
-				FlxTween.color(bg, 0.6, bg.color, 0xFF56526B);
-				clicksound = new FlxSound().loadEmbedded(Paths.sound("laurasqueak"));
-				clicksound.play(true);
-			}
+				if(!isHoveringEthlyn && isShowingEthlyn) {
+					isShowingEthlyn = false;
 
-			if(!isHoveringLaura && isShowingLaura) {
-				isShowingLaura = false;
+					FlxTween.tween(ethlyndesc, {alpha: 0}, 0.3);
+				}
 
-				FlxTween.tween(lauradesc, {alpha: 0}, 0.3); 
-				FlxTween.color(alfie, 0.3, alfie.color, 0xFFFFFFFF);
-				FlxTween.color(ethlyn, 0.3, ethlyn.color, 0xFFFFFFFF);
-				FlxTween.color(pooky, 0.3, pooky.color, 0xFFFFFFFF);
-				FlxTween.color(boyfriend, 0.3, boyfriend.color, 0xFFFFFFFF);
-				FlxTween.color(harper, 0.3, harper.color, 0xFFFFFFFF);
-				FlxTween.color(bg, 0.3, bg.color, 0xFFFFFFFF);
-			}
+				//laura Laura
+				if(isHoveringLaura && !isShowingLaura) {
+					isShowingLaura = true;
 
-			//pooky Pooky
-			if(isHoveringPooky && !isShowingPooky) {
-				isShowingPooky = true;
-				
-				FlxTween.tween(pookydesc, {alpha: 1}, 0.6); 
-				FlxTween.color(alfie, 0.6, alfie.color, 0xFF56526B);
-				FlxTween.color(ethlyn, 0.6, ethlyn.color, 0xFF56526B);
-				FlxTween.color(laura, 0.6, laura.color, 0xFF56526B);
-				FlxTween.color(boyfriend, 0.6, boyfriend.color, 0xFF56526B);
-				FlxTween.color(harper, 0.6, harper.color, 0xFF56526B);
-				FlxTween.color(bg, 0.6, bg.color, 0xFF56526B);
-				clicksound = new FlxSound().loadEmbedded(Paths.sound("ghostmelody"));
-				clicksound.play(true);
-			}
+					FlxTween.tween(lauradesc, {alpha: 1}, 0.6);
+					clicksound = new FlxSound().loadEmbedded(Paths.sound("laurasqueak"));
+					clicksound.play(true);
+				}
 
-			if(!isHoveringPooky && isShowingPooky) {
-				isShowingPooky = false;
+				if(!isHoveringLaura && isShowingLaura) {
+					isShowingLaura = false;
 
-				FlxTween.tween(pookydesc, {alpha: 0}, 0.3); 
-				FlxTween.color(alfie, 0.3, alfie.color, 0xFFFFFFFF);
-				FlxTween.color(ethlyn, 0.3, ethlyn.color, 0xFFFFFFFF);
-				FlxTween.color(laura, 0.3, laura.color, 0xFFFFFFFF);
-				FlxTween.color(boyfriend, 0.3, boyfriend.color, 0xFFFFFFFF);
-				FlxTween.color(harper, 0.3, harper.color, 0xFFFFFFFF);
-				FlxTween.color(bg, 0.3, bg.color, 0xFFFFFFFF);
-			}
+					FlxTween.tween(lauradesc, {alpha: 0}, 0.3);
+				}
 
-			
-			//boyfriend Boyfriend
-			if(isHoveringBoyfriend && !isShowingBoyfriend) {
-				isShowingBoyfriend = true;
-				
-				FlxTween.tween(boyfrienddesc, {alpha: 1}, 0.6); 
-				FlxTween.color(alfie, 0.6, alfie.color, 0xFF56526B);
-				FlxTween.color(ethlyn, 0.6, ethlyn.color, 0xFF56526B);
-				FlxTween.color(laura, 0.6, laura.color, 0xFF56526B);
-				FlxTween.color(pooky, 0.6, pooky.color, 0xFF56526B);
-				FlxTween.color(harper, 0.6, harper.color, 0xFF56526B);
-				FlxTween.color(bg, 0.6, bg.color, 0xFF56526B);
-				clicksound = new FlxSound().loadEmbedded(Paths.sound("boobf"));
-				clicksound.play(true);
-			}
+				//pooky Pooky
+				if(isHoveringPooky && !isShowingPooky) {
+					isShowingPooky = true;
 
-			if(!isHoveringBoyfriend && isShowingBoyfriend) {
-				isShowingBoyfriend = false;
+					FlxTween.tween(pookydesc, {alpha: 1}, 0.6);
+					clicksound = new FlxSound().loadEmbedded(Paths.sound("ghostmelody"));
+					clicksound.play(true);
+				}
 
-				FlxTween.tween(boyfrienddesc, {alpha: 0}, 0.3); 
-				FlxTween.color(alfie, 0.3, alfie.color, 0xFFFFFFFF);
-				FlxTween.color(ethlyn, 0.3, ethlyn.color, 0xFFFFFFFF);
-				FlxTween.color(laura, 0.3, laura.color, 0xFFFFFFFF);
-				FlxTween.color(pooky, 0.3, pooky.color, 0xFFFFFFFF);
-				FlxTween.color(harper, 0.3, harper.color, 0xFFFFFFFF);
-				FlxTween.color(bg, 0.3, bg.color, 0xFFFFFFFF);
-			}
-		
+				if(!isHoveringPooky && isShowingPooky) {
+					isShowingPooky = false;
+
+					FlxTween.tween(pookydesc, {alpha: 0}, 0.3);
+				}
+
+
+				//boyfriend Boyfriend
+				if(isHoveringBoyfriend && !isShowingBoyfriend) {
+					isShowingBoyfriend = true;
+
+					FlxTween.tween(boyfrienddesc, {alpha: 1}, 0.6);
+					clicksound = new FlxSound().loadEmbedded(Paths.sound("boobf"));
+					clicksound.play(true);
+				}
+
+				if(!isHoveringBoyfriend && isShowingBoyfriend) {
+					isShowingBoyfriend = false;
+
+					FlxTween.tween(boyfrienddesc, {alpha: 0}, 0.3);
+				}
+
+				fixColorTween(alfie, 0.3, alfie.color, 0xFFFFFFFF);
+				fixColorTween(ethlyn, 0.3, ethlyn.color, 0xFFFFFFFF);
+				fixColorTween(laura, 0.3, laura.color, 0xFFFFFFFF);
+				fixColorTween(pooky, 0.3, pooky.color, 0xFFFFFFFF);
+				fixColorTween(harper, 0.3, harper.color, 0xFFFFFFFF);
+				fixColorTween(boyfriend, 0.3, boyfriend.color, 0xFFFFFFFF);
+
+				if(shouldShowBg) {
+					fixColorTween(bg, 0.6, bg.color, 0xFF56526B);
+
+					if(!isShowingAlfie) fixColorTween(alfie, 0.6, alfie.color, 0xFF56526B);
+					if(!isShowingHarper) fixColorTween(harper, 0.6, harper.color, 0xFF56526B);
+					if(!isShowingEthlyn) fixColorTween(ethlyn, 0.6, ethlyn.color, 0xFF56526B);
+					if(!isShowingPooky) fixColorTween(pooky, 0.6, pooky.color, 0xFF56526B);
+					if(!isShowingBoyfriend) fixColorTween(boyfriend, 0.6, boyfriend.color, 0xFF56526B);
+					if(!isShowingLaura) fixColorTween(laura, 0.6, laura.color, 0xFF56526B);
+				} else {
+					fixColorTween(bg, 0.3, bg.color, 0xFFFFFFFF);
+				}
+
 			}
 		}
 		if (FlxG.sound.music.volume < 0.8)
 		{
-			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
+			FlxG.sound.music.volume += 0.5 * elapsed;
 		}
-
-
-
-
-		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
 
 		if (!selectedSomethin)
 		{
-			/*if (controls.UI_UP_P)
-			{
-				FlxG.sound.play(Paths.sound('scrollMenu'));
-				changeItem(-1);
-			}
-
-			if (controls.UI_DOWN_P)
-			{
-				FlxG.sound.play(Paths.sound('scrollMenu'));
-				changeItem(1);
-			}*/
-
 			if (controls.BACK)
 			{
 				selectedSomethin = true;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new MainMenuState());
 			}
-
-			/*if (controls.ACCEPT)
-			{
-			
-				{
-					selectedSomethin = true;
-					FlxG.sound.play(Paths.sound('confirmMenu'));
-
-					menuItems.forEach(function(spr:FlxSprite)
-					{
-						if (curSelected != spr.ID)
-						{
-							FlxTween.tween(spr, {alpha: 0}, 0.4, {
-								ease: FlxEase.quadOut,
-								onComplete: function(twn:FlxTween)
-								{
-									spr.kill();
-								}
-							});
-						}
-						else
-						{
-							FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
-							{
-								var daChoice:String = optionShit[curSelected];
-
-								switch (daChoice)
-								{
-									case 'story_mode':
-										MusicBeatState.switchState(new StoryMenuState());
-									case 'freeplay':
-										MusicBeatState.switchState(new FreeplayState());
-									#if MODS_ALLOWED
-									case 'mods':
-										MusicBeatState.switchState(new ModsMenuState());
-									#end
-									case 'awards':
-										MusicBeatState.switchState(new AchievementsMenuState());
-									case 'credits':
-										MusicBeatState.switchState(new CreditsState());
-									case 'options':
-										LoadingState.loadAndSwitchState(new options.OptionsState());
-								}
-							});
-						}
-					});
-				}
-			}
-			#if desktop
-			else if (FlxG.keys.anyJustPressed(debugKeys))
-			{
-				selectedSomethin = true;
-				MusicBeatState.switchState(new MasterEditorMenu());
-			}
-			#end*/
 		}
-
-
-		/*menuItems.forEach(function(spr:FlxSprite)
-		{
-			spr.screenCenter(X);
-		});*/
 	}
-
-	/*function changeItem(huh:Int = 0)
-	{
-		curSelected += huh;
-
-		if (curSelected >= menuItems.length)
-			curSelected = 0;
-		if (curSelected < 0)
-			curSelected = menuItems.length - 1;
-
-		menuItems.forEach(function(spr:FlxSprite)
-		{
-			spr.animation.play('idle');
-			spr.updateHitbox();
-
-			if (spr.ID == curSelected)
-			{
-				spr.animation.play('selected');
-				var add:Float = 0;
-				if(menuItems.length > 4) {
-					add = menuItems.length * 8;
-				}
-				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
-				spr.centerOffsets();
-			}
-		});
-	}*/
-
-
-
-
-
-
-
-
 
 }

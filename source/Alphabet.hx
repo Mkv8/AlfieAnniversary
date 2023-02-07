@@ -1,5 +1,7 @@
 package;
 
+import flixel.util.FlxColor;
+import flixel.util.FlxColor;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
@@ -39,6 +41,8 @@ class Alphabet extends FlxSpriteGroup
 
 	var splitWords:Array<String> = [];
 
+	public var fontColor(default, set):FlxColor = 0x000000;
+
 	var isBold:Bool = false;
 	public var lettersArray:Array<AlphaCharacter> = [];
 
@@ -70,6 +74,28 @@ class Alphabet extends FlxSpriteGroup
 		} else {
 			finishedText = true;
 		}
+	}
+
+	function setFontColor(letter:AlphaCharacter, color:FlxColor) {
+		if(!letter.isBold) {
+			letter.colorTransform.color = color;
+		}
+	}
+
+	function set_fontColor(newColor:FlxColor) {
+		for(letter in lettersArray) {
+			setFontColor(letter, newColor);
+		}
+		return fontColor = newColor;
+	}
+
+	public function changeTextIfDifferent(newText:String, newTypingSpeed:Float = -1)
+	{
+		if(_finalText != newText) {
+			changeText(newText, newTypingSpeed);
+			return true;
+		}
+		return false;
 	}
 
 	public function changeText(newText:String, newTypingSpeed:Float = -1)
@@ -178,6 +204,7 @@ class Alphabet extends FlxSpriteGroup
 					}
 				}
 
+				setFontColor(letter, fontColor);
 				add(letter);
 				lettersArray.push(letter);
 
@@ -313,6 +340,7 @@ class Alphabet extends FlxSpriteGroup
 					dialogueSound = FlxG.sound.play(Paths.sound('dialogue'));
 				}
 
+				setFontColor(letter, fontColor);
 				add(letter);
 
 				lastSprite = letter;
@@ -369,6 +397,8 @@ class AlphaCharacter extends FlxSprite
 
 	private var textSize:Float = 1;
 
+	public var isBold:Bool = false;
+
 	public function new(x:Float, y:Float, textSize:Float)
 	{
 		super(x, y);
@@ -383,6 +413,7 @@ class AlphaCharacter extends FlxSprite
 
 	public function createBoldLetter(letter:String)
 	{
+		isBold = true;
 		animation.addByPrefix(letter, letter.toUpperCase() + " bold", 24);
 		animation.play(letter);
 		updateHitbox();
@@ -390,6 +421,7 @@ class AlphaCharacter extends FlxSprite
 
 	public function createBoldNumber(letter:String):Void
 	{
+		isBold = true;
 		animation.addByPrefix(letter, "bold" + letter, 24);
 		animation.play(letter);
 		updateHitbox();
@@ -397,6 +429,7 @@ class AlphaCharacter extends FlxSprite
 
 	public function createBoldSymbol(letter:String)
 	{
+		isBold = true;
 		switch (letter)
 		{
 			case '.':
@@ -440,6 +473,7 @@ class AlphaCharacter extends FlxSprite
 
 	public function createLetter(letter:String):Void
 	{
+		isBold = false;
 		var letterCase:String = "lowercase";
 		if (letter.toLowerCase() != letter)
 		{
@@ -456,6 +490,7 @@ class AlphaCharacter extends FlxSprite
 
 	public function createNumber(letter:String):Void
 	{
+		isBold = false;
 		animation.addByPrefix(letter, letter, 24);
 		animation.play(letter);
 
@@ -467,6 +502,7 @@ class AlphaCharacter extends FlxSprite
 
 	public function createSymbol(letter:String)
 	{
+		isBold = false;
 		switch (letter)
 		{
 			case '#':

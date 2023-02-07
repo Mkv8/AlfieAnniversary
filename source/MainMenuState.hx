@@ -18,7 +18,9 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import lime.app.Application;
+#if ACHIEVEMENTS_ALLOWED
 import Achievements;
+#end
 import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
 
@@ -32,7 +34,7 @@ class MainMenuState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
-	
+
 	var optionShit:Array<String> = [
 		'story mode',
 		//'freeplay',
@@ -69,8 +71,7 @@ class MainMenuState extends MusicBeatState
 		camAchievement.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
-		FlxG.cameras.add(camAchievement);
-		FlxCamera.defaultCameras = [camGame];
+		FlxG.cameras.add(camAchievement, false);
 
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
@@ -102,7 +103,7 @@ class MainMenuState extends MusicBeatState
 		magenta.setGraphicSize(FlxG.width, FlxG.height);
 
 		add(magenta);
-		
+
 		// magenta.scrollFactor.set();
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
@@ -157,7 +158,7 @@ class MainMenuState extends MusicBeatState
 					menuItem.y -= 10;
 				case "options":
 					menuItem.y += 20;
-			} 
+			}
 		}
 
 
@@ -185,7 +186,7 @@ class MainMenuState extends MusicBeatState
 	var selectedSomethin:Bool = false;
 
 
-	
+
 	override function update(elapsed:Float)
 	{
 
@@ -404,7 +405,7 @@ switch (optionShit[curSelected])
     }
 }
 	}
-	
+
 }
 
 class Item extends FlxSprite {
@@ -415,5 +416,7 @@ class Item extends FlxSprite {
         initialY = y;
         initialX = x;
         super(x, y);
+
+		antialiasing = ClientPrefs.globalAntialiasing;
     }
 }

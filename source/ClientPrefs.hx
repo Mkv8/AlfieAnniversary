@@ -28,7 +28,7 @@ class ClientPrefs {
 	public static var controllerMode:Bool = false;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
-		'scrolltype' => 'multiplicative', 
+		'scrolltype' => 'multiplicative',
 		// anyone reading this, amod is multiplicative speed mod, cmod is constant speed mod, and xmod is bpm based speed mod.
 		// an amod example would be chartSpeed * multiplier
 		// cmod would just be constantSpeed = chartSpeed
@@ -61,21 +61,21 @@ class ClientPrefs {
 		'note_down'		=> [S, DOWN],
 		'note_up'		=> [W, UP],
 		'note_right'	=> [D, RIGHT],
-		
+
 		'ui_left'		=> [A, LEFT],
 		'ui_down'		=> [S, DOWN],
 		'ui_up'			=> [W, UP],
 		'ui_right'		=> [D, RIGHT],
-		
+
 		'accept'		=> [SPACE, ENTER],
 		'back'			=> [BACKSPACE, ESCAPE],
 		'pause'			=> [ENTER, ESCAPE],
 		'reset'			=> [R, NONE],
-		
+
 		'volume_mute'	=> [ZERO, NONE],
 		'volume_up'		=> [NUMPADPLUS, PLUS],
 		'volume_down'	=> [NUMPADMINUS, MINUS],
-		
+
 		'debug_1'		=> [SEVEN, NONE],
 		'debug_2'		=> [EIGHT, NONE]
 	];
@@ -106,8 +106,10 @@ class ClientPrefs {
 		FlxG.save.data.noReset = noReset;
 		FlxG.save.data.healthBarAlpha = healthBarAlpha;
 		FlxG.save.data.comboOffset = comboOffset;
+		#if ACHIEVEMENTS_ALLOWED
 		FlxG.save.data.achievementsMap = Achievements.achievementsMap;
 		FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
+		#end
 
 		FlxG.save.data.ratingOffset = ratingOffset;
 		FlxG.save.data.sickWindow = sickWindow;
@@ -116,7 +118,7 @@ class ClientPrefs {
 		FlxG.save.data.safeFrames = safeFrames;
 		FlxG.save.data.gameplaySettings = gameplaySettings;
 		FlxG.save.data.controllerMode = controllerMode;
-	
+
 		FlxG.save.flush();
 
 		var save:FlxSave = new FlxSave();
@@ -192,7 +194,7 @@ class ClientPrefs {
 		if(FlxG.save.data.comboOffset != null) {
 			comboOffset = FlxG.save.data.comboOffset;
 		}
-		
+
 		if(FlxG.save.data.ratingOffset != null) {
 			ratingOffset = FlxG.save.data.ratingOffset;
 		}
@@ -219,7 +221,7 @@ class ClientPrefs {
 				gameplaySettings.set(name, value);
 			}
 		}
-		
+
 		// flixel automatically saves your volume!
 		if(FlxG.save.data.volume != null)
 		{

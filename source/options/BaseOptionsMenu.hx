@@ -50,11 +50,11 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 		if(title == null) title = 'Options';
 		if(rpcTitle == null) rpcTitle = 'Changing some settings';
-		
+
 		#if desktop
 		DiscordClient.changePresence("Changing some settings", null);
 		#end
-		
+
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuOptions'));
 		bg.color = 0xFFea71fd;
 		bg.screenCenter();
@@ -91,6 +91,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		{
 			var optionText:Alphabet = new Alphabet(0, 70 * i, optionsArray[i].name, false, false);
 			optionText.isMenuItem = true;
+			optionText.fontColor = 0xFFFFFF;
 			optionText.x += 300;
 			/*optionText.forceX = 300;
 			optionText.yMult = 90;*/
@@ -108,6 +109,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				optionText.xAdd -= 80;
 				var valueText:AttachedText = new AttachedText('' + optionsArray[i].getValue(), optionText.width + 80);
 				valueText.sprTracker = optionText;
+				valueText.fontColor = 0xFFFFFF;
 				valueText.copyAlpha = true;
 				valueText.ID = i;
 				grpTexts.add(valueText);
@@ -221,7 +223,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 							{
 								case 'int':
 									curOption.setValue(Math.round(holdValue));
-								
+
 								case 'float' | 'percent':
 									curOption.setValue(FlxMath.roundDecimal(holdValue, curOption.decimals));
 							}
@@ -284,7 +286,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		}
 		holdTime = 0;
 	}
-	
+
 	function changeSelection(change:Int = 0)
 	{
 		curSelected += change;
