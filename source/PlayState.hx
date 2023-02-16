@@ -5232,6 +5232,7 @@ class PlayState extends MusicBeatState
 						coming4u.animation.pause();
 						boyfriend.screenCenter(XY);
 						dad.screenCenter(XY);
+						dad.scrollFactor.set(0,0);
 						boyfriend.alpha = 0.0001;
 						gf.alpha = 0.0001;
 						fakeweek.alpha = 0.0001;
