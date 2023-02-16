@@ -38,10 +38,10 @@
 				-34,
 				-2
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "singRIGHT",
-			"loop": false,
+			"indices": [],
 			"name": "dad sing note right"
 		},
 		{
@@ -49,10 +49,10 @@
 				110,
 				-86
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 24,
 			"anim": "singUP",
-			"loop": false,
+			"indices": [],
 			"name": "Dad Sing note UP"
 		}
 	],
@@ -70,8 +70,8 @@
 		121
 	],
 	"camera_position": [
-		200,
-		30
+		70,
+		60
 	],
 	"sing_duration": 6.1,
 	"scale": 1

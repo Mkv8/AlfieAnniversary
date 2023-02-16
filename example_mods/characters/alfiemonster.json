@@ -14,7 +14,7 @@
 		{
 			"offsets": [
 				45,
-				160
+				173
 			],
 			"loop": false,
 			"fps": 24,
@@ -25,7 +25,7 @@
 		{
 			"offsets": [
 				45,
-				82
+				87
 			],
 			"loop": false,
 			"fps": 24,
@@ -35,8 +35,8 @@
 		},
 		{
 			"offsets": [
-				149,
-				39
+				159,
+				40
 			],
 			"loop": false,
 			"fps": 24,
@@ -49,6 +49,9 @@
 				45,
 				25
 			],
+			"loop": false,
+			"fps": 24,
+			"anim": "danceLeft",
 			"indices": [
 				0,
 				1,
@@ -64,9 +67,6 @@
 				11,
 				12
 			],
-			"fps": 24,
-			"anim": "danceLeft",
-			"loop": false,
 			"name": "idle"
 		},
 		{
@@ -74,6 +74,9 @@
 				45,
 				25
 			],
+			"loop": false,
+			"fps": 24,
+			"anim": "danceRight",
 			"indices": [
 				13,
 				14,
@@ -90,17 +93,14 @@
 				25,
 				26
 			],
-			"fps": 24,
-			"anim": "danceRight",
-			"loop": false,
 			"name": "idle"
 		}
 	],
 	"no_antialiasing": false,
 	"image": "characters/monster",
 	"position": [
-		0,
-		0
+		-50,
+		-50
 	],
 	"healthicon": "monsteralfie",
 	"flip_x": false,
@@ -110,9 +110,9 @@
 		0
 	],
 	"camera_position": [
-		-225,
-		30
+		-275,
+		40
 	],
 	"sing_duration": 6.1,
-	"scale": 1
+	"scale": 1.1
 }

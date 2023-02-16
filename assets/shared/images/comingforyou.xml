@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="comingforyou.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="comingblack0000" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0001" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0002" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0003" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0004" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0005" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0006" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0007" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0008" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0009" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0010" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0011" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0012" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0013" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0014" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0015" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0016" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0017" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0018" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0019" x="10" y="10" width="600" height="104" frameX="-807" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0020" x="630" y="10" width="582" height="104" frameX="-816" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0021" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0022" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0023" x="10" y="1313" width="839" height="104" frameX="-691" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0024" x="869" y="1313" width="851" height="104" frameX="-681" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0025" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0026" x="1740" y="1313" width="872" height="104" frameX="-670" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0027" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0028" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0029" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0030" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0031" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0032" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0033" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0034" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0035" x="2632" y="1313" width="860" height="104" frameX="-677" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0036" x="10" y="1437" width="860" height="102" frameX="-677" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0037" x="890" y="1437" width="863" height="106" frameX="-674" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0038" x="1773" y="1437" width="860" height="103" frameX="-677" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0039" x="2653" y="1437" width="859" height="103" frameX="-678" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0040" x="2653" y="1437" width="859" height="103" frameX="-678" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0041" x="10" y="1563" width="860" height="105" frameX="-677" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0042" x="890" y="1563" width="859" height="107" frameX="-678" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0043" x="1769" y="1563" width="861" height="103" frameX="-676" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0044" x="1769" y="1563" width="861" height="103" frameX="-676" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0045" x="2650" y="1563" width="862" height="103" frameX="-675" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0046" x="2650" y="1563" width="862" height="103" frameX="-675" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0047" x="10" y="1690" width="862" height="103" frameX="-675" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0048" x="10" y="1690" width="862" height="103" frameX="-675" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0049" x="10" y="1690" width="862" height="103" frameX="-675" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0050" x="10" y="1690" width="862" height="103" frameX="-675" frameY="-1000" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0051" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0052" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0053" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0054" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0055" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0056" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0057" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0058" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0059" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0060" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0061" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0062" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0063" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0064" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0065" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0066" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0067" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0068" x="892" y="1690" width="866" height="256" frameX="-670" frameY="-874" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0069" x="892" y="1690" width="866" height="256" frameX="-670" frameY="-874" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0070" x="1778" y="1690" width="866" height="246" frameX="-670" frameY="-884" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0071" x="1778" y="1690" width="866" height="246" frameX="-670" frameY="-884" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0072" x="2664" y="1690" width="866" height="240" frameX="-670" frameY="-890" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0073" x="2664" y="1690" width="866" height="240" frameX="-670" frameY="-890" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0074" x="2664" y="1690" width="866" height="240" frameX="-670" frameY="-890" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0075" x="2664" y="1690" width="866" height="240" frameX="-670" frameY="-890" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0076" x="2664" y="1690" width="866" height="240" frameX="-670" frameY="-890" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0077" x="2664" y="1690" width="866" height="240" frameX="-670" frameY="-890" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0078" x="2664" y="1690" width="866" height="240" frameX="-670" frameY="-890" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0079" x="2664" y="1690" width="866" height="240" frameX="-670" frameY="-890" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0080" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0081" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0082" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0083" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0084" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0085" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0086" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0087" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0088" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0089" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0090" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0091" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0092" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0093" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0094" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0095" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0096" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0097" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0098" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0099" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0100" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0101" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0102" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0103" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0104" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0105" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0106" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0107" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0108" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0109" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0110" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0111" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0112" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0113" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0114" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0115" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0116" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0117" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0118" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0119" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0120" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0121" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0122" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0123" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0124" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0125" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0126" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0127" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0128" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0129" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0130" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0131" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0132" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0133" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0134" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0135" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0136" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0137" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0138" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0139" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0140" x="10" y="1966" width="866" height="278" frameX="-670" frameY="-852" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0141" x="896" y="1966" width="907" height="666" frameX="-629" frameY="-464" frameWidth="2458" frameHeight="1283"/>
+	<SubTexture name="comingblack0142" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0143" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0144" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0145" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0146" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0147" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0148" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0149" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0150" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0151" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0152" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0153" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0154" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0155" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0156" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0157" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0158" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0159" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0160" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0161" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0162" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0163" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0164" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0165" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0166" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0167" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0168" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0169" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0170" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0171" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0172" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0173" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0174" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0175" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0176" x="1232" y="10" width="2458" height="1283"/>
+	<SubTexture name="comingblack0177" x="1232" y="10" width="2458" height="1283"/>
+</TextureAtlas>

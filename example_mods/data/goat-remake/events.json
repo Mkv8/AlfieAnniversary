@@ -833,6 +833,11 @@
 						"Set Cam Zoom",
 						"0.7",
 						""
+					],
+					[
+						"Camera Follow Pos",
+						"50",
+						"175"
 					]
 				]
 			],
@@ -1426,8 +1431,8 @@
 					],
 					[
 						"Camera Follow Pos",
-						"",
-						""
+						"50",
+						"175"
 					],
 					[
 						"Set Cam Zoom",
@@ -1613,6 +1618,11 @@
 						"Add Camera Zoom",
 						"0.03",
 						""
+					],
+					[
+						"Camera Follow Pos",
+						"",
+						""
 					]
 				]
 			],
@@ -1693,6 +1703,11 @@
 						"Add Camera Zoom",
 						"0.03",
 						""
+					],
+					[
+						"Camera Follow Pos",
+						"50",
+						"175"
 					]
 				]
 			],

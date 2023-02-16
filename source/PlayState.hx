@@ -302,6 +302,19 @@ class PlayState extends MusicBeatState
 	var kissuhoh:BGSprite;
 	var munchoverlay:BGSprite;
 
+	var waterfall:BGSprite;
+	var wateradd:BGSprite;
+	var watermultiply:BGSprite;
+	var wateroverlay:BGSprite;
+
+	public var grayscale = new shaders.Grayscale();
+	public var grayscaleFilter:ShaderFilter;
+
+	//public var grayscaleFilter = new ShaderFilter(grayscale);
+
+	var fakeweek:BGSprite;
+	var coming4u:BGSprite;
+
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
@@ -366,7 +379,7 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-
+		grayscaleFilter = new ShaderFilter(grayscale);
 		FunkinLua.hscript = null;
 		Paths.clearStoredMemory();
 
@@ -672,9 +685,6 @@ class PlayState extends MusicBeatState
 			munchoverlay.alpha = 0;
 			munchoverlay.blend = ADD;
 
-
-
-
 			kissuhoh = new BGSprite('cupid/kissuhoh', 0, 0, 1, 1);
 			kissuhoh.updateHitbox();
 			kissuhoh.setGraphicSize(FlxG.width, FlxG.height);
@@ -683,6 +693,59 @@ class PlayState extends MusicBeatState
 			kissuhoh.blend = MULTIPLY;
 			kissuhoh.alpha = 0;
 		}
+
+		if(formattedSong == 'jelly-jamboree') {
+
+			wateradd = new BGSprite('kaikai/waterfalladd', -600, -300, 1, 1);
+			wateradd.updateHitbox();
+			wateradd.alpha = 0.0001;
+			wateradd.blend = ADD;
+
+			watermultiply = new BGSprite('kaikai/waterfallmultiply', -600, -300, 1, 1);
+			watermultiply.updateHitbox();
+			watermultiply.alpha = 1;
+			watermultiply.blend = MULTIPLY;
+
+			wateroverlay = new BGSprite('kaikai/waterfalloverlay', -600, -300, 1, 1);
+			wateroverlay.updateHitbox();
+			wateroverlay.alpha = 0.0001;
+			wateroverlay.blend = SCREEN;
+
+			wateradd.scale.set(1.15, 1.15);
+			watermultiply.scale.set(1.15, 1.15);
+			wateroverlay.scale.set(1.15, 1.15);
+
+			FlxG.game.setFilters(cshaders);
+			FlxG.game.filtersEnabled = false;
+
+			camGame.setFilters([grayscaleFilter]);
+			camHUD.setFilters([grayscaleFilter]);
+			grayscale.apply = 0;
+
+
+			scanlines = new BGSprite('scanlines2', 1, 1, 1, 1);
+			scanlines.updateHitbox();
+			scanlines.cameras = [camHUD];
+			scanlines.screenCenter(XY);
+			scanlines.blend = OVERLAY;
+			scanlines.scale.set(1.8, 1.8);
+			scanlines.alpha = 0;
+		}
+
+		if(formattedSong == 'minimize')
+			{
+				coming4u = new BGSprite('comingforyou', 0, -420, 1, 1, ['comingblack'], false);
+				coming4u.updateHitbox();
+				//coming4u.setGraphicSize(FlxG.width, FlxG.height);
+				coming4u.cameras = [camOther];
+				coming4u.screenCenter(X);
+				coming4u.alpha = 1;
+				coming4u.x += 115;
+				add(coming4u);
+				coming4u.animation.pause();
+				coming4u.animation.curAnim.curFrame = 1;
+
+			}
 
 		#if desktop
 		storyDifficultyText = CoolUtil.difficulties[storyDifficulty];
@@ -1042,6 +1105,16 @@ class PlayState extends MusicBeatState
 
 				add(bkiss);
 
+			case 'waterfall':
+				waterfall = new BGSprite('kaikai/waterfall', -600, -300, 1, 1);
+				waterfall.scale.set(1.15, 1.15);
+				add(waterfall);
+			
+			case 'fake':
+				fakeweek = new BGSprite('fakeweek', -600, -300, 1, 1);
+				fakeweek.scale.set(1.10, 1.10);
+				add(fakeweek);
+
 
 		}
 		add(gfGroup);
@@ -1091,6 +1164,17 @@ class PlayState extends MusicBeatState
 			add(blackOverlay);
 		}
 
+		if(curStage == 'waterfall') {
+			add(watermultiply);
+			add(wateradd);
+			add(wateroverlay);
+			add(blackOverlay);
+			add(scanlines);
+			scanlines.alpha = 0.15;
+		}
+		if(curStage == 'fake') {
+			add(blackOverlay);
+		}
 
 		// "GLOBAL" SCRIPTS
 		#if LUA_ALLOWED
@@ -1420,6 +1504,14 @@ class PlayState extends MusicBeatState
 			healthBar.alpha = 0;
 
 		}
+
+		if (SONG.song == 'minimize')
+		{
+			iconP2.alpha = 0;
+			iconP1.alpha = 0;
+			healthBar.alpha = 0;
+
+		}
 		if (SONG.song == 'mansion-match')
 		{
 			scoreTxt = new FlxFixedText(0, healthBarBG.y + 36, FlxG.width, "", 20);
@@ -1525,7 +1617,8 @@ class PlayState extends MusicBeatState
 		data.set("all-saints-scramble", ["NowP", "skatitle"]);
 		data.set("spooks", ["NowP90s", "90stitle"]);
 		data.set("heart-attack", ["NowP", "ktitle"]);
-		data.set("slimy-business", ["NowP", "kaititle"]);
+		data.set("jelly-jamboree", ["NowP", "kaititle"]);
+		data.set("minimize", ["NowP", "minustitle"]);
 
 
 		var shouldShowCassette:Bool = false;
@@ -5067,7 +5160,7 @@ class PlayState extends MusicBeatState
 				case 158:
 				{
 					FlxTween.tween(blackOverlay, {alpha: 0}, 2);
-					FlxTween.tween(kissuhoh, {alpha: 0.5}, 2 );
+					FlxTween.tween(kissuhoh, {alpha: 0.8}, 2 );
 				}
 				case 232:
 				{
@@ -5084,6 +5177,90 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		if (curSong == 'jelly-jamboree' && curStage == 'waterfall' && !ClientPrefs.lowQuality)
+			{
+	
+				switch (curBeat)
+				{
+					case 20:
+					{
+						FlxTween.tween(wateradd, {alpha: 0.8}, 1);
+						FlxTween.tween(wateroverlay, {alpha: 1}, 1);
+					}
+					case 101 | 109 | 117 | 125 | 293 | 301 | 309 | 317:
+					{
+						grayscale.apply = 1;
+						FlxG.game.filtersEnabled = true;
+					}
+					case 102 | 110 | 118 | 126 | 294 | 302 | 310 | 318:
+					{
+						grayscale.apply = 0.25;
+					}
+					case 103 | 111 | 119 | 127 | 295 | 303  | 311 | 319:
+					{
+						grayscale.apply = 0;
+						FlxG.game.filtersEnabled = true;
+					}
+					case 104 | 112 | 120 | 128 | 296 | 304 | 312 | 320:
+					{
+						grayscale.apply = 0;
+						FlxG.game.filtersEnabled = false;
+					}
+					case 324:
+					{
+						FlxTween.tween(camHUD, {alpha: 0}, 2);
+					}
+					case 340:
+						FlxTween.tween(blackOverlay, {alpha: 1}, 9);
+
+				}
+			}
+
+		if (curSong == 'minimize' && curStage == 'fake' && !ClientPrefs.lowQuality)
+			{
+	
+				switch (curBeat)
+				{
+					case 17:
+					{
+						dad.alpha = 0.0001;
+						coming4u.animation.resume();
+					}
+					case 31:
+					{
+						blackOverlay.alpha = 1;
+						coming4u.animation.pause();
+						boyfriend.screenCenter(XY);
+						dad.screenCenter(XY);
+						boyfriend.alpha = 0.0001;
+						gf.alpha = 0.0001;
+						fakeweek.alpha = 0.0001;
+					}
+
+					case 37:
+					{
+						coming4u.alpha = 0;
+						FlxTween.tween(blackOverlay, {alpha: 0}, 1.7);
+
+						FlxTween.tween(iconP2, {alpha: 1}, 1.7);
+						FlxTween.tween(iconP1, {alpha: 1}, 1.7);
+						FlxTween.tween(healthBar, {alpha: 1}, 1.7);
+
+						FlxTween.tween(dad, {alpha: 1}, 1.7);
+					}
+
+					case 104:
+					{
+						FlxTween.tween(dad, {alpha: 0}, 2.5);
+					}
+
+					case 112:
+					{
+					FlxG.camera.flash(FlxColor.WHITE,1,false);
+					dad.alpha = 1;
+					}
+				}
+			}
 
 		switch (curStage)
 		{
@@ -5201,107 +5378,6 @@ class PlayState extends MusicBeatState
 
 	public static var othersCodeName:String = 'otherAchievements';
 	#if ACHIEVEMENTS_ALLOWED
-	/*private function checkForAchievement(achievesToCheck:Array<String> = null):String {
 
-		if(chartingMode) return null;
-
-		var usedPractice:Bool = (ClientPrefs.getGameplaySetting('practice', false) || ClientPrefs.getGameplaySetting('botplay', false));
-		var achievementsToCheck:Array<String> = achievesToCheck;
-		if (achievementsToCheck == null) {
-			achievementsToCheck = [];
-			for (i in 0...Achievements.achievementsStuff.length) {
-				achievementsToCheck.push(Achievements.achievementsStuff[i][2]);
-			}
-			achievementsToCheck.push(othersCodeName);
-		}
-
-		for (i in 0...achievementsToCheck.length) {
-			var achievementName:String = achievementsToCheck[i];
-			var unlock:Bool = false;
-
-			if (achievementName == othersCodeName) {
-				if(isStoryMode && campaignMisses + songMisses < 1 && CoolUtil.difficultyString() == 'HARD' && storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
-				{
-					var weekName:String = WeekData.getWeekFileName();
-
-					for (json in Achievements.loadedAchievements) {
-						if (json.unlocksAfter == weekName && !Achievements.isAchievementUnlocked(json.icon) && !json.customGoal) unlock = true;
-						achievementName = json.icon;
-					}
-
-					for (k in 0...Achievements.achievementsStuff.length) {
-						var unlockPoint:String = Achievements.achievementsStuff[k][3];
-						if (unlockPoint != null) {
-							if (unlockPoint == weekName && !unlock && !Achievements.isAchievementUnlocked(Achievements.achievementsStuff[k][2])) unlock = true;
-							achievementName = Achievements.achievementsStuff[k][2];
-						}
-					}
-				}
-			}
-
-			for (json in Achievements.loadedAchievements) { //Requires jsons for call
-				var ret:Dynamic = callOnLuas('onCheckForAchievement', [json.icon]); //Set custom goals
-
-				//IDK, like
-				// if getProperty('misses') > 10 and leName == 'lmao_skill_issue' then return Function_Continue end
-
-				if (ret == FunkinLua.Function_Continue && !Achievements.isAchievementUnlocked(json.icon) && json.customGoal && !unlock) {
-					unlock = true;
-					achievementName = json.icon;
-				}
-			}
-
-			if(!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled && !unlock) {
-				switch(achievementName)
-				{
-					case 'ur_bad':
-						if(ratingPercent < 0.2 && !practiceMode) {
-							unlock = true;
-						}
-					case 'ur_good':
-						if(ratingPercent >= 1 && !usedPractice) {
-							unlock = true;
-						}
-					case 'roadkill_enthusiast':
-						if(Achievements.henchmenDeath >= 100) {
-							unlock = true;
-						}
-					case 'oversinging':
-						if(boyfriend.holdTimer >= 10 && !usedPractice) {
-							unlock = true;
-						}
-					case 'hype':
-						if(!boyfriendIdled && !usedPractice) {
-							unlock = true;
-						}
-					case 'two_keys':
-						if(!usedPractice) {
-							var howManyPresses:Int = 0;
-							for (j in 0...keysPressed.length) {
-								if(keysPressed[j]) howManyPresses++;
-							}
-
-							if(howManyPresses <= 2) {
-								unlock = true;
-							}
-						}
-					case 'toastie':
-						if(ClientPrefs.framerate <= 60 && ClientPrefs.lowQuality && !ClientPrefs.globalAntialiasing /*&& !ClientPrefs.imagesPersist) {
-							unlock = true;
-						}
-					case 'debugger':
-						if(Paths.formatToSongPath(SONG.song) == 'test' && !usedPractice) {
-							unlock = true;
-						}
-				}
-			}
-
-			if(unlock) {
-				Achievements.unlockAchievement(achievementName);
-				return achievementName;
-			}
-		}
-		return null;
-	}*/
 	#end
 }

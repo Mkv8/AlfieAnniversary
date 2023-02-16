@@ -63,6 +63,7 @@ class StoryMenuState extends MusicBeatState
 	var ourple:FlxSprite;
 	var ska:FlxSprite;
 	var kisston:FlxSprite;
+	var kai:FlxSprite;
 
 	override function create()
 	{
@@ -101,6 +102,7 @@ class StoryMenuState extends MusicBeatState
 		ourple = new FlxSprite().loadGraphic(Paths.image('ourplembg'));
 		ska = new FlxSprite().loadGraphic(Paths.image('skabg'));
 		kisston = new FlxSprite().loadGraphic(Paths.image('kisstonbg'));
+		kai = new FlxSprite().loadGraphic(Paths.image('kaimenubg'));
 
 		add(oldtimes);
 		add(specters);
@@ -113,6 +115,7 @@ class StoryMenuState extends MusicBeatState
 		add(ourple);
 		add(ska);
 		add(kisston);
+		add(kai);
 
 		updateBackground(true);
 
@@ -431,7 +434,8 @@ class StoryMenuState extends MusicBeatState
 		tweenBg(ourple, 8, instant);
 		tweenBg(ska, 9, instant);
 		tweenBg(anime, 10, instant);
-		tweenBg(kisston, 11, instant);
+		tweenBg(kisston, 12, instant);
+		tweenBg(kai, 13, instant);
 		}
 
 	function changeWeek(change:Int = 0):Void

@@ -1,59 +1,59 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
-				230,
-				-120
+				260,
+				81
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singLEFT",
-			"fps": 24,
-			"name": "lefteye",
-			"indices": []
+			"indices": [],
+			"name": "lefteye"
 		},
 		{
-			"loop": false,
 			"offsets": [
-				20,
-				-340
+				5,
+				-210
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singDOWN",
-			"fps": 24,
-			"name": "downeye",
-			"indices": []
+			"indices": [],
+			"name": "downeye"
 		},
 		{
-			"loop": false,
 			"offsets": [
-				8,
-				30
+				-11,
+				220
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singUP",
-			"fps": 24,
-			"name": "upeye",
-			"indices": []
+			"indices": [],
+			"name": "upeye"
 		},
 		{
+			"offsets": [
+				-260,
+				100
+			],
 			"loop": false,
-			"offsets": [
-				-200,
-				-120
-			],
-			"anim": "singRIGHT",
 			"fps": 24,
-			"name": "righteye",
-			"indices": []
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "righteye"
 		},
 		{
-			"loop": true,
 			"offsets": [
-				21,
-				-195
+				0,
+				0
 			],
-			"anim": "idle",
+			"loop": true,
 			"fps": 12,
-			"name": "idleeye",
-			"indices": []
+			"anim": "idle",
+			"indices": [],
+			"name": "idleeye"
 		}
 	],
 	"no_antialiasing": false,
@@ -70,9 +70,9 @@
 		0
 	],
 	"camera_position": [
-		-165,
-		280
+		-175,
+		80
 	],
 	"sing_duration": 6.1,
-	"scale": 1
+	"scale": 1.2
 }

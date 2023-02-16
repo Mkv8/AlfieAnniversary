@@ -1,0 +1,49 @@
+{
+	"song": {
+		"speed": 2.3,
+		"stage": "fake",
+		"player1": "bf",
+		"player2": "bf-opti",
+		"player3": null,
+		"events": [
+			[
+				15408.560311284,
+				[
+					[
+						"Change Character",
+						"dad",
+						"allseeing"
+					]
+				]
+			],
+			[
+				22402.8079091559,
+				[
+					[
+						"Camera Follow Pos",
+						"400",
+						"750"
+					]
+				]
+			],
+			[
+				62088.4793805416,
+				[
+					[
+						"Change Character",
+						"dad",
+						"alfiemonster"
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": "noteSplashes",
+		"validScore": false,
+		"gfVersion": "gf-pixel",
+		"bpm": 128.5,
+		"arrowSkin": "",
+		"needsVoices": true,
+		"song": "minimize"
+	}
+}

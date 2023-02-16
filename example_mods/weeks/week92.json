@@ -1,25 +1,25 @@
 {
 	"songs": [
 		[
-			"Heart Attack",
-			"kissIco",
+			"Minimize",
+			"dad",
 			[
-				200,
-				250,
-				167
+				146,
+				113,
+				253
 			]
 		]
 	],
 	"hideFreeplay": false,
-	"weekBackground": "kiss",
+	"weekBackground": "minus",
 	"difficulties": "",
 	"weekCharacters": [
 		"",
 		"",
 		""
 	],
-	"storyName": "Heart Attack",
-	"weekName": "The deadly embrace of love",
+	"storyName": "Minimize",
+	"weekName": "Past the fourth wall",
 	"freeplayColor": [
 		146,
 		113,
