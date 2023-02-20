@@ -99,8 +99,8 @@
 	"no_antialiasing": false,
 	"image": "characters/monster",
 	"position": [
-		-50,
-		-50
+		-250,
+		-200
 	],
 	"healthicon": "monsteralfie",
 	"flip_x": false,
