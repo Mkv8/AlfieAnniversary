@@ -1,11 +1,21 @@
 {
 	"song": {
-		"speed": 2.3,
+		"speed": 2.8,
 		"stage": "fake",
 		"player1": "bf",
 		"player2": "bf-opti",
 		"player3": null,
 		"events": [
+			[
+				15234.375,
+				[
+					[
+						"Camera Follow Pos",
+						"400",
+						"725"
+					]
+				]
+			],
 			[
 				15408.560311284,
 				[
@@ -13,16 +23,6 @@
 						"Change Character",
 						"dad",
 						"allseeing"
-					]
-				]
-			],
-			[
-				22402.8079091559,
-				[
-					[
-						"Camera Follow Pos",
-						"400",
-						"750"
 					]
 				]
 			],
@@ -38,11 +38,11 @@
 			]
 		],
 		"notes": [],
-		"splashSkin": "noteSplashes",
+		"splashSkin": null,
 		"validScore": false,
 		"gfVersion": "gf-pixel",
-		"bpm": 128.5,
-		"arrowSkin": "",
+		"bpm": 178,
+		"arrowSkin": null,
 		"needsVoices": true,
 		"song": "minimize"
 	}

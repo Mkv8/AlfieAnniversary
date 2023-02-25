@@ -9,6 +9,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
+import openfl.Lib;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -40,6 +41,8 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	override function create()
 	{
+		TransparentWindow.disableTransparent();
+		Lib.application.window.borderless = false;
 		instance = this;
 		PlayState.instance.callOnLuas('onGameOverStart', []);
 		#if desktop

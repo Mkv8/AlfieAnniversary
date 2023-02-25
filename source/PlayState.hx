@@ -2,6 +2,7 @@ package;
 
 import flixel.util.FlxDestroyUtil;
 import shaders.VCRShader;
+import shaders.TransparentHudShader;
 import flixel.graphics.FlxGraphic;
 #if desktop
 import Discord.DiscordClient;
@@ -165,7 +166,7 @@ class PlayState extends MusicBeatState
 
 	public var camZooming:Bool = false;
 	private var curSong:String = "";
-	private var formattedSong:String = "";
+	public var formattedSong:String = "";
 
 	public var gfSpeed:Int = 1;
 	public var health:Float = 1;
@@ -423,6 +424,7 @@ class PlayState extends MusicBeatState
 		camOther = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
+		camGame.bgColor = FlxColor.fromRGB(2, 3, 5);
 
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
@@ -2658,18 +2660,6 @@ class PlayState extends MusicBeatState
 
 
 
-		//ERECT BG CAMERA
-		/*if (curStage == 'erectbg')
-			{
-				camFollow.setPosition(dad.getMidpoint().x + 150, dad.getMidpoint().y - 450);
-
-				camFollow.setPosition(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 450);
-
-			}*/
-
-
-
-
 
 		super.update(elapsed);
 
@@ -4282,6 +4272,10 @@ class PlayState extends MusicBeatState
 
 	private var preventLuaRemove:Bool = false;
 	override function destroy() {
+
+		TransparentWindow.disableTransparent();
+		Lib.application.window.borderless = false;
+
 		preventLuaRemove = true;
 		for (i in 0...luaArray.length) {
 			luaArray[i].call('onDestroy', []);
@@ -5242,22 +5236,27 @@ class PlayState extends MusicBeatState
 					{
 						coming4u.alpha = 0;
 						FlxTween.tween(blackOverlay, {alpha: 0}, 1.7);
-
-						FlxTween.tween(iconP2, {alpha: 1}, 1.7);
-						FlxTween.tween(iconP1, {alpha: 1}, 1.7);
-						FlxTween.tween(healthBar, {alpha: 1}, 1.7);
-
 						FlxTween.tween(dad, {alpha: 1}, 1.7);
 					}
 
 					case 104:
 					{
+						remove(blackOverlay);
 						FlxTween.tween(dad, {alpha: 0}, 2.5);
 					}
 
 					case 112:
 					{
-					FlxG.camera.flash(FlxColor.WHITE,1,false);
+					//FlxG.camera.flash(FlxColor.WHITE,0.5,false);
+					Lib.application.window.fullscreen = false;
+					Lib.application.window.borderless = true;
+					TransparentWindow.enableTransparent();
+					Main.fpsVar.visible = true; // Transparent
+					for(note in unspawnNotes) if(note != null && note.isSustainNote) note.multAlpha = 1;
+					for(note in notes.members) if(note != null && note.isSustainNote) note.multAlpha = 1;
+					//camGame.setFilters([new ShaderFilter(new TransparentHudShader())]);
+					camHUD.setFilters([new ShaderFilter(new TransparentHudShader())]);
+					//camOther.setFilters([new ShaderFilter(new TransparentHudShader())]);
 					dad.alpha = 1;
 					}
 				}

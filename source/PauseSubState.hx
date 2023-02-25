@@ -61,7 +61,7 @@ class PauseSubState extends MusicBeatSubstate
 		var bg = new FlxSpriteExtra().makeSolid(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.alpha = 0.0001;
 		bg.scrollFactor.set();
-		add(bg);
+		
 
 		dots = new FlxSprite(0, 380).loadGraphic(Paths.image('pausedots'));
 
@@ -78,11 +78,15 @@ class PauseSubState extends MusicBeatSubstate
 		overlay.alpha = 0.0001;
 		bars.alpha = 0.0001;
 		overlay.blend = OVERLAY;
+
+		if(PlayState.instance.formattedSong != "minimize")
+		{
+		add(bg);
 		add(dots);
 		add(bells);
 		add(overlay);
 		add(bars);
-
+		}
 
 
 
