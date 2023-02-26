@@ -4347,6 +4347,8 @@ class PlayState extends MusicBeatState
 
 	var eventNum:Int = 0;
 
+	var enableCameraBopping = true;
+
 	override function beatHit()
 	{
 		super.beatHit();
@@ -4378,12 +4380,13 @@ class PlayState extends MusicBeatState
 			// Conductor.changeBPM(SONG.bpm);
 		}
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
+		//comebackherelol
 
 		if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null && !endingSong && !isCameraOnForcedPos)
 		{
 			moveCameraSection(Std.int(curStep / 16));
 		}
-		if (camZooming && FlxG.camera.zoom < 1.35 && ClientPrefs.camZooms && curBeat % 4 == 0)
+		if (enableCameraBopping && camZooming && FlxG.camera.zoom < 1.35 && ClientPrefs.camZooms && curBeat % 4 == 0)
 		{
 			FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.03;
@@ -4467,16 +4470,6 @@ class PlayState extends MusicBeatState
 		}
 
 
-		/*if (curSong == 'after-dark' && curStage == 'dark' && !ClientPrefs.lowQuality)
-			{
-				switch (curStep)
-				{
-					case 1:
-					{
-					FlxTween.tween(black, {alpha: 0}, 0.2);
-					}
-				}
-			}*/
 
 		if (curSong == 'after-dark' && curStage == 'dark' && !ClientPrefs.lowQuality)
 		{
@@ -5217,11 +5210,14 @@ class PlayState extends MusicBeatState
 				{
 					case 17:
 					{
+						for(note in unspawnNotes) if(note != null) note.noteSplashDisabled = true;
+						for(note in notes.members) if(note != null) note.noteSplashDisabled = true;
 						dad.alpha = 0.0001;
 						coming4u.animation.resume();
 					}
 					case 31:
 					{
+						enableCameraBopping = false;
 						blackOverlay.alpha = 1;
 						coming4u.animation.pause();
 						boyfriend.screenCenter(XY);
@@ -5243,21 +5239,56 @@ class PlayState extends MusicBeatState
 					{
 						remove(blackOverlay);
 						FlxTween.tween(dad, {alpha: 0}, 2.5);
+						Main.instance.flashShader.color = 1.0; 
 					}
 
 					case 112:
 					{
+					Main.instance.flashShader.apply = 1;
+
+					FlxTween.tween(Main.instance.flashShader, {apply: 0}, 0.5);
+
 					//FlxG.camera.flash(FlxColor.WHITE,0.5,false);
-					Lib.application.window.fullscreen = false;
 					Lib.application.window.borderless = true;
+					Lib.application.window.fullscreen = false;
 					TransparentWindow.enableTransparent();
-					Main.fpsVar.visible = true; // Transparent
+					Main.fpsVar.visible = false; // Transparent
 					for(note in unspawnNotes) if(note != null && note.isSustainNote) note.multAlpha = 1;
 					for(note in notes.members) if(note != null && note.isSustainNote) note.multAlpha = 1;
-					//camGame.setFilters([new ShaderFilter(new TransparentHudShader())]);
+					camGame.setFilters([new ShaderFilter(new TransparentHudShader())]);
 					camHUD.setFilters([new ShaderFilter(new TransparentHudShader())]);
-					//camOther.setFilters([new ShaderFilter(new TransparentHudShader())]);
+					camOther.setFilters([new ShaderFilter(new TransparentHudShader())]);
 					dad.alpha = 1;
+					}
+					
+					case 116:
+					{
+						Main.instance.flashShader.color = 0.0; 
+
+					}
+
+					case 891:
+					{
+						FlxTween.tween(Main.instance.flashShader, {apply: 1}, 0.6);
+
+					}
+
+					case 892:
+					{
+						Main.instance.flashShader.apply = 0;
+						Lib.application.window.borderless = false;
+						TransparentWindow.disableTransparent();
+						Main.fpsVar.visible = true; // Transparent
+						camGame.setFilters([]);
+						camHUD.setFilters([]);
+						camOther.setFilters([]);
+						camHUD.alpha = 0.0001;
+
+					}
+
+					case 924:
+					{
+						dad.alpha = 0.0001;
 					}
 				}
 			}
