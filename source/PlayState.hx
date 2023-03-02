@@ -2,6 +2,7 @@ package;
 
 import flixel.util.FlxDestroyUtil;
 import shaders.VCRShader;
+import shaders.OldTVShader;
 import shaders.TransparentHudShader;
 import flixel.graphics.FlxGraphic;
 #if desktop
@@ -273,6 +274,7 @@ class PlayState extends MusicBeatState
 	var candlebells:FlxBackdrop;
 	var funkyassoverlay:BGSprite;
 	var cshaders:Array<BitmapFilter> = [new ShaderFilter(new VCRShader())];
+	var tvshaders:Array<BitmapFilter> = [new ShaderFilter(new OldTVShader())];
 
 	var ourplebg:BGSprite;
 	var ourplelight:BGSprite;
@@ -476,22 +478,15 @@ class PlayState extends MusicBeatState
 			redglow.blend = SCREEN;
 			redglow.alpha = 0;
 
-			/*scanlines = new BGSprite('scanlines', -2, -8, 1, 1);
+			scanlines = new BGSprite('scanlines', -2, -8, 1, 1);
 			scanlines.updateHitbox();
 			scanlines.cameras = [camHUD];
 			scanlines.screenCenter(XY);
+			scanlines.setGraphicSize(FlxG.width, FlxG.height);
 			scanlines.blend = OVERLAY;
-			scanlines.scale.set(2.5, 2.5);
-			scanlines.alpha = 0;*/
-
-			
-			scanlines = new BGSprite('scanlines2', 1, 1, 1, 1);
-			scanlines.updateHitbox();
-			scanlines.cameras = [camHUD];
-			scanlines.screenCenter(XY);
-			scanlines.blend = OVERLAY;
-			scanlines.scale.set(1.8, 1.8);
+			//scanlines.scale.set(2.5, 2.5);
 			scanlines.alpha = 0;
+
 
 			darksparks = new FlxBackdrop(Paths.image('darksparks'), 0.2, 0, true, true);
 			darksparks.velocity.set(25, -200);
@@ -653,6 +648,14 @@ class PlayState extends MusicBeatState
 			ourpletheory.cameras = [camHUD];
 			ourplelogo.cameras = [camHUD];
 
+			scanlines = new BGSprite('scanline', -2, -8, 1, 1);
+			scanlines.updateHitbox();
+			scanlines.cameras = [camOther];
+			scanlines.screenCenter(XY);
+			scanlines.setGraphicSize(FlxG.width, FlxG.height);
+			scanlines.blend = OVERLAY;
+			//scanlines.scale.set(2.5, 2.5);
+			scanlines.alpha = 1;
 
 		}
 
@@ -918,7 +921,7 @@ class PlayState extends MusicBeatState
 				circles.alpha = 0;
 				add(circles);
 
-				var shaders:Array<BitmapFilter> = [new ShaderFilter(new VCRShader())];
+				var shaders:Array<BitmapFilter> = [new ShaderFilter(new VCRShader()), new ShaderFilter(new OldTVShader()) ];
 
 				//camHUD.setFilters(shaders);
 				//camHUD.filtersEnabled = true;
