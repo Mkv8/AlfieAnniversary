@@ -16,7 +16,7 @@ import flixel.util.FlxTimer;
 
 class MeetState extends MusicBeatState
 {
-	public static var leftState:Bool = false;
+	public var leftState:Bool = false;
 	public var bg:BGSprite;
 	public var text:BGSprite;
 	public var enter:BGSprite;
