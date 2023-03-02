@@ -208,6 +208,8 @@ class PlayState extends MusicBeatState
 	public var camOther:FlxCamera;
 	public var cameraSpeed:Float = 1;
 
+	public var isMinimizeBroken:Bool = false;
+
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
 	var dialogueJson:DialogueFile = null;
 
@@ -474,12 +476,21 @@ class PlayState extends MusicBeatState
 			redglow.blend = SCREEN;
 			redglow.alpha = 0;
 
-			scanlines = new BGSprite('scanlines', -2, -8, 1, 1);
+			/*scanlines = new BGSprite('scanlines', -2, -8, 1, 1);
 			scanlines.updateHitbox();
 			scanlines.cameras = [camHUD];
 			scanlines.screenCenter(XY);
 			scanlines.blend = OVERLAY;
 			scanlines.scale.set(2.5, 2.5);
+			scanlines.alpha = 0;*/
+
+			
+			scanlines = new BGSprite('scanlines2', 1, 1, 1, 1);
+			scanlines.updateHitbox();
+			scanlines.cameras = [camHUD];
+			scanlines.screenCenter(XY);
+			scanlines.blend = OVERLAY;
+			scanlines.scale.set(1.8, 1.8);
 			scanlines.alpha = 0;
 
 			darksparks = new FlxBackdrop(Paths.image('darksparks'), 0.2, 0, true, true);
@@ -4275,6 +4286,8 @@ class PlayState extends MusicBeatState
 
 		TransparentWindow.disableTransparent();
 		Lib.application.window.borderless = false;
+		Main.fpsVar.visible = true; // Transparent
+
 
 		preventLuaRemove = true;
 		for (i in 0...luaArray.length) {
@@ -5247,7 +5260,7 @@ class PlayState extends MusicBeatState
 					Main.instance.flashShader.apply = 1;
 
 					FlxTween.tween(Main.instance.flashShader, {apply: 0}, 0.5);
-
+					isMinimizeBroken = true;
 					//FlxG.camera.flash(FlxColor.WHITE,0.5,false);
 					Lib.application.window.borderless = true;
 					Lib.application.window.fullscreen = false;
@@ -5263,7 +5276,7 @@ class PlayState extends MusicBeatState
 					
 					case 116:
 					{
-						Main.instance.flashShader.color = 0.0; 
+						Main.instance.flashShader.color = 1/255; 
 
 					}
 
@@ -5275,10 +5288,10 @@ class PlayState extends MusicBeatState
 
 					case 892:
 					{
+						canPause = false;
 						Main.instance.flashShader.apply = 0;
 						Lib.application.window.borderless = false;
 						TransparentWindow.disableTransparent();
-						Main.fpsVar.visible = true; // Transparent
 						camGame.setFilters([]);
 						camHUD.setFilters([]);
 						camOther.setFilters([]);
@@ -5288,6 +5301,8 @@ class PlayState extends MusicBeatState
 
 					case 924:
 					{
+						isMinimizeBroken = false;
+
 						dad.alpha = 0.0001;
 					}
 				}

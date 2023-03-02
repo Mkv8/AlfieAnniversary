@@ -1,5 +1,6 @@
 package;
 
+import flixel.util.FlxTimer;
 import Controls.Control;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -37,6 +38,13 @@ class PauseSubState extends MusicBeatSubstate
 	public function new(x:Float, y:Float)
 	{
 		super();
+
+		if(PlayState.instance.formattedSong == "minimize"  && PlayState.instance.isMinimizeBroken == true)
+			{
+			menuItemsOG = ['Resume', 'Exit to menu'];
+
+			}
+
 		if(CoolUtil.difficulties.length < 2) menuItemsOG.remove('Change Difficulty'); //No need to change difficulty if there is only one!
 
 		if(PlayState.chartingMode)
@@ -79,13 +87,19 @@ class PauseSubState extends MusicBeatSubstate
 		bars.alpha = 0.0001;
 		overlay.blend = OVERLAY;
 
-		if(PlayState.instance.formattedSong != "minimize")
-		{
 		add(bg);
 		add(dots);
 		add(bells);
 		add(overlay);
 		add(bars);
+		
+		if(PlayState.instance.formattedSong == "minimize"  && PlayState.instance.isMinimizeBroken == true)
+		{
+		remove(bg);
+		remove(dots);
+		remove(bells);
+		remove(overlay);
+		remove(bars);
 		}
 
 
@@ -137,6 +151,23 @@ class PauseSubState extends MusicBeatSubstate
 		blueballedTxt.x = FlxG.width - (blueballedTxt.width + 20);
 
 
+		if(PlayState.instance.formattedSong == "minimize"  && PlayState.instance.isMinimizeBroken == true)
+		{
+		var minimizetext:FlxText = new FlxText(20, 15 + 101, 0, "YOU CAN'T HIDE FROM ME.", 32);
+		minimizetext.scrollFactor.set();
+		minimizetext.setFormat(Paths.font('vcr.ttf'), 32);
+		minimizetext.screenCenter(X);
+		minimizetext.y = FlxG.height - (minimizetext.height + 70);
+		minimizetext.updateHitbox();
+		minimizetext.visible = true;
+		add(minimizetext);
+
+		new FlxTimer().start(1, function(tmr:FlxTimer)
+			{
+				FlxTween.tween(minimizetext, {alpha: 1}, 0.5, {ease: FlxEase.quartInOut});
+			});
+		}
+
 		FlxTween.tween(dots, {alpha: 0.6}, 0.6, {ease: FlxEase.quartInOut});
 		FlxTween.tween(bells, {alpha: 0.5}, 0.8, {ease: FlxEase.quartInOut});
 		FlxTween.tween(overlay, {alpha: 0.3}, 1, {ease: FlxEase.quartInOut});
@@ -150,13 +181,22 @@ class PauseSubState extends MusicBeatSubstate
 		grpMenuShit = new FlxTypedGroup<Alphabet>();
 		add(grpMenuShit);
 
+
 		for (i in 0...menuItems.length)
 		{
 			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, menuItems[i], true, false);
 			songText.isMenuItem = true;
 			songText.targetY = i;
 			grpMenuShit.add(songText);
+			
+			if(PlayState.instance.formattedSong == "minimize"  && PlayState.instance.isMinimizeBroken == true)
+			{
+				songText.y += 120;
+				songText.isMenuItem = false;
+				songText.screenCenter(X);
+			}
 		}
+
 
 		changeSelection();
 
@@ -218,6 +258,14 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.botplayTxt.alpha = 1;
 					PlayState.instance.botplaySine = 0;
 				case "Exit to menu":
+
+					if(PlayState.instance.formattedSong == "minimize" && PlayState.instance.isMinimizeBroken == true)
+						{
+							PlayState.instance.health = -10;
+							close();
+							return;
+						}
+
 					PlayState.deathCounter = 0;
 					PlayState.seenCutscene = false;
 					if(PlayState.isStoryMode) {
@@ -228,6 +276,8 @@ class PauseSubState extends MusicBeatSubstate
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 					PlayState.changedDifficulty = false;
 					PlayState.chartingMode = false;
+
+
 
 				case 'BACK':
 					menuItems = menuItemsOG;

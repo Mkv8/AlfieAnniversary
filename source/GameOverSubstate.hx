@@ -43,6 +43,8 @@ class GameOverSubstate extends MusicBeatSubstate
 	{
 		TransparentWindow.disableTransparent();
 		Lib.application.window.borderless = false;
+		Main.fpsVar.visible = true; // Transparent
+
 		instance = this;
 		PlayState.instance.callOnLuas('onGameOverStart', []);
 		#if desktop
