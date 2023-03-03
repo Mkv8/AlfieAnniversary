@@ -300,6 +300,8 @@ class PlayState extends MusicBeatState
 	var skagf:BGSprite;
 	var skamultiply:BGSprite;
 	var skaOverlay:BGSprite;
+	var skaclock:BGSprite;
+	var skafunky:BGSprite;
 
 	var bkiss:BGSprite;
 	var bkissmultiply:BGSprite;
@@ -671,6 +673,31 @@ class PlayState extends MusicBeatState
 			skamultiply.alpha = 1;
 			skamultiply.blend = MULTIPLY;
 
+			skaclock = new BGSprite('skaclock', 0, -420, 1, 1, ['clock'], false);
+			skaclock.updateHitbox();
+			skaclock.screenCenter(XY);
+			skaclock.alpha = 0.0001;
+			skaclock.animation.pause();
+			skaclock.cameras = [camOther];
+			skaclock.animation.curAnim.curFrame = 1;
+			skaclock.scale.set(1, 1);
+
+			camGame.setFilters([grayscaleFilter]);
+			camHUD.setFilters([grayscaleFilter]);
+			grayscale.apply = 0;
+
+			skafunky = new BGSprite('skafunky', 0, 0, 1, 1);
+			skafunky.updateHitbox();
+			skafunky.setGraphicSize(FlxG.width, FlxG.height);
+			skafunky.cameras = [camOther];
+			skafunky.screenCenter(XY);
+			skafunky.alpha = 0;
+
+
+			blackOverlay.cameras = [camOther];
+
+
+			add(skafunky);
 
 		}
 
@@ -1162,7 +1189,8 @@ class PlayState extends MusicBeatState
 			blackOverlay.alpha = 1;
 			add(ourpletheory);
 			add(ourplelogo);
-
+			add(scanlines);
+			scanlines.alpha = 0.5;
 			boyfriendGroup.alpha = 0.0001;
 
 		}
@@ -1171,6 +1199,10 @@ class PlayState extends MusicBeatState
 			add(skamultiply);
 			add(skaOverlay);
 			add(skacrowd);
+			add(vignette);
+			add(blackOverlay);
+			add(skaclock);
+			blackOverlay.alpha = 1;
 		}
 
 		if(curStage == 'kpark') {
@@ -1676,7 +1708,7 @@ class PlayState extends MusicBeatState
 			//casette.animation.play('play');
 			casette.scrollFactor.set(1, 1);
 			casette.scale.set(0.55, 0.55);
-			casette.cameras = [camHUD];
+			casette.cameras = [camOther];
 			casette.antialiasing = ClientPrefs.globalAntialiasing;
 
 			playing = new FlxSprite(500, 200);
@@ -1684,7 +1716,7 @@ class PlayState extends MusicBeatState
 			playing.scrollFactor.set(1, 1);
 			playing.active = false;
 			playing.scale.set(0.85, 0.85);
-			playing.cameras = [camHUD];
+			playing.cameras = [camOther];
 			playing.alpha = 0;
 			playing.antialiasing = ClientPrefs.globalAntialiasing;
 
@@ -1693,7 +1725,7 @@ class PlayState extends MusicBeatState
 			songtitle.scrollFactor.set(1, 1);
 			songtitle.active = false;
 			songtitle.scale.set(0.85, 0.85);
-			songtitle.cameras = [camHUD];
+			songtitle.cameras = [camOther];
 			songtitle.alpha = 0;
 			songtitle.antialiasing = ClientPrefs.globalAntialiasing;
 
@@ -5053,6 +5085,8 @@ class PlayState extends MusicBeatState
 			switch (curBeat)
 			{
 				case 1:
+					for(note in unspawnNotes) if(note != null) note.noteSplashDisabled = true;
+					for(note in notes.members) if(note != null) note.noteSplashDisabled = true;
 					markiplier.visible = false;
 					cryingchild.alpha = 0.0001;
 
@@ -5135,6 +5169,109 @@ class PlayState extends MusicBeatState
 				}
 			}
 		}
+
+
+		if (curSong == 'all-saints-scramble' && curStage == 'skalloween' && !ClientPrefs.lowQuality)
+			{
+	
+				switch (curBeat)
+				{
+					case 4:
+					{
+						FlxTween.tween(skaclock, {alpha: 1}, 1);
+
+					}
+					
+					case 8:
+					{
+						skaclock.animation.curAnim.curFrame = 24;
+						skaclock.animation.resume();
+						new FlxTimer().start(0.4, function(tmr:FlxTimer)
+							{
+								skaclock.animation.pause();
+							});
+					}
+					case 12:
+					{
+						skaclock.animation.curAnim.curFrame = 48;
+						skaclock.animation.resume();
+						new FlxTimer().start(0.4, function(tmr:FlxTimer)
+							{
+								skaclock.animation.pause();
+							});
+					}
+					case 16:
+					{
+						skaclock.animation.curAnim.curFrame = 93;
+						skaclock.animation.resume();
+						new FlxTimer().start(0.4, function(tmr:FlxTimer)
+							{
+								skaclock.animation.pause();
+							});
+					}
+					case 20:
+					{
+						skaclock.animation.curAnim.curFrame = 120;
+						skaclock.animation.resume();
+						new FlxTimer().start(0.4, function(tmr:FlxTimer)
+							{
+								skaclock.animation.pause();
+							});
+					}
+
+					case 24:
+					{
+						skaclock.animation.curAnim.curFrame = 144;
+						skaclock.animation.resume();
+						new FlxTimer().start(0.4, function(tmr:FlxTimer)
+							{
+								skaclock.animation.pause();
+							});
+					}
+
+					case 28:
+					{
+						skaclock.animation.curAnim.curFrame = 168;
+						skaclock.animation.resume();
+						new FlxTimer().start(0.4, function(tmr:FlxTimer)
+							{
+								skaclock.animation.pause();
+							});
+					}
+
+					case 32:
+					{
+						blackOverlay.alpha = 0.0001;
+						remove(skaclock);
+						camHUD.alpha = 1;
+					}
+
+					case 320:
+					{
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						grayscale.apply = 1;
+						vignette.alpha = 1;
+					}
+
+					case 350:
+					{
+						FlxTween.tween(grayscale, {apply: 0}, 8 * Conductor.stepCrochet / 1000);
+						FlxTween.tween(vignette, {alpha: 0}, 8 * Conductor.stepCrochet / 1000);
+
+					}
+
+					case 416:
+					{
+						skafunky.alpha = 1;
+					}
+
+					case 672:
+					{
+						FlxTween.tween(blackOverlay, {alpha: 1}, 4);
+					}
+
+				}
+			}
 
 		if (curSong == 'heart-attack' && curStage == 'kpark' && !ClientPrefs.lowQuality)
 		{

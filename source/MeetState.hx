@@ -72,7 +72,7 @@ class MeetState extends MusicBeatState
 				FlxTween.tween(text,{alpha: 1}, 1.3, {ease: FlxEase.expoInOut});
 				FlxTween.tween(text,{y: -80}, 1.8, {ease: FlxEase.expoInOut});
                 FlxTween.tween(enter,{alpha: 1}, 1.3, {
-					startDelay: 0.4,
+					startDelay: 1.7,
 					onComplete: (_) -> {shouldEnterFade = true;}
 				});
 			});
