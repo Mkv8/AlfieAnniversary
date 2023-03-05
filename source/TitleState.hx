@@ -41,7 +41,6 @@ import openfl.Assets;
 using StringTools;
 typedef TitleData =
 {
-	
 	titlex:Float,
 	titley:Float,
 	startx:Float,
@@ -68,16 +67,10 @@ class TitleState extends MusicBeatState
 
 	var curWacky:Array<String> = [];
 
-	var wackyImage:FlxSprite;
-
-	var easterEggEnabled:Bool = true; //Disable this to hide the easter egg
-	var easterEggKeyCombination:Array<FlxKey> = [FlxKey.B, FlxKey.B]; //bb stands for bbpanzu cuz he wanted this lmao
-	var lastKeysPressed:Array<FlxKey> = [];
-
 	var mustUpdate:Bool = false;
-	
+
 	var titleJSON:TitleData;
-	
+
 	public static var updateVersion:String = '';
 
 	override public function create():Void
@@ -88,7 +81,6 @@ class TitleState extends MusicBeatState
 		#if MODS_ALLOWED
 		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
 		if (FileSystem.exists("modsList.txt")){
-			
 			var list:Array<String> = CoolUtil.listFromString(File.getContent("modsList.txt"));
 			var foundTheTop = false;
 			for (i in list){
@@ -97,11 +89,11 @@ class TitleState extends MusicBeatState
 					foundTheTop = true;
 					Paths.currentModDirectory = dat[0];
 				}
-				
+
 			}
 		}
 		#end
-		
+
 		#if (desktop && MODS_ALLOWED)
 		var path = "mods/" + Paths.currentModDirectory + "/images/gfDanceTitle.json";
 		//trace(path, FileSystem.exists(path));
@@ -116,29 +108,14 @@ class TitleState extends MusicBeatState
 		titleJSON = Json.parse(File.getContent(path));
 		#else
 		var path = Paths.getPreloadPath("images/gfDanceTitle.json");
-		titleJSON = Json.parse(Assets.getText(path)); 
+		titleJSON = Json.parse(Assets.getText(path));
 		#end
-		
-		#if (polymod && !html5)
-		if (sys.FileSystem.exists('mods/')) {
-			var folders:Array<String> = [];
-			for (file in sys.FileSystem.readDirectory('mods/')) {
-				var path = haxe.io.Path.join(['mods/', file]);
-				if (sys.FileSystem.isDirectory(path)) {
-					folders.push(file);
-				}
-			}
-			if(folders.length > 0) {
-				polymod.Polymod.init({modRoot: "mods", dirs: folders});
-			}
-		}
-		#end
-		
+
 		#if CHECK_FOR_UPDATES
 		if(!closedState) {
 			trace('checking for update');
 			var http = new haxe.Http("https://raw.githubusercontent.com/ShadowMario/FNF-PsychEngine/main/gitVersion.txt");
-			
+
 			http.onData = function (data:String)
 			{
 				updateVersion = data.split('\n')[0].trim();
@@ -149,11 +126,11 @@ class TitleState extends MusicBeatState
 					mustUpdate = true;
 				}
 			}
-			
+
 			http.onError = function (error) {
 				trace('error: $error');
 			}
-			
+
 			http.request();
 		}
 		#end
@@ -166,12 +143,15 @@ class TitleState extends MusicBeatState
 
 		PlayerSettings.init();
 
-		curWacky = FlxG.random.getObject(getIntroTextShit());
+		curWacky = getIntroText();
 
 		// DEBUG BULLSHIT
 
 		swagShader = new ColorSwap();
 		super.create();
+
+		//initialized = false;
+		//closedState = false;
 
 		FlxG.save.bind('funkin', 'ninjamuffin99');
 
@@ -180,9 +160,9 @@ class TitleState extends MusicBeatState
 			FlxG.fullscreen = FlxG.save.data.fullscreen;
 			//trace('LOADED FULLSCREEN SETTING!!');
 		}
-		
+
 		ClientPrefs.loadPrefs();
-		
+
 		Highscore.load();
 
 		if (FlxG.save.data.weekCompleted != null)
@@ -191,11 +171,7 @@ class TitleState extends MusicBeatState
 		}
 
 		FlxG.mouse.visible = false;
-		#if FREEPLAY
-		MusicBeatState.switchState(new FreeplayState());
-		#elseif CHARTING
-		MusicBeatState.switchState(new ChartingState());
-		#else
+
 		if(FlxG.save.data.flashing == null && !FlashingState.leftState) {
 			FlxTransitionableState.skipNextTransIn = true;
 			FlxTransitionableState.skipNextTransOut = true;
@@ -203,16 +179,15 @@ class TitleState extends MusicBeatState
 		} else {
 			#if desktop
 			DiscordClient.initialize();
-			Application.current.onExit.add (function (exitCode) {
+			Application.current.onExit.add(function(exitCode) {
 				DiscordClient.shutdown();
 			});
 			#end
-			new FlxTimer().start(1, function(tmr:FlxTimer)
+			new FlxTimer().start(0.3, function(tmr:FlxTimer)
 			{
 				startIntro();
 			});
 		}
-		#end
 	}
 
 	var logoBl:FlxSprite;
@@ -226,27 +201,6 @@ class TitleState extends MusicBeatState
 	{
 		if (!initialized)
 		{
-			/*var diamond:FlxGraphic = FlxGraphic.fromClass(GraphicTransTileDiamond);
-			diamond.persist = true;
-			diamond.destroyOnNoUse = false;
-
-			FlxTransitionableState.defaultTransIn = new TransitionData(FADE, FlxColor.BLACK, 1, new FlxPoint(0, -1), {asset: diamond, width: 32, height: 32},
-				new FlxRect(-300, -300, FlxG.width * 1.8, FlxG.height * 1.8));
-			FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 0.7, new FlxPoint(0, 1),
-				{asset: diamond, width: 32, height: 32}, new FlxRect(-300, -300, FlxG.width * 1.8, FlxG.height * 1.8));
-				
-			transIn = FlxTransitionableState.defaultTransIn;
-			transOut = FlxTransitionableState.defaultTransOut;*/
-
-			// HAD TO MODIFY SOME BACKEND SHIT
-			// IF THIS PR IS HERE IF ITS ACCEPTED UR GOOD TO GO
-			// https://github.com/HaxeFlixel/flixel-addons/pull/348
-
-			// var music:FlxSound = new FlxSound();
-			// music.loadStream(Paths.music('freakyMenu'));
-			// FlxG.sound.list.add(music);
-			// music.play();
-
 			if(FlxG.sound.music == null) {
 				FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 
@@ -305,10 +259,10 @@ class TitleState extends MusicBeatState
 		//trace(path, FileSystem.exists(path));
 		logoBl.frames = FlxAtlasFrames.fromSparrow(BitmapData.fromFile(path),File.getContent(StringTools.replace(path,".png",".xml")));
 		#else
-		
+
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		#end
-		
+
 		logoBl.antialiasing = ClientPrefs.globalAntialiasing;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
@@ -318,7 +272,7 @@ class TitleState extends MusicBeatState
 
 		swagShader = new ColorSwap();
 		/*gfDance = new FlxSprite(titleJSON.gfx, titleJSON.gfy);
-		
+
 		#if (desktop && MODS_ALLOWED)
 		var path = "mods/" + Paths.currentModDirectory + "/images/gfDanceTitle.png";
 		//trace(path, FileSystem.exists(path));
@@ -332,12 +286,12 @@ class TitleState extends MusicBeatState
 		}
 		gfDance.frames = FlxAtlasFrames.fromSparrow(BitmapData.fromFile(path),File.getContent(StringTools.replace(path,".png",".xml")));
 		#else
-		
+
 		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
 		#end
 			gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 			gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
-	
+
 		gfDance.antialiasing = ClientPrefs.globalAntialiasing;
 		//add(gfDance);
 		gfDance.shader = swagShader.shader;*/
@@ -359,7 +313,6 @@ class TitleState extends MusicBeatState
 		//trace(path, FileSystem.exists(path));
 		titleText.frames = FlxAtlasFrames.fromSparrow(BitmapData.fromFile(path),File.getContent(StringTools.replace(path,".png",".xml")));
 		#else
-		
 		titleText.frames = Paths.getSparrowAtlas('titleEnter');
 		#end
 		titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
@@ -399,21 +352,6 @@ class TitleState extends MusicBeatState
 			initialized = true;
 
 		// credGroup.add(credTextShit);
-	}
-
-	function getIntroTextShit():Array<Array<String>>
-	{
-		var fullText:String = Assets.getText(Paths.txt('introText'));
-
-		var firstArray:Array<String> = fullText.split('\n');
-		var swagGoodArray:Array<Array<String>> = [];
-
-		for (i in firstArray)
-		{
-			swagGoodArray.push(i.split('--'));
-		}
-
-		return swagGoodArray;
 	}
 
 	var transitioning:Bool = false;
@@ -482,30 +420,6 @@ class TitleState extends MusicBeatState
 				});
 				// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
 			}
-			else if(easterEggEnabled)
-			{
-				var finalKey:FlxKey = FlxG.keys.firstJustPressed();
-				if(finalKey != FlxKey.NONE) {
-					lastKeysPressed.push(finalKey); //Convert int to FlxKey
-					if(lastKeysPressed.length > easterEggKeyCombination.length)
-					{
-						lastKeysPressed.shift();
-					}
-					
-					if(lastKeysPressed.length == easterEggKeyCombination.length)
-					{
-						var isDifferent:Bool = false;
-						for (i in 0...lastKeysPressed.length) {
-							if(lastKeysPressed[i] != easterEggKeyCombination[i]) {
-								isDifferent = true;
-								break;
-							}
-						}
-
-
-					}
-				}
-			}
 		}
 
 		if (pressedEnter && !skippedIntro)
@@ -556,17 +470,114 @@ class TitleState extends MusicBeatState
 		}
 	}
 
+	function getIntroText():Array<String>
+	{
+		var fullText:String = Assets.getText(Paths.txt('introText'));
+
+		var firstArray:Array<String> = fullText.split('\n');
+		//var firstArray:Array<String> = ["Wow--you got the rarest screen--youre so lucky--i should reward you--lemme think of something--hmmmmm-- --oh sorry am i wasting your time--my bad--wasnt my intention--i just gotta think of something cool--hmmmm--oh wait--I know--Ill just do this"];
+		var swagGoodArray:Array<Array<String>> = [];
+
+		for (i in firstArray)
+		{
+			swagGoodArray.push(i.split('--'));
+		}
+
+		return FlxG.random.getObject(swagGoodArray);
+	}
+
+	function noop() {}
+
+	function getIntroCommands() {
+		var commands:Array<Void->Void> = [];
+
+		commands[1] = () -> {
+			#if PSYCH_WATERMARKS
+			createCoolText(['Psych Engine by'], 15);
+			#else
+			createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
+			#end
+		};
+
+		commands[3] = () -> {
+			#if PSYCH_WATERMARKS
+			addMoreText('Shadow Mario', 15);
+			addMoreText('RiverOaken', 15);
+			addMoreText('bb-panzu', 15);
+			#else
+			addMoreText('present');
+			#end
+		};
+
+		commands[4] = () -> {
+			deleteCoolText();
+		};
+
+
+		commands[5] = () -> {
+			#if PSYCH_WATERMARKS
+			createCoolText(['Not associated', 'with'], -40);
+			#else
+			createCoolText(['In association', 'with'], -40);
+			#end
+		};
+
+		commands[7] = () -> {
+			addMoreText('newgrounds', -40);
+			ngSpr.visible = true;
+		};
+
+		commands[8] = () -> {
+			deleteCoolText();
+			ngSpr.visible = false;
+		};
+
+		var idx = 9;
+
+		for(i=>wacky in curWacky) {
+			commands[idx] = () -> {
+				deleteCoolText();
+				createCoolText(curWacky.slice(Std.int(Math.max(0, i - 4)), i+1));
+			};
+			idx += 2;
+		}
+
+		if(curWacky.length == 2) {
+			idx -= 1;
+		}
+
+		commands[idx++] = () -> {
+			deleteCoolText();
+		};
+		commands[idx++] = () -> {
+			addMoreText('FNF');
+		};
+		commands[idx++] = () -> {
+			addMoreText('Vs Alfie');
+		};
+		commands[idx++] = () -> {
+			addMoreText('Megamix');
+		};
+		commands[idx++] = () -> {
+			skipIntro();
+		};
+
+		return commands;
+	}
+
+	var commands:Array<Void->Void> = null;
+
 	private var sickBeats:Int = 0; //Basically curBeat but won't be skipped if you hold the tab or resize the screen
 	public static var closedState:Bool = false;
 	override function beatHit()
 	{
 		super.beatHit();
 
-		if(logoBl != null && megamix!= null) 
-			{
+		if(logoBl != null && megamix != null)
+		{
 			logoBl.animation.play('bump', true);
 			megamix.animation.play('bump', true);
-			}
+		}
 
 		/*if(gfDance != null) {
 			danceLeft = !danceLeft;
@@ -578,68 +589,13 @@ class TitleState extends MusicBeatState
 		}*/
 
 		if(!closedState) {
-			sickBeats++;
-			switch (sickBeats)
-			{
-				case 1:
-					#if PSYCH_WATERMARKS
-					createCoolText(['Psych Engine by'], 15);
-					#else
-					createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
-					#end
-				case 3:
-					#if PSYCH_WATERMARKS
-					addMoreText('Shadow Mario', 15);
-					addMoreText('RiverOaken', 15);
-					addMoreText('bb-panzu', 15);
-					#else
-					addMoreText('present');
-					#end
-				case 4:
-					deleteCoolText();
-				case 5:
-					#if PSYCH_WATERMARKS
-					createCoolText(['Not associated', 'with'], -40);
-					#else
-					createCoolText(['In association', 'with'], -40);
-					#end
-				case 7:
-					addMoreText('newgrounds', -40);
-					ngSpr.visible = true;
-				case 8:
-					deleteCoolText();
-					ngSpr.visible = false;
-				case 9:
-					createCoolText([curWacky[0]]);
-				case 11:
-					addMoreText(curWacky[1]);
-				case 12:
-					if(curWacky.length > 2) {
-						addMoreText(curWacky[2]);
-					} else {
-					   deleteCoolText();
-					}
-				case 13:
-					if(curWacky.length > 2) {
-						addMoreText(curWacky[2]);
-					} else {
-						addMoreText('FNF');
-					}
-				case 14:
-					if(curWacky.length > 2) {
-						addMoreText(curWacky[2]);
-					} else {
-						addMoreText('Vs Alfie');
-					}
-				case 15:
-					if(curWacky.length > 2) {
-						addMoreText(curWacky[2]);
-					} else {
-						addMoreText('Megamix');
-					}
+			if(commands == null) {
+				commands = getIntroCommands();
+			}
 
-				case 16:
-					skipIntro();
+			sickBeats++;
+			if(commands[sickBeats] != null) {
+				commands[sickBeats]();
 			}
 		}
 	}
