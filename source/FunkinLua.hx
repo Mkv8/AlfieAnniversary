@@ -107,7 +107,7 @@ class FunkinLua {
 		set('Function_StopLua', Function_StopLua);
 		set('Function_Stop', Function_Stop);
 		set('Function_Continue', Function_Continue);
-		set('luaDebugMode', false);
+		set('luaDebugMode', #if debug true #else false #end);
 		set('luaDeprecatedWarnings', true);
 		set('inChartEditor', false);
 
