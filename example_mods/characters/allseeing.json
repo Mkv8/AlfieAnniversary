@@ -1,65 +1,65 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				260,
 				81
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "lefteye"
+			"fps": 24,
+			"name": "lefteye",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				5,
 				-210
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "downeye"
+			"fps": 24,
+			"name": "downeye",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-11,
 				220
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "upeye"
+			"fps": 24,
+			"name": "upeye",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-260,
 				100
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "righteye"
+			"fps": 24,
+			"name": "righteye",
+			"indices": []
 		},
 		{
+			"loop": true,
 			"offsets": [
 				0,
 				0
 			],
-			"loop": true,
-			"fps": 12,
 			"anim": "idle",
-			"indices": [],
-			"name": "idleeye"
+			"fps": 12,
+			"name": "idleeye",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
 	"image": "characters/allseeing",
 	"position": [
-		0,
+		-70,
 		0
 	],
 	"healthicon": "monsteralfie",

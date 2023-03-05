@@ -502,26 +502,7 @@ class TitleState extends MusicBeatState
 							}
 						}
 
-						/*if(!isDifferent) {
-							trace('Easter egg triggered!');
-							FlxG.save.data.psykaEasterEgg = !FlxG.save.data.psykaEasterEgg;
-							FlxG.sound.play(Paths.sound('secretSound'));
 
-							var black:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-							black.alpha = 0;
-							add(black);
-
-							FlxTween.tween(black, {alpha: 1}, 1, {onComplete:
-								function(twn:FlxTween) {
-									FlxTransitionableState.skipNextTransIn = true;
-									FlxTransitionableState.skipNextTransOut = true;
-									MusicBeatState.switchState(new TitleState());
-								}
-							});
-							lastKeysPressed = [];
-							closedState = true;
-							transitioning = true;
-						}*/
 					}
 				}
 			}
@@ -581,10 +562,11 @@ class TitleState extends MusicBeatState
 	{
 		super.beatHit();
 
-		if(logoBl != null) 
+		if(logoBl != null && megamix!= null) 
+			{
 			logoBl.animation.play('bump', true);
 			megamix.animation.play('bump', true);
-
+			}
 
 		/*if(gfDance != null) {
 			danceLeft = !danceLeft;
@@ -632,13 +614,29 @@ class TitleState extends MusicBeatState
 				case 11:
 					addMoreText(curWacky[1]);
 				case 12:
-					deleteCoolText();
+					if(curWacky.length > 2) {
+						addMoreText(curWacky[2]);
+					} else {
+					   deleteCoolText();
+					}
 				case 13:
-					addMoreText('Friday');
+					if(curWacky.length > 2) {
+						addMoreText(curWacky[2]);
+					} else {
+						addMoreText('FNF');
+					}
 				case 14:
-					addMoreText('Night');
+					if(curWacky.length > 2) {
+						addMoreText(curWacky[2]);
+					} else {
+						addMoreText('Vs Alfie');
+					}
 				case 15:
-					addMoreText('Funkin');
+					if(curWacky.length > 2) {
+						addMoreText(curWacky[2]);
+					} else {
+						addMoreText('Megamix');
+					}
 
 				case 16:
 					skipIntro();

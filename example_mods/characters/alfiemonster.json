@@ -1,57 +1,58 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				45,
 				25
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "down"
+			"fps": 24,
+			"name": "down",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				45,
 				173
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "up"
+			"fps": 24,
+			"name": "up",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				45,
 				87
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "right"
+			"fps": 24,
+			"name": "right",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				159,
 				40
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "left"
+			"fps": 24,
+			"name": "left",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				45,
 				25
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "danceLeft",
+			"fps": 24,
+			"name": "idle",
 			"indices": [
 				0,
 				1,
@@ -66,17 +67,17 @@
 				10,
 				11,
 				12
-			],
-			"name": "idle"
+			]
 		},
 		{
+			"loop": false,
 			"offsets": [
 				45,
 				25
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "danceRight",
+			"fps": 24,
+			"name": "idle",
 			"indices": [
 				13,
 				14,
@@ -92,15 +93,14 @@
 				24,
 				25,
 				26
-			],
-			"name": "idle"
+			]
 		}
 	],
 	"no_antialiasing": false,
 	"image": "characters/monster",
 	"position": [
-		-250,
-		-200
+		-300,
+		-170
 	],
 	"healthicon": "monsteralfie",
 	"flip_x": false,

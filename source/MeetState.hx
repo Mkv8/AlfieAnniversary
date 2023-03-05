@@ -39,6 +39,9 @@ class MeetState extends MusicBeatState
 			text.alpha = 0.0001;
 			text.scale.set(0.65, 0.65);
 
+			FlxG.sound.playMusic(Paths.music('kisstonbreakfast'), 0, true);
+
+
 			}
 
 		if(Paths.formatToSongPath(PlayState.SONG.song) == "jelly-jamboree")
@@ -51,6 +54,8 @@ class MeetState extends MusicBeatState
 			text = new BGSprite ('kaitext', 180, -600, 1, 1);
 			text.alpha = 0.0001;
 			text.scale.set(0.65, 0.65);
+
+			FlxG.sound.playMusic(Paths.music('kaibreakfast'), 0, true);
 
 			}
 
@@ -77,7 +82,6 @@ class MeetState extends MusicBeatState
 				});
 			});
 
-		FlxG.sound.playMusic(Paths.music('breakfast'), 0, true);
 		FlxG.sound.music.fadeIn(0.55, 0.5);
 
 	}

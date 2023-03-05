@@ -4519,7 +4519,7 @@ class PlayState extends MusicBeatState
 
 
 
-		if (curSong == 'after-dark' && curStage == 'dark' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'after-dark' && curStage == 'dark' && !ClientPrefs.lowQuality)
 		{
 			if(eventNum == 0 && curBeat >= 8) {
 				eventNum++;
@@ -4797,7 +4797,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (curSong == 'candlelit-clash' && curStage == 'candlelit' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'candlelit-clash' && curStage == 'candlelit' && !ClientPrefs.lowQuality)
 		{
 
 			switch (curBeat)
@@ -4975,7 +4975,7 @@ class PlayState extends MusicBeatState
 		}
 
 
-		if (curSong == 'goat-remake' && curStage == 'newstage' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'goat-remake' && curStage == 'newstage' && !ClientPrefs.lowQuality)
 		{
 
 			switch (curBeat)
@@ -5079,7 +5079,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (curSong == 'interrupted' && curStage == 'ourple' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'interrupted' && curStage == 'ourple' && !ClientPrefs.lowQuality)
 		{ //dad 1 is phone dad 2 is ourplemark dad 3 is guy and dad 4 is crying
 
 			switch (curBeat)
@@ -5171,7 +5171,7 @@ class PlayState extends MusicBeatState
 		}
 
 
-		if (curSong == 'all-saints-scramble' && curStage == 'skalloween' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'all-saints-scramble' && curStage == 'skalloween' && !ClientPrefs.lowQuality)
 			{
 	
 				switch (curBeat)
@@ -5273,7 +5273,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-		if (curSong == 'heart-attack' && curStage == 'kpark' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'heart-attack' && curStage == 'kpark' && !ClientPrefs.lowQuality)
 		{
 
 			switch (curBeat)
@@ -5317,7 +5317,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (curSong == 'jelly-jamboree' && curStage == 'waterfall' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'jelly-jamboree' && curStage == 'waterfall' && !ClientPrefs.lowQuality)
 			{
 	
 				switch (curBeat)
@@ -5356,7 +5356,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-		if (curSong == 'minimize' && curStage == 'fake' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'minimize' && curStage == 'fake' && !ClientPrefs.lowQuality)
 			{
 	
 				switch (curBeat)
