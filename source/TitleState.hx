@@ -475,7 +475,7 @@ class TitleState extends MusicBeatState
 		var fullText:String = Assets.getText(Paths.txt('introText'));
 
 		var firstArray:Array<String> = fullText.split('\n');
-		//var firstArray:Array<String> = ["Wow--you got the rarest screen--youre so lucky--i should reward you--lemme think of something--hmmmmm-- --oh sorry am i wasting your time--my bad--wasnt my intention--i just gotta think of something cool--hmmmm--oh wait--I know--Ill just do this"];
+		//var firstArray:Array<String> = ["Wow--you got the rarest screen--youre so lucky--i should reward you--lemme think of something--hmmmmm-- --oh sorry--am i wasting your time--my bad--wasnt my intention--just gotta--think of something cool--hmmmm-- --oh wait--I know--Ill just do this"];
 		var swagGoodArray:Array<Array<String>> = [];
 
 		for (i in firstArray)

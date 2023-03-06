@@ -233,6 +233,7 @@ class InfoState extends MusicBeatState
 		super.destroy();
 		FlxTween.cancelTweensOf(FlxG.mouse.cursorContainer);
 		FlxG.mouse.cursorContainer.alpha = 1;
+		FlxG.mouse.visible = false;
 	}
 
 	function checkOverlap(group:FlxSprite, heightExtend:Float = 0) {
