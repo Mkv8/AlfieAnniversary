@@ -539,7 +539,9 @@ class TitleState extends MusicBeatState
 				deleteCoolText();
 				createCoolText(curWacky.slice(Std.int(Math.max(0, i - 4)), i+1));
 			};
-			idx += 2;
+			//idx += 2;
+			idx += (curWacky.length > 5) ? 3 : 2;
+
 		}
 
 		if(curWacky.length == 2) {
