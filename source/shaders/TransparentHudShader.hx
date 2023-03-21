@@ -9,11 +9,9 @@ class TransparentHudShader extends FlxShader
 
 vec4 custom_texture2D(sampler2D bitmap,vec2 coord){
     vec4 c=texture2D(bitmap,coord);
-    c.rgb += 1/255;
+    c.rgb += vec3(1/255);
     if(c.a < 0.8) c.a = 0.0; // Force full alpha
     if(!hasTransform){return c;}
-
-    
 
     if(c.a==0.0){return vec4(0.0,0.0,0.0,0.0);}
 

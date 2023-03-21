@@ -274,7 +274,6 @@ class PlayState extends MusicBeatState
 	var candlebells:FlxBackdrop;
 	var funkyassoverlay:BGSprite;
 	var cshaders:Array<BitmapFilter> = [new ShaderFilter(new VCRShader())];
-	var tvshaders:Array<BitmapFilter> = [new ShaderFilter(new OldTVShader())];
 
 	var ourplebg:BGSprite;
 	var ourplelight:BGSprite;
@@ -948,7 +947,10 @@ class PlayState extends MusicBeatState
 				circles.alpha = 0;
 				add(circles);
 
-				var shaders:Array<BitmapFilter> = [new ShaderFilter(new VCRShader()), new ShaderFilter(new OldTVShader()) ];
+				var shaders:Array<BitmapFilter> = [
+					new ShaderFilter(new VCRShader()),
+					#if !mac new ShaderFilter(new OldTVShader()) #end
+				];
 
 				//camHUD.setFilters(shaders);
 				//camHUD.filtersEnabled = true;
