@@ -13022,7 +13022,7 @@
 		"song": "All Saints Scramble",
 		"validScore": true,
 		"stage": "skalloween",
-		"arrowSkin": "",
+		"arrowSkin": "SKANOTE_assets",
 		"needsVoices": true,
 		"speed": 3.2,
 		"bpm": 180

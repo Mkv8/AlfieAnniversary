@@ -1537,7 +1537,7 @@ class PlayState extends MusicBeatState
 		iconP2.alpha = ClientPrefs.healthBarAlpha;
 		add(iconP2);
 		reloadHealthBarColors();
-		if (SONG.song == 'goat-remake')
+		if (formattedSong == 'goat-remake')
 		{
 			iconP2.alpha = 0;
 			healthBar.color = 0xFF000000;
@@ -1545,7 +1545,7 @@ class PlayState extends MusicBeatState
 
 		}
 
-		if (SONG.song == 'interrupted')
+		if (formattedSong == 'interrupted')
 		{
 			iconP2.alpha = 0;
 			iconP1.alpha = 0;
@@ -1553,14 +1553,14 @@ class PlayState extends MusicBeatState
 
 		}
 
-		if (SONG.song == 'minimize')
+		if (formattedSong == 'minimize')
 		{
 			iconP2.alpha = 0;
 			iconP1.alpha = 0;
 			healthBar.alpha = 0;
 
 		}
-		if (SONG.song == 'mansion-match')
+		if (formattedSong == 'mansion-match')
 		{
 			scoreTxt = new FlxFixedText(0, healthBarBG.y + 36, FlxG.width, "", 20);
 			scoreTxt.setFormat(Paths.font("porque.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -1580,7 +1580,7 @@ class PlayState extends MusicBeatState
 
 		add(scoreTxt);
 
-		if (SONG.song == 'mansion-match')
+		if (formattedSong == 'mansion-match')
 		{
 		botplayTxt = new FlxFixedText(400, timeBarBG.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("porque.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);

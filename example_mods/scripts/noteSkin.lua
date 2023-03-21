@@ -4,13 +4,15 @@ local noteskinMap = {
 	munchawake = "KISSNOTE_assets",
 	kai = "KAINOTE_assets",
 	pooky = "POOKYNOTE_assets",
+	pookyangy = "POOKYNOTE_assets",
+	pookyhapi = "POOKYNOTE_assets",
 	glaura = "POOKYNOTE_assets",
 	gharper = "POOKYNOTE_assets",
+	gharperd = "POOKYNOTE_assets",
 	galfie = "POOKYNOTE_assets",
 	gethlyn = "POOKYNOTE_assets",
-	skaalfie = "SKANOTE_assets",
-	skafilip = "SKANOTE_assets",
 	skabf = "NOTE_assets",
+	bfd = "NOTE_assets",
 
 	default = "NOTE_assets"
 }

@@ -11807,7 +11807,7 @@
 		"splashSkin": "noteSplashes",
 		"song": "All Saints Scramble",
 		"needsVoices": true,
-		"arrowSkin": "",
+		"arrowSkin": "SKANOTE_assets",
 		"stage": "skalloween",
 		"validScore": true,
 		"bpm": 180,

@@ -10103,7 +10103,7 @@
 		"song": "All Saints Scramble",
 		"validScore": true,
 		"stage": "skalloween",
-		"arrowSkin": "",
+		"arrowSkin": "SKANOTE_assets",
 		"needsVoices": true,
 		"speed": 2.6,
 		"bpm": 180
