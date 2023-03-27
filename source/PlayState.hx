@@ -266,6 +266,8 @@ class PlayState extends MusicBeatState
 	var animeoverlay:BGSprite;
 	var animeadd:BGSprite;
 
+	var bge:BGSprite;
+
 	var candlebg:BGSprite;
 	var hcandlebg:BGSprite;
 	var acandlebg:BGSprite;
@@ -800,10 +802,16 @@ class PlayState extends MusicBeatState
 
 		if(formattedSong == 'pasta-night') {
 			pastaoverlay = new BGSprite('pasta/pastaoverlay', -960, 540, 1, 1);
-			pastaoverlay.alpha = 0.7;
+			pastaoverlay.alpha = 0.5;
 			pastaoverlay.scale.set(1.25, 1.25);
 
-			pastaoverlay.blend = BlendMode.OVERLAY;
+			pastaoverlay.blend = BlendMode.ADD;
+
+			watermultiply = new BGSprite('pasta/pastaoverlay', -960, 540, 1, 1);
+			watermultiply.alpha = 0.6;
+			watermultiply.scale.set(1.25, 1.25);
+
+			watermultiply.blend = BlendMode.MULTIPLY;
 
 		}
 
@@ -923,7 +931,7 @@ class PlayState extends MusicBeatState
 
 
 			case 'erect':
-				var bge:BGSprite = new BGSprite('erectBG', -1000, -500, 1, 1, ['boppin'], true);
+				bge = new BGSprite('erectBG', -1000, -500, 1, 1, ['boppin'], false);
 				bge.updateHitbox();
 				add(bge);
 				bge.antialiasing = true;
@@ -1114,7 +1122,7 @@ class PlayState extends MusicBeatState
 
 
 			case '90s': //spooks
-				animemap = new BGSprite('map90s', 1, 1, 1, 1, ['boppin'], true);
+				animemap = new BGSprite('map90s', 1, 1, 1, 1, ['boppin'], false);
 				animemap.updateHitbox();
 				add(animemap);
 				animemap.antialiasing = true;
@@ -1157,8 +1165,8 @@ class PlayState extends MusicBeatState
 
 			case 'skalloween': //all saints
 				skabg = new BGSprite('skabbg', -600, -300, 1, 1);
-				skagf = new BGSprite('skagf', 800, 200, 1, 1, ['GF Dancing Beat0'], true);
-				skacrowd = new BGSprite('skacrowdbop', -590, 875, 1, 1, ['skacrowdbop0'], true);
+				skagf = new BGSprite('skagf', 800, 200, 1, 1, ['GF Dancing Beat0'], false);
+				skacrowd = new BGSprite('skacrowdbop', -590, 875, 1, 1, ['skacrowdbop0'], false);
 
 
 				add(skabg);
@@ -1179,7 +1187,7 @@ class PlayState extends MusicBeatState
 				add(fakeweek);
 
 			case 'pasta':
-				pastabg = new BGSprite('pasta/pastaground', -960, 540, 1, 1, ['pastabg0'], true);
+				pastabg = new BGSprite('pasta/pastaground', -960, 540, 1, 1, ['pastabg0'], false);
 				pastabg.scale.set(1.25, 1.25);
 				add(pastabg);
 
@@ -1255,6 +1263,7 @@ class PlayState extends MusicBeatState
 		}
 		if(curStage == 'pasta') {
 			add(pastaoverlay);
+			add(watermultiply);
 			add(blackOverlay);
 		}
 
@@ -1306,24 +1315,6 @@ class PlayState extends MusicBeatState
 
 		callOnLuas('onCreate', []);
 
-
-		/*if(!modchartSprites.exists('blammedLightsBlack')) { //Creates blammed light black fade in case you didn't make your own
-			blammedLightsBlack = new ModchartSprite(FlxG.width * -0.5, FlxG.height * -0.5);
-			blammedLightsBlack.makeSolid(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
-			var position:Int = members.indexOf(gfGroup);
-			if(members.indexOf(boyfriendGroup) < position) {
-				position = members.indexOf(boyfriendGroup);
-			} else if(members.indexOf(dadGroup) < position) {
-				position = members.indexOf(dadGroup);
-			}
-			insert(position, blammedLightsBlack);
-
-			blammedLightsBlack.wasAdded = true;
-			modchartSprites.set('blammedLightsBlack', blammedLightsBlack);
-		}
-		if(curStage == 'philly') insert(members.indexOf(blammedLightsBlack) + 1, phillyCityLightsEvent);
-		blammedLightsBlack = modchartSprites.get('blammedLightsBlack');
-		blammedLightsBlack.alpha = 0.0;*/
 
 		var gfVersion:String = SONG.gfVersion;
 		if(gfVersion == null || gfVersion.length < 1) {
@@ -5521,20 +5512,33 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
+			case 'erect': //anime
+			if(curBeat % 2 == 0)
+				{
+				bge.dance(true);
+				}
+
 			case '90s': //anime
-				//if(!ClientPrefs.lowQuality) {
-				animemap.dance();
-				//}
+			if(curBeat % 2 == 0)
+				{
+				animemap.dance(true);
+				}
 
 			case 'skalloween': //all saints wooooo
-				//if(!ClientPrefs.lowQuality) {
-				skacrowd.dance();
-				//}
+			if(curBeat % 2 == 0)
+				{
+				skacrowd.dance(true);
+				}
+			if(curBeat % 4 == 0)
+				{
+				skagf.dance(true);
+				}
 
 			case 'pasta': //anime
-				//if(!ClientPrefs.lowQuality) {
-				pastabg.dance();
-				//}
+			if(curBeat % 2 == 0)
+				{
+				pastabg.dance(true);
+				}
 		}
 		lastBeatHit = curBeat;
 
