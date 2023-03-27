@@ -68,6 +68,9 @@ import DialogueBoxPsych;
 import sys.FileSystem;
 #end
 
+import flixel.text.FlxBitmapText;
+import flixel.graphics.frames.FlxBitmapFont;
+
 using StringTools;
 
 class PlayState extends MusicBeatState
@@ -180,6 +183,7 @@ class PlayState extends MusicBeatState
 	private var timeBarBG:AttachedSprite;
 	public var timeBar:FlxBar;
 
+	public var ratingText:FlxBitmapText;
 	public var sicks:Int = 0;
 	public var goods:Int = 0;
 	public var bads:Int = 0;
@@ -1447,6 +1451,21 @@ class PlayState extends MusicBeatState
 		comboLayer.cameras = [camHUD];
 		add(comboLayer);
 
+
+		ratingText = new FlxBitmapText(
+			FlxBitmapFont.fromAngelCode(
+				Paths.image('font/menuOutline_B'),
+				Paths.getTextFromFile("images/font/menuOutline.fnt")
+			)
+		);
+		ratingText.pixelPerfectRender = true;
+    	ratingText.letterSpacing = 0;
+		ratingText.screenCenter(X);
+		ratingText.y = FlxG.height-180; 
+		ratingText.updateHitbox();
+		ratingText.scale.set(0.6,0.6);
+		comboLayer.add(ratingText);
+			
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);
 		add(grpNoteSplashes);
@@ -3740,6 +3759,12 @@ class PlayState extends MusicBeatState
 	public var showCombo:Bool = true;
 	public var showRating:Bool = true;
 
+	//public var consecutiveSicks:Int = 0;
+	
+	function oneLetterUppercase (a:String):String{
+		return a.charAt(0).toUpperCase()+a.substr(1).toLowerCase();
+	}
+	
 	private function popUpScore(note:Note = null):Void
 	{
 		var noteDiff:Float = Math.abs(note.strumTime - Conductor.songPosition + ClientPrefs.ratingOffset);
@@ -3748,6 +3773,18 @@ class PlayState extends MusicBeatState
 
 		//tryna do MS based judgment due to popular demand
 		var daRating:String = Conductor.judgeNote(noteDiff);
+		/*if(daRating != "sick"){
+			//consecutiveSicks=0;
+			ratingText.visible = false;
+		}else{
+			ratingText.visible = true;
+		}*/
+
+		ratingText.visible = true;
+		ratingText.text = oneLetterUppercase(daRating)+" "+combo;
+		ratingText.updateHitbox();
+		ratingText.screenCenter(X);
+		ratingText.color = 0xFFFFFFFF;
 
 		switch (daRating)
 		{
@@ -3755,10 +3792,12 @@ class PlayState extends MusicBeatState
 				totalNotesHit += 0;
 				score = 50;
 				shits++;
+				ratingText.color = 0xFF391F16;
 			case "bad": // bad
 				totalNotesHit += 0.5;
 				score = 100;
 				bads++;
+				ratingText.color = 0xFFAA350E;
 			case "good": // good
 				totalNotesHit += 0.75;
 				score = 200;
@@ -3767,6 +3806,7 @@ class PlayState extends MusicBeatState
 				totalNotesHit += 1;
 				sicks++;
 
+				//consecutiveSicks++;
 				if(!note.noteSplashDisabled && !noteSplashGloballyDisabled)
 				{
 					spawnNoteSplashOnNote(note);
@@ -4084,6 +4124,7 @@ class PlayState extends MusicBeatState
 			}
 		});
 		combo = 0;
+		ratingText.visible = false;
 
 		health -= daNote.missHealth * healthLoss;
 		if(instakillOnMiss)
