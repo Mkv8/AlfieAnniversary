@@ -84,6 +84,7 @@ class CreditsState extends MusicBeatState
 			['Mk',					'mk',				'Creator of Alfie, made most of the art',				'https://twitter.com/Mkv8Art',			'D23B48'],
 			['Josszzol',			'joss',				'Creator of Filip, made Skalloween Spectracle sprites',	'https://twitter.com/abbledacker',		'FFBF47'],
 			['Gigab00ts',			'giga',				'Creator of Kisston and Munchton, sketched a lot of poses',	'https://twitter.com/GigaB00ts',	'81DB7F'],
+			['Aurum',				'jade',				'Animated the Pasta Night sprites',						'https://twitter.com/AurumArt_',		'9D58BF'],
 			[''],
 			['Programming'],
 			['Mk',					'mk',				'Did most of the basic coding',							'https://twitter.com/Mkv8Art',			'D23B48'],

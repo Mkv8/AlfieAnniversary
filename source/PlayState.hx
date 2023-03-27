@@ -313,10 +313,12 @@ class PlayState extends MusicBeatState
 	var watermultiply:BGSprite;
 	var wateroverlay:BGSprite;
 
+	var pastabg:BGSprite;
+	var pastaoverlay:BGSprite;
+	var pastatable:BGSprite;
+
 	public var grayscale = new shaders.Grayscale();
 	public var grayscaleFilter:ShaderFilter;
-
-	//public var grayscaleFilter = new ShaderFilter(grayscale);
 
 	var fakeweek:BGSprite;
 	var coming4u:BGSprite;
@@ -380,6 +382,9 @@ class PlayState extends MusicBeatState
 	4- make the gf on the skalloween bg bop ot the beat if possible (since its a fake gf kinda)
 
 	5- implement that shader that you wrote";
+
+	//thanks neo thats exactly what i wanted <3
+
 
 	var spritesToDestroy:Array<FlxBasic> = [];
 
@@ -789,6 +794,15 @@ class PlayState extends MusicBeatState
 
 			}
 
+		if(formattedSong == 'pasta-night') {
+			pastaoverlay = new BGSprite('pasta/pastaoverlay', -960, 540, 1, 1);
+			pastaoverlay.alpha = 0.7;
+			pastaoverlay.scale.set(1.25, 1.25);
+
+			pastaoverlay.blend = BlendMode.OVERLAY;
+
+		}
+
 		#if desktop
 		storyDifficultyText = CoolUtil.difficulties[storyDifficulty];
 
@@ -1160,6 +1174,16 @@ class PlayState extends MusicBeatState
 				fakeweek.scale.set(1.10, 1.10);
 				add(fakeweek);
 
+			case 'pasta':
+				pastabg = new BGSprite('pasta/pastaground', -960, 540, 1, 1, ['pastabg0'], true);
+				pastabg.scale.set(1.25, 1.25);
+				add(pastabg);
+
+				pastatable = new BGSprite('pasta/table', -960, 1440, 1, 1);
+				pastatable.scale.set(1.25, 1.25);
+				add(pastatable);
+
+
 
 		}
 		add(gfGroup);
@@ -1223,6 +1247,10 @@ class PlayState extends MusicBeatState
 			scanlines.alpha = 0.15;
 		}
 		if(curStage == 'fake') {
+			add(blackOverlay);
+		}
+		if(curStage == 'pasta') {
+			add(pastaoverlay);
 			add(blackOverlay);
 		}
 
@@ -5155,7 +5183,7 @@ class PlayState extends MusicBeatState
 							ourpleguy.animation.curAnim.curFrame = 158;
 						});
 				}
-				case 575:
+				case 578:
 				{
 					markiplier.visible = true;
 					markiplier.playAnim('fall');
@@ -5460,6 +5488,11 @@ class PlayState extends MusicBeatState
 			case 'skalloween': //all saints wooooo
 				//if(!ClientPrefs.lowQuality) {
 				skacrowd.dance();
+				//}
+
+			case 'pasta': //anime
+				//if(!ClientPrefs.lowQuality) {
+				pastabg.dance();
 				//}
 		}
 		lastBeatHit = curBeat;
