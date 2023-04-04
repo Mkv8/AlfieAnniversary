@@ -152,7 +152,7 @@ class PlayState extends MusicBeatState
 	public var allNotes:Array<Note> = [];
 	public var unspawnNotes:Array<Note> = [];
 	public var eventNotes:Array<EventNote> = [];
-
+	private var rateTween:FlxTween=null;
 	private var strumLine:FlxSprite;
 
 	//Handles the new epic mega sexy cam code that i've done
@@ -3756,6 +3756,7 @@ class PlayState extends MusicBeatState
 		return a.charAt(0).toUpperCase()+a.substr(1).toLowerCase();
 	}
 	
+	static final hasTextColor = ["shit","bad"];
 	private function popUpScore(note:Note = null):Void
 	{
 		var noteDiff:Float = Math.abs(note.strumTime - Conductor.songPosition + ClientPrefs.ratingOffset);
@@ -3775,8 +3776,22 @@ class PlayState extends MusicBeatState
 		ratingText.text = oneLetterUppercase(daRating)+" "+combo;
 		ratingText.updateHitbox();
 		ratingText.screenCenter(X);
-		ratingText.color = 0xFFFFFFFF;
+		ratingText.antialiasing=true;
+		if(hasTextColor.indexOf(daRating)<0){
+			ratingText.color = 0xFFFFFFFF;
+		}
+		if(rateTween!=null)
+			rateTween.cancel();
 
+		ratingText.alpha=1;
+		rateTween = FlxTween.tween(ratingText, {alpha: 0}, 0.2, {
+			onComplete: function(tween:FlxTween)
+			{
+				rateTween =null;
+			},
+			startDelay: Conductor.crochet * 0.002
+		});
+		
 		switch (daRating)
 		{
 			case "shit": // shit
@@ -3827,7 +3842,7 @@ class PlayState extends MusicBeatState
 				});
 			}
 		}
-
+		/*
 		var pixelShitPart1:String = "";
 		var pixelShitPart2:String = '';
 
@@ -3923,6 +3938,7 @@ class PlayState extends MusicBeatState
 
 			daLoop++;
 		}
+		*/
 	}
 
 	private function onKeyPress(event:KeyboardEvent):Void
