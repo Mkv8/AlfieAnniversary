@@ -39,9 +39,13 @@ class StoryMenuState extends MusicBeatState
 	var txtWeekTitle:FlxText;
 	var bgSprite:FlxSprite;
 
-	private static var curWeek:Int = 0;
+	private var curWeek(get, never):Int;
+	function get_curWeek() {
+		return CoolUtil.mod(_curWeek, WeekData.weeksList.length);
+	}
+	private static var _curWeek:Int = 0;
 
-	var txtTracklist:FlxText;
+	//var txtTracklist:FlxText;
 
 	var grpCassette:FlxTypedGroup<Cassette>;
 
@@ -79,7 +83,7 @@ class StoryMenuState extends MusicBeatState
 
 		PlayState.isStoryMode = true;
 		WeekData.reloadWeekFiles(true);
-		if(curWeek >= WeekData.weeksList.length) curWeek = 0;
+		if(curWeek >= WeekData.weeksList.length) _curWeek = 0;
 		persistentUpdate = persistentDraw = true;
 
 		scoreText = new FlxFixedText(10, 10, 0, "SCORE: 49324858", 36);
@@ -176,7 +180,6 @@ class StoryMenuState extends MusicBeatState
 
 		/*sprDifficulty = new FlxSprite(0, leftArrow.y);
 		sprDifficulty.antialiasing = ClientPrefs.globalAntialiasing;
-		
 
 		difficultySelectors.add(sprDifficulty);*/
 
@@ -195,10 +198,10 @@ class StoryMenuState extends MusicBeatState
 		tracksSprite.antialiasing = ClientPrefs.globalAntialiasing;
 		//add(tracksSprite);
 
-		txtTracklist = new FlxFixedText(FlxG.width * 0.05, tracksSprite.y + 60, 0, "", 32);
-		txtTracklist.alignment = CENTER;
-		txtTracklist.font = Paths.font("vcr.ttf");
-		txtTracklist.color = 0xFFe55777;
+		//txtTracklist = new FlxFixedText(FlxG.width * 0.05, tracksSprite.y + 60, 0, "", 32);
+		//txtTracklist.alignment = CENTER;
+		//txtTracklist.font = Paths.font("vcr.ttf");
+		//txtTracklist.color = 0xFFe55777;
 		//add(txtTracklist);
 		add(scoreText);
 		add(txtWeekTitle);
@@ -517,6 +520,8 @@ class StoryMenuState extends MusicBeatState
 	{
 		changeDiffNumber(change);
 
+		if(change == 0) return;
+
 		for(cassette in grpCassette) {
 			cassette.acceleration.set();
 			cassette.velocity.set();
@@ -588,12 +593,12 @@ class StoryMenuState extends MusicBeatState
 
 	function changeWeek(change:Int = 0):Void
 	{
-		curWeek += change;
+		_curWeek += change;
 
-		if (curWeek >= WeekData.weeksList.length)
+		/*if (curWeek >= WeekData.weeksList.length)
 			curWeek = 0;
 		if (curWeek < 0)
-			curWeek = WeekData.weeksList.length - 1;
+			curWeek = WeekData.weeksList.length - 1;*/
 
 		var leWeek:WeekData = WeekData.weeksLoaded.get(WeekData.weeksList[curWeek]);
 		WeekData.setDirectoryFromWeek(leWeek);
@@ -603,12 +608,36 @@ class StoryMenuState extends MusicBeatState
 		//txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
 		txtWeekTitle.screenCenter(X);
 
-		var bullShit:Int = 0;
+		var half = Math.floor(WeekData.weeksList.length / 2);
+
+		var i:Int = 0;
+		//var renderPart = 5;
+		//var renderPart2 = renderPart+1;
 
 		for (item in grpCassette.members)
 		{
-			item.targetItem = bullShit - curWeek;
-			bullShit++;
+			item.targetItem = i - curWeek;
+			var a = CoolUtil.mod(item.targetItem + half, grpCassette.members.length) - half;
+			item.visTargetItem = a;
+			//if(item.targetItem > renderPart2) {
+			//	item.targetItem -= WeekData.weeksList.length;
+			//}
+			/*if(curWeek < renderPart2 && i ) { // && i > WeekData.weeksList.length - renderPart2
+				item.targetItem -= WeekData.weeksList.length; // add to left
+			}
+			else *//*if(curWeek > WeekData.weeksList.length - renderPart2 && i <= renderPart2) {
+				item.targetItem += WeekData.weeksList.length; // add to right
+			}*/
+			item.exVisible = false;
+			if(Math.abs(item.visTargetItem) <= 4) {
+				item.exVisible = true;
+			}
+
+			item.exAlpha = 1;
+			if(item.visTargetItem != item.targetItem) {
+				item.exAlpha = 0.3;
+			}
+			i++;
 		}
 
 		bgSprite.visible = true;
@@ -670,7 +699,7 @@ class StoryMenuState extends MusicBeatState
 			stringThing.push(leWeek.songs[i][0]);
 		}
 
-		txtTracklist.text = '';
+		/*txtTracklist.text = '';
 		for (i in 0...stringThing.length)
 		{
 			txtTracklist.text += stringThing[i] + '\n';
@@ -679,7 +708,7 @@ class StoryMenuState extends MusicBeatState
 		txtTracklist.text = txtTracklist.text.toUpperCase();
 
 		txtTracklist.screenCenter(X);
-		txtTracklist.x -= FlxG.width * 0.35;
+		txtTracklist.x -= FlxG.width * 0.35;*/
 
 		#if !switch
 		intendedScore = Highscore.getWeekScore(WeekData.weeksList[curWeek], curDifficulty);

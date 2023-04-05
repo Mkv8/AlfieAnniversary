@@ -10,7 +10,10 @@ import flixel.FlxSprite;
 class Cassette extends FlxSprite {
 	public var difficultySpr:FlxSprite;
 	public var isUnlocked = false;
+	public var exVisible = true;
 	public var targetItem:Int = 0;
+	public var visTargetItem:Int = 0;
+	public var exAlpha:Float = 1;
 
 	public var defaultX:Float = 0;
 	public var defaultY:Float = 0;
@@ -77,7 +80,7 @@ class Cassette extends FlxSprite {
 		}
 
 		var wantedAngle:Float = 0;//(FlxG.width / 2) - (width / 2);
-		wantedAngle += angleD * targetItem;
+		wantedAngle += angleD * visTargetItem;
 
 		colorL = FlxMath.lerp(colorL, wantedColor, CoolUtil.boundTo(elapsed * 0.17 * 60, 0, 1));
 		angle = FlxMath.lerp(angle, wantedAngle, CoolUtil.boundTo(elapsed * 0.17 * 60, 0, 1));
@@ -89,7 +92,7 @@ class Cassette extends FlxSprite {
 
 		color = FlxColor.fromRGBFloat(colorL, colorL, colorL);
 
-		visible = (angle >= -180 && angle < 180);
+		visible = (angle >= -180 && angle < 180) && exVisible;
 
 		force = false;
 
@@ -97,6 +100,9 @@ class Cassette extends FlxSprite {
 	}
 
 	override function draw() {
+		var oAlpha = alpha;
+		alpha *= exAlpha;
+
 		difficultySpr.x = x;
 		difficultySpr.y = y;
 		difficultySpr.origin = origin;
@@ -110,6 +116,8 @@ class Cassette extends FlxSprite {
 		difficultySpr.alpha = alpha * diffAlpha;
 		super.draw();
 		difficultySpr.draw();
+
+		alpha = oAlpha;
 	}
 
 	override function destroy() {
