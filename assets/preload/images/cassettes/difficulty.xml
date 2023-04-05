@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.0.2 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="difficulty.png" width="925" height="60">
+	<SubTexture name="EX" x="3" y="3" width="164" height="49" frameX="-129" frameY="-160" frameWidth="406" frameHeight="257"/>
+	<SubTexture name="EASY" x="173" y="3" width="229" height="50" frameX="-89" frameY="-160" frameWidth="406" frameHeight="257"/>
+	<SubTexture name="NORMAL" x="408" y="3" width="286" height="51" frameX="-65" frameY="-159" frameWidth="406" frameHeight="257"/>
+	<SubTexture name="HARD" x="700" y="3" width="222" height="54" frameX="-100" frameY="-157" frameWidth="406" frameHeight="257"/>
+</TextureAtlas>
