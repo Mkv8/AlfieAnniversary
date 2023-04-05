@@ -1,0 +1,122 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"anim": "idle",
+			"fps": 24,
+			"name": "idleb",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				162,
+				5
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "leftb",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-37,
+				-10
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "downb",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				32,
+				24
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "upb",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				36,
+				2
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "rightb",
+			"indices": []
+		},
+		{
+			"offsets": [
+				18,
+				-6
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFTmiss",
+			"indices": [],
+			"name": "missb"
+		},
+		{
+			"offsets": [
+				18,
+				-6
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "missb"
+		},
+		{
+			"offsets": [
+				18,
+				-6
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "missb"
+		},
+		{
+			"offsets": [
+				18,
+				-6
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "missb"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/pastaalfie",
+	"position": [
+		-10,
+		10
+	],
+	"healthicon": "kiss",
+	"flip_x": false,
+	"healthbar_colors": [
+		246,
+		221,
+		201
+	],
+	"camera_position": [
+		-60,
+		470
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

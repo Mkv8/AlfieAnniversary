@@ -25,7 +25,8 @@ class Note extends FlxSprite
 {
 	public var strumTime:Float = 0;
 
-	public var mustPress:Bool = false;
+	public var mustPress:Null<Bool> = false;
+	public var mustPressByThird = false;
 	public var noteData:Int = 0;
 	public var canBeHit:Bool = false;
 	public var tooLate:Bool = false;
@@ -317,7 +318,7 @@ class Note extends FlxSprite
 			animation.addByPrefix('bluehold', 'blue hold piece');
 		}
 
-		setGraphicSize(Std.int(width * 0.7));
+		setGraphicSize(Std.int(Note.swagWidth));
 		updateHitbox();
 	}
 

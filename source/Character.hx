@@ -79,6 +79,8 @@ class Character extends FlxSprite
 	public var originalFlipX:Bool = false;
 	public var healthColorArray:Array<Int> = [255, 0, 0];
 
+	public var copying = false;
+
 	public static var DEFAULT_CHARACTER:String = 'bf'; //In case a character is missing, it will use BF on its place
 	public function new(x:Float, y:Float, ?character:String = 'bf', ?isPlayer:Bool = false)
 	{
@@ -379,8 +381,19 @@ class Character extends FlxSprite
 		animation.addByPrefix(name, anim, 24, false);
 	}
 	public override function toString():String
-		{
-					return FlxStringUtil.getDebugString([LabelValuePair.weak("name", curCharacter), LabelValuePair.weak("x", x), LabelValuePair.weak("y", y), LabelValuePair.weak("alpha", alpha)]);
-		}
-
+	{
+				return FlxStringUtil.getDebugString([LabelValuePair.weak("name", curCharacter), LabelValuePair.weak("x", x), LabelValuePair.weak("y", y), LabelValuePair.weak("alpha", alpha)]);
+	}
+	
+	public function copyChar(char:Character) {
+		var animname = char.animation.curAnim.name;
+		animname = StringTools.replace(animname,"b","Full front");
+		playAnim(animname,true);
+		animation.curAnim.curFrame = char.animation.curAnim.curFrame;
+		offset.set(char.offset.x, char.offset.y);
+		setPosition(char.x,char.y);
+		scale.set(char.scale.x,char.scale.y);
+		origin.set(char.origin.x,char.origin.y);
+		width=char.width;height=char.height;
+	}
 }

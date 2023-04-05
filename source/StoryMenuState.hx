@@ -3,6 +3,7 @@ package;
 #if desktop
 import Discord.DiscordClient;
 #end
+import flixel.tweens.FlxEase;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
@@ -17,6 +18,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.net.curl.CURLCode;
 import flixel.graphics.FlxGraphic;
+import flixel.math.FlxPoint;
 import WeekData;
 
 using StringTools;
@@ -62,6 +64,13 @@ class StoryMenuState extends MusicBeatState
 	var kisston:FlxSprite;
 	var kai:FlxSprite;
 	var pasta:FlxSprite;
+
+	var choosingbih = false;
+	var blackOverlay:FlxSprite;
+	var bihText:FlxText;
+	var icons:Array<HealthIcon> = [];
+	var handSelect:FlxSprite;
+	var curBih = 0;
 
 	override function create()
 	{
@@ -112,7 +121,7 @@ class StoryMenuState extends MusicBeatState
 
 		grpCassette = new FlxTypedGroup<Cassette>();
 
-		var blackBarThingie:FlxSprite = new FlxSpriteExtra().makeSolid(FlxG.width, 56, FlxColor.BLACK);
+		var blackBarThingie:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 56, FlxColor.BLACK);
 		add(blackBarThingie);
 
 		#if desktop
@@ -198,6 +207,35 @@ class StoryMenuState extends MusicBeatState
 
 		changeWeek();
 
+		blackOverlay = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+		blackOverlay.screenCenter(XY);
+		blackOverlay.alpha = 0;
+		add(blackOverlay);
+
+		bihText = new FlxFixedText(FlxG.width * 0.7, -300, 0, "Choose your player", 40);
+		bihText.setFormat("VCR OSD Mono", 90, FlxColor.WHITE, RIGHT);
+		add(bihText);
+		bihText.screenCenter(X);
+
+		var names = ["icon-kisstonpasta", "icon-filippasta", "icon-alfiepasta"];
+		var poses = [new FlxPoint(268,452),new FlxPoint(568,452),new FlxPoint(868,452)];
+		
+		for (e in 0...names.length)
+		{
+			var i = new HealthIcon(names[e], false);
+			i.alpha = 0;
+			i.setPosition(poses[e].x,poses[e].y);
+			add(i);
+			icons.push(i);
+		}
+
+		handSelect = new FlxSprite(275,362).loadGraphic(Paths.image('hand_textbox'));
+		handSelect.setGraphicSize(Std.int(handSelect.width * PlayState.daPixelZoom * 1.15));
+		handSelect.angle = 90;
+		handSelect.updateHitbox();
+		handSelect.alpha = 0;
+		add(handSelect);
+
 		super.create();
 	}
 
@@ -210,13 +248,30 @@ class StoryMenuState extends MusicBeatState
 	var didResetTo0 = false;
 	var firstFrame = true;
 	var allowChanging = true;
+	var fml = 0.0;
+	var handxpos = 275;
 
 	override function update(elapsed:Float)
 	{
-		if(!firstFrame && !didResetTo0) {
-			updateBackground(true);
-			didResetTo0 = true;
+		var lerpVal = CoolUtil.boundTo(1 - (elapsed * 9), 0, 1);
+		if (fml != -1)
+		{
+			fml += elapsed*2;
+
+			handSelect.setPosition(FlxMath.lerp(handxpos, handSelect.x, lerpVal),362 - Math.cos(fml) * 10);
 		}
+
+		if (FlxG.sound.music != null)
+			Conductor.songPosition = FlxG.sound.music.time;
+
+		for (i in icons)
+		{
+			var mult:Float = FlxMath.lerp(1, i.scale.x, lerpVal);
+			i.scale.set(mult, mult);
+			i.updateHitbox();
+		}
+
+
 		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, CoolUtil.boundTo(elapsed * 30, 0, 1)));
 		if(Math.abs(intendedScore - lerpScore) < 10) lerpScore = intendedScore;
 
@@ -227,14 +282,14 @@ class StoryMenuState extends MusicBeatState
 
 		difficultySelectors.visible = !weekIsLocked(curWeek);
 
-		if(!movedBack && !selectedWeek && !allowChanging) {
+		if(!movedBack && !selectedWeek && !allowChanging && !choosingbih) {
 			if (controls.UI_UP_P)
 				changeDiffNumber(1);
 			else if (controls.UI_DOWN_P)
 				changeDiffNumber(-1);
 		}
 
-		if (!movedBack && !selectedWeek && allowChanging)
+		if (!movedBack && !selectedWeek && allowChanging && !choosingbih)
 		{
 			var upP = controls.UI_LEFT_P;
 			var downP = controls.UI_RIGHT_P;
@@ -278,7 +333,18 @@ class StoryMenuState extends MusicBeatState
 			}
 			else if (controls.ACCEPT)
 			{
-				selectWeek();
+				selectWeek(curWeek);
+			}
+		}
+		else if (choosingbih)
+		{
+			if (controls.UI_RIGHT_P)
+				changeBih(1);
+			else if (controls.UI_LEFT_P)
+				changeBih(-1);
+			else if (controls.ACCEPT)
+			{
+				selectWeek(curWeek,true);
 			}
 		}
 
@@ -294,18 +360,69 @@ class StoryMenuState extends MusicBeatState
 		firstFrame = false;
 	}
 
+	function changeBih(n:Int) {
+		curBih += n;
+		if (curBih == -1)
+			curBih = 2;
+		if (curBih == 3)
+			curBih = 0;
+
+		switch(curBih)
+		{
+			case 0:
+				handxpos = 275;
+			case 1:
+				handxpos = 575;
+			case 2:
+				handxpos = 875;
+		}
+	}
+
+	function openChoosing() {
+		choosingbih = true;
+
+		for (i in icons)
+			FlxTween.tween(i, {alpha: 1}, 0.75);
+
+		FlxTween.tween(blackOverlay, {alpha: 0.75}, 0.75);
+		FlxTween.tween(handSelect, {alpha: 1}, 0.75);
+		FlxTween.tween(bihText, {y: bihText.y + 400}, 0.75, {ease: FlxEase.backOut});
+	}
+
+	override function beatHit()
+	{
+		for (i in icons)
+		{
+			if (fml == -1)
+				return;
+			i.scale.set(1.2, 1.2);
+			i.updateHitbox();
+		}
+	}
+
 	var movedBack:Bool = false;
 	var selectedWeek:Bool = false;
 	var stopspamming:Bool = false;
 
-	function selectWeek()
+	function selectWeek(wNum:Int,selectPasta = false)
 	{
-		if (weekIsLocked(curWeek)) {
-			FlxG.sound.play(Paths.sound('cancelMenu'));
+		if (wNum == 14 && !selectPasta)
+		{
+			openChoosing();
 			return;
 		}
+		else if (selectPasta)
+		{
+			fml = -1;
+			handSelect.y += 30;
+			FlxTween.tween(handSelect, {y: handSelect.y - 30}, 0.35, {ease: FlxEase.cubeOut});
+			var chosen = [0,1,2];
+			chosen.remove(curBih);
+			for (i in chosen)
+				icons[i].animation.curAnim.curFrame = 1;
+		}
 
-		if (stopspamming == false)
+		if (!weekIsLocked(curWeek))
 		{
 			FlxG.sound.play(Paths.sound('confirmMenu'));
 
@@ -330,9 +447,27 @@ class StoryMenuState extends MusicBeatState
 
 		PlayState.storyDifficulty = curDifficulty;
 
-		PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + diffic, PlayState.storyPlaylist[0].toLowerCase());
-		PlayState.campaignScore = 0;
-		PlayState.campaignMisses = 0;
+			if (!selectPasta)
+				PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + diffic, PlayState.storyPlaylist[0].toLowerCase());
+			else
+			{
+				switch(curBih)
+				{
+					case 0:
+						PlayState.SONG = Song.loadFromJson("pasta-night" + diffic + '-k', "pasta-night");
+						PlayState.ectSONGS = [Song.loadFromJson("pasta-night" + diffic + '-f', "pasta-night"),Song.loadFromJson("pasta-night" + diffic + '-a', "pasta-night")];
+					case 1:
+						PlayState.SONG = Song.loadFromJson("pasta-night" + diffic + '-f', "pasta-night");
+						PlayState.ectSONGS = [Song.loadFromJson("pasta-night" + diffic + '-k', "pasta-night"),Song.loadFromJson("pasta-night" + diffic + '-a', "pasta-night")];
+					case 2:
+						PlayState.SONG = Song.loadFromJson("pasta-night" + diffic + '-a', "pasta-night");
+						PlayState.ectSONGS = [Song.loadFromJson("pasta-night" + diffic + '-k', "pasta-night"),Song.loadFromJson("pasta-night" + diffic + '-f', "pasta-night")];
+				}
+			}
+
+			PlayState.campaignScore = 0;
+			PlayState.campaignMisses = 0;
+			PlayState.bihNum = curBih;
 
 		new FlxTimer().start(1, function(tmr:FlxTimer)
 		{
