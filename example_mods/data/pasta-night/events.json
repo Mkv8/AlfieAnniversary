@@ -1,0 +1,19 @@
+{
+	"song": {
+		"speed": 2.05,
+		"stage": "pasta",
+		"player1": "pfilip",
+		"player2": "pkiss",
+		"player3": null,
+		"events": [
+		],
+		"notes": [],
+		"splashSkin": null,
+		"validScore": false,
+		"gfVersion": "palfie",
+		"bpm": 130,
+		"arrowSkin": null,
+		"needsVoices": true,
+		"song": "Pasta Night"
+	}
+}

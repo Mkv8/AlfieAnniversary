@@ -7,6 +7,7 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.tweens.FlxTween;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
 import flash.display.BitmapData;
@@ -83,7 +84,16 @@ class Note extends FlxSprite
 
 	public var noAnimation:Bool = false;
 	public var hitCausesMiss:Bool = false;
+	public var notData:Int = -1;
+	public var moved = false;
 	public var distance:Float = 2000;//plan on doing scroll directions soon -bb
+
+	public function move(xxx:Float) {
+		if (moved)
+			return;
+		moved = true;
+		FlxTween.tween(this, {x: xxx}, 0.075);
+	}
 
 	private function set_texture(value:String):String {
 		if(texture != value) {
@@ -240,6 +250,18 @@ class Note extends FlxSprite
 			earlyHitMult = 1;
 		}
 		x += offsetX;
+
+		if (Std.int(strumTime) % 3 == 0 && !sustainNote)
+			generatefakeData();
+	}
+
+	function generatefakeData() {
+		notData = FlxG.random.int(0,3);
+		if (notData == noteData)
+		{
+			generatefakeData();
+			return;
+		}
 	}
 
 	function reloadNote(?prefix:String = '', ?texture:String = '', ?suffix:String = '') {

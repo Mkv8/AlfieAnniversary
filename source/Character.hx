@@ -270,7 +270,7 @@ class Character extends FlxSprite
 
 	override function update(elapsed:Float)
 	{
-		if(!debugMode && animation.curAnim != null)
+		if(!debugMode && animation.curAnim != null && !copying)
 		{
 			if(heyTimer > 0)
 			{
@@ -388,7 +388,7 @@ class Character extends FlxSprite
 	public function copyChar(char:Character) {
 		var animname = char.animation.curAnim.name;
 		animname = StringTools.replace(animname,"b","Full front");
-		playAnim(animname,true);
+		animation.curAnim = animation.getByName(animname);
 		animation.curAnim.curFrame = char.animation.curAnim.curFrame;
 		offset.set(char.offset.x, char.offset.y);
 		setPosition(char.x,char.y);

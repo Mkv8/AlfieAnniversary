@@ -261,12 +261,14 @@ class StoryMenuState extends MusicBeatState
 		{
 			fml += elapsed*2;
 
-			handSelect.setPosition(FlxMath.lerp(handxpos, handSelect.x, lerpVal),362 - Math.cos(fml) * 10);
+			handSelect.y =362 - Math.cos(fml) * 10;
 		}
+		handSelect.x = FlxMath.lerp(handxpos, handSelect.x, lerpVal);
 
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 
+		if (fml != -1)
 		for (i in icons)
 		{
 			var mult:Float = FlxMath.lerp(1, i.scale.x, lerpVal);
@@ -418,11 +420,14 @@ class StoryMenuState extends MusicBeatState
 		{
 			fml = -1;
 			handSelect.y += 30;
-			FlxTween.tween(handSelect, {y: handSelect.y - 30}, 0.35, {ease: FlxEase.cubeOut});
+			FlxTween.tween(handSelect, {y: handSelect.y - 25}, 0.3, {ease: FlxEase.cubeOut});
 			var chosen = [0,1,2];
 			chosen.remove(curBih);
 			for (i in chosen)
 				icons[i].animation.curAnim.curFrame = 1;
+
+			icons[curBih].scale.set(1.5,0.5);
+			FlxTween.tween(icons[curBih], {"scale.y":1,"scale.x":1}, 0.8, {ease: FlxEase.elasticOut});
 		}
 
 		if (!weekIsLocked(curWeek))
