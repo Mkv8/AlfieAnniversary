@@ -3364,7 +3364,7 @@ class PlayState extends MusicBeatState
 					{
 						alfiefucking = true;
 						setNotex(true);
-						FlxTween.tween(bells, {alpha: 1}, 1, {ease: FlxEase.quartInOut});
+						FlxTween.tween(bells, {alpha: 1}, 1, {ease: FlxEase.cubeOut});
 						for (i in noteglow)
 						{
 							i.alpha = 1;
@@ -3374,7 +3374,7 @@ class PlayState extends MusicBeatState
 					{
 						alfiefucking = false;
 						//setNotex(false);
-						FlxTween.tween(bells, {alpha: 0.0}, 0.8, {ease: FlxEase.quartInOut});
+						FlxTween.tween(bells, {alpha: 0.0}, 0.8, {ease: FlxEase.cubeOut});
 						for (i in noteglow)
 						{
 							i.alpha = 0;
