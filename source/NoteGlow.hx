@@ -30,7 +30,7 @@ class NoteGlow extends FlxSprite
 
 	override function update(elapsed:Float)
 	{
-		setPosition(n.x -44,n.y -52);
+		setPosition(n.x -44,n.y +(ClientPrefs.downScroll ? -36 :-52));
 		if (!n.alive)
 			alpha = 0;
 		super.update(elapsed);
