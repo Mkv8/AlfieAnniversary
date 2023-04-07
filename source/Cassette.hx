@@ -1,5 +1,6 @@
 package;
 
+import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.util.FlxStringUtil;
 import flixel.FlxG;
@@ -8,7 +9,7 @@ import flixel.group.FlxSpriteGroup;
 import flixel.FlxSprite;
 
 class Cassette extends FlxSprite {
-	public var difficultySpr:FlxSprite;
+	var difficultySpr:FlxSprite;
 	public var isUnlocked = false;
 	public var exVisible = true;
 	public var targetItem:Int = 0;
@@ -18,21 +19,33 @@ class Cassette extends FlxSprite {
 	public var defaultX:Float = 0;
 	public var defaultY:Float = 0;
 
+	public var weekName:String = "";
+
 	public function new(weekName:String, isUnlocked:Bool = true) {
 		super();
 
+		this.weekName = weekName;
+
 		this.isUnlocked = isUnlocked;
 
-		loadGraphic(Paths.image('cassettes/' + weekName));
+		var cassetteImage = weekName;
 
-		difficultySpr = new FlxSprite();
-		difficultySpr.frames = Paths.getSparrowAtlas('cassettes/difficulty');
-		for(diff in ["easy", "normal", "hard", "ex"]) {
-			difficultySpr.animation.addByPrefix(diff, diff.toUpperCase(), 24);
+		if(!isUnlocked) {
+			cassetteImage = "missing";
 		}
-		difficultySpr.antialiasing = ClientPrefs.globalAntialiasing;
-		difficultySpr.animation.play("normal");
-		difficultySpr.moves = false;
+
+		loadGraphic(Paths.image('cassettes/' + cassetteImage));
+
+		if(isUnlocked) {
+			difficultySpr = new FlxSprite();
+			difficultySpr.frames = Paths.getSparrowAtlas('cassettes/difficulty');
+			for(diff in ["easy", "normal", "hard", "ex"]) {
+				difficultySpr.animation.addByPrefix(diff, diff.toUpperCase(), 24);
+			}
+			difficultySpr.animation.play("normal");
+			difficultySpr.antialiasing = ClientPrefs.globalAntialiasing;
+			difficultySpr.moves = false;
+		}
 
 		antialiasing = ClientPrefs.globalAntialiasing;
 
@@ -55,20 +68,31 @@ class Cassette extends FlxSprite {
 		defaultY = y;
 	}
 
+	public function updateDifficulty(diff:String) {
+		if(difficultySpr != null) {
+			difficultySpr.animation.play(diff);
+		}
+	}
+
 	public var force = true;
 
 	static var angleD:Float = 33;
+	public var selectAngleOffset:Float = 0;
 
+	var shakeOffset:FlxPoint = new FlxPoint();
 	var colorL:Float = 1;
 	var diffAlpha:Float = 1;
+
+	public var shakeDuration:Float = 0;
+	var timer:Float = 0;
+	var shakeDistance:Float = 10;
 
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
 		var wantedAlpha = 1;
-		if(targetItem == 0 && !isUnlocked) {
+		if(targetItem == 0 && isUnlocked) {
 			wantedAlpha = 1;
-			//glow.alpha = FlxMath.lerp(1, 0.5, Conductor.getBeatPhase());
 		} else {
 			wantedAlpha = 0;
 		}
@@ -79,8 +103,10 @@ class Cassette extends FlxSprite {
 			wantedColor = 0.7;
 		}
 
-		var wantedAngle:Float = 0;//(FlxG.width / 2) - (width / 2);
+		var wantedAngle:Float = 0;
 		wantedAngle += angleD * visTargetItem;
+
+		wantedAngle += selectAngleOffset * visTargetItem;//FlxMath.signOf(visTargetItem);
 
 		colorL = FlxMath.lerp(colorL, wantedColor, CoolUtil.boundTo(elapsed * 0.17 * 60, 0, 1));
 		angle = FlxMath.lerp(angle, wantedAngle, CoolUtil.boundTo(elapsed * 0.17 * 60, 0, 1));
@@ -96,33 +122,60 @@ class Cassette extends FlxSprite {
 
 		force = false;
 
-		difficultySpr.update(elapsed);
+		if(shakeDuration > 0) {
+			shakeDuration -= elapsed;
+			if(shakeDistance > 0) {
+				timer += elapsed;
+				while(timer > 1/30) {
+					shakeOffset.set(
+						FlxG.random.float(-shakeDistance, shakeDistance),
+						FlxG.random.float(-shakeDistance, shakeDistance)
+					);
+					timer -= 1/30;
+				}
+			}
+		}
+
+		if(shakeDuration <= 0) {
+			shakeOffset.set();
+		}
+
+		if(difficultySpr != null) difficultySpr.update(elapsed);
 	}
 
 	override function draw() {
 		var oAlpha = alpha;
 		alpha *= exAlpha;
 
-		difficultySpr.x = x;
-		difficultySpr.y = y;
-		difficultySpr.origin = origin;
-		difficultySpr.offset = offset;
-		difficultySpr.scale = scale;
-		difficultySpr.width = width;
-		difficultySpr.height = height;
-		difficultySpr.angle = angle;
-		difficultySpr.visible = visible;
-		difficultySpr.color = color;
-		difficultySpr.alpha = alpha * diffAlpha;
+		x += shakeOffset.x;
+		y += shakeOffset.y;
+
+		if(difficultySpr != null) {
+			difficultySpr.x = x;
+			difficultySpr.y = y;
+			difficultySpr.origin = origin;
+			difficultySpr.offset = offset;
+			difficultySpr.scale = scale;
+			difficultySpr.width = width;
+			difficultySpr.height = height;
+			difficultySpr.angle = angle;
+			difficultySpr.visible = visible;
+			difficultySpr.color = color;
+			difficultySpr.alpha = alpha * diffAlpha;
+		}
 		super.draw();
-		difficultySpr.draw();
+		if(difficultySpr != null)
+			difficultySpr.draw();
+
+		x -= shakeOffset.x;
+		y -= shakeOffset.y;
 
 		alpha = oAlpha;
 	}
 
 	override function destroy() {
 		super.destroy();
-		difficultySpr.destroy();
+		if(difficultySpr != null) difficultySpr.destroy();
 
 		Debugger.unregisterObject(FlxStringUtil.getClassName(Cassette, true));
 	}
