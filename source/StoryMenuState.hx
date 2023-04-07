@@ -49,10 +49,10 @@ class StoryMenuState extends MusicBeatState
 
 	var grpCassette:FlxTypedGroup<Cassette>;
 
-	var difficultySelectors:FlxGroup;
+	//var difficultySelectors:FlxGroup;
 	//var sprDifficulty:FlxSprite;
-	var leftArrow:FlxSprite;
-	var rightArrow:FlxSprite;
+	//var leftArrow:FlxSprite;
+	//var rightArrow:FlxSprite;
 
 	var oldtimes:FlxSprite;
 	var specters:FlxSprite;
@@ -125,7 +125,7 @@ class StoryMenuState extends MusicBeatState
 
 		grpCassette = new FlxTypedGroup<Cassette>();
 
-		var blackBarThingie:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 56, FlxColor.BLACK);
+		var blackBarThingie:FlxSprite = new FlxSpriteExtra().makeSolid(FlxG.width, 56, FlxColor.BLACK);
 		add(blackBarThingie);
 
 		#if desktop
@@ -136,7 +136,7 @@ class StoryMenuState extends MusicBeatState
 		for (i in 0...WeekData.weeksList.length)
 		{
 			WeekData.setDirectoryFromWeek(WeekData.weeksLoaded.get(WeekData.weeksList[i]));
-			var weekThing:Cassette = new Cassette(WeekData.weeksList[i], weekIsLocked(i));
+			var weekThing:Cassette = new Cassette(WeekData.weeksList[i], !weekIsLocked(i));
 			//weekThing.y += ((weekThing.height + 20) * i);
 			weekThing.targetItem = i - curWeek;
 			grpCassette.add(weekThing);
@@ -160,7 +160,7 @@ class StoryMenuState extends MusicBeatState
 
 		WeekData.setDirectoryFromWeek(WeekData.weeksLoaded.get(WeekData.weeksList[0]));
 
-		difficultySelectors = new FlxGroup();
+		/*difficultySelectors = new FlxGroup();
 		add(difficultySelectors);
 
 		leftArrow = new FlxSprite(grpCassette.members[0].x + grpCassette.members[0].width + 10, grpCassette.members[0].y + 10);
@@ -169,7 +169,7 @@ class StoryMenuState extends MusicBeatState
 		leftArrow.animation.addByPrefix('press', "arrow push left");
 		leftArrow.animation.play('idle');
 		leftArrow.antialiasing = ClientPrefs.globalAntialiasing;
-		difficultySelectors.add(leftArrow);
+		difficultySelectors.add(leftArrow);*/
 
 		CoolUtil.difficulties = CoolUtil.defaultDifficulties.copy();
 		if(lastDifficultyName == '')
@@ -183,13 +183,13 @@ class StoryMenuState extends MusicBeatState
 
 		difficultySelectors.add(sprDifficulty);*/
 
-		rightArrow = new FlxSprite(leftArrow.x + 376, leftArrow.y);
+		/*rightArrow = new FlxSprite(leftArrow.x + 376, leftArrow.y);
 		rightArrow.frames = ui_tex;
 		rightArrow.animation.addByPrefix('idle', 'arrow right');
 		rightArrow.animation.addByPrefix('press', "arrow push right", 24, false);
 		rightArrow.animation.play('idle');
 		rightArrow.antialiasing = ClientPrefs.globalAntialiasing;
-		difficultySelectors.add(rightArrow);
+		difficultySelectors.add(rightArrow);*/
 		changeDifficulty();
 
 		add(bgSprite);
@@ -210,8 +210,14 @@ class StoryMenuState extends MusicBeatState
 
 		changeWeek();
 
-		blackOverlay = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
-		blackOverlay.screenCenter(XY);
+		makeOverlay(); // Maybe optimize to make it happen later
+
+		super.create();
+	}
+
+	function makeOverlay() {
+		blackOverlay = new FlxSpriteExtra(0, 0).makeSolid(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+		blackOverlay.screenCenter();
 		blackOverlay.alpha = 0;
 		add(blackOverlay);
 
@@ -222,7 +228,7 @@ class StoryMenuState extends MusicBeatState
 
 		var names = ["icon-kisstonpasta", "icon-filippasta", "icon-alfiepasta"];
 		var poses = [new FlxPoint(268,452),new FlxPoint(568,452),new FlxPoint(868,452)];
-		
+
 		for (e in 0...names.length)
 		{
 			var i = new HealthIcon(names[e], false);
@@ -232,14 +238,12 @@ class StoryMenuState extends MusicBeatState
 			icons.push(i);
 		}
 
-		handSelect = new FlxSprite(275,362).loadGraphic(Paths.image('hand_textbox'));
+		handSelect = new FlxSprite(handxpos, 362).loadGraphic(Paths.image('hand_textbox'));
 		handSelect.setGraphicSize(Std.int(handSelect.width * PlayState.daPixelZoom * 1.15));
 		handSelect.angle = 90;
 		handSelect.updateHitbox();
 		handSelect.alpha = 0;
 		add(handSelect);
-
-		super.create();
 	}
 
 	override function closeSubState() {
@@ -252,7 +256,7 @@ class StoryMenuState extends MusicBeatState
 	var firstFrame = true;
 	var allowChanging = true;
 	var fml = 0.0;
-	var handxpos = 275;
+	var handxpos:Float = 275;
 
 	override function update(elapsed:Float)
 	{
@@ -268,12 +272,13 @@ class StoryMenuState extends MusicBeatState
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 
-		if (fml != -1)
-		for (i in icons)
-		{
-			var mult:Float = FlxMath.lerp(1, i.scale.x, lerpVal);
-			i.scale.set(mult, mult);
-			i.updateHitbox();
+		if (fml != -1) {
+			for (i in icons)
+			{
+				var mult:Float = FlxMath.lerp(1, i.scale.x, lerpVal);
+				i.scale.set(mult, mult);
+				i.updateHitbox();
+			}
 		}
 
 
@@ -285,7 +290,7 @@ class StoryMenuState extends MusicBeatState
 
 		// FlxG.watch.addQuick('font', scoreText.font);
 
-		difficultySelectors.visible = !weekIsLocked(curWeek);
+		//difficultySelectors.visible = !weekIsLocked(curWeek);
 
 		if(!movedBack && !selectedWeek && !allowChanging && !choosingbih) {
 			if (controls.UI_UP_P)
@@ -310,7 +315,7 @@ class StoryMenuState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('scrollMenu'));
 			}
 
-			if (controls.UI_RIGHT)
+			/*if (controls.UI_RIGHT)
 				rightArrow.animation.play('press')
 			else
 				rightArrow.animation.play('idle');
@@ -318,7 +323,7 @@ class StoryMenuState extends MusicBeatState
 			if (controls.UI_LEFT)
 				leftArrow.animation.play('press');
 			else
-				leftArrow.animation.play('idle');
+				leftArrow.animation.play('idle');*/
 
 			if (controls.UI_UP_P)
 				changeDifficulty(1);
@@ -396,10 +401,10 @@ class StoryMenuState extends MusicBeatState
 
 	override function beatHit()
 	{
+		if (fml == -1)
+			return;
 		for (i in icons)
 		{
-			if (fml == -1)
-				return;
 			i.scale.set(1.2, 1.2);
 			i.updateHitbox();
 		}
@@ -411,6 +416,11 @@ class StoryMenuState extends MusicBeatState
 
 	function selectWeek(wNum:Int,selectPasta = false)
 	{
+		if(!grpCassette.members[wNum].isUnlocked) {
+			grpCassette.members[wNum].shakeDuration = 0.3;
+			return;
+		}
+
 		if (wNum == 14 && !selectPasta)
 		{
 			openChoosing();
@@ -455,29 +465,59 @@ class StoryMenuState extends MusicBeatState
 
 		PlayState.storyDifficulty = curDifficulty;
 
-			if (!selectPasta)
-				PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + diffic, PlayState.storyPlaylist[0].toLowerCase());
-			else
+		if (!selectPasta)
+			PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + diffic, PlayState.storyPlaylist[0].toLowerCase());
+		else
+		{
+			var kisston = Song.loadFromJson("pasta-night" + diffic + '-k', "pasta-night");
+			var alfie = Song.loadFromJson("pasta-night" + diffic + '-a', "pasta-night");
+			var filip = Song.loadFromJson("pasta-night" + diffic + '-f', "pasta-night");
+
+			switch(curBih)
 			{
-				switch(curBih)
-				{
-					case 0:
-						PlayState.SONG = Song.loadFromJson("pasta-night" + diffic + '-k', "pasta-night");
-						PlayState.ectSONGS = [Song.loadFromJson("pasta-night" + diffic + '-f', "pasta-night"),Song.loadFromJson("pasta-night" + diffic + '-a', "pasta-night")];
-					case 1:
-						PlayState.SONG = Song.loadFromJson("pasta-night" + diffic + '-f', "pasta-night");
-						PlayState.ectSONGS = [Song.loadFromJson("pasta-night" + diffic + '-k', "pasta-night"),Song.loadFromJson("pasta-night" + diffic + '-a', "pasta-night")];
-					case 2:
-						PlayState.SONG = Song.loadFromJson("pasta-night" + diffic + '-a', "pasta-night");
-						PlayState.ectSONGS = [Song.loadFromJson("pasta-night" + diffic + '-k', "pasta-night"),Song.loadFromJson("pasta-night" + diffic + '-f', "pasta-night")];
-				}
+				case 0:
+					PlayState.SONG = kisston;
+					PlayState.ectSONGS = [filip, alfie];
+				case 1:
+					PlayState.SONG = filip;
+					PlayState.ectSONGS = [kisston, alfie];
+				case 2:
+					PlayState.SONG = alfie;
+					PlayState.ectSONGS = [kisston, filip];
 			}
+		}
 
-			PlayState.campaignScore = 0;
-			PlayState.campaignMisses = 0;
-			PlayState.bihNum = curBih;
+		PlayState.campaignScore = 0;
+		PlayState.campaignMisses = 0;
+		PlayState.bihNum = curBih;
 
-		new FlxTimer().start(1, function(tmr:FlxTimer)
+		for(cassette in grpCassette) {
+			if(cassette.targetItem != 0) {
+				FlxTween.tween(cassette, {selectAngleOffset: 70}, 0.9);
+			}
+		}
+		var curCassette = grpCassette.members[wNum];
+		timer(0.8, (_) -> {
+			FlxTween.tween(curCassette, {y: curCassette.defaultY - 50}, 0.1, {
+				ease: FlxEase.quartOut,
+				onComplete: (_) -> {
+					FlxTween.tween(curCassette, {y: curCassette.defaultY + 270}, 0.4, {
+						ease: FlxEase.quartIn,
+						onComplete: (_) -> {
+							loadSong();
+						}
+					});
+				}
+			});
+		});
+	}
+
+	function timer(Time:Float = 1, ?OnComplete:FlxTimer->Void, Loops:Int = 1) {
+		new FlxTimer().start(Time, OnComplete, Loops);
+	}
+
+	function loadSong() {
+		timer(1, function(tmr:FlxTimer)
 		{
 			if(Paths.formatToSongPath(PlayState.SONG.song) == "heart-attack" || Paths.formatToSongPath(PlayState.SONG.song) == "jelly-jamboree" )
 			{
@@ -507,7 +547,7 @@ class StoryMenuState extends MusicBeatState
 
 		if(change == 0) {
 			for(cassette in grpCassette) {
-				cassette.difficultySpr.animation.play(diffName);
+				cassette.updateDifficulty(diffName);
 			}
 			intendedScore = Highscore.getWeekScore(WeekData.weeksList[curWeek], curDifficulty);
 		}
@@ -515,7 +555,7 @@ class StoryMenuState extends MusicBeatState
 		if(change != 0) {
 			for(cassette in grpCassette) {
 				if(cassette.targetItem != 0) {
-					cassette.difficultySpr.animation.play(diffName);
+					cassette.updateDifficulty(diffName);
 				}
 			}
 		}
@@ -540,7 +580,7 @@ class StoryMenuState extends MusicBeatState
 				FlxTween.tween(cassette, {alpha: 0}, 0.3, {
 					startDelay: 0.3,
 					onComplete: (_) -> {
-						cassette.difficultySpr.animation.play(diffName);
+						cassette.updateDifficulty(diffName);
 						cassette.acceleration.set();
 						cassette.velocity.set();
 						cassette.y = cassette.defaultY + 100;
@@ -692,6 +732,7 @@ class StoryMenuState extends MusicBeatState
 	}
 
 	function weekIsLocked(weekNum:Int) {
+		if(weekNum == 14) return true;
 		var leWeek:WeekData = WeekData.weeksLoaded.get(WeekData.weeksList[weekNum]);
 		return (!leWeek.startUnlocked && leWeek.weekBefore.length > 0 && (!weekCompleted.exists(leWeek.weekBefore) || !weekCompleted.get(leWeek.weekBefore)));
 	}
