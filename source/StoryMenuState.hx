@@ -125,7 +125,7 @@ class StoryMenuState extends MusicBeatState
 
 		grpCassette = new FlxTypedGroup<Cassette>();
 
-		var blackBarThingie:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 56, FlxColor.BLACK);
+		var blackBarThingie:FlxSprite = new FlxSpriteExtra().makeSolid(FlxG.width, 56, FlxColor.BLACK);
 		add(blackBarThingie);
 
 		#if desktop
@@ -455,27 +455,31 @@ class StoryMenuState extends MusicBeatState
 
 		PlayState.storyDifficulty = curDifficulty;
 
-			if (!selectPasta)
-				PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + diffic, PlayState.storyPlaylist[0].toLowerCase());
-			else
-			{
-				switch(curBih)
-				{
-					case 0:
-						PlayState.SONG = Song.loadFromJson("pasta-night" + diffic + '-k', "pasta-night");
-						PlayState.ectSONGS = [Song.loadFromJson("pasta-night" + diffic + '-f', "pasta-night"),Song.loadFromJson("pasta-night" + diffic + '-a', "pasta-night")];
-					case 1:
-						PlayState.SONG = Song.loadFromJson("pasta-night" + diffic + '-f', "pasta-night");
-						PlayState.ectSONGS = [Song.loadFromJson("pasta-night" + diffic + '-k', "pasta-night"),Song.loadFromJson("pasta-night" + diffic + '-a', "pasta-night")];
-					case 2:
-						PlayState.SONG = Song.loadFromJson("pasta-night" + diffic + '-a', "pasta-night");
-						PlayState.ectSONGS = [Song.loadFromJson("pasta-night" + diffic + '-k', "pasta-night"),Song.loadFromJson("pasta-night" + diffic + '-f', "pasta-night")];
-				}
-			}
+		if (!selectPasta)
+			PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + diffic, PlayState.storyPlaylist[0].toLowerCase());
+		else
+		{
+			var kisston = Song.loadFromJson("pasta-night" + diffic + '-k', "pasta-night");
+			var alfie = Song.loadFromJson("pasta-night" + diffic + '-a', "pasta-night");
+			var filip = Song.loadFromJson("pasta-night" + diffic + '-f', "pasta-night");
 
-			PlayState.campaignScore = 0;
-			PlayState.campaignMisses = 0;
-			PlayState.bihNum = curBih;
+			switch(curBih)
+			{
+				case 0:
+					PlayState.SONG = kisston;
+					PlayState.ectSONGS = [filip, alfie];
+				case 1:
+					PlayState.SONG = filip;
+					PlayState.ectSONGS = [kisston, alfie];
+				case 2:
+					PlayState.SONG = alfie;
+					PlayState.ectSONGS = [kisston, filip];
+			}
+		}
+
+		PlayState.campaignScore = 0;
+		PlayState.campaignMisses = 0;
+		PlayState.bihNum = curBih;
 
 		new FlxTimer().start(1, function(tmr:FlxTimer)
 		{
