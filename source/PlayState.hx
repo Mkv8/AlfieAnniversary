@@ -2666,7 +2666,7 @@ class PlayState extends MusicBeatState
 						babyArrow.x += FlxG.width / 2 + 25;
 					}
 				}
-				else if (player == 0 || player == 2)
+				else if ((player == 0 || player == 2) && curStage == "pasta")
 					babyArrow.alpha = 0.35;
 			}
 
