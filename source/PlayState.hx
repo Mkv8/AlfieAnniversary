@@ -829,13 +829,13 @@ class PlayState extends MusicBeatState
 		if(formattedSong == 'pasta-night') {
 			pastaoverlay = new BGSprite('pasta/pastaoverlay', -960, 540, 1, 1);
 			pastaoverlay.alpha = 0.5;
-			pastaoverlay.scale.set(1.25, 1.25);
+			pastaoverlay.scale.set(1.075, 1.075);
 
 			pastaoverlay.blend = BlendMode.ADD;
 
 			watermultiply = new BGSprite('pasta/pastaoverlay', -960, 540, 1, 1);
 			watermultiply.alpha = 0.6;
-			watermultiply.scale.set(1.25, 1.25);
+			watermultiply.scale.set(1.075, 1.075);
 
 			watermultiply.blend = BlendMode.MULTIPLY;
 
@@ -1217,7 +1217,7 @@ class PlayState extends MusicBeatState
 				pastabg.scale.set(1.075, 1.075);
 				add(pastabg);
 
-				pastatable = new BGSprite('pasta/table', -960, 1440, 1, 1);
+				pastatable = new BGSprite('pasta/table', -960, 1400, 1, 1);
 				pastatable.scale.set(1.075, 1.075);
 				
 		}
@@ -1390,15 +1390,15 @@ class PlayState extends MusicBeatState
 				switch(PlayState.bihNum)
 				{
 					case 0:
-						boyfriend.setPosition(-927 ,979); dad.setPosition(-297, 956); gf.setPosition(433, 1036);
+						boyfriend.setPosition(-927 ,939); dad.setPosition(-297, 916); gf.setPosition(433, 996);
 						boyfriend.healthIcon = "icon-kisstonpasta"; dad.healthIcon = "icon-alfiefilippasta"; 
 						boyfriend.healthColorArray= [246,221,201]; dad.healthColorArray= [234,145,58];
 					case 1:
-						dad.setPosition(-927 ,979); boyfriend.setPosition(-297, 956); gf.setPosition(433, 1036);
+						dad.setPosition(-927 ,939); boyfriend.setPosition(-297, 916); gf.setPosition(433, 996);
 						boyfriend.healthIcon = "icon-filippasta"; dad.healthIcon = "icon-alfiekisspasta"; 
 						boyfriend.healthColorArray= [255,205,1]; dad.healthColorArray= [255,169,166];
 					case 2:
-						dad.setPosition(-927 ,979); gf.setPosition(-297, 956); boyfriend.setPosition(433, 1036);
+						dad.setPosition(-927 ,939); gf.setPosition(-297, 916); boyfriend.setPosition(433, 996);
 						boyfriend.healthIcon = "icon-alfiepasta"; dad.healthIcon = "icon-filipkisspasta"; 
 						boyfriend.healthColorArray= [179,32,61]; dad.healthColorArray= [255,197,146];
 				}
@@ -1658,12 +1658,12 @@ class PlayState extends MusicBeatState
 
 		}
 
-		if (formattedSong == 'minimize')
+		if (formattedSong == 'minimize' && curStage == 'fake')
 		{
 			iconP2.alpha = 0;
 			iconP1.alpha = 0;
 			healthBar.alpha = 0;
-
+			camHUD.alpha = 0.0001;
 		}
 		if (formattedSong == 'mansion-match')
 		{
@@ -2674,6 +2674,7 @@ class PlayState extends MusicBeatState
 			if(afterDarkSpot) babyArrow.player = 0;
 			babyArrow.postAddedToGroup();
 			if(afterDarkSpot) babyArrow.player = player;
+
 		}
 	}
 
@@ -5664,6 +5665,7 @@ class PlayState extends MusicBeatState
 					}
 					case 31:
 					{
+						camHUD.alpha = 1;			
 						enableCameraBopping = false;
 						blackOverlay.alpha = 1;
 						coming4u.animation.pause();
