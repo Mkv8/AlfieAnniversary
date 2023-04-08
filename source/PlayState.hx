@@ -1773,6 +1773,7 @@ class PlayState extends MusicBeatState
 		data.set("heart-attack", ["NowP", "ktitle"]);
 		data.set("jelly-jamboree", ["NowP", "kaititle"]);
 		data.set("minimize", ["NowP", "minustitle"]);
+		data.set("pasta-night", ["NowP", "pastatitle"]);
 
 
 		var shouldShowCassette:Bool = false;

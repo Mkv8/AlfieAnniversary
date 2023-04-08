@@ -493,11 +493,11 @@ class StoryMenuState extends MusicBeatState
 
 		for(cassette in grpCassette) {
 			if(cassette.targetItem != 0) {
-				FlxTween.tween(cassette, {selectAngleOffset: 70}, 0.9);
+				FlxTween.tween(cassette, {selectAngleOffset: 70}, 0.5, {ease: FlxEase.quartIn});
 			}
 		}
 		var curCassette = grpCassette.members[wNum];
-		timer(0.8, (_) -> {
+		timer(0.6, (_) -> {
 			FlxTween.tween(curCassette, {y: curCassette.defaultY - 50}, 0.1, {
 				ease: FlxEase.quartOut,
 				onComplete: (_) -> {
