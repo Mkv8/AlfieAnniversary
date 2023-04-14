@@ -73,6 +73,11 @@ import flixel.graphics.frames.FlxBitmapFont;
 
 using StringTools;
 
+enum PositionsType {
+	DownScroll(middleScroll:Bool);
+	UpScroll(middleScroll:Bool);
+}
+
 class PlayState extends MusicBeatState
 {
 	public static var STRUM_X = 42;
@@ -399,6 +404,19 @@ class PlayState extends MusicBeatState
 
 
 	var spritesToDestroy:Array<FlxBasic> = [];
+
+	var ratingPosition:PositionsType = null;
+	public function setRatingPositionFromName(songName:String):Void
+	{
+		songName = songName.toLowerCase();
+		var middleScroll:Bool = songName=="skalloween" || ClientPrefs.middleScroll;
+		if(ClientPrefs.downScroll){
+			ratingPosition = DownScroll(middleScroll);
+		}
+		else{
+			ratingPosition = UpScroll(middleScroll);
+		}
+	}
 
 	override public function create()
 	{
@@ -860,6 +878,8 @@ class PlayState extends MusicBeatState
 
 		GameOverSubstate.resetVariables();
 		var songName:String = Paths.formatToSongPath(SONG.song);
+
+		setRatingPositionFromName(songName);
 
 		curStage = PlayState.SONG.stage;
 		//trace('stage is: ' + curStage);
@@ -1515,8 +1535,31 @@ class PlayState extends MusicBeatState
 		);
 		ratingText.pixelPerfectRender = true;
     	ratingText.letterSpacing = 0;
-		ratingText.screenCenter(X);
-		ratingText.y = FlxG.height-180; 
+		
+		switch (ratingPosition) {
+			case DownScroll(middleScroll):
+				trace('Downscroll; Middle:$middleScroll!');
+				if (!middleScroll){
+					ratingText.y = FlxG.height-180; 
+					ratingText.x = FlxG.width/2;
+				}
+				else {
+					ratingText.x = 360;
+					ratingText.y = 180; 
+				}
+			case UpScroll(middleScroll):
+				trace('Upscroll; Middle:$middleScroll!');
+				ratingText.y = 180; 
+				if (!middleScroll){
+					ratingText.y = 180; 
+					ratingText.x = FlxG.width/2;
+				}
+				else {
+					ratingText.x = 360;
+					ratingText.y = FlxG.height-180; 
+				}
+
+		}
 		ratingText.updateHitbox();
 		ratingText.scale.set(0.6,0.6);
 		comboLayer.add(ratingText);
@@ -3989,11 +4032,13 @@ class PlayState extends MusicBeatState
 		}else{
 			ratingText.visible = true;
 		}*/
-
+		
 		ratingText.visible = true;
 		ratingText.text = oneLetterUppercase(daRating)+" "+combo;
 		ratingText.updateHitbox();
-		ratingText.screenCenter(X);
+
+		ratingText.offset.x = ratingText.width*0.5/0.6;
+
 		ratingText.antialiasing=true;
 		if(hasTextColor.indexOf(daRating)<0){
 			ratingText.color = 0xFFFFFFFF;
