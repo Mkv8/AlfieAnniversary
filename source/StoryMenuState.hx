@@ -265,7 +265,7 @@ class StoryMenuState extends MusicBeatState
 		{
 			fml += elapsed*2;
 
-			handSelect.y =362 - Math.cos(fml) * 10;
+			handSelect.y = 362 - Math.cos(fml) * 10;
 		}
 		handSelect.x = FlxMath.lerp(handxpos, handSelect.x, lerpVal);
 
@@ -325,10 +325,14 @@ class StoryMenuState extends MusicBeatState
 			else
 				leftArrow.animation.play('idle');*/
 
-			if (controls.UI_UP_P)
-				changeDifficulty(1);
-			else if (controls.UI_DOWN_P)
-				changeDifficulty(-1);
+			if(controls.UI_UP_P || controls.UI_DOWN_P) {
+				if(!weekIsLocked(curWeek)) {
+					if (controls.UI_UP_P)
+						changeDifficulty(1);
+					else if (controls.UI_DOWN_P)
+						changeDifficulty(-1);
+				}
+			}
 
 			if(FlxG.keys.justPressed.CONTROL)
 			{
@@ -412,7 +416,6 @@ class StoryMenuState extends MusicBeatState
 
 	var movedBack:Bool = false;
 	var selectedWeek:Bool = false;
-	var stopspamming:Bool = false;
 
 	function selectWeek(wNum:Int,selectPasta = false)
 	{
@@ -445,7 +448,6 @@ class StoryMenuState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('confirmMenu'));
 
 			//grpCassette.members[curWeek].startFlashing();
-			stopspamming = true;
 		}
 
 		// We can't use Dynamic Array .copy() because that crashes HTML5, here's a workaround.
@@ -549,7 +551,7 @@ class StoryMenuState extends MusicBeatState
 			for(cassette in grpCassette) {
 				cassette.updateDifficulty(diffName);
 			}
-			intendedScore = Highscore.getWeekScore(WeekData.weeksList[curWeek], curDifficulty);
+			updateScore();
 		}
 
 		if(change != 0) {
@@ -588,7 +590,7 @@ class StoryMenuState extends MusicBeatState
 						cassette.alpha = 1;
 						allowChanging = true;
 
-						intendedScore = Highscore.getWeekScore(WeekData.weeksList[curWeek], curDifficulty);
+						updateScore();
 
 						FlxTween.tween(cassette, {y: cassette.defaultY}, 0.2, {
 							onComplete: (_) -> {
@@ -732,18 +734,22 @@ class StoryMenuState extends MusicBeatState
 	}
 
 	function weekIsLocked(weekNum:Int) {
-		if(weekNum == 14) return true;
 		var leWeek:WeekData = WeekData.weeksLoaded.get(WeekData.weeksList[weekNum]);
-		return (!leWeek.startUnlocked && leWeek.weekBefore.length > 0 && (!weekCompleted.exists(leWeek.weekBefore) || !weekCompleted.get(leWeek.weekBefore)));
+		if(leWeek.songs.length > 0) {
+			return !LockManager.isSongUnlocked(leWeek.songs[0][0]);
+		}
+
+		return true;
+		//return (!leWeek.startUnlocked && leWeek.weekBefore.length > 0 && (!weekCompleted.exists(leWeek.weekBefore) || !weekCompleted.get(leWeek.weekBefore)));
 	}
 
 	function updateText()
 	{
-		var leWeek:WeekData = WeekData.weeksLoaded.get(WeekData.weeksList[curWeek]);
+		/*var leWeek:WeekData = WeekData.weeksLoaded.get(WeekData.weeksList[curWeek]);
 		var stringThing:Array<String> = [];
 		for (i in 0...leWeek.songs.length) {
 			stringThing.push(leWeek.songs[i][0]);
-		}
+		}*/
 
 		/*txtTracklist.text = '';
 		for (i in 0...stringThing.length)
@@ -756,8 +762,17 @@ class StoryMenuState extends MusicBeatState
 		txtTracklist.screenCenter(X);
 		txtTracklist.x -= FlxG.width * 0.35;*/
 
-		#if !switch
-		intendedScore = Highscore.getWeekScore(WeekData.weeksList[curWeek], curDifficulty);
-		#end
+		updateScore();
+	}
+
+	function updateScore() {
+		var wkstr = WeekData.weeksList[curWeek];
+		var leWeek = WeekData.weeksLoaded.get(wkstr);
+		//trace(leWeek.songs, CoolUtil.difficulties[curDifficulty]);
+		if(leWeek.songs.length > 0) {
+			intendedScore = Highscore.getScore(leWeek.songs[0][0], curDifficulty);
+		} else {
+			intendedScore = Highscore.getWeekScore(wkstr, curDifficulty);
+		}
 	}
 }

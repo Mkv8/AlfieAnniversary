@@ -110,7 +110,7 @@ class Highscore
 	{
 		var daSong:String = formatSong(song, diff);
 		if (!songScores.exists(daSong))
-			setScore(daSong, 0);
+			return 0;
 
 		return songScores.get(daSong);
 	}
@@ -119,7 +119,7 @@ class Highscore
 	{
 		var daSong:String = formatSong(song, diff);
 		if (!songRating.exists(daSong))
-			setRating(daSong, 0);
+			return 0;
 
 		return songRating.get(daSong);
 	}
@@ -128,7 +128,7 @@ class Highscore
 	{
 		var daWeek:String = formatSong(week, diff);
 		if (!weekScores.exists(daWeek))
-			setWeekScore(daWeek, 0);
+			return 0;
 
 		return weekScores.get(daWeek);
 	}
