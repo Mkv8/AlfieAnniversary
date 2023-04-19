@@ -406,11 +406,12 @@ class PlayState extends MusicBeatState
 
 	var spritesToDestroy:Array<FlxBasic> = [];
 
+	public var sectionMiddleScroll:Bool = false;
 	public static var ratingPosition:PositionsType = null;
 	public function setRatingPositionFromName(songName:String):Void
 	{
 		songName = songName.toLowerCase();
-		var middleScroll:Bool = songName=="skalloween" || ClientPrefs.middleScroll;
+		var middleScroll:Bool = ClientPrefs.middleScroll;
 		if(ClientPrefs.downScroll){
 			ratingPosition = DownScroll(middleScroll);
 		}
@@ -425,7 +426,7 @@ class PlayState extends MusicBeatState
 		switch (ratingPosition) {
 			case DownScroll(middleScroll):
 				//trace('Downscroll; Middle:$middleScroll!');
-				if (!middleScroll){
+				if (!middleScroll && !sectionMiddleScroll){
 					ratingText.y = top;
 				}
 				else {
@@ -435,7 +436,7 @@ class PlayState extends MusicBeatState
 			case UpScroll(middleScroll):
 				//trace('Upscroll; Middle:$middleScroll!');
 				ratingText.y = 180;
-				if (!middleScroll){
+				if (!middleScroll && !sectionMiddleScroll){
 					ratingText.y = 180;
 				}
 				else {

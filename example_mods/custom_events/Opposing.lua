@@ -1,5 +1,6 @@
 function onEvent(ev, v1, v2)
     if ev == "Opposing" then
+        setProperty("sectionMiddleScroll", true);
         if not middlescroll then
             local y = 50
             if not downscroll then
@@ -18,6 +19,7 @@ function onEvent(ev, v1, v2)
     end
 
     if ev == "Default Strums" then
+        setProperty("sectionMiddleScroll", false);
         if not middlescroll then
             local y = 50
             if downscroll then
