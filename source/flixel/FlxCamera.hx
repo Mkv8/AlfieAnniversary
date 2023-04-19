@@ -1,5 +1,6 @@
 package flixel;
 
+import flixel.math.FlxAngle;
 import ColorSwap.CSData;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
@@ -285,6 +286,11 @@ class FlxCamera extends FlxBasic
 	public var angle(default, set):Float = 0;
 
 	/**
+	 * The rotation of the camera display (in degrees).
+	 */
+	public var rotation(default, set):Float = 0;
+
+	/**
 	 * The color tint of the camera display.
 	 */
 	public var color(default, set):FlxColor = FlxColor.WHITE;
@@ -518,9 +524,15 @@ class FlxCamera extends FlxBasic
 	 * Internal variables, used in blit render mode to draw trianglesSprite on camera's buffer.
 	 * Added for less garbage creation.
 	 */
-	static var renderPoint:FlxPoint = FlxPoint.get();
+	static var renderPoint:FlxPoint = new FlxPoint();
 
-	static var renderRect:FlxRect = FlxRect.get();
+	static var renderRect:FlxRect = new FlxRect();
+
+	@:noCompletion
+	var _sinAngle:Float = 0;
+
+	@:noCompletion
+	var _cosAngle:Float = 1;
 
 	@:noCompletion
 	public function startQuadBatch(graphic:FlxGraphic, colored:Bool, hasColorOffsets:Bool = false, ?blend:BlendMode, smooth:Bool = false, ?shader:FlxShader, ?cs:CSData)
@@ -710,6 +722,12 @@ class FlxCamera extends FlxBasic
 		{
 			var isColored = (transform != null && transform.hasRGBMultipliers());
 			var hasColorOffsets:Bool = (transform != null && transform.hasRGBAOffsets());
+
+			if(angle != 0) {
+				matrix.translate(-width/2, -height/2);
+				matrix.rotateWithTrig(_cosAngle, _sinAngle);
+				matrix.translate(width/2, height/2);
+			}
 
 			#if FLX_RENDER_TRIANGLE
 			var drawItem:FlxDrawTrianglesItem = startTrianglesBatch(frame.parent, smoothing, isColored, blend);
@@ -1027,7 +1045,7 @@ class FlxCamera extends FlxBasic
 			_helperPoint = null;
 		}
 
-		_bounds = null;
+		_bounds = FlxDestroyUtil.put(_bounds);
 		scroll = FlxDestroyUtil.put(scroll);
 		targetOffset = FlxDestroyUtil.put(targetOffset);
 		deadzone = FlxDestroyUtil.put(deadzone);
@@ -1842,10 +1860,21 @@ class FlxCamera extends FlxBasic
 		return Alpha;
 	}
 
+	function set_rotation(Rotation:Float):Float
+	{
+		rotation = Rotation;
+		flashSprite.rotation = Rotation;
+		return Rotation;
+	}
+
 	function set_angle(Angle:Float):Float
 	{
 		angle = Angle;
-		flashSprite.rotation = Angle;
+		//flashSprite.rotation = Angle;
+
+		var radians:Float = angle * FlxAngle.TO_RAD;
+		_sinAngle = Math.sin(radians);
+		_cosAngle = Math.cos(radians);
 		return Angle;
 	}
 
