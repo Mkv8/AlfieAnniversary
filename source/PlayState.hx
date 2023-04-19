@@ -418,6 +418,33 @@ class PlayState extends MusicBeatState
 		}
 	}
 
+	public function setRatingPositions() {
+		var top = FlxG.height-180;
+		ratingText.screenCenter(X);
+		switch (ratingPosition) {
+			case DownScroll(middleScroll):
+				trace('Downscroll; Middle:$middleScroll!');
+				if (!middleScroll){
+					ratingText.y = top;
+				}
+				else {
+					ratingText.x -= 360;
+					ratingText.y = 180;
+				}
+			case UpScroll(middleScroll):
+				trace('Upscroll; Middle:$middleScroll!');
+				ratingText.y = 180;
+				if (!middleScroll){
+					ratingText.y = 180;
+				}
+				else {
+					ratingText.x -= 360;
+					ratingText.y = top;
+				}
+
+		}
+	}
+
 	override public function create()
 	{
 		grayscaleFilter = new ShaderFilter(grayscale);
@@ -1536,30 +1563,7 @@ class PlayState extends MusicBeatState
 		ratingText.pixelPerfectRender = true;
     	ratingText.letterSpacing = 0;
 
-		switch (ratingPosition) {
-			case DownScroll(middleScroll):
-				trace('Downscroll; Middle:$middleScroll!');
-				if (!middleScroll){
-					ratingText.y = FlxG.height-180;
-					ratingText.x = FlxG.width/2;
-				}
-				else {
-					ratingText.x = 360;
-					ratingText.y = 180;
-				}
-			case UpScroll(middleScroll):
-				trace('Upscroll; Middle:$middleScroll!');
-				ratingText.y = 180;
-				if (!middleScroll){
-					ratingText.y = 180;
-					ratingText.x = FlxG.width/2;
-				}
-				else {
-					ratingText.x = 360;
-					ratingText.y = FlxG.height-180;
-				}
-
-		}
+		setRatingPositions();		
 		ratingText.updateHitbox();
 		ratingText.scale.set(0.6,0.6);
 		comboLayer.add(ratingText);
@@ -4038,8 +4042,7 @@ class PlayState extends MusicBeatState
 		ratingText.text = oneLetterUppercase(daRating)+" "+combo;
 		ratingText.updateHitbox();
 
-		ratingText.offset.x = ratingText.width*0.5/0.6;
-
+		setRatingPositions();
 		ratingText.antialiasing=true;
 		if(hasTextColor.indexOf(daRating)<0){
 			ratingText.color = 0xFFFFFFFF;
