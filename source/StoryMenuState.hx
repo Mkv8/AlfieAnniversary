@@ -731,6 +731,8 @@ class StoryMenuState extends MusicBeatState
 			curDifficulty = newPos;
 		}
 		updateText();
+
+		changeDiffNumber(0);
 	}
 
 	function weekIsLocked(weekNum:Int) {
