@@ -406,7 +406,7 @@ class PlayState extends MusicBeatState
 
 	var spritesToDestroy:Array<FlxBasic> = [];
 
-	var ratingPosition:PositionsType = null;
+	public static var ratingPosition:PositionsType = null;
 	public function setRatingPositionFromName(songName:String):Void
 	{
 		songName = songName.toLowerCase();

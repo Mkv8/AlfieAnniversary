@@ -5,10 +5,35 @@ import flixel.util.FlxSave;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
+import PlayState.PositionsType;
 
 class ClientPrefs {
-	public static var downScroll:Bool = false;
-	public static var middleScroll:Bool = false;
+	//public static var downScroll:Bool = false;
+	//public static var middleScroll:Bool = false;
+	public static var downScroll(default, set):Bool;
+	public static var middleScroll(default, set):Bool;
+
+	private static function set_downScroll(check:Bool):Bool {
+		if(check){
+			PlayState.ratingPosition = DownScroll(middleScroll);
+		}
+		else{
+			PlayState.ratingPosition = UpScroll(middleScroll);
+		}
+		trace(":"+PlayState.ratingPosition);
+		return check;
+	}	
+	private static function set_middleScroll(check:Bool):Bool {
+		if(downScroll){
+			PlayState.ratingPosition = DownScroll(check);
+		}
+		else{
+			PlayState.ratingPosition = UpScroll(check);
+		}
+		trace(":"+PlayState.ratingPosition);
+		return check;
+	}	
+
 	public static var showFPS:Bool = true;
 	public static var flashing:Bool = true;
 	public static var globalAntialiasing:Bool = true;
@@ -280,4 +305,5 @@ class ClientPrefs {
 		}
 		return copiedArray;
 	}
+
 }
