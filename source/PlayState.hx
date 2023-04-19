@@ -1010,13 +1010,13 @@ class PlayState extends MusicBeatState
 				eyes.scale.set(1.05, 1.05);
 				add(eyes);
 				eyes.antialiasing = true;
-				eyes.alpha = 0;
+				eyes.alpha = 0.00001;
 
 				circles = new BGSprite('circles', 0, 0, 1, 1);
 				circles.updateHitbox();
 				circles.screenCenter(XY);
 				circles.scale.set(1.05, 1.05);
-				circles.alpha = 0;
+				circles.alpha = 0.00001;
 				add(circles);
 
 				var shaders:Array<BitmapFilter> = [
@@ -1058,28 +1058,28 @@ class PlayState extends MusicBeatState
 				acandlebg = new BGSprite('acandlebg', 0, -280, 1, 1);
 				acandlebg.updateHitbox();
 				acandlebg.scale.set(1.4, 1.4);
-				acandlebg.alpha = 0;
+				acandlebg.alpha = 0.00001;
 
 				add(acandlebg);
 
 				ecandlebg = new BGSprite('ecandlebg', 0, -280, 1, 1);
 				ecandlebg.updateHitbox();
 				ecandlebg.scale.set(1.4, 1.4);
-				ecandlebg.alpha = 0;
+				ecandlebg.alpha = 0.00001;
 
 				add(ecandlebg);
 
 				hcandlebg = new BGSprite('hcandlebg', 0, -280, 1, 1);
 				hcandlebg.updateHitbox();
 				hcandlebg.scale.set(1.4, 1.4);
-				hcandlebg.alpha = 0;
+				hcandlebg.alpha = 0.00001;
 
 				add(hcandlebg);
 
 				lcandlebg = new BGSprite('lcandlebg', 0, -280, 1, 1);
 				lcandlebg.updateHitbox();
 				lcandlebg.scale.set(1.4, 1.4);
-				lcandlebg.alpha = 0;
+				lcandlebg.alpha = 0.00001;
 
 				add(lcandlebg);
 
@@ -1087,14 +1087,14 @@ class PlayState extends MusicBeatState
 				brokencandlebg.updateHitbox();
 				brokencandlebg.scale.set(1.4, 1.4);
 				add(brokencandlebg);
-				brokencandlebg.alpha = 0;
+				brokencandlebg.alpha = 0.00001;
 
 				black = new BGSprite('black', 0, 0, 1, 1);
 				black.scale.set(3.5, 3.5);
 				black.updateHitbox();
 				black.screenCenter(XY);
 				add(black);
-				black.alpha = 0;
+				black.alpha = 0.00001;
 
 				candlebells = new FlxBackdrop(Paths.image('bells'), 0.4, 0, true, false);
 				candlebells.velocity.set(100, 0);
@@ -1105,7 +1105,7 @@ class PlayState extends MusicBeatState
 				candlebells.y -= 800;
 
 				//bells.screenCenter();
-				candlebells.alpha = 0;
+				candlebells.alpha = 0.00001;
 				add(candlebells);
 
 
@@ -5162,8 +5162,8 @@ class PlayState extends MusicBeatState
 					brokencandlebg.alpha = 1;
 					FlxG.game.setFilters(cshaders);
 					FlxG.game.filtersEnabled = true;
-					candledark.alpha = 0;
-					candleglow.alpha = 0;
+					candledark.alpha = 0.00001;
+					candleglow.alpha = 0.00001;
 				}
 
 				case 276:
@@ -5193,8 +5193,8 @@ class PlayState extends MusicBeatState
 
 				case 435:
 				{
-					FlxTween.tween(candlebells, {alpha: 0}, 3);
-					FlxTween.tween(black, {alpha: 0}, 2);
+					FlxTween.tween(candlebells, {alpha: 0.00001}, 3);
+					FlxTween.tween(black, {alpha: 0.00001}, 2);
 				}
 
 				case 468:
@@ -5217,7 +5217,7 @@ class PlayState extends MusicBeatState
 
 				case 776:
 				{
-					FlxTween.tween(candlespotlight, {alpha: 0}, 2);
+					FlxTween.tween(candlespotlight, {alpha: 0.00001}, 2);
 				}
 
 				case 800:
@@ -5247,7 +5247,7 @@ class PlayState extends MusicBeatState
 					countdownReady.scale.set(0.8, 0.8);
 					countdownReady.cameras = [camOther];
 					add(countdownReady);
-					FlxTween.tween(countdownReady, {alpha: 0}, 0.3, {
+					FlxTween.tween(countdownReady, {alpha: 0.00001}, 0.3, {
 						ease: FlxEase.cubeInOut,
 						onComplete: function(twn:FlxTween)
 						{
@@ -5265,7 +5265,7 @@ class PlayState extends MusicBeatState
 					countdownSet.cameras = [camOther];
 					countdownSet.scale.set(0.8, 0.8);
 					add(countdownSet);
-					FlxTween.tween(countdownSet, {alpha: 0}, 0.3, {
+					FlxTween.tween(countdownSet, {alpha: 0.00001}, 0.3, {
 						ease: FlxEase.cubeInOut,
 						onComplete: function(twn:FlxTween)
 						{
@@ -5284,7 +5284,7 @@ class PlayState extends MusicBeatState
 					countdownGo.cameras = [camOther];
 					countdownGo.scale.set(0.8, 0.8);
 					add(countdownGo);
-					FlxTween.tween(countdownGo, {alpha: 0}, 0.3, {
+					FlxTween.tween(countdownGo, {alpha: 0.00001}, 0.3, {
 						ease: FlxEase.cubeInOut,
 						onComplete: function(twn:FlxTween)
 						{
@@ -5303,7 +5303,7 @@ class PlayState extends MusicBeatState
 
 				case 1200:
 				{
-					FlxTween.tween(funkyassoverlay, {alpha: 0}, 1);
+					FlxTween.tween(funkyassoverlay, {alpha: 0.00001}, 1);
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
 					dad.alpha = 0.6;
 				}
@@ -5311,7 +5311,7 @@ class PlayState extends MusicBeatState
 				case 1232:
 				{
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
-					FlxTween.tween(dad, {alpha: 0}, 2.5);
+					FlxTween.tween(dad, {alpha: 0.00001}, 2.5);
 				}
 			}
 		}

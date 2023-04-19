@@ -325,14 +325,13 @@ class StoryMenuState extends MusicBeatState
 			else
 				leftArrow.animation.play('idle');*/
 
-			if(controls.UI_UP_P || controls.UI_DOWN_P) {
-				if(!weekIsLocked(curWeek)) {
-					if (controls.UI_UP_P)
-						changeDifficulty(1);
-					else if (controls.UI_DOWN_P)
-						changeDifficulty(-1);
-				}
+			if(grpCassette.members[curWeek].isUnlocked) {
+				if (controls.UI_UP_P)
+					changeDifficulty(1);
+				else if (controls.UI_DOWN_P)
+					changeDifficulty(-1);
 			}
+			
 
 			if(FlxG.keys.justPressed.CONTROL)
 			{

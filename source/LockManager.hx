@@ -32,6 +32,7 @@ class LockManager {
 				for(sng in allSongs) {
 					if(!lockedSongs.contains(sng)) {
 						if(!hasBeaten(sng)) {
+							trace(song, sng);
 							return false;
 						}
 					}
@@ -48,7 +49,7 @@ class LockManager {
 
 		if(diff == -1) {
 			for(d in diffs) {
-				if(Highscore.getScore(song + d, 0) > 0) {
+				if(Highscore.songScores.get(song + d) > 0) {
 					return true;
 				}
 			}
