@@ -279,10 +279,11 @@ class PlayState extends MusicBeatState
 	var bge:BGSprite;
 
 	var candlebg:BGSprite;
-	var hcandlebg:BGSprite;
-	var acandlebg:BGSprite;
-	var lcandlebg:BGSprite;
-	var ecandlebg:BGSprite;
+	var candlelitpaintings:FlxSprite;
+	//var hcandlebg:BGSprite;
+	//var acandlebg:BGSprite;
+	//var lcandlebg:BGSprite;
+	//var ecandlebg:BGSprite;
 	var brokencandlebg:BGSprite;
 	var candleglow:BGSprite;
 	var candledark:BGSprite;
@@ -423,7 +424,7 @@ class PlayState extends MusicBeatState
 		ratingText.screenCenter(X);
 		switch (ratingPosition) {
 			case DownScroll(middleScroll):
-				trace('Downscroll; Middle:$middleScroll!');
+				//trace('Downscroll; Middle:$middleScroll!');
 				if (!middleScroll){
 					ratingText.y = top;
 				}
@@ -432,7 +433,7 @@ class PlayState extends MusicBeatState
 					ratingText.y = 180;
 				}
 			case UpScroll(middleScroll):
-				trace('Upscroll; Middle:$middleScroll!');
+				//trace('Upscroll; Middle:$middleScroll!');
 				ratingText.y = 180;
 				if (!middleScroll){
 					ratingText.y = 180;
@@ -675,7 +676,7 @@ class PlayState extends MusicBeatState
 			//add(light2);
 
 			ballsowo = new BGSprite('balls', -1000, -500, 1, 1);
-			ballsowo.alpha = 0;
+			ballsowo.alpha = 0.00001;
 			//add(ballsowo);
 		}
 
@@ -1082,7 +1083,21 @@ class PlayState extends MusicBeatState
 				candlebg.scale.set(1.4, 1.4);
 				add(candlebg);
 
-				acandlebg = new BGSprite('acandlebg', 0, -280, 1, 1);
+				candlelitpaintings = new FlxSprite(0, -280);
+				candlelitpaintings.frames = Paths.getSparrowAtlas("candlelitpaintings");
+				candlelitpaintings.moves = false;
+				candlelitpaintings.active = false;
+				candlelitpaintings.animation.addByPrefix("acandlebg", "acandlebg", 0, false);
+				candlelitpaintings.animation.addByPrefix("ecandlebg", "ecandlebg", 0, false);
+				candlelitpaintings.animation.addByPrefix("hcandlebg", "hcandlebg", 0, false);
+				candlelitpaintings.animation.addByPrefix("lcandlebg", "lcandlebg", 0, false);
+				candlelitpaintings.alpha = 0.000001;
+				candlelitpaintings.updateHitbox();
+				candlelitpaintings.scale.set(1.4, 1.4);
+				candlelitpaintings.antialiasing = candlebg.antialiasing;
+				add(candlelitpaintings);
+
+				/*acandlebg = new BGSprite('acandlebg', 0, -280, 1, 1);
 				acandlebg.updateHitbox();
 				acandlebg.scale.set(1.4, 1.4);
 				acandlebg.alpha = 0.00001;
@@ -1108,7 +1123,7 @@ class PlayState extends MusicBeatState
 				lcandlebg.scale.set(1.4, 1.4);
 				lcandlebg.alpha = 0.00001;
 
-				add(lcandlebg);
+				add(lcandlebg);*/
 
 				brokencandlebg = new BGSprite('candlebgbroken', 0, -280, 1, 1);
 				brokencandlebg.updateHitbox();
@@ -1949,7 +1964,7 @@ class PlayState extends MusicBeatState
 		{
 			add(candledark);
 			add(candleglow);
-			dad.alpha = 0;
+			dad.alpha = 0.000001;
 		}
 
 		RecalculateRating();
@@ -3110,9 +3125,8 @@ class PlayState extends MusicBeatState
 						daNote.x = strumX + Math.cos(angleDir) * daNote.distance;
 				}
 
-
 				if (daNote.mustPress && daNote.notData != -1 && Math.abs(daNote.distance) < 500)
-				daNote.move(playerStrums.members[daNote.noteData].x);
+					daNote.move(playerStrums.members[daNote.noteData].x);
 
 				if(daNote.copyY)
 				{
@@ -3146,6 +3160,10 @@ class PlayState extends MusicBeatState
 					}
 				}
 
+				if(daNote.isSustainNote) {
+					daNote.flipY = strumScroll;
+				}
+
 				var center:Float = strumY + Note.swagWidth / 2;
 				if(strum.sustainReduce && daNote.isSustainNote && (daNote.mustPress || !daNote.ignoreNote) &&
 					(!daNote.mustPress || (daNote.wasGoodHit || (daNote.prevNote.wasGoodHit && !daNote.canBeHit))))
@@ -3165,7 +3183,7 @@ class PlayState extends MusicBeatState
 					{
 						if (daNote.y + daNote.offset.y * daNote.scale.y <= center)
 						{
-							var swagRect = new FlxRect(0, 0, daNote.width / daNote.scale.x, daNote.height / daNote.scale.y);
+							var swagRect = new FlxRect(0, 0, daNote.frameWidth, daNote.frameHeight);
 							swagRect.y = (center - daNote.y) / daNote.scale.y;
 							swagRect.height -= swagRect.y;
 
@@ -5156,7 +5174,9 @@ class PlayState extends MusicBeatState
 				case 148:
 				{
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
-					hcandlebg.alpha = 1;
+					candlelitpaintings.animation.play("hcandlebg");
+					candlelitpaintings.alpha = 1;
+					//hcandlebg.alpha = 1;
 				}
 
 				case 212:
@@ -5165,8 +5185,8 @@ class PlayState extends MusicBeatState
 					brokencandlebg.alpha = 1;
 					FlxG.game.setFilters(cshaders);
 					FlxG.game.filtersEnabled = true;
-					candledark.alpha = 0.00001;
-					candleglow.alpha = 0.00001;
+					candledark.alpha = 0;
+					candleglow.alpha = 0;
 				}
 
 				case 276:
@@ -5182,8 +5202,10 @@ class PlayState extends MusicBeatState
 				case 308:
 				{
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
-					acandlebg.alpha = 1;
-					remove(hcandlebg);
+					//acandlebg.alpha = 1;
+					candlelitpaintings.animation.play("acandlebg");
+					candlelitpaintings.alpha = 1;
+					//remove(hcandlebg);
 				}
 
 				case 340:
@@ -5196,20 +5218,23 @@ class PlayState extends MusicBeatState
 
 				case 435:
 				{
-					FlxTween.tween(candlebells, {alpha: 0.00001}, 3);
-					FlxTween.tween(black, {alpha: 0.00001}, 2);
+					FlxTween.tween(candlebells, {alpha: 0}, 3);
+					FlxTween.tween(black, {alpha: 0}, 2);
 				}
 
 				case 468:
 				{
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
-					remove(acandlebg);
+					//remove(acandlebg);
+					candlelitpaintings.alpha = 0;
 				}
 
 				case 632:
 				{
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
-					ecandlebg.alpha = 1;
+					//ecandlebg.alpha = 1;
+					candlelitpaintings.animation.play("ecandlebg");
+					candlelitpaintings.alpha = 1;
 				}
 
 				case 728:
@@ -5220,26 +5245,29 @@ class PlayState extends MusicBeatState
 
 				case 776:
 				{
-					FlxTween.tween(candlespotlight, {alpha: 0.00001}, 2);
+					FlxTween.tween(candlespotlight, {alpha: 0}, 2);
 				}
 
 				case 800:
 				{
 					remove(candlespotlight);
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
-					remove(ecandlebg);
-					lcandlebg.alpha = 1;
+					//remove(ecandlebg);
+					//lcandlebg.alpha = 1;
+					candlelitpaintings.animation.play("lcandlebg");
+					candlelitpaintings.alpha = 1;
 				}
 
 				case 976:
 				{
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
-					remove(lcandlebg);
+					//remove(lcandlebg);
+					candlelitpaintings.alpha = 0;
 				}
 
 				case 1132:
 				{
-				FlxG.sound.play(Paths.sound('intro3' + introSoundsSuffix), 0.6);
+					FlxG.sound.play(Paths.sound('intro3' + introSoundsSuffix), 0.6);
 				}
 				case 1133:
 				{
@@ -5250,7 +5278,7 @@ class PlayState extends MusicBeatState
 					countdownReady.scale.set(0.8, 0.8);
 					countdownReady.cameras = [camOther];
 					add(countdownReady);
-					FlxTween.tween(countdownReady, {alpha: 0.00001}, 0.3, {
+					FlxTween.tween(countdownReady, {alpha: 0}, 0.3, {
 						ease: FlxEase.cubeInOut,
 						onComplete: function(twn:FlxTween)
 						{
@@ -5268,7 +5296,7 @@ class PlayState extends MusicBeatState
 					countdownSet.cameras = [camOther];
 					countdownSet.scale.set(0.8, 0.8);
 					add(countdownSet);
-					FlxTween.tween(countdownSet, {alpha: 0.00001}, 0.3, {
+					FlxTween.tween(countdownSet, {alpha: 0}, 0.3, {
 						ease: FlxEase.cubeInOut,
 						onComplete: function(twn:FlxTween)
 						{
@@ -5287,7 +5315,7 @@ class PlayState extends MusicBeatState
 					countdownGo.cameras = [camOther];
 					countdownGo.scale.set(0.8, 0.8);
 					add(countdownGo);
-					FlxTween.tween(countdownGo, {alpha: 0.00001}, 0.3, {
+					FlxTween.tween(countdownGo, {alpha: 0}, 0.3, {
 						ease: FlxEase.cubeInOut,
 						onComplete: function(twn:FlxTween)
 						{
@@ -5306,7 +5334,7 @@ class PlayState extends MusicBeatState
 
 				case 1200:
 				{
-					FlxTween.tween(funkyassoverlay, {alpha: 0.00001}, 1);
+					FlxTween.tween(funkyassoverlay, {alpha: 0}, 1);
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
 					dad.alpha = 0.6;
 				}
@@ -5314,7 +5342,7 @@ class PlayState extends MusicBeatState
 				case 1232:
 				{
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
-					FlxTween.tween(dad, {alpha: 0.00001}, 2.5);
+					FlxTween.tween(dad, {alpha: 0}, 2.5);
 				}
 			}
 		}

@@ -129,6 +129,14 @@ class ClientPrefs {
 	}
 
 	public static function loadPrefs() {
+		#if debug
+		if (FlxG.save.data.windowSettings == null)
+		{
+			var maxWindows = 10; // arbitrary
+			FlxG.save.data.windowSettings = [for (_ in 0...maxWindows) true];
+		}
+		#end
+
 		if(FlxG.save.data.downScroll != null) {
 			downScroll = FlxG.save.data.downScroll;
 		}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Created with Funkin Packer v0.0.2 https://neeeoo.github.io/funkin-packer/
+-->
+<TextureAtlas imagePath="candlelitpaintings.png" width="360" height="1608">
+	<SubTexture name="acandlebg" x="3" y="3" width="354" height="396" frameX="-1081" frameY="-268" frameWidth="2538" frameHeight="1229"/>
+	<SubTexture name="ecandlebg" x="3" y="405" width="354" height="396" frameX="-1081" frameY="-268" frameWidth="2538" frameHeight="1229"/>
+	<SubTexture name="hcandlebg" x="3" y="807" width="354" height="396" frameX="-1081" frameY="-268" frameWidth="2538" frameHeight="1229"/>
+	<SubTexture name="lcandlebg" x="3" y="1209" width="354" height="396" frameX="-1081" frameY="-268" frameWidth="2538" frameHeight="1229"/>
+</TextureAtlas>

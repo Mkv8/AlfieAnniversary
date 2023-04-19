@@ -160,6 +160,14 @@ class StoryMenuState extends MusicBeatState
 
 		WeekData.setDirectoryFromWeek(WeekData.weeksLoaded.get(WeekData.weeksList[0]));
 
+		if(CoolUtil.difficulties.length == 0) {
+			CoolUtil.difficulties = CoolUtil.defaultDifficulties.copy();
+		}
+		if(lastDifficultyName == '') {
+			lastDifficultyName = CoolUtil.defaultDifficulty;
+		}
+		curDifficulty = Math.round(Math.max(0, CoolUtil.difficulties.indexOf(lastDifficultyName)));
+
 		/*difficultySelectors = new FlxGroup();
 		add(difficultySelectors);
 
@@ -170,13 +178,6 @@ class StoryMenuState extends MusicBeatState
 		leftArrow.animation.play('idle');
 		leftArrow.antialiasing = ClientPrefs.globalAntialiasing;
 		difficultySelectors.add(leftArrow);*/
-
-		CoolUtil.difficulties = CoolUtil.defaultDifficulties.copy();
-		if(lastDifficultyName == '')
-		{
-			lastDifficultyName = CoolUtil.defaultDifficulty;
-		}
-		curDifficulty = Math.round(Math.max(0, CoolUtil.defaultDifficulties.indexOf(lastDifficultyName)));
 
 		/*sprDifficulty = new FlxSprite(0, leftArrow.y);
 		sprDifficulty.antialiasing = ClientPrefs.globalAntialiasing;
@@ -194,8 +195,8 @@ class StoryMenuState extends MusicBeatState
 
 		add(bgSprite);
 
-		var tracksSprite:FlxSprite = new FlxSprite(FlxG.width * 0.07, 56 + 425).loadGraphic(Paths.image('Menu_Tracks'));
-		tracksSprite.antialiasing = ClientPrefs.globalAntialiasing;
+		//var tracksSprite:FlxSprite = new FlxSprite(FlxG.width * 0.07, 56 + 425).loadGraphic(Paths.image('Menu_Tracks'));
+		//tracksSprite.antialiasing = ClientPrefs.globalAntialiasing;
 		//add(tracksSprite);
 
 		//txtTracklist = new FlxFixedText(FlxG.width * 0.05, tracksSprite.y + 60, 0, "", 32);
@@ -331,7 +332,6 @@ class StoryMenuState extends MusicBeatState
 				else if (controls.UI_DOWN_P)
 					changeDifficulty(-1);
 			}
-			
 
 			if(FlxG.keys.justPressed.CONTROL)
 			{

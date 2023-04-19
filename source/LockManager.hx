@@ -32,7 +32,7 @@ class LockManager {
 				for(sng in allSongs) {
 					if(!lockedSongs.contains(sng)) {
 						if(!hasBeaten(sng)) {
-							trace(song, sng);
+							//trace(song, sng);
 							return false;
 						}
 					}
