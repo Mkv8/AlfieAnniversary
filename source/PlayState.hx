@@ -849,7 +849,7 @@ class PlayState extends MusicBeatState
 			grayscale.apply = 0;
 
 
-			scanlines = new BGSprite('scanlines2', 1, 1, 1, 1);
+			scanlines = new BGSprite('scanline', 1, 1, 1, 1);
 			scanlines.updateHitbox();
 			scanlines.cameras = [camHUD];
 			scanlines.screenCenter(XY);
@@ -1342,7 +1342,8 @@ class PlayState extends MusicBeatState
 			add(wateroverlay);
 			add(blackOverlay);
 			add(scanlines);
-			scanlines.alpha = 0.15;
+			scanlines.alpha = 0.12;
+			blackOverlay.alpha = 1;
 		}
 		if(curStage == 'fake') {
 			add(blackOverlay);
@@ -5170,6 +5171,8 @@ class PlayState extends MusicBeatState
 				case 14:
 				{
 					FlxTween.tween(dad, {alpha: 1}, 0.4);
+					upperBlackBar.exists = false;
+					bottomBlackBar.exists = false;
 				}
 
 				case 148:
@@ -5257,6 +5260,8 @@ class PlayState extends MusicBeatState
 					//lcandlebg.alpha = 1;
 					candlelitpaintings.animation.play("lcandlebg");
 					candlelitpaintings.alpha = 1;
+					upperBlackBar.exists = true;
+					bottomBlackBar.exists = true;
 				}
 
 				case 976:
@@ -5696,10 +5701,19 @@ class PlayState extends MusicBeatState
 
 				switch (curBeat)
 				{
+					case 1:
+					{
+						blackOverlay.alpha = 0;
+					}
 					case 20:
 					{
 						FlxTween.tween(wateradd, {alpha: 0.8}, 1);
 						FlxTween.tween(wateroverlay, {alpha: 1}, 1);
+					}
+					case 22:
+					{
+						upperBlackBar.exists = false;
+						bottomBlackBar.exists = false;
 					}
 					case 101 | 109 | 117 | 125 | 293 | 301 | 309 | 317:
 					{
