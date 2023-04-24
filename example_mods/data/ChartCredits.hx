@@ -40,6 +40,21 @@ function beatHit(){
 	beatTween = FlxTween.tween(beatTxt.scale, {x: scaleTo, y:scaleTo}, 0.2, {ease: FlxEase.cubeInOut});
 	beatTxt.text = game.curBeat;
 	beatTxt.screenCenter(FlxAxes.X);
+
+	if(curBeat == 20){
+		beatTxt.color=0xFF00FF00;
+	}
+	if(curBeat == 22){
+		beatTxt.color=0xFF0084FF;
+	}
+	if(curBeat == 24){
+		beatTxt.color=0xFFFF6868;
+	}
+	if(curBeat == 30){
+		beatTxt.color=0xFFFFFFFF;
+	}
+
+
 }
 
 

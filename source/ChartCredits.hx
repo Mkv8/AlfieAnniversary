@@ -162,16 +162,16 @@ class ChartCredits extends MusicBeatState
 	{
 		quickCallHscript("pre_stepHit",[]);
 		super.stepHit();
+		ChartCredits.hscript.interp.variables.set('curStep', instance.curStep);
 		quickCallHscript("stepHit",[]);
-		hscript.interp.variables.set('curStep', curStep);
 	}
 
 	override function beatHit()
 	{
 		quickCallHscript("pre_beatHit",[]);
 		super.beatHit();
+		ChartCredits.hscript.interp.variables.set('curBeat', instance.curBeat);
 		quickCallHscript("beatHit",[]);
-		hscript.interp.variables.set('curBeat', curBeat);
 		//FlxG.log.add('beat');
 	}
 	
