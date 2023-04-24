@@ -20,7 +20,9 @@ class ClientPrefs {
 		else{
 			PlayState.ratingPosition = UpScroll(middleScroll);
 		}
-		trace(":"+PlayState.ratingPosition);
+		//trace(":"+PlayState.ratingPosition);
+		ClientPrefs.downScroll = check;
+
 		return check;
 	}	
 	private static function set_middleScroll(check:Bool):Bool {
@@ -30,7 +32,9 @@ class ClientPrefs {
 		else{
 			PlayState.ratingPosition = UpScroll(check);
 		}
-		trace(":"+PlayState.ratingPosition);
+		//trace(":"+PlayState.ratingPosition);
+		ClientPrefs.middleScroll = check;
+
 		return check;
 	}	
 
