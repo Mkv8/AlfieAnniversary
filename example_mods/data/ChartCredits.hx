@@ -41,6 +41,11 @@ function beatHit(){
 	beatTxt.text = game.curBeat;
 	beatTxt.screenCenter(FlxAxes.X);
 
+	switch (curBeat)
+	{
+		case 10
+		{}
+	}
 	if(curBeat == 20){
 		beatTxt.color=0xFF00FF00;
 	}
@@ -106,8 +111,8 @@ function update(elapsed:Float){
 function create(){
 	Conductor.changeBPM(155);
 	Conductor.songPosition=0;
-	FlxG.sound.playMusic(Paths.music('0-_Megamix_Credits_theme'));
-	FlxG.sound.music.volume = 0.4;
+	FlxG.sound.playMusic(Paths.music('Megamix'));
+	FlxG.sound.music.volume = 0.5;
 	songLength = FlxG.sound.music.length;
 	
 	var initialScale = 1;
