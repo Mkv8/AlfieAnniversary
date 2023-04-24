@@ -259,7 +259,10 @@ class MainMenuState extends MusicBeatState
 									case 'info':
 										MusicBeatState.switchState(new InfoState());
 									case 'credits':
-										MusicBeatState.switchState(new CreditsState());
+										if(FlxG.keys.pressed.A)
+											MusicBeatState.switchState(new ChartCredits("ChartCredits"));
+										else
+											MusicBeatState.switchState(new CreditsState());
 									case 'options':
 										LoadingState.loadAndSwitchState(new options.OptionsState());
 								}
