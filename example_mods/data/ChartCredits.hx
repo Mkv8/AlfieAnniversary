@@ -20,10 +20,30 @@ var timeTxt = new FlxBitmapText(
 		Paths.getTextFromFile("images/font/menuOutline.fnt")
 	)
 );
-var p = 0;
+
+var beatTxt = new FlxBitmapText(
+	FlxBitmapFont.fromAngelCode(
+		Paths.image('font/menuOutline_B'),
+		Paths.getTextFromFile("images/font/menuOutline.fnt")
+	)
+);
+
+
+var beatTween = null;
+var scaleTo = 0.75;
+function beatHit(){
+	beatTxt.scale.set(1,1);
+	beatTxt.screenCenter(FlxAxes.X);
+	if(beatTween!=null){
+		beatTween.cancel();
+	}
+	beatTween = FlxTween.tween(beatTxt.scale, {x: scaleTo, y:scaleTo}, 0.2, {ease: FlxEase.cubeInOut});
+	beatTxt.text = game.curBeat;
+	beatTxt.screenCenter(FlxAxes.X);
+}
+
 
 var initialVolume = FlxG.sound.music.volume;
-
 function returnToMenu(){
 	FlxG.sound.play(Paths.sound('cancelMenu'));
 	game.persistentUpdate = false;
@@ -37,13 +57,15 @@ function update(elapsed:Float){
 	{
 		returnToMenu();	
 	}
+	if (controls.RESET)
+	{
+		MusicBeatState.resetState();	
+	}
 	u.updateHitbox();
 	u.screenCenter(FlxAxes.X);
-	p+=elapsed;
-	//ratingText.text = Math.floor(p*100)/100;
+	Conductor.songPosition = FlxG.sound.music.time;
 	
-	
-	Conductor.songPosition += elapsed * 1000;
+
 	var curTime:Float = Conductor.songPosition;
 	if(curTime < 0) curTime = 0;
 	songPercent = (curTime / songLength);
@@ -62,6 +84,7 @@ function update(elapsed:Float){
 	timeTxt.screenCenter(FlxAxes.X);
 	
 }
+
 
 
 
@@ -86,9 +109,10 @@ function create(){
 	FlxTween.tween(u, {y: -2275/2}, 2, {ease: FlxEase.expoInOut, startDelay: 2.0});
 	FlxTween.tween(u.scale, {x: newScale, y:newScale}, 3, {ease: FlxEase.expoInOut, startDelay: 1.0});
 	game.add(timeTxt);
-	
+	beatTxt.scale.set(1,1);
+	game.add(beatTxt);
+	beatTxt.text= "[Beat hit here]";
+	beatTxt.screenCenter(FlxAxes.XY);
+	//beatTxt.y=60;
 	
 }
-
-
-

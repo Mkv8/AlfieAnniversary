@@ -33,7 +33,8 @@ class ChartCredits extends MusicBeatState
 {
 	public static var hscript:HScript = null;
 	public var curMod ="";
-		
+	public static var startingVariables:Map<String, Null<Dynamic>> = null;
+
 	public function initHaxeModule()
 	{
 		
@@ -51,7 +52,12 @@ class ChartCredits extends MusicBeatState
 					var e = Type.resolveEnum(pkg);
 					hscript.interp.variables.set(a[a.length-1], e!=null?e:Type.resolveClass(pkg));
 				});
-
+				if(startingVariables!=null){
+					for(v in startingVariables.keys()){
+						hscript.interp.variables.set(v, startingVariables.get(v));
+					}
+					startingVariables=null;
+				}
 			}
 		}catch(err){
 			trace("Failed to intialize HScript (CustomBeatState)");
@@ -87,8 +93,13 @@ class ChartCredits extends MusicBeatState
 			}
 			hscript.execute(y);
 		}
-		catch(err){
-			trace(err);
+		catch(e:haxe.Exception) {
+            trace('error parsing: ' + e.message);
+			customErrorFunction(e.message,e.details());
+			return;
+        }
+		catch(e:Dynamic){
+			trace('error parsing: ' + e);
 		}
 	}
 
@@ -104,7 +115,18 @@ class ChartCredits extends MusicBeatState
 		}
 	}
 
-	public var name:String = 'chartCredits';
+	public static function customErrorFunction(message:String,details:String):Void{
+		trace("\n[DISPLAYING ERROR STATE]\n");
+		
+		var errorState = new ChartCredits("ErrorState", [
+			"lastStateName"=>"ChartCredits",
+			"errMsg"=>message,
+			"errDetails"=>details
+		]);
+		MusicBeatState.switchState(errorState);
+	};
+
+	public var name:String = 'ChartCredits';
 	public static var instance:ChartCredits;
 
 	override function create()
@@ -125,22 +147,31 @@ class ChartCredits extends MusicBeatState
 		
 	}
 	
-	public function new(nameinput:String)
-	{
-		trace("new");
-		
-		name = nameinput;
-		super();
-		trace("new super");
-		
-		//cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
-	}
+	public function new(nameInput:String = null, ?startingVars:Map<String,Dynamic>) {
+        super();
+		if(nameInput != null) {
+            name = nameInput;
+        }
+		if(startingVars !=null){
+			//startingVariables = startingVars; //Doesn't work
+			startingVariables = [for( k in startingVars.keys() ) k => startingVars.get(k)]; 
+		}
+    }
 	
+	override function stepHit()
+	{
+		quickCallHscript("pre_stepHit",[]);
+		super.stepHit();
+		quickCallHscript("stepHit",[]);
+		hscript.interp.variables.set('curStep', curStep);
+	}
+
 	override function beatHit()
 	{
-		quickCallHscript("beatHit",[]);
+		quickCallHscript("pre_beatHit",[]);
 		super.beatHit();
-		quickCallHscript("beatHitPost",[]);
+		quickCallHscript("beatHit",[]);
+		hscript.interp.variables.set('curBeat', curBeat);
 		//FlxG.log.add('beat');
 	}
 	
@@ -156,4 +187,6 @@ class ChartCredits extends MusicBeatState
 		quickCallHscript("stateDestroy",[]);
 		super.destroy();
 	}
+
+	
 }
