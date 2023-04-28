@@ -787,6 +787,16 @@
 				]
 			],
 			[
+				48300,
+				[
+					[
+						"Play Animation",
+						"oh",
+						"dad"
+					]
+				]
+			],
+			[
 				48960,
 				[
 					[
@@ -798,6 +808,16 @@
 						"Play Animation",
 						"cheer",
 						"GF"
+					]
+				]
+			],
+			[
+				49140,
+				[
+					[
+						"Play Animation",
+						"igetit",
+						"dad"
 					]
 				]
 			],
@@ -1078,6 +1098,26 @@
 						"Set Cam Zoom",
 						"0.9",
 						"0.9"
+					]
+				]
+			],
+			[
+				66180,
+				[
+					[
+						"Play Animation",
+						"uhg",
+						"dad"
+					]
+				]
+			],
+			[
+				67260,
+				[
+					[
+						"Play Animation",
+						"notgood",
+						"dad"
 					]
 				]
 			],
@@ -1764,6 +1804,6 @@
 		"bpm": 125,
 		"arrowSkin": null,
 		"needsVoices": true,
-		"song": "heart-attack"
+		"song": "Heart Attack"
 	}
 }

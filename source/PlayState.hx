@@ -5007,7 +5007,7 @@ class PlayState extends MusicBeatState
 			{
 				case 210:
 				{trace('hello??');
-
+				new FlxTimer().start(0.35, function(tmr:FlxTimer){
 					black.alpha = 1;
 					dad.alpha = 0;
 					gf.alpha = 0;
@@ -5016,6 +5016,8 @@ class PlayState extends MusicBeatState
 					boyfriend.playAnim('dies',true, false);
 					deathsound.play(true);
 					camHUD.alpha = 0;
+					});	
+					
 				}
 			}
 		}
@@ -5614,10 +5616,15 @@ class PlayState extends MusicBeatState
 						FlxTween.tween(wateradd, {alpha: 0.8}, 1);
 						FlxTween.tween(wateroverlay, {alpha: 1}, 1);
 					}
-					case 22:
+					case 22 | 266:
 					{
 						upperBlackBar.exists = false;
 						bottomBlackBar.exists = false;
+					}
+					case 196:
+					{
+						upperBlackBar.exists = true;
+						bottomBlackBar.exists = true;
 					}
 					case 101 | 109 | 117 | 125 | 293 | 301 | 309 | 317:
 					{
@@ -5628,12 +5635,12 @@ class PlayState extends MusicBeatState
 					{
 						grayscale.apply = 0.25;
 					}
-					case 103 | 111 | 119 | 127 | 295 | 303  | 311 | 319:
+					case 103 | 111 | 119 | 127 | 295 | 303  | 311 | 319 | 261:
 					{
 						grayscale.apply = 0;
 						FlxG.game.filtersEnabled = true;
 					}
-					case 104 | 112 | 120 | 128 | 296 | 304 | 312 | 320:
+					case 104 | 112 | 120 | 128 | 296 | 304 | 312 | 320 | 262:
 					{
 						grayscale.apply = 0;
 						FlxG.game.filtersEnabled = false;
