@@ -255,6 +255,9 @@ class MainMenuState extends MusicBeatState
 								switch (daChoice)
 								{
 									case 'story mode':
+										#if debug
+										StoryMenuState.forceUnlock = FlxG.keys.pressed.SHIFT;
+										#end
 										MusicBeatState.switchState(new StoryMenuState());
 									case 'info':
 										MusicBeatState.switchState(new InfoState());

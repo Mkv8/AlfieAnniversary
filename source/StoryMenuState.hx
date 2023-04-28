@@ -30,6 +30,7 @@ class StoryMenuState extends MusicBeatState
 	// playing just the modded week then delete it.
 	// defaults to True
 	public static var weekCompleted:Map<String, Bool> = new Map<String, Bool>();
+	public static var forceUnlock:Bool = false;
 
 	var scoreText:FlxText;
 
@@ -136,7 +137,7 @@ class StoryMenuState extends MusicBeatState
 		for (i in 0...WeekData.weeksList.length)
 		{
 			WeekData.setDirectoryFromWeek(WeekData.weeksLoaded.get(WeekData.weeksList[i]));
-			var weekThing:Cassette = new Cassette(WeekData.weeksList[i], !weekIsLocked(i));
+			var weekThing:Cassette = new Cassette(WeekData.weeksList[i], weekIsUnlocked(i));
 			//weekThing.y += ((weekThing.height + 20) * i);
 			weekThing.targetItem = i - curWeek;
 			grpCassette.add(weekThing);
@@ -442,12 +443,7 @@ class StoryMenuState extends MusicBeatState
 			FlxTween.tween(icons[curBih], {"scale.y":1,"scale.x":1}, 0.8, {ease: FlxEase.elasticOut});
 		}
 
-		if (!weekIsLocked(curWeek))
-		{
-			FlxG.sound.play(Paths.sound('confirmMenu'));
-
-			//grpCassette.members[curWeek].startFlashing();
-		}
+		FlxG.sound.play(Paths.sound('confirmMenu'));
 
 		// We can't use Dynamic Array .copy() because that crashes HTML5, here's a workaround.
 		var songArray:Array<String> = [];
@@ -734,10 +730,16 @@ class StoryMenuState extends MusicBeatState
 		changeDiffNumber(0);
 	}
 
-	function weekIsLocked(weekNum:Int) {
+	function weekIsUnlocked(weekNum:Int) {
+		#if debug
+		if(forceUnlock) {
+			return true;
+		}
+		#end
+
 		var leWeek:WeekData = WeekData.weeksLoaded.get(WeekData.weeksList[weekNum]);
 		if(leWeek.songs.length > 0) {
-			return !LockManager.isSongUnlocked(leWeek.songs[0][0]);
+			return LockManager.isSongUnlocked(leWeek.songs[0][0]);
 		}
 
 		return true;
