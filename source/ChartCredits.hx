@@ -35,6 +35,7 @@ class ChartCredits extends MusicBeatState
 	public var curMod ="";
 	public static var startingVariables:Map<String, Null<Dynamic>> = null;
 
+
 	public function initHaxeModule()
 	{
 		
@@ -46,6 +47,9 @@ class ChartCredits extends MusicBeatState
 				hscript = new HScript(); 
 				hscript.interp.variables.set('game', cast(this,MusicBeatState));
 				hscript.interp.variables.set('controls', controls);
+				hscript.interp.variables.set('creditsInfo', new Map<String, Array<String>>() );
+				hscript.interp.variables.set('creditsStuff', new Map<String, Alphabet>() );
+
 				//Thanks Neo!
 				hscript.interp.variables.set("import", function(pkg) {
 					var a = pkg.split(".");

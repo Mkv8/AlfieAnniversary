@@ -28,7 +28,7 @@ class Alphabet extends FlxSpriteGroup
 	public var yAdd:Float = 0;
 	public var isMenuItem:Bool = false;
 	public var textSize:Float = 1.0;
-
+	public var invertColors = false;
 	public var text:String = "";
 
 	var _finalText:String = "";
@@ -50,7 +50,7 @@ class Alphabet extends FlxSpriteGroup
 	public var typed:Bool = false;
 
 	public var typingSpeed:Float = 0.05;
-	public function new(x:Float, y:Float, text:String = "", ?bold:Bool = false, typed:Bool = false, ?typingSpeed:Float = 0.05, ?textSize:Float = 1)
+	public function new(x:Float, y:Float, text:String = "", ?bold:Bool = false, typed:Bool = false, ?typingSpeed:Float = 0.05, ?textSize:Float = 1, ?invert:Bool=false)
 	{
 		super(x, y);
 		forceX = Math.NEGATIVE_INFINITY;
@@ -60,7 +60,7 @@ class Alphabet extends FlxSpriteGroup
 		this.text = text;
 		this.typed = typed;
 		isBold = bold;
-
+		invertColors = invert;
 		if (text != "")
 		{
 			if (typed)
@@ -171,7 +171,7 @@ class Alphabet extends FlxSpriteGroup
 				consecutiveSpaces = 0;
 
 				// var letter:AlphaCharacter = new AlphaCharacter(30 * loopNum, 0, textSize);
-				var letter:AlphaCharacter = new AlphaCharacter(xPos, 0, textSize);
+				var letter:AlphaCharacter = new AlphaCharacter(xPos, 0, textSize, invertColors);
 
 				if (isBold)
 				{
@@ -301,7 +301,7 @@ class Alphabet extends FlxSpriteGroup
 				consecutiveSpaces = 0;
 
 				// var letter:AlphaCharacter = new AlphaCharacter(30 * loopNum, 0, textSize);
-				var letter:AlphaCharacter = new AlphaCharacter(xPos, 55 * yMulti, textSize);
+				var letter:AlphaCharacter = new AlphaCharacter(xPos, 55 * yMulti, textSize, invertColors);
 				letter.row = curRow;
 				if (isBold)
 				{
@@ -399,10 +399,10 @@ class AlphaCharacter extends FlxSprite
 
 	public var isBold:Bool = false;
 
-	public function new(x:Float, y:Float, textSize:Float)
+	public function new(x:Float, y:Float, textSize:Float,?invertColors:Bool=false)
 	{
 		super(x, y);
-		var tex = Paths.getSparrowAtlas('alphabet');
+		var tex = invertColors? Paths.getSparrowAtlas('alphabetInverted'): Paths.getSparrowAtlas('alphabet');
 		frames = tex;
 
 		setGraphicSize(Std.int(width * textSize));
