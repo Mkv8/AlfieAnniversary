@@ -420,6 +420,11 @@ class PlayState extends MusicBeatState
 		}
 	}
 
+	public function shake(sprite:FlxSprite, intensity:Float = 0.025){
+		sprite.offset.x = FlxG.random.float(-intensity * sprite.width, intensity * sprite.width);
+		sprite.offset.y = FlxG.random.float(-intensity * sprite.height, intensity * sprite.height);
+	}
+
 	public function setRatingPositions() {
 		var top = FlxG.height-180;
 		ratingText.screenCenter(X);
@@ -1459,6 +1464,7 @@ class PlayState extends MusicBeatState
 						boyfriend.healthColorArray= [246,221,201]; dad.healthColorArray= [234,145,58];
 					case 1:
 						dad.setPosition(-927 ,939); boyfriend.setPosition(-297, 916); gf.setPosition(433, 996);
+						sectionMiddleScroll = true; // lol
 						boyfriend.healthIcon = "icon-filippasta"; dad.healthIcon = "icon-alfiekisspasta";
 						boyfriend.healthColorArray= [255,205,1]; dad.healthColorArray= [255,169,166];
 					case 2:
@@ -2903,6 +2909,11 @@ class PlayState extends MusicBeatState
         if (FlxG.keys.pressed.W){object.y--;}
 		if (FlxG.keys.justPressed.SPACE){trace(object);}*/
 
+		if (ratingText.visible && ratingText.color == 0xFF391F16){
+			shake(ratingText);
+		}else if(ratingText.offset.x!=0||ratingText.offset.y!=0){
+			ratingText.offset.set(0,0);
+		}
 		if(ClientPrefs.framerate <= maxLuaFPS){
 
 			callOnLuas('onUpdate', [elapsed]);
@@ -4321,9 +4332,33 @@ class PlayState extends MusicBeatState
 				destroyNote(note);
 			}
 		});
-		combo = 0;
-		ratingText.visible = false;
+		if(combo !=0){
+			ratingText.visible = true;
+			ratingText.text ="Miss 0";
+			ratingText.updateHitbox();
 
+			setRatingPositions();
+			ratingText.antialiasing=true;
+			ratingText.color = 0xFF391F16;
+			
+			if(rateTween!=null)
+				rateTween.cancel();
+
+			ratingText.alpha=1;
+			rateTween = FlxTween.tween(ratingText, {alpha: 0}, 0.2, {
+				onComplete: function(tween:FlxTween)
+				{
+					rateTween =null;
+				},
+				startDelay: Conductor.crochet * 0.002
+			});
+
+		}
+		else{
+			ratingText.visible = false;
+		}
+		combo = 0;
+		
 		health -= daNote.missHealth * healthLoss;
 		if(instakillOnMiss)
 		{
