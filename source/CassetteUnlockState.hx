@@ -27,10 +27,28 @@ class CassetteUnlockState extends MusicBeatSubstate
 	var cassette1:Cassette;
 	var cassette2:Cassette;
 	var cassette3:Cassette;
+	var unlocktext:Alphabet;
+	var unlocktext2:Alphabet;
+
 
 	public override function create()
 	{
 		super.create();
+
+		unlocktext = new Alphabet(0, 70, "New songs unlocked!", true);
+		unlocktext.scale.set(0.9, 0.9);
+		unlocktext.screenCenter(X);
+		unlocktext.alpha = 0.0001;
+		FlxTween.tween(unlocktext, {alpha: 1}, 0.3, {ease: FlxEase.quartInOut, startDelay: 0.9});
+
+		unlocktext2 = new Alphabet(0, 550, "Press ENTER to continue.", true);
+		unlocktext2.scale.set(0.7, 0.7);
+		unlocktext2.screenCenter(X);
+		unlocktext2.alpha = 0.0001;
+		FlxTween.tween(unlocktext2, {alpha: 1}, 0.3, {ease: FlxEase.quartInOut, startDelay: 0.9});
+
+		add(unlocktext);
+		add(unlocktext2);
 
 		blur = new FastBlurShader();
 		blur.blur = 0.0;
@@ -101,6 +119,8 @@ class CassetteUnlockState extends MusicBeatSubstate
 		if(controls.ACCEPT && !closing) {
 			closing = true;
 			var cassettes = [cassette1, cassette2, cassette3];
+			FlxTween.tween(unlocktext, {alpha: 0}, 0.3, {ease: FlxEase.quartInOut});
+			FlxTween.tween(unlocktext2, {alpha: 0}, 0.3, {ease: FlxEase.quartInOut});
 
 			for(i => cass in cassettes) {
 				FlxTween.tween(cass, {alpha: 0}, 0.3, {ease: FlxEase.quartInOut});
@@ -150,6 +170,9 @@ class CassetteUnlockState extends MusicBeatSubstate
 	{
 		FlxG.cameras.list[FlxG.cameras.list.indexOf(cam) - 1].setFilters([]);
 		FlxG.cameras.remove(cam, true);
+		unlocktext.kill();
+		unlocktext2.kill();
+
 		super.destroy();
 	}
 }

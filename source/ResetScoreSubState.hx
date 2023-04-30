@@ -107,6 +107,8 @@ class ResetScoreSubState extends MusicBeatSubstate
 		var scales:Array<Float> = [0.75, 1];
 		var alphas:Array<Float> = [0.6, 1.25];
 		var confirmInt:Int = onYes ? 1 : 0;
+		//var week = WeekData.weeksLoaded.get(WeekData.weeksList[curWeek]);
+
 
 		yesText.alpha = alphas[confirmInt];
 		yesText.scale.set(scales[confirmInt], scales[confirmInt]);

@@ -360,8 +360,9 @@ class StoryMenuState extends MusicBeatState
 			}
 			else if(controls.RESET)
 			{
+				var week = WeekData.weeksLoaded.get(WeekData.weeksList[curWeek]);
 				persistentUpdate = false;
-				openSubState(new ResetScoreSubState('', curDifficulty, '', curWeek));
+				openSubState(new ResetScoreSubState(week.songs[0][0], curDifficulty, week.songs[0][1]));
 				//FlxG.sound.play(Paths.sound('scrollMenu'));
 			}
 			else if (controls.ACCEPT)
