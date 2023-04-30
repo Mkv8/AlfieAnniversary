@@ -4,8 +4,7 @@ local intensity = 0
 local intensity2 = 3
 local enabled = false
 function onBeatHit()
-	
-		if enabled then 
+	if enabled then
 		if curBeat % 2 == 0 then
 			angleshit = anglevar;
 		else
@@ -17,11 +16,11 @@ function onBeatHit()
 		doTweenX('tuin', 'camHUD', -angleshit*intensity, crochet*0.001, 'linear')
 		doTweenAngle('tt', 'camGame', angleshit*intensity, stepCrochet*0.002, 'circOut')
 		doTweenX('ttrn', 'camGame', -angleshit*intensity, crochet*0.001, 'linear')
-		end
+	end
 end
 
 function onStepHit()
-if enabled then
+	if enabled then
 		if curStep % 4 == 0 then
 			doTweenY('rrr', 'camHUD', -6*intensity2, stepCrochet*0.002, 'circOut')
 			doTweenY('rtr', 'camGame.scroll', 12, stepCrochet*0.002, 'sineIn')
@@ -30,25 +29,20 @@ if enabled then
 			doTweenY('rir', 'camHUD', 0, stepCrochet*0.002, 'sineIn')
 			doTweenY('ryr', 'camGame.scroll', 0, stepCrochet*0.002, 'sineIn')
 		end
-		end
+	end
 end
 
 
 function onEvent(n,v,b)
-
-
 	if n == 'Kaboom' then
-	enabled = true
+		enabled = true
 		intensity = tonumber(v)
 		intensity2 = tonumber(b)
-		if tonumber(b) == 0 then 
-		enabled = false
-		
-		doTweenAngle('gg','camHUD',0,1,'sineInOut')
-		doTweenAngle('gg2','camGame',0,1,'sineInOut')
-		 
+		if tonumber(b) == 0 then
+			enabled = false
+
+			doTweenAngle('gg','camHUD',0,1,'sineInOut')
+			doTweenAngle('gg2','camGame',0,1,'sineInOut')
 		end
 	end
-
-
 end

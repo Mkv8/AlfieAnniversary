@@ -21,7 +21,7 @@ class Cassette extends FlxSprite {
 
 	public var weekName:String = "";
 
-	public function new(weekName:String, isUnlocked:Bool = true) {
+	public function new(weekName:String, isUnlocked:Bool = true, showDifficulty:Bool = true) {
 		super();
 
 		this.weekName = weekName;
@@ -36,15 +36,8 @@ class Cassette extends FlxSprite {
 
 		loadGraphic(Paths.image('cassettes/' + cassetteImage));
 
-		if(isUnlocked) {
-			difficultySpr = new FlxSprite();
-			difficultySpr.frames = Paths.getSparrowAtlas('cassettes/difficulty');
-			for(diff in ["easy", "normal", "hard", "ex"]) {
-				difficultySpr.animation.addByPrefix(diff, diff.toUpperCase(), 24);
-			}
-			difficultySpr.animation.play("normal");
-			difficultySpr.antialiasing = ClientPrefs.globalAntialiasing;
-			difficultySpr.moves = false;
+		if(isUnlocked && showDifficulty) {
+			loadDifficulty();
 		}
 
 		antialiasing = ClientPrefs.globalAntialiasing;
@@ -68,10 +61,50 @@ class Cassette extends FlxSprite {
 		defaultY = y;
 	}
 
-	public function updateDifficulty(diff:String) {
-		if(difficultySpr != null) {
-			difficultySpr.animation.play(diff);
+	public function loadDifficulty() {
+		if(difficultySpr != null) return;
+
+		difficultySpr = new FlxSprite();
+		difficultySpr.frames = Paths.getSparrowAtlas('cassettes/difficulty');
+		for(diff in ["easy", "normal", "hard", "ex"]) {
+			difficultySpr.animation.addByPrefix(diff, diff.toUpperCase(), 24);
 		}
+		difficultySpr.animation.play("normal");
+		difficultySpr.antialiasing = ClientPrefs.globalAntialiasing;
+		difficultySpr.moves = false;
+	}
+
+	public function unlock() {
+		var off = offset.copyTo(FlxPoint.weak());
+		var orig = origin.copyTo(FlxPoint.weak());
+
+		loadGraphic(Paths.image('cassettes/' + weekName));
+
+		if(difficultySpr != null) difficultySpr.exists = true;
+		diffAlpha = 1;
+		this.isUnlocked = true;
+
+		offset.copyFrom(off);
+		origin.copyFrom(orig);
+	}
+
+	public function lock() {
+		var off = offset.copyTo(FlxPoint.weak());
+		var orig = origin.copyTo(FlxPoint.weak());
+
+		loadGraphic(Paths.image('cassettes/missing'));
+
+		if(difficultySpr != null) difficultySpr.exists = false;
+		this.isUnlocked = false;
+		diffAlpha = 0;
+
+		offset.copyFrom(off);
+		origin.copyFrom(orig);
+	}
+
+	public function updateDifficulty(diff:String) {
+		if(difficultySpr != null)
+			difficultySpr.animation.play(diff);
 	}
 
 	public var force = true;

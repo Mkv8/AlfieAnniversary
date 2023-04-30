@@ -25,6 +25,35 @@ class LockManager {
 		"jelly-jamboree",
 	];
 
+	public static var lastUnlocked:Array<String> = [];
+
+	public static function precheckLastUnlock() {
+		lastUnlocked = getUnlockedSongs();
+	}
+
+	public static function getNewlyUnlockedSongs() {
+		//lastUnlocked = getUnlockedSongs();
+		var curUnlocked = getUnlockedSongs();
+		var unlocked = [];
+		for(song in curUnlocked) {
+			if(!lastUnlocked.contains(song)) {
+				unlocked.push(song);
+			}
+		}
+		precheckLastUnlock();
+		return unlocked;
+	}
+
+	static function getUnlockedSongs() {
+		var unlocked = [];
+		for(song in lockedSongs) {
+			if(isSongUnlocked(song)) {
+				unlocked.push(song);
+			}
+		}
+		return unlocked;
+	}
+
 	public static function isSongUnlocked(song:String) {
 		song = Paths.formatToSongPath(song);
 		return switch(song) {

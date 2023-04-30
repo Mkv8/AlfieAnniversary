@@ -48,7 +48,7 @@ class StoryMenuState extends MusicBeatState
 
 	//var txtTracklist:FlxText;
 
-	var grpCassette:FlxTypedGroup<Cassette>;
+	public var grpCassette:FlxTypedGroup<Cassette>;
 
 	//var difficultySelectors:FlxGroup;
 	//var sprDifficulty:FlxSprite;
@@ -77,6 +77,10 @@ class StoryMenuState extends MusicBeatState
 	var handSelect:FlxSprite;
 	var curBih = 0;
 
+	public var weekMap:Map<String, Int> = [];
+
+	var newUnlockedSongs:Array<String>;
+
 	override function create()
 	{
 		Paths.clearStoredMemory();
@@ -86,6 +90,8 @@ class StoryMenuState extends MusicBeatState
 		WeekData.reloadWeekFiles(true);
 		if(curWeek >= WeekData.weeksList.length) _curWeek = 0;
 		persistentUpdate = persistentDraw = true;
+
+		newUnlockedSongs = LockManager.getNewlyUnlockedSongs();
 
 		scoreText = new FlxFixedText(10, 10, 0, "SCORE: 49324858", 36);
 		scoreText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -120,7 +126,6 @@ class StoryMenuState extends MusicBeatState
 
 		updateBackground(true);
 
-		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
 		bgSprite = new FlxSprite(0, 56);
 		bgSprite.antialiasing = ClientPrefs.globalAntialiasing;
 
@@ -141,6 +146,8 @@ class StoryMenuState extends MusicBeatState
 			//weekThing.y += ((weekThing.height + 20) * i);
 			weekThing.targetItem = i - curWeek;
 			grpCassette.add(weekThing);
+
+			weekMap[WeekData.weeksList[i]] = i;
 
 			//weekThing.screenCenter(X);
 			//weekThing.antialiasing = ClientPrefs.globalAntialiasing;
@@ -260,8 +267,20 @@ class StoryMenuState extends MusicBeatState
 	var fml = 0.0;
 	var handxpos:Float = 275;
 
+	var waitTime = 0.2;
+
 	override function update(elapsed:Float)
 	{
+		if(waitTime > 0) {
+			waitTime -= elapsed;
+			if(waitTime <= 0) {
+				if(newUnlockedSongs.length > 0) {
+					persistentUpdate = false;
+					openSubState(new CassetteUnlockState());
+				}
+			}
+		}
+
 		var lerpVal = CoolUtil.boundTo(1 - (elapsed * 9), 0, 1);
 		if (fml != -1)
 		{
@@ -360,6 +379,11 @@ class StoryMenuState extends MusicBeatState
 			{
 				selectWeek(curWeek,true);
 			}
+		}
+
+		if(FlxG.keys.justPressed.H) {
+			persistentUpdate = false;
+			openSubState(new CassetteUnlockState());
 		}
 
 		if (controls.BACK && !movedBack && !selectedWeek)
@@ -739,7 +763,11 @@ class StoryMenuState extends MusicBeatState
 
 		var leWeek:WeekData = WeekData.weeksLoaded.get(WeekData.weeksList[weekNum]);
 		if(leWeek.songs.length > 0) {
-			return LockManager.isSongUnlocked(leWeek.songs[0][0]);
+			var song = leWeek.songs[0][0];
+			if(newUnlockedSongs.contains(song)) {
+				return false;
+			}
+			return LockManager.isSongUnlocked(song);
 		}
 
 		return true;

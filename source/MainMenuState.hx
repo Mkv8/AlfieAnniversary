@@ -56,10 +56,10 @@ class MainMenuState extends MusicBeatState
 	var creditsPortrait:Item;
 	var optionsPooky:Item;
 
-
-
 	override function create()
 	{
+		LockManager.precheckLastUnlock();
+
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
