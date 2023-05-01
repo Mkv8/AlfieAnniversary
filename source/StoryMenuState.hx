@@ -327,13 +327,13 @@ class StoryMenuState extends MusicBeatState
 			if (upP)
 			{
 				changeWeek(-1);
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				FlxG.sound.play(Paths.sound('cassetteScroll'));
 			}
 
 			if (downP)
 			{
 				changeWeek(1);
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				FlxG.sound.play(Paths.sound('cassetteScroll'));
 			}
 
 			/*if (controls.UI_RIGHT)
@@ -446,6 +446,7 @@ class StoryMenuState extends MusicBeatState
 	{
 		if(!grpCassette.members[wNum].isUnlocked) {
 			grpCassette.members[wNum].shakeDuration = 0.3;
+			FlxG.sound.play(Paths.sound('lockedsfx'));
 			return;
 		}
 
@@ -468,7 +469,7 @@ class StoryMenuState extends MusicBeatState
 			FlxTween.tween(icons[curBih], {"scale.y":1,"scale.x":1}, 0.8, {ease: FlxEase.elasticOut});
 		}
 
-		FlxG.sound.play(Paths.sound('confirmMenu'));
+		FlxG.sound.play(Paths.sound('cassetteConfirm'));
 
 		// We can't use Dynamic Array .copy() because that crashes HTML5, here's a workaround.
 		var songArray:Array<String> = [];

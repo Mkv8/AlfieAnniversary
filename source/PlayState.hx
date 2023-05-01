@@ -5617,10 +5617,11 @@ class PlayState extends MusicBeatState
 				{
 					FlxTween.tween(blackOverlay, {alpha: 1}, 1);
 				}
-				case 158:
+				case 168:
 				{
-					FlxTween.tween(blackOverlay, {alpha: 0}, 2);
-					FlxTween.tween(kissuhoh, {alpha: 0.8}, 2 );
+					FlxG.camera.flash(FlxColor.WHITE,1,false);
+					blackOverlay.alpha = 0.0001;
+					FlxTween.tween(kissuhoh, {alpha: 0.8}, 0.5 );
 				}
 				case 232:
 				{
