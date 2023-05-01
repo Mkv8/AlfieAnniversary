@@ -144,7 +144,7 @@ class CassetteUnlockState extends MusicBeatSubstate
 								var wantedI = parent.weekMap["week94"];
 								if(wantedI - parent.curWeek > 0) {
 									parent.changeWeek(1);
-									FlxG.sound.play(Paths.sound('scrollMenu'));
+									FlxG.sound.play(Paths.sound('cassetteScroll'));
 									tmr.reset(0.1);
 								} else {
 									new FlxTimer().start(0.4, (_) -> {
