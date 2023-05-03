@@ -100,8 +100,11 @@ class ChartCredits extends PlayState
 				luaArray.push(new FunkinLua("assets/data/blank.lua"));
 				trace(Lua_helper.callbacks.keys());
 				for(v in Lua_helper.callbacks.keys()){
-					ChartCredits.hscript.interp.variables.set(v, 
-						function(a,?b:Null<Dynamic>,?c:Null<Dynamic>,?d:Null<Dynamic>,?e:Null<Dynamic>,?f:Null<Dynamic>){
+					ChartCredits.hscript.interp.variables.set(v,  
+						Lua_helper.callbacks.get(v)
+					);	
+					
+					/*	function(a,?b:Null<Dynamic>,?c:Null<Dynamic>,?d:Null<Dynamic>,?e:Null<Dynamic>,?f:Null<Dynamic>){
 							trace(v);
 							try{
 								Reflect.callMethod(luaArray[0], Lua_helper.callbacks.get(v), [a,b,c,d,e,f]);
@@ -110,7 +113,7 @@ class ChartCredits extends PlayState
 								trace(err);
 							}
 						}
-					);
+					);*/
 				}
 			}
 		}catch(err){
