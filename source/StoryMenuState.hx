@@ -378,7 +378,7 @@ class StoryMenuState extends MusicBeatState
 				persistentUpdate = false;
 				openSubState(new GameplayChangersSubstate());
 			}
-			else if(controls.RESET)
+			else if(controls.RESET && grpCassette.members[curWeek].isUnlocked)
 			{
 				var week = WeekData.weeksLoaded.get(WeekData.weeksList[curWeek]);
 				persistentUpdate = false;
@@ -402,10 +402,12 @@ class StoryMenuState extends MusicBeatState
 			}
 		}
 
+		#if debug
 		if(FlxG.keys.justPressed.H) {
 			persistentUpdate = false;
 			openSubState(new CassetteUnlockState());
 		}
+		#end
 
 		if (controls.BACK && !movedBack && !selectedWeek)
 		{
@@ -692,6 +694,9 @@ class StoryMenuState extends MusicBeatState
 		WeekData.setDirectoryFromWeek(leWeek);
 
 		var leName:String = leWeek.storyName;
+		if(!grpCassette.members[curWeek].isUnlocked) {
+			leName = "???";
+		}
 		txtWeekTitle.text = leName.toUpperCase();
 		//txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
 		txtWeekTitle.screenCenter(X);

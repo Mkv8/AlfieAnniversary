@@ -106,6 +106,8 @@ class CassetteUnlockState extends MusicBeatSubstate
 		parent.grpCassette.members[parent.weekMap["week94"]].lock();
 		parent.grpCassette.members[parent.weekMap["week95"]].lock();
 
+		@:privateAccess parent.changeWeek(0);
+
 		cameras = [cam];//[FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 
 		FlxG.sound.play(Paths.sound('newsongsunlocked'));
@@ -154,7 +156,6 @@ class CassetteUnlockState extends MusicBeatSubstate
 										parent.grpCassette.members[parent.weekMap["week94"]].shakeDuration = duration;
 										parent.grpCassette.members[parent.weekMap["week95"]].shakeDuration = duration;
 
-
 										new FlxTimer().start(duration, (_) -> {
 											parent.camera.flash(-1, 0.3);
 											FlxG.sound.play(Paths.sound('unlocked'));
@@ -163,6 +164,7 @@ class CassetteUnlockState extends MusicBeatSubstate
 											parent.grpCassette.members[parent.weekMap["week94"]].unlock();
 											parent.grpCassette.members[parent.weekMap["week95"]].unlock();
 
+											parent.changeWeek(0);
 										});
 									});
 								}
