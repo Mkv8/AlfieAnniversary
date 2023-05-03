@@ -31,11 +31,13 @@ void main() {
 	vec2 uv = openfl_TextureCoordv;
 	vec2 fragCoord = openfl_TextureCoordv * openfl_TextureSize.xy;
 
+	vec2 blur = vec2(uBlur) * vec2(1.0, openfl_TextureSize.x / openfl_TextureSize.y);
+
 	//float blur = iMouse.x/iResolution.x * 0.1;
-	vec4 a = flixel_texture2D(bitmap, uv+fixvec2(random(uv)*uBlur - uBlur / 2.0)) * uBrightness;
-	a += flixel_texture2D(bitmap, uv+fixvec2(random(uv+0.1)*uBlur - uBlur / 2.0)) * uBrightness;
-	a += flixel_texture2D(bitmap, uv+fixvec2(random(uv+0.2)*uBlur - uBlur / 2.0)) * uBrightness;
-	a += flixel_texture2D(bitmap, uv+fixvec2(random(uv+0.3)*uBlur - uBlur / 2.0)) * uBrightness;
+	vec4 a = flixel_texture2D(bitmap, uv+fixvec2(random(uv)*blur - blur / 2.0)) * uBrightness;
+	a += flixel_texture2D(bitmap, uv+fixvec2(random(uv+0.1)*blur - blur / 2.0)) * uBrightness;
+	a += flixel_texture2D(bitmap, uv+fixvec2(random(uv+0.2)*blur - blur / 2.0)) * uBrightness;
+	a += flixel_texture2D(bitmap, uv+fixvec2(random(uv+0.3)*blur - blur / 2.0)) * uBrightness;
 	gl_FragColor = a / 4.0;
 }')
 

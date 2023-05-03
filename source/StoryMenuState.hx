@@ -269,6 +269,8 @@ class StoryMenuState extends MusicBeatState
 
 	var waitTime = 0.2;
 
+	var holdTime = 0.0;
+
 	override function update(elapsed:Float)
 	{
 		if(waitTime > 0) {
@@ -322,18 +324,36 @@ class StoryMenuState extends MusicBeatState
 
 		if (!movedBack && !selectedWeek && allowChanging && !choosingbih)
 		{
-			var upP = controls.UI_LEFT_P;
-			var downP = controls.UI_RIGHT_P;
-			if (upP)
+			var shiftMult:Int = 1;
+			if(FlxG.keys.pressed.SHIFT) shiftMult = 3;
+
+			var leftP = controls.UI_LEFT_P;
+			var rightP = controls.UI_RIGHT_P;
+			if (leftP)
 			{
-				changeWeek(-1);
+				changeWeek(-shiftMult);
+				holdTime = 0;
 				FlxG.sound.play(Paths.sound('cassetteScroll'));
 			}
 
-			if (downP)
+			if (rightP)
 			{
-				changeWeek(1);
+				changeWeek(shiftMult);
+				holdTime = 0;
 				FlxG.sound.play(Paths.sound('cassetteScroll'));
+			}
+
+			if(controls.UI_LEFT || controls.UI_RIGHT)
+			{
+				var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10);
+				holdTime += elapsed;
+				var checkNewHold:Int = Math.floor((holdTime - 0.5) * 10);
+
+				if(holdTime > 0.5 && checkNewHold - checkLastHold > 0)
+				{
+					changeWeek((checkNewHold - checkLastHold) * (controls.UI_LEFT ? -shiftMult : shiftMult));
+					FlxG.sound.play(Paths.sound('cassetteScroll'));
+				}
 			}
 
 			/*if (controls.UI_RIGHT)
@@ -450,7 +470,7 @@ class StoryMenuState extends MusicBeatState
 			return;
 		}
 
-		if (wNum == 14 && !selectPasta)
+		if (wNum == weekMap["week95"] && !selectPasta)
 		{
 			openChoosing();
 			return;

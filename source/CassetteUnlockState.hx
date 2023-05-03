@@ -149,12 +149,13 @@ class CassetteUnlockState extends MusicBeatSubstate
 								} else {
 									new FlxTimer().start(0.4, (_) -> {
 										FlxG.sound.play(Paths.sound('unlocking'));
-										parent.grpCassette.members[parent.weekMap["week93"]].shakeDuration = 1;
-										parent.grpCassette.members[parent.weekMap["week94"]].shakeDuration = 1;
-										parent.grpCassette.members[parent.weekMap["week95"]].shakeDuration = 1;
+										var duration = 1.1;
+										parent.grpCassette.members[parent.weekMap["week93"]].shakeDuration = duration;
+										parent.grpCassette.members[parent.weekMap["week94"]].shakeDuration = duration;
+										parent.grpCassette.members[parent.weekMap["week95"]].shakeDuration = duration;
 
 
-										new FlxTimer().start(1, (_) -> {
+										new FlxTimer().start(duration, (_) -> {
 											parent.camera.flash(-1, 0.3);
 											FlxG.sound.play(Paths.sound('unlocked'));
 											parent.allowChanging = true;
