@@ -19,6 +19,8 @@ import("FlxColor");
 import("AttachedSprite");
 import("Alphabet");
 import("ChartCredits");
+import("Reflect");
+
 var u;
 var songLength = 1.0;
 
@@ -133,7 +135,10 @@ function beatHit()
 
 		case 3:
 		{
-			FlxTween.tween(u, {alpha: 1}, 1);
+			makeLuaText("pop","Hello World", 200, 200,200);
+			//FlxTween.tween(u, {alpha: 1}, 1);
+			addLuaText("pop");
+			//addLuaText("pop");
 		}
 		case 16:
 		{
@@ -207,6 +212,7 @@ function beatHit()
 		case 72:
 		{
 			bop();
+			
 			//below them there's Aurum and their icon
 		}
 		case 88:
@@ -405,7 +411,6 @@ function create(){
 	u.screenCenter(FlxAxes.XY);
 	u.y+=3655/2*1-FlxG.height/2;
 	u.antialiasing = true;
-	u.alpha = 0.00001;
 	
 	game.add(u);
 	FlxTween.tween(u, {y: -2275/2}, 2, {ease: FlxEase.expoInOut, startDelay: 2.0});
