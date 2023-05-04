@@ -12,6 +12,8 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
+import flixel.ui.FlxButton;
+
 #if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
@@ -32,6 +34,21 @@ class CreditsState extends MusicBeatState
 	var descText:FlxText;
 	var intendedColor:Int;
 	var colorTween:FlxTween;
+	var colorSubTween:FlxTween;
+	var replayButton:FlxButton;
+	
+	function setAllLabelsOffset(button:FlxButton, x:Float, y:Float)
+	{
+		for (point in button.labelOffsets)
+		{
+			point.set(x, y);
+		}
+	}
+	
+	override function destroy(){
+		FlxG.mouse.visible = false;
+		super.destroy();
+	}
 
 	override function create()
 	{
@@ -172,6 +189,21 @@ class CreditsState extends MusicBeatState
 		descText.borderSize = 2.4;
 		add(descText);
 
+		FlxG.mouse.visible = true;
+
+		replayButton = new FlxButton(FlxG.width*0.80, FlxG.height*0.90, "Play End Credits", function()
+		{
+			MusicBeatState.switchState(new ChartCredits("ChartCredits"));
+		});
+		replayButton.color= FlxColor.RED;
+		replayButton.setGraphicSize(200, 70);
+		replayButton.updateHitbox();
+		//replayButton.color = FlxColor.RED;
+		replayButton.label.fieldWidth = 200;
+		replayButton.label.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER);
+		setAllLabelsOffset(replayButton, 2, 24);
+		add(replayButton);
+
 		bg.color = getCurrentBGColor();
 		intendedColor = bg.color;
 		changeSelection();
@@ -230,6 +262,14 @@ class CreditsState extends MusicBeatState
 			intendedColor = newColor;
 			colorTween = FlxTween.color(bg, 1, bg.color, intendedColor, {
 				onComplete: function(twn:FlxTween) {
+					if(colorSubTween != null) {
+						colorSubTween.cancel();
+					}
+					colorSubTween = FlxTween.color(replayButton, 0.25, replayButton.color, intendedColor, {
+						onComplete: function(twn:FlxTween) {
+							colorSubTween = null;
+						}
+					});
 					colorTween = null;
 				}
 			});
