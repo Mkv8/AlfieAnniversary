@@ -188,6 +188,7 @@ class ChartCredits extends PlayState
 
 	override function create()
 	{
+		FlxG.mouse.visible=true;
 		curMod = Paths.currentModDirectory;
 		trace("creation");
 		instance = this;
@@ -258,6 +259,7 @@ class ChartCredits extends PlayState
 
 
 	override function destroy() {
+		FlxG.mouse.visible=false;
 		for (i in 0...luaArray.length) {
 			luaArray[i].call('onDestroy', []);
 			luaArray[i].stop();

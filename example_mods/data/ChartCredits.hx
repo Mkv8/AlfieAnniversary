@@ -86,13 +86,21 @@ megamix.frames = Paths.getSparrowAtlas('megamix');
 megamix.animation.addByPrefix('bump', 'megamix', 24, false);
 megamix.animation.play('bump');
 megamix.scale.set(0.7, 0.7);
+megamix.updateHitbox();
+megamix.screenCenter();
+megamix.y+=500*0.7-60/0.7;
 megamix.antialiasing = ClientPrefs.globalAntialiasing;
+megamix.updateHitbox();
+
+var carStuff = [];
 
 var logoBl = new FlxSprite(565, 60);
 logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 logoBl.antialiasing = ClientPrefs.globalAntialiasing;
 logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 logoBl.animation.play('bump');
+logoBl.screenCenter();
+logoBl.y-=60;
 logoBl.updateHitbox();
 
 var bopping = [];
@@ -120,6 +128,14 @@ function bopIcons(){
 	}
 
 }
+
+function bopThis(x:Dynamic, time:Float, amount:Float){
+	var initialScaleX = x.scale.x + 0;
+	var initialScaleY = x.scale.y + 0;
+	x.scale.x+=amount;
+	x.scale.y+=amount;
+	FlxTween.tween(x.scale, {x: initialScaleX, y:initialScaleY}, time, {ease: FlxEase.cubeInOut});
+}
 //makeLuaText("pop","Hello World", 200, 200, 200);
 		
 function getLuaText(s:String){
@@ -137,8 +153,12 @@ function activateText(name:String){
 
 function subTitleSwoop(name:String, x:Int, y:Int){
 	var subtitle = activateText(name);
-	subtitle.x=-1500;
-	FlxTween.tween(subtitle, {x: x-subtitle.width/2, y:y-subtitle.height}, 0.25, {ease: FlxEase.cubeInOut});
+	//subtitle.x=-1500;
+	subtitle.alpha =0;
+	subtitle.setPosition(x-subtitle.width/2, y-subtitle.height-20);
+	FlxTween.tween(subtitle, {x: x-subtitle.width/2, y:y-subtitle.height}, 0.25, {ease: FlxEase.elasticInOut});
+	FlxTween.tween(subtitle, {alpha:1}, 0.25, {ease: FlxEase.elasticInOut});
+	return subtitle;
 }
 
 
@@ -172,16 +192,16 @@ function splitEnter(threeNames:Array<String>){
 	bopping.push(split1);
 	split1.screenCenter(FlxAxes.XY);
 	split2.screenCenter(FlxAxes.XY);
-	swoopNameTo(split1,-FlxG.width/4-40,-250+hypnoAdd);			
-	swoopNameTo(split2,-FlxG.width/4-40,30+hypnoAdd);
+	swoopNameTo(split1,-FlxG.width/4-80-hypnoAdd,-250+hypnoAdd);			
+	swoopNameTo(split2,-FlxG.width/4-80-hypnoAdd,30+hypnoAdd);
 
 	var split1 = creditsStuff.get(threeNames[1]);
 	var split2 = activateText(threeNames[1]);
 	bopping.push(split1);
 	split1.screenCenter(FlxAxes.XY);
 	split2.screenCenter(FlxAxes.XY);
-	swoopNameTo(split1,FlxG.width/4+40,-250+hypnoAdd);			
-	swoopNameTo(split2,FlxG.width/4+40,30+hypnoAdd);
+	swoopNameTo(split1,FlxG.width/4+80+hypnoAdd,-250+hypnoAdd);			
+	swoopNameTo(split2,FlxG.width/4+80+hypnoAdd,30+hypnoAdd);
 
 	if(threeNames[2]!=''){
 		var split1 = creditsStuff.get(threeNames[2]);
@@ -269,6 +289,12 @@ function beatHit()
 	if(curBeat%4){
 		bopEverything();
 		bopIcons();
+		if(curBeat<40){
+			new FlxTimer().start(Conductor.crochet/1000 - 0.3, function(tmr:FlxTimer){
+				bopThis(megamix, 0.6, 0.04);
+				bopThis(logoBl, 0.6, 0.04);
+			});	
+		}
 	}
 
 	switch (curBeat)
@@ -297,9 +323,8 @@ function beatHit()
 		{
 			
 			bop();
-			
 			game.add(logoBl);
-			bopping.push(logoBl);
+			//bopping.push(logoBl);
 			//Display Vs Alfie logo image (logoBumpin.png, but it doesnt have to be that one, it can be just a cropped logo as well)
 		}
 		case 24:
@@ -307,7 +332,7 @@ function beatHit()
 			bop();
 			
 			game.add(megamix);
-			bopping.push(megamix);
+			//bopping.push(megamix);
 			//Display subtitle Megamix below the logo (megamix.png, same case as the logo)
 		}
 
@@ -434,7 +459,7 @@ function beatHit()
 			//yall deserve more time on screen
 		}
 		case 110:
-		{
+		{	
 			new FlxTimer().start(0.28, function(tmr:FlxTimer){
 				bop();
 			});	
@@ -595,6 +620,11 @@ function update(elapsed:Float){
 		FlxG.sound.music.play();
 	}
 
+	for(i in carStuff){
+		if(FlxG.mouse.overlaps(i)&&FlxG.mouse.pressed){
+			FlxG.sound.play(Paths.sound('honk'));
+		}
+	}
 	u.updateHitbox();
 	u.screenCenter(FlxAxes.X);
 	Conductor.songPosition = FlxG.sound.music.time;
@@ -666,6 +696,11 @@ function generateCredits(){
 				makeLuaText(formattedName+dash2,i[2], FlxG.width*0.1, 70 * j, FlxG.width*0.8);
 				getLuaText(formattedName+dash2).setFormat(Paths.font("vcr.ttf"), 24,0xFFFFFF, "center", FlxTextBorderStyle.OUTLINE, 0xFF000000);
 				getLuaText(formattedName+dash2).borderSize=3;
+
+				if(formattedName=="Car"){
+					carStuff.push(icon);
+					carStuff.push(getLuaText("Car"));
+				}
 				game.add(icon);
 			}else{
 				makeLuaText(formattedName,i[0], FlxG.width*0.1, 70 * j, FlxG.width*0.8);
@@ -673,6 +708,10 @@ function generateCredits(){
 				getLuaText(formattedName).borderSize=3;
 			}
 			game.add(optionText);
+			
+			if(formattedName=="Car"){
+				carStuff.push(optionText);
+			}
 		//}
 
 		if(creditsInfo.get(i[0])==null)
@@ -708,7 +747,7 @@ function create(){
 	game.add(u);
 	FlxTween.tween(u, {y: -2275/2}, 2, {ease: FlxEase.expoInOut, startDelay: 2.0});
 	FlxTween.tween(u.scale, {x: newScale, y:newScale}, 3, {ease: FlxEase.expoInOut, startDelay: 1.0});
-	//game.add(timeTxt);
+	game.add(timeTxt);
 	//beatTxt.scale.set(1,1);
 	//game.add(beatTxt);
 	//beatTxt.text= "[Beat hit here]";
