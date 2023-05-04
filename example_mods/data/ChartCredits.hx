@@ -243,12 +243,12 @@ function ascendEnter(allNames:Array<String>){
 		split2.fieldWidth = FlxG.width*0.9;
 		split2.updateHitbox();
 		split1.y=FlxG.height+140*i;
-		split2.y=FlxG.height+140*i+split1.height+60;
+		split2.y=FlxG.height+140*i+split1.height+80;
 		split1.screenCenter(FlxAxes.X);
 		split2.screenCenter(FlxAxes.X);
 
 		FlxTween.tween(split1, {x: split1.x, y:-FlxG.height/2-(allNames.length-i)*140}, 30, {ease: FlxEase.LINEAR});
-		FlxTween.tween(split2, {x: split2.x, y:-FlxG.height/2-(allNames.length-i)*140+60+split1.height}, 30, {ease: FlxEase.LINEAR});
+		FlxTween.tween(split2, {x: split2.x, y:-FlxG.height/2-(allNames.length-i)*140+80+split1.height}, 30, {ease: FlxEase.LINEAR});
 	}
 	ascendHeight = -FlxG.height/2-(allNames.length)*140;
 }
@@ -364,7 +364,7 @@ function beatHit()
 			var name2 = creditsStuff.get("Aurum");
 			name2.screenCenter(FlxAxes.XY);
 			name2.y -=50;
-			subTitleSwoop("Aurum", FlxG.width/2, FlxG.height/2+250);
+			subTitleSwoop("Aurum", FlxG.width/2, FlxG.height/2+300);
 			bopping.push(name2);
 			
 			//below them there's Aurum and their icon
@@ -660,7 +660,7 @@ function generateCredits(){
 			if(!unselectableCheck(i)){
 				var icon:AttachedSprite = new AttachedSprite('credits/' + i[1]);
 				icon.xAdd = optionText.width/2-icon.width/2;
-				icon.yAdd = 100; 
+				icon.yAdd = -icon.height/2 +195; 
 				icon.sprTracker = optionText;
 				icons.push(icon);
 				makeLuaText(formattedName+dash2,i[2], FlxG.width*0.1, 70 * j, FlxG.width*0.8);
