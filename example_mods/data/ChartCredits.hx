@@ -221,12 +221,16 @@ var ascendHeight = 0;
 function ascendLeave(allNames:Array<String>){
 
 	for(i in 0 ... allNames.length){
-		var split1 = creditsStuff.get(allNames[i]);
+		if(allNames[i]!="SPECIAL THANKS"){
+			var split1 = creditsStuff.get(allNames[i]);
+			var j = split1.y/140;
+			FlxTween.tween(split1, {x: split1.x, y:-FlxG.height/2-(allNames.length-j)*140}, 10, {ease: FlxEase.LINEAR});
+		}
+		
 		var split2 = getLuaText(allNames[i] );
-		var j = split1.y/140;
 		var k = split2.y/140;
-		FlxTween.tween(split1, {x: split1.x, y:-FlxG.height/2-(allNames.length-j)*140}, 10, {ease: FlxEase.LINEAR});
 		FlxTween.tween(split2, {x: split2.x, y:-FlxG.height/2-(allNames.length-k)*140}, 10, {ease: FlxEase.LINEAR});
+	
 	}
 
 }
@@ -314,7 +318,7 @@ function beatHit()
 			FlxG.camera.flash(-1,1,false);
 			game.remove(logoBl);
 			game.remove(megamix);
-			titleSwoop("ARTWORK:", 0, -250);
+			titleSwoop("ARTWORK", 0, -250);
 			//logo and megamix go away, there's a bit ARTWORK:  title at the top (like the image i sent in the GC)
 		}		
 		case 48:
@@ -368,16 +372,23 @@ function beatHit()
 		case 88:
 		{
 			bopping =[];
-			swoopNameTo(creditsStuff.get("Gigab00ts"),-2000,0);
+			/*swoopNameTo(creditsStuff.get("Gigab00ts"),-2000,0);
 			swoopNameTo(creditsStuff.get("Josszzol"),-2000,0);
 			swoopNameTo(creditsStuff.get("Aurum"),-2000,0);
 			swoopNameTo(getLuaText("Gigab00ts"),-2000,0);
 			swoopNameTo(getLuaText("Josszzol"),-2000,0);
-			swoopNameTo(getLuaText("Aurum"),-2000,0);
+			swoopNameTo(getLuaText("Aurum"),-2000,0);*/
+			creditsStuff.get("Gigab00ts").x=-2000;
+			creditsStuff.get("Josszzol").x=-2000;
+			creditsStuff.get("Aurum").x=-2000;
+			getLuaText("Gigab00ts").x=-2000;
+			getLuaText("Josszzol").x=-2000;
+			getLuaText("Aurum").x=-2000;
+
 			bop();
 			FlxG.camera.flash(-1,1,false);
-			titleSwoop("ARTWORK:", 0, -1050, false);
-			titleSwoop("PROGRAMMING:", 0, -250);
+			titleSwoop("ARTWORK", 0, -1050, false);
+			titleSwoop("PROGRAMMING", 0, -250);
 			
 			//artists stuff goes away, title goes from ARTWORK to PROGRAMMING
 		}	
@@ -442,16 +453,16 @@ function beatHit()
 		{
 			new FlxTimer().start(0.28, function(tmr:FlxTimer){
 				bop();
-				swoopNameTo(creditsStuff.get("Whatify"),-2000,0);			
-				swoopNameTo(getLuaText("Whatify"),-2000,0);
+				swoopNameTo(creditsStuff.get("Whatify"),2000,0);			
+				swoopNameTo(getLuaText("Whatify"),2000,0);
 				//whatify goes away
 			});	
 		}
 		case 120: 
 		{
 			bop();
-			swoopNameTo(creditsStuff.get("Shadowfi"),-2000,0);			
-			swoopNameTo(getLuaText("Shadowfi"),-2000,0);
+			swoopNameTo(creditsStuff.get("Shadowfi"),0,2000);			
+			swoopNameTo(getLuaText("Shadowfi"),0,2000);
 			//shadowfi goes away
 		}
 		case 125:
@@ -459,26 +470,26 @@ function beatHit()
 			bopping =[];
 			bop();
 			FlxG.camera.flash(-1,1,false);
-			titleSwoop("PROGRAMMING:", 0, -1050, false);
+			titleSwoop("PROGRAMMING", 0, -1050, false);
 			
-			getLuaText("MUSIC:").text="M";
-			titleSwoop("MUSIC:", 0, -250);
+			getLuaText("MUSIC").text="M";
+			titleSwoop("MUSIC", 0, -250);
 			//programming stuff goes away
 		}
 		case 126: 
 		{
 			new FlxTimer().start(0.28, function(tmr:FlxTimer){
 				bop();
-				getLuaText("MUSIC:").text="MU";
-				titleSwoop("MUSIC:", 0, -250);
+				getLuaText("MUSIC").text="MU";
+				titleSwoop("MUSIC", 0, -250);
 				//the start of the word Music comes in, "mu"
 			});	
 		}
 		case 128: 
 		{
 			bop();
-			getLuaText("MUSIC:").text="MUSIC:";
-			titleSwoop("MUSIC:", 0, -250);
+			getLuaText("MUSIC").text="MUSIC";
+			titleSwoop("MUSIC", 0, -250);
 			//finishing the word, "sic", forming Music
 			splitEnter(['AidanXD','Meta','Kamex']);
 		}
@@ -495,8 +506,8 @@ function beatHit()
 		}
 		case 200: 
 		{
-			titleSwoop("MUSIC:", 0, -1050, false);
-			titleSwoop("CHARTING:", 0, -250);
+			titleSwoop("MUSIC", 0, -1050, false);
+			titleSwoop("CHARTING", 0, -250);
 			splitLeave(['SplatterDash','Jospi','JunoSongs']);	
 			splitEnter(['Sayge', 'ChubbyGamer', 'PpavlikosS']);
 		}
@@ -508,22 +519,22 @@ function beatHit()
 ['Smokeyy',				
 ['Hotline 024 team', 'Ourple Guy team', 'Hypnos Lullaby Team']
 */
-			titleSwoop("CHARTING:", 0, -1050, false);
-			titleSwoop("MISC:", 0, -250);
+			titleSwoop("CHARTING", 0, -1050, false);
+			titleSwoop("MISC", 0, -250);
 			splitLeave(['Sayge', 'ChubbyGamer', 'PpavlikosS']);
 			splitEnter(['David H','Smokeyy','']);
 		}
 
 		case 248:
 		{
-			titleSwoop("MISC:", 0, -1050, false);
-			titleSwoop("SPECIAL THANKS:", 0, -290);
+			titleSwoop("MISC", 0, -1050, false);
+			titleSwoop("SPECIAL THANKS", 0, -290);
 			splitLeave(['David H','Smokeyy','']);
 			splitEnter(['Hotline 024 team', 'Ourple Guy team', 'Hypnos Lullaby Team']);
 		}
 		case 260:
 		{
-			ascendLeave(['Hotline 024 team', 'Ourple Guy team', 'Hypnos Lullaby Team']);
+			ascendLeave(["SPECIAL THANKS",'Hotline 024 team', 'Ourple Guy team', 'Hypnos Lullaby Team']);
 			ascendEnter(['Past Vs Alfie members'
 			'Flippy and Gegcoin',	
 			'MattDoes_',			
@@ -537,7 +548,7 @@ function beatHit()
 
 		case 304:
 		{
-			FlxTween.tween(getLuaText('SPECIAL THANKS:'), {alpha: 0}, 7);
+			//FlxTween.tween(getLuaText('SPECIAL THANKS'), {alpha: 0}, 7);
 			FlxTween.tween(u, {alpha: 0}, 7);
 		}
 	}
@@ -653,7 +664,7 @@ function generateCredits(){
 				icon.sprTracker = optionText;
 				icons.push(icon);
 				makeLuaText(formattedName+dash2,i[2], FlxG.width*0.1, 70 * j, FlxG.width*0.8);
-				getLuaText(formattedName+dash2).setFormat(Paths.font("vcr.ttf"), 32,0xFFFFFF, "center", FlxTextBorderStyle.OUTLINE, 0xFF000000);
+				getLuaText(formattedName+dash2).setFormat(Paths.font("vcr.ttf"), 24,0xFFFFFF, "center", FlxTextBorderStyle.OUTLINE, 0xFF000000);
 				getLuaText(formattedName+dash2).borderSize=3;
 				game.add(icon);
 			}else{
@@ -713,42 +724,42 @@ function create(){
 
 
 pisspoop = [ //Name - Icon name - Description - Link - BG Color
-	['ARTWORK:'],
+	['ARTWORK'],
 	['Mkv8',				'mk',				'Creator of Alfie, made most of the art',				'https://twitter.com/Mkv8Art',			'D23B48'],
 	['Josszzol',			'joss',				'Creator of Filip, made Skalloween Spectracle sprites',	'https://twitter.com/abbledacker',		'FFBF47'],
 	['Gigab00ts',			'giga',				'Creator of Kisston and Munchton, sketched a lot of poses',	'https://twitter.com/GigaB00ts',	'81DB7F'],
 	['Aurum',				'jade',				'Animated the Pasta Night sprites',						'https://twitter.com/AurumArt_',		'9D58BF'],
 	
-	['PROGRAMMING:'],
+	['PROGRAMMING'],
 	['Mkv8',				'mk',				'Did most of the basic coding',							'https://twitter.com/Mkv8Art',			'D23B48'],
 	['Ne_Eo',				'neo',				'Helped a lot with optimizing and coding the hard stuff!',	'https://twitter.com/Ne_Eo_Twitch',	'8A5F5C'],
 	['Whatify',				'WhatIcon',			'Helped with Interrupted, Lua issues and more',			'https://twitter.com/Sonamaker1',		'5A66A6'],
 	['Shadowfi',			'shadowdelic',		'Coded Pasta Night mechanics and characters',			'https://twitter.com/Shadowfi1385',		'9D58BF'],
 	
-	['MUSIC:'],
+	['MUSIC'],
 	['Aidan.XD',			'aidan',			'Gettin Freaky, Spectral Sonnet Beta Mix, After Dark (Alfie Mix)',	'https://www.youtube.com/channel/UCvIvCI3NRiJEYpyes58LhqQ',	'FF9D87'],
 	['Meta',				'meta',				'Forest Fire Remix and Spectral Sonnet Beta',			'https://metahumanboi.carrd.co/',		'4F3F5C'],
 	['Kamex',				'ace',				'Spectral Sonnet, G.O.A.T Remake, Spooks',				'https://www.youtube.com/c/Kamex',		'BAE2FF'],
-	['RayZord',				'ray',				'GOATED song',											'https://www.youtube.com/c/RayZord',	'49A7EB'],
+	['RayZord',				'ray',				'GOATED Song',											'https://www.youtube.com/c/RayZord',	'49A7EB'],
 	['Coquers_',			'coquers',			'Shattered (Game Over Music), Mansion Match, G.O.A.T Remake, Heart Attack',	'https://www.youtube.com/c/coquers_',	'D15E56'],
 	['Car',					'car',				'Candle-Lit Clash',										'https://www.youtube.com/c/carcarwoah',	'FF3021'],
 	['SplatterDash',		'splatter',			'INTERRUPTED, All Saints Scramble Remix, Pasta Night (AFK Mix)',	'https://twitter.com/splatterdash_ng',	'72B2F2'],
 	['Jospi',				'jospi',			'Take It Slow (Pause Music), Megamix (Credits Song), Minimize, Jelly Jamboree',	'https://twitter.com/jospi_music',	'96FAFF'],
 	['JunoSongs',			'juno',				'Lyrics and singer for Spooks',							'https://www.youtube.com/@JunoSongs',	'B563DB'],
 	
-	['CHARTING:'],
+	['CHARTING'],
 	['Sayge',				'sayge',			'Charter for Spectral Sonnet and After Dark',			'https://twitter.com/Sayge3D',			'FFA44F'],
 	['ChubbyGamer',			'chubby',			'Charter for Interruped, Spooks, and Pasta Night (AFK Mix)','https://twitter.com/ChubbyAlt',	'C78A58'],
 	['PpavlikosS',			'pav',				'The rest of the songs lol',							'https://twitter.com/ppavlikoss',		'BAE2FF'],
 	
-	['MISC:'],
+	['MISC'],
 	['David H.',			'blank',			'Album cover Artwork',									' ',									'72A3ED'],
 	['Smokeyy',				'smokeyy',			'Release trailer',										'https://twitter.com/Smokiixx',			'716A73'],			
 	['Hotline 024 team',	'nikku',			'Thank you Sakury and the H024 team for letting us use Nikku!','https://gamebanana.com/mods/373298',			'FF3021'],
 	['Ourple Guy team',		'guy',				'Thank you Kiwiquest and the Ourple Guy team for letting us use the characters!','https://gamebanana.com/mods/357511',			'BD51DB'],
 	['Hypnos Lullaby Team',	'hypno',			'Thank you Punkett, iKenny, and TheInnuendo, creators of Pasta Night ','https://fridaynightfunking.fandom.com/wiki/Friday_Night_Funkin%27_Lullaby',			'F7BF45'],
 	
-	['SPECIAL THANKS:'],
+	['SPECIAL THANKS'],
 	['Past Vs Alfie members','blank',			'Including MisterParakeet, ThisIsBennyK, StardustTunes, Dami and NemoInABottle',' ',			'D23B48'],
 	['Flippy and Gegcoin',	'blank',			'For always playing vs Alfie',							' ',									'BDBCC4'],
 	['MattDoes_',			'blank',			'For Always Following Vs Alfie',						' ',									'49E3E6'],
