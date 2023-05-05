@@ -30,6 +30,7 @@ class FancyButton extends FlxButton{
                 animation.finishCallback=null;
                 animation.play(newAnim, true);  
             case 'pressed':
+                //This happens if you hold down click on the button
                 
         }
     }
