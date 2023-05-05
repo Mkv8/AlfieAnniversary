@@ -537,7 +537,8 @@ function beatHit()
 		}
 		case 200: 
 		{
-			FlxG.mouse.visible=true;
+			FlxG.mouse.visible=false;
+			FlxG.mouse.cursorContainer.alpha = 1;
 			
 			titleSwoop("MUSIC", 0, -1050, false);
 			titleSwoop("CHARTING", 0, -285);
@@ -629,7 +630,7 @@ function update(elapsed:Float){
 	}
 
 	for(i in carStuff){
-		if(FlxG.mouse.overlaps(i)&&FlxG.mouse.pressed){
+		if(FlxG.mouse.overlaps(i)&&FlxG.mouse.justPressed){
 			FlxG.sound.play(Paths.sound('honk'));
 		}
 	}

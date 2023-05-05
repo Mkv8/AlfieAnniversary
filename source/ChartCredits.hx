@@ -260,6 +260,7 @@ class ChartCredits extends PlayState
 
 	override function destroy() {
 		FlxG.mouse.visible=false;
+		FlxG.mouse.cursorContainer.alpha = 1;
 		for (i in 0...luaArray.length) {
 			luaArray[i].call('onDestroy', []);
 			luaArray[i].stop();
