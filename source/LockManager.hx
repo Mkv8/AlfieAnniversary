@@ -2,27 +2,27 @@ package;
 
 class LockManager {
 	public static var allSongs = [
-		"forest-fire",
-		"spectral-sonnet",
-		"spectral-sonnet-beta",
-		"goated",
-		"after-dark",
-		"mansion-match",
-		"candlelit-clash",
-		"goat-remake",
-		"interrupted",
-		"all-saints-scramble",
-		"spooks",
-		"heart-attack",
-		"jelly-jamboree",
-		"minimize",
-		"pasta-night",
+		"Forest Fire",
+		"Spectral Sonnet",
+		"Spectral Sonnet Beta",
+		"Goated",
+		"After Dark",
+		"Mansion Match",
+		"Candlelit Clash",
+		"Goat Remake",
+		"Interrupted",
+		"All Saints Scramble",
+		"Spooks",
+		"Heart Attack",
+		"Jelly Jamboree",
+		"Minimize",
+		"Pasta Night",
 	];
 
 	public static var lockedSongs = [
-		"heart-attack",
-		"pasta-night",
-		"jelly-jamboree",
+		"Heart Attack",
+		"Pasta Night",
+		"Jelly Jamboree",
 	];
 
 	public static var lastUnlocked:Array<String> = [];
@@ -87,4 +87,15 @@ class LockManager {
 		var score = Highscore.getScore(song, diff) > 0;
 		return score;
 	}
+
+	public static function getSongsLeft() {
+        var arr = [];
+        for(song in allSongs) {
+            if(!hasBeaten(song) && !lockedSongs.contains(song)) {
+                arr.push(song);
+            }
+        }
+        return arr;
+    }
+
 }

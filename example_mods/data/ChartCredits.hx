@@ -84,7 +84,7 @@ var megamix = new FlxSprite(355, 500);
 //megamix.loadGraphic(Paths.image('megamix', 'preload'));
 megamix.frames = Paths.getSparrowAtlas('megamix');
 megamix.animation.addByPrefix('bump', 'megamix', 24, false);
-megamix.animation.play('bump');
+//megamix.animation.play('bump');
 megamix.scale.set(0.7, 0.7);
 megamix.updateHitbox();
 megamix.screenCenter();
@@ -98,7 +98,7 @@ var logoBl = new FlxSprite(565, 60);
 logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 logoBl.antialiasing = ClientPrefs.globalAntialiasing;
 logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
-logoBl.animation.play('bump');
+//logoBl.animation.play('bump');
 logoBl.screenCenter();
 logoBl.y-=60;
 logoBl.updateHitbox();
@@ -179,9 +179,10 @@ function titleSwoop(name:String, x:Int, y:Int, ?b:Bool){
 	if(b){
 		title.screenCenter(FlxAxes.XY);
 	}
-	//title.x-=title.width/4;
 	addLuaText(name);
-	FlxTween.tween(title, {x: title.x+x, y:title.y+y}, 0.25, {ease: FlxEase.cubeInOut});
+	//FlxTween.tween(title, {x: title.x+x, y:title.y+y}, 0.25, {ease: FlxEase.cubeInOut});
+	title.y-= 285;
+
 }
 
 function splitEnter(threeNames:Array<String>){
@@ -301,7 +302,7 @@ function beatHit()
 	switch (curBeat)
 	{
 
-		case 32 , 56 , 80 , 109 , 112:
+		case 32 , 56 , 80 , 109 , 112, 136, 141, 144, 149, 157, 160, 184, 192, 208, 216, 232, 240, 256:
 		{
 			bop();
 			//single bops with nothing special
@@ -341,10 +342,10 @@ function beatHit()
 		{
 			bopping = [];
 			bop();
-			FlxG.camera.flash(-1,1,false);
+			game.camHUD.flash(-1,1,false);
 			game.remove(logoBl);
 			game.remove(megamix);
-			titleSwoop("ARTWORK", 0, -285);
+			titleSwoop("ARTWORK", 0, 0);
 			//logo and megamix go away, there's a bit ARTWORK:  title at the top (like the image i sent in the GC)
 		}		
 		case 48:
@@ -412,10 +413,10 @@ function beatHit()
 			getLuaText("Aurum").x=-2000;
 
 			bop();
-			FlxG.camera.flash(-1,1,false);
-			titleSwoop("ARTWORK", 0, -1050, false);
-			titleSwoop("PROGRAMMING", 0, -285);
-			
+			titleSwoop("ARTWORK", 0, -0, false);
+			titleSwoop("PROGRAMMING", 0, 0);
+			game.camHUD.flash(-1,1,false);
+
 			//artists stuff goes away, title goes from ARTWORK to PROGRAMMING
 		}	
 		case 96:
@@ -459,7 +460,7 @@ function beatHit()
 			//i put myself separated cuz idk both with the timing of the song it seemed good, and also while I did a lot of work, you guys did all the big stuff so
 			//yall deserve more time on screen
 		}
-		case 110:
+		case 110, 142, 150, 158:
 		{	
 			new FlxTimer().start(0.28, function(tmr:FlxTimer){
 				bop();
@@ -495,19 +496,20 @@ function beatHit()
 		{
 			bopping =[];
 			bop();
-			FlxG.camera.flash(-1,1,false);
 			titleSwoop("PROGRAMMING", 0, -1050, false);
 			
 			getLuaText("MUSIC").text="M";
-			titleSwoop("MUSIC", 0, -285);
+			titleSwoop("MUSIC", 0, 0);
 			//programming stuff goes away
+			game.camHUD.flash(-1,1,false);
+
 		}
 		case 126: 
 		{
 			new FlxTimer().start(0.28, function(tmr:FlxTimer){
 				bop();
 				getLuaText("MUSIC").text="MU";
-				titleSwoop("MUSIC", 0, -285);
+				titleSwoop("MUSIC", 0, 0);
 				//the start of the word Music comes in, "mu"
 			});	
 		}
@@ -515,18 +517,20 @@ function beatHit()
 		{
 			bop();
 			getLuaText("MUSIC").text="MUSIC";
-			titleSwoop("MUSIC", 0, -285);
+			titleSwoop("MUSIC", 0, 0);
 			//finishing the word, "sic", forming Music
 			splitEnter(['AidanXD','Meta','Kamex']);
 		}
 
 		case 152: 
 		{
+			bop();
 			FlxG.mouse.visible=true;
 			FlxG.mouse.cursorContainer.alpha = 0;
 			FlxTween.tween(FlxG.mouse.cursorContainer, {alpha: 1}, fadeIn, {ease: FlxEase.quartInOut});
 			splitLeave(['AidanXD','Meta','Kamex']);	
 			splitEnter(['RayZord','Coquers_','Car']);
+
 		}
 		case 176:
 		{
@@ -534,29 +538,34 @@ function beatHit()
 			FlxTween.tween(FlxG.mouse.cursorContainer, {alpha: 0}, fadeIn, {ease: FlxEase.quartInOut});
 			splitLeave(['RayZord','Coquers_','Car']);
 			splitEnter(['SplatterDash','Jospi','JunoSongs']);
+			bop();
+
 		}
 		case 200: 
 		{
 			FlxG.mouse.visible=false;
 			FlxG.mouse.cursorContainer.alpha = 1;
 			
-			titleSwoop("MUSIC", 0, -1050, false);
-			titleSwoop("CHARTING", 0, -285);
+			titleSwoop("MUSIC", 0, -0, false);
+			titleSwoop("CHARTING", 0, -0);
 			splitLeave(['SplatterDash','Jospi','JunoSongs']);	
 			splitEnter(['Sayge', 'ChubbyGamer', 'PpavlikosS']);
+			game.camHUD.flash(-1,1,false);
+			bop();
+
+
 		}
 		case 224:
 		{
 
-			/*['MISC:'],
-['David H.',			
-['Smokeyy',				
-['Hotline 024 team', 'Ourple Guy team', 'Hypnos Lullaby Team']
-*/
-			titleSwoop("CHARTING", 0, -1050, false);
-			titleSwoop("MISC", 0, -285);
+			titleSwoop("CHARTING", 0, 0, false);
+			titleSwoop("MISC", 0, 0);
 			splitLeave(['Sayge', 'ChubbyGamer', 'PpavlikosS']);
 			splitEnter(['David H','Smokeyy','']);
+			game.camHUD.flash(-1,1,false);
+			bop();
+
+
 		}
 
 		case 248:
@@ -565,6 +574,8 @@ function beatHit()
 			titleSwoop("SPECIAL THANKS", 0, -320);
 			splitLeave(['David H','Smokeyy','']);
 			splitEnter(['Hotline 024 team', 'Ourple Guy team', 'Hypnos Lullaby Team']);
+			bop();
+
 		}
 		case 260:
 		{
@@ -582,23 +593,10 @@ function beatHit()
 
 		case 304:
 		{
-			//FlxTween.tween(getLuaText('SPECIAL THANKS'), {alpha: 0}, 7);
+			FlxTween.tween(getLuaText('SPECIAL THANKS'), {alpha: 0}, 11);
 			FlxTween.tween(u, {alpha: 0}, 7);
 		}
 	}
-	/*
-	if(curBeat == 20){
-		beatTxt.color=0xFF00FF00;
-	}
-	if(curBeat == 22){
-		beatTxt.color=0xFF0084FF;
-	}
-	if(curBeat == 24){
-		beatTxt.color=0xFFFF6868;
-	}
-	if(curBeat == 30){
-		beatTxt.color=0xFFFFFFFF;
-	}*/
 
 	
 }
@@ -756,13 +754,12 @@ function create(){
 	game.add(u);
 	FlxTween.tween(u, {y: -2275/2}, 2, {ease: FlxEase.expoInOut, startDelay: 2.0});
 	FlxTween.tween(u.scale, {x: newScale, y:newScale}, 3, {ease: FlxEase.expoInOut, startDelay: 1.0});
-	//game.add(timeTxt);
-	//beatTxt.scale.set(1,1);
-	//game.add(beatTxt);
-	//beatTxt.text= "[Beat hit here]";
+	/*beatTxt.scale.set(1,1);
+	game.add(beatTxt);
+	beatTxt.text= "[Beat hit here]";
 	
-	//beatTxt.screenCenter(FlxAxes.XY);
-	//beatTxt.y=60;
+	beatTxt.screenCenter(FlxAxes.XY);
+	beatTxt.y=60;*/
 	
 	generateCredits();
 }
@@ -773,49 +770,49 @@ function create(){
 
 pisspoop = [ //Name - Icon name - Description - Link - BG Color
 	['ARTWORK'],
-	['Mkv8',				'mk',				'Creator of Alfie, made most of the art',				'https://twitter.com/Mkv8Art',			'D23B48'],
-	['Josszzol',			'joss',				'Creator of Filip, made Skalloween Spectracle sprites',	'https://twitter.com/abbledacker',		'FFBF47'],
-	['Gigab00ts',			'giga',				'Creator of Kisston and Munchton, sketched a lot of poses',	'https://twitter.com/GigaB00ts',	'81DB7F'],
-	['Aurum',				'jade',				'Animated the Pasta Night sprites',						'https://twitter.com/AurumArt_',		'9D58BF'],
+	['Mkv8',				'mk',				'Creator of Alfie',				'https://twitter.com/Mkv8Art',			'D23B48'],
+	['Josszzol',			'joss',				'Creator of Filip',	'https://twitter.com/abbledacker',		'FFBF47'],
+	['Gigab00ts',			'giga',				'Creator of Kisston',	'https://twitter.com/GigaB00ts',	'81DB7F'],
+	['Aurum',				'jade',				' ',						'https://twitter.com/AurumArt_',		'9D58BF'],
 	
 	['PROGRAMMING'],
-	['Mkv8',				'mk',				'Did most of the basic coding',							'https://twitter.com/Mkv8Art',			'D23B48'],
-	['Ne_Eo',				'neo',				'Helped a lot with optimizing and coding the hard stuff!',	'https://twitter.com/Ne_Eo_Twitch',	'8A5F5C'],
-	['Whatify',				'WhatIcon',			'Helped with Interrupted, Lua issues and more',			'https://twitter.com/Sonamaker1',		'5A66A6'],
-	['Shadowfi',			'shadowdelic',		'Coded Pasta Night mechanics and characters',			'https://twitter.com/Shadowfi1385',		'9D58BF'],
+	['Mkv8',				'mk',				' ',							'https://twitter.com/Mkv8Art',			'D23B48'],
+	['Ne_Eo',				'neo',				' ',	'https://twitter.com/Ne_Eo_Twitch',	'8A5F5C'],
+	['Whatify',				'WhatIcon',			' ',			'https://twitter.com/Sonamaker1',		'5A66A6'],
+	['Shadowfi',			'shadowdelic',		' ',			'https://twitter.com/Shadowfi1385',		'9D58BF'],
 	
 	['MUSIC'],
-	['Aidan.XD',			'aidan',			'Gettin Freaky, Spectral Sonnet Beta Mix, After Dark (Alfie Mix)',	'https://www.youtube.com/channel/UCvIvCI3NRiJEYpyes58LhqQ',	'FF9D87'],
-	['Meta',				'meta',				'Forest Fire Remix and Spectral Sonnet Beta',			'https://metahumanboi.carrd.co/',		'4F3F5C'],
-	['Kamex',				'ace',				'Spectral Sonnet, G.O.A.T Remake, Spooks',				'https://www.youtube.com/c/Kamex',		'BAE2FF'],
-	['RayZord',				'ray',				'GOATED Song',											'https://www.youtube.com/c/RayZord',	'49A7EB'],
-	['Coquers_',			'coquers',			'Shattered (Game Over Music), Mansion Match, G.O.A.T Remake, Heart Attack',	'https://www.youtube.com/c/coquers_',	'D15E56'],
-	['Car',					'car',				'Candle-Lit Clash',										'https://www.youtube.com/c/carcarwoah',	'FF3021'],
-	['SplatterDash',		'splatter',			'INTERRUPTED, All Saints Scramble Remix, Pasta Night (AFK Mix)',	'https://twitter.com/splatterdash_ng',	'72B2F2'],
-	['Jospi',				'jospi',			'Take It Slow (Pause Music), Megamix (Credits Song), Minimize, Jelly Jamboree',	'https://twitter.com/jospi_music',	'96FAFF'],
-	['JunoSongs',			'juno',				'Lyrics and singer for Spooks',							'https://www.youtube.com/@JunoSongs',	'B563DB'],
+	['Aidan.XD',			'aidan',			' ',	'https://www.youtube.com/channel/UCvIvCI3NRiJEYpyes58LhqQ',	'FF9D87'],
+	['Meta',				'meta',				' ',			'https://metahumanboi.carrd.co/',		'4F3F5C'],
+	['Kamex',				'ace',				' ',				'https://www.youtube.com/c/Kamex',		'BAE2FF'],
+	['RayZord',				'ray',				' ',											'https://www.youtube.com/c/RayZord',	'49A7EB'],
+	['Coquers_',			'coquers',			' ',	'https://www.youtube.com/c/coquers_',	'D15E56'],
+	['Car',					'car',				' ',										'https://www.youtube.com/c/carcarwoah',	'FF3021'],
+	['SplatterDash',		'splatter',			' ',	'https://twitter.com/splatterdash_ng',	'72B2F2'],
+	['Jospi',				'jospi',			' ',	'https://twitter.com/jospi_music',	'96FAFF'],
+	['JunoSongs',			'juno',				' ',							'https://www.youtube.com/@JunoSongs',	'B563DB'],
 	
 	['CHARTING'],
-	['Sayge',				'sayge',			'Charter for Spectral Sonnet and After Dark',			'https://twitter.com/Sayge3D',			'FFA44F'],
-	['ChubbyGamer',			'chubby',			'Charter for Interruped, Spooks, and Pasta Night (AFK Mix)','https://twitter.com/ChubbyAlt',	'C78A58'],
-	['PpavlikosS',			'pav',				'The rest of the songs lol',							'https://twitter.com/ppavlikoss',		'BAE2FF'],
+	['Sayge',				'sayge',			' ',			'https://twitter.com/Sayge3D',			'FFA44F'],
+	['ChubbyGamer',			'chubby',			' ','https://twitter.com/ChubbyAlt',	'C78A58'],
+	['PpavlikosS',			'pav',				' ',							'https://twitter.com/ppavlikoss',		'BAE2FF'],
 	
 	['MISC'],
 	['David H.',			'blank',			'Album cover Artwork',									' ',									'72A3ED'],
 	['Smokeyy',				'smokeyy',			'Release trailer',										'https://twitter.com/Smokiixx',			'716A73'],			
-	['Hotline 024 team',	'nikku',			'Thank you Sakury and the H024 team for letting us use Nikku!','https://gamebanana.com/mods/373298',			'FF3021'],
-	['Ourple Guy team',		'guy',				'Thank you Kiwiquest and the Ourple Guy team for letting us use the characters!','https://gamebanana.com/mods/357511',			'BD51DB'],
-	['Hypnos Lullaby Team',	'hypno',			'Thank you Punkett, iKenny, and TheInnuendo, creators of Pasta Night ','https://fridaynightfunking.fandom.com/wiki/Friday_Night_Funkin%27_Lullaby',			'F7BF45'],
+	['Hotline 024 team',	'nikku',			'Thank you Saruky and the H024 team','https://gamebanana.com/mods/373298',			'FF3021'],
+	['Ourple Guy team',		'guy',				'Thank you Kiwiquest and the Ourple Guy team','https://gamebanana.com/mods/357511',			'BD51DB'],
+	['Hypnos Lullaby Team',	'hypno',			'Thank you Punkett, iKenny, and TheInnuendo','https://fridaynightfunking.fandom.com/wiki/Friday_Night_Funkin%27_Lullaby',			'F7BF45'],
 	
 	['SPECIAL THANKS'],
-	['Past Vs Alfie members','blank',			'Including MisterParakeet, ThisIsBennyK, StardustTunes, Dami and NemoInABottle',' ',			'D23B48'],
-	['Flippy and Gegcoin',	'blank',			'For always playing vs Alfie',							' ',									'BDBCC4'],
-	['MattDoes_',			'blank',			'For Always Following Vs Alfie',						' ',									'49E3E6'],
-	['Tesseption',			'blank',			'For Always Following Vs Alfie',						' ',									'D149E6'],
+	['Past Vs Alfie members','blank',			' ',' ',			'D23B48'],
+	['Flippy and Gegcoin',	'blank',			' ',							' ',									'BDBCC4'],
+	['MattDoes_',			'blank',			' ',						' ',									'49E3E6'],
+	['Tesseption',			'blank',			' ',						' ',									'D149E6'],
 	['FlarinthK',			'blank',			' ',													' ',									'F78F45'],
 	['SirSins',				'blank',			' ',													' ',									'F78F45'],
 	['Alfie and Filip fan Server',	'blank',	' ',													' ',									'F78F45'],
-	['Fans and Supporters',	'blank',			'For the fan content (we really appreciate it!!)',		' ',									'98ED87'],
-	['And you',				'blank',			'cuz we really do be cheesy like that',					' ',									'D42C3D'],
+	['Fans and Supporters',	'blank',			' ',		' ',									'98ED87'],
+	['And you',				'blank',			' ',					' ',									'D42C3D'],
 ];
 

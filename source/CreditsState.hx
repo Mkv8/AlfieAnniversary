@@ -129,7 +129,7 @@ class CreditsState extends MusicBeatState
 			['Misc.'],
 			['David H.',			'blank',			'Album cover Artwork',									' ',									'72A3ED'],
 			['Smokeyy',				'smokeyy',			'Release trailer',										'https://twitter.com/Smokiixx',			'716A73'],			
-			['Hotline 024 team',	'nikku',			'Thank you Sakury and the H024 team for letting us use Nikku!','https://gamebanana.com/mods/373298',			'FF3021'],
+			['Hotline 024 team',	'nikku',			'Thank you Saruky and the H024 team for letting us use Nikku!','https://gamebanana.com/mods/373298',			'FF3021'],
 			['Ourple Guy team',		'guy',				'Thank you Kiwiquest and the Ourple Guy team for letting us use the characters!','https://gamebanana.com/mods/357511',			'BD51DB'],
 			['Hypnos Lullaby Team',	'hypno',			'Thank you Punkett, iKenny, and TheInnuendo, creators of Pasta Night ','https://fridaynightfunking.fandom.com/wiki/Friday_Night_Funkin%27_Lullaby',			'F7BF45'],
 			[''],

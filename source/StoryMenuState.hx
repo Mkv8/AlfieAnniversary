@@ -77,6 +77,12 @@ class StoryMenuState extends MusicBeatState
 	var handSelect:FlxSprite;
 	var curBih = 0;
 
+	var lockedTxt:FlxText;
+	var songsLeft:FlxText;
+
+	var howManySongsLeft = LockManager.getSongsLeft();
+
+
 	public var weekMap:Map<String, Int> = [];
 
 	var newUnlockedSongs:Array<String>;
@@ -95,6 +101,19 @@ class StoryMenuState extends MusicBeatState
 
 		scoreText = new FlxFixedText(10, 10, 0, "SCORE: 49324858", 36);
 		scoreText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+
+		lockedTxt = new FlxFixedText(0, 100, 0, "SONG LOCKED!\nPlay other songs to unlock. ", 60);
+		lockedTxt.setFormat("VCR OSD Mono", 48, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		lockedTxt.screenCenter(X);
+		lockedTxt.alignment = "center";
+
+		songsLeft = new FlxFixedText(0, 230, 0, "SONGS LEFT:\n"+howManySongsLeft.join("\n") , 40);
+		songsLeft.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		songsLeft.screenCenter(X);
+		songsLeft.alignment = "center";
+
+		lockedTxt.alpha = 0.0001;
+		songsLeft.alpha = 0.0001;
 
 
 		txtWeekTitle = new FlxFixedText(FlxG.width * 0.7, 10, 0, "", 40);
@@ -176,44 +195,17 @@ class StoryMenuState extends MusicBeatState
 		}
 		curDifficulty = Math.round(Math.max(0, CoolUtil.difficulties.indexOf(lastDifficultyName)));
 
-		/*difficultySelectors = new FlxGroup();
-		add(difficultySelectors);
-
-		leftArrow = new FlxSprite(grpCassette.members[0].x + grpCassette.members[0].width + 10, grpCassette.members[0].y + 10);
-		leftArrow.frames = ui_tex;
-		leftArrow.animation.addByPrefix('idle', "arrow left");
-		leftArrow.animation.addByPrefix('press', "arrow push left");
-		leftArrow.animation.play('idle');
-		leftArrow.antialiasing = ClientPrefs.globalAntialiasing;
-		difficultySelectors.add(leftArrow);*/
-
-		/*sprDifficulty = new FlxSprite(0, leftArrow.y);
-		sprDifficulty.antialiasing = ClientPrefs.globalAntialiasing;
-
-		difficultySelectors.add(sprDifficulty);*/
-
-		/*rightArrow = new FlxSprite(leftArrow.x + 376, leftArrow.y);
-		rightArrow.frames = ui_tex;
-		rightArrow.animation.addByPrefix('idle', 'arrow right');
-		rightArrow.animation.addByPrefix('press', "arrow push right", 24, false);
-		rightArrow.animation.play('idle');
-		rightArrow.antialiasing = ClientPrefs.globalAntialiasing;
-		difficultySelectors.add(rightArrow);*/
+		
 		changeDifficulty();
 
 		add(bgSprite);
 
-		//var tracksSprite:FlxSprite = new FlxSprite(FlxG.width * 0.07, 56 + 425).loadGraphic(Paths.image('Menu_Tracks'));
-		//tracksSprite.antialiasing = ClientPrefs.globalAntialiasing;
-		//add(tracksSprite);
-
-		//txtTracklist = new FlxFixedText(FlxG.width * 0.05, tracksSprite.y + 60, 0, "", 32);
-		//txtTracklist.alignment = CENTER;
-		//txtTracklist.font = Paths.font("vcr.ttf");
-		//txtTracklist.color = 0xFFe55777;
-		//add(txtTracklist);
+	
 		add(scoreText);
 		add(txtWeekTitle);
+
+		add(lockedTxt);
+		add(songsLeft);
 
 		add(grpCassette);
 
@@ -223,6 +215,8 @@ class StoryMenuState extends MusicBeatState
 
 		super.create();
 	}
+
+
 
 	function makeOverlay() {
 		blackOverlay = new FlxSpriteExtra(0, 0).makeSolid(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
@@ -694,9 +688,11 @@ class StoryMenuState extends MusicBeatState
 		WeekData.setDirectoryFromWeek(leWeek);
 
 		var leName:String = leWeek.storyName;
+
 		if(!grpCassette.members[curWeek].isUnlocked) {
 			leName = "???";
 		}
+
 		txtWeekTitle.text = leName.toUpperCase();
 		//txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
 		txtWeekTitle.screenCenter(X);
@@ -742,6 +738,19 @@ class StoryMenuState extends MusicBeatState
 		}
 
 		updateBackground();
+
+		lockedTxt.alpha = 0.0001;
+		songsLeft.alpha = 0.0001;
+
+	
+		if(!grpCassette.members[curWeek].isUnlocked) {
+			bgSprite.visible = false;
+			lockedTxt.alpha = 1;
+
+				if(howManySongsLeft.length <= 4) {
+					songsLeft.alpha = 1;
+				}
+		}
 
 		PlayState.storyWeek = curWeek;
 
@@ -798,27 +807,11 @@ class StoryMenuState extends MusicBeatState
 		}
 
 		return true;
-		//return (!leWeek.startUnlocked && leWeek.weekBefore.length > 0 && (!weekCompleted.exists(leWeek.weekBefore) || !weekCompleted.get(leWeek.weekBefore)));
 	}
 
 	function updateText()
 	{
-		/*var leWeek:WeekData = WeekData.weeksLoaded.get(WeekData.weeksList[curWeek]);
-		var stringThing:Array<String> = [];
-		for (i in 0...leWeek.songs.length) {
-			stringThing.push(leWeek.songs[i][0]);
-		}*/
 
-		/*txtTracklist.text = '';
-		for (i in 0...stringThing.length)
-		{
-			txtTracklist.text += stringThing[i] + '\n';
-		}
-
-		txtTracklist.text = txtTracklist.text.toUpperCase();
-
-		txtTracklist.screenCenter(X);
-		txtTracklist.x -= FlxG.width * 0.35;*/
 
 		updateScore();
 	}
@@ -826,7 +819,6 @@ class StoryMenuState extends MusicBeatState
 	function updateScore() {
 		var wkstr = WeekData.weeksList[curWeek];
 		var leWeek = WeekData.weeksLoaded.get(wkstr);
-		//trace(leWeek.songs, CoolUtil.difficulties[curDifficulty]);
 		if(leWeek.songs.length > 0) {
 			intendedScore = Highscore.getScore(leWeek.songs[0][0], curDifficulty);
 		} else {
