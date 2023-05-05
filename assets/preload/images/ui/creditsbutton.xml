@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="creditsbutton.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="idle0000" x="10" y="10" width="250" height="80"/>
+	<SubTexture name="idle0001" x="10" y="10" width="250" height="80"/>
+	<SubTexture name="idle0002" x="10" y="10" width="250" height="80"/>
+	<SubTexture name="idle0003" x="10" y="10" width="250" height="80"/>
+	<SubTexture name="idle0004" x="10" y="10" width="250" height="80"/>
+	<SubTexture name="idle0005" x="10" y="10" width="250" height="80"/>
+	<SubTexture name="idle0006" x="10" y="10" width="250" height="80"/>
+	<SubTexture name="idle0007" x="10" y="10" width="250" height="80"/>
+	<SubTexture name="idle0008" x="10" y="10" width="250" height="80"/>
+	<SubTexture name="idle0009" x="10" y="10" width="250" height="80"/>
+	<SubTexture name="idle0010" x="10" y="10" width="250" height="80"/>
+	<SubTexture name="idle0011" x="10" y="10" width="250" height="80"/>
+	<SubTexture name="idle0012" x="10" y="10" width="250" height="80"/>
+	<SubTexture name="selected0000" x="280" y="10" width="250" height="80"/>
+	<SubTexture name="selected0001" x="550" y="10" width="250" height="80"/>
+	<SubTexture name="selected0002" x="10" y="110" width="250" height="80"/>
+	<SubTexture name="selected0003" x="280" y="110" width="250" height="80"/>
+	<SubTexture name="selected0004" x="550" y="110" width="250" height="80"/>
+	<SubTexture name="selected0005" x="10" y="210" width="250" height="80"/>
+	<SubTexture name="selected0006" x="280" y="210" width="250" height="80"/>
+	<SubTexture name="selected0007" x="550" y="210" width="250" height="80"/>
+	<SubTexture name="selected0008" x="550" y="210" width="250" height="80"/>
+	<SubTexture name="selected0009" x="10" y="310" width="250" height="80"/>
+	<SubTexture name="selected0010" x="10" y="310" width="250" height="80"/>
+	<SubTexture name="selected0011" x="10" y="310" width="250" height="80"/>
+	<SubTexture name="selected0012" x="10" y="310" width="250" height="80"/>
+	<SubTexture name="selected0013" x="10" y="310" width="250" height="80"/>
+	<SubTexture name="selected0014" x="10" y="310" width="250" height="80"/>
+	<SubTexture name="selected0015" x="10" y="310" width="250" height="80"/>
+	<SubTexture name="selected0016" x="10" y="310" width="250" height="80"/>
+	<SubTexture name="selected0017" x="10" y="310" width="250" height="80"/>
+	<SubTexture name="selected0018" x="10" y="310" width="250" height="80"/>
+	<SubTexture name="selected0019" x="10" y="310" width="250" height="80"/>
+	<SubTexture name="selected0020" x="10" y="310" width="250" height="80"/>
+	<SubTexture name="selected0021" x="10" y="310" width="250" height="80"/>
+	<SubTexture name="selected0022" x="10" y="310" width="250" height="80"/>
+	<SubTexture name="selected0023" x="10" y="310" width="250" height="80"/>
+</TextureAtlas>

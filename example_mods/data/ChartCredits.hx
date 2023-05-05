@@ -755,7 +755,7 @@ function create(){
 	game.add(u);
 	FlxTween.tween(u, {y: -2275/2}, 2, {ease: FlxEase.expoInOut, startDelay: 2.0});
 	FlxTween.tween(u.scale, {x: newScale, y:newScale}, 3, {ease: FlxEase.expoInOut, startDelay: 1.0});
-	game.add(timeTxt);
+	//game.add(timeTxt);
 	//beatTxt.scale.set(1,1);
 	//game.add(beatTxt);
 	//beatTxt.text= "[Beat hit here]";

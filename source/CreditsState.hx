@@ -34,7 +34,7 @@ class CreditsState extends MusicBeatState
 	var descText:FlxText;
 	var intendedColor:Int;
 	var colorTween:FlxTween;
-	var colorSubTween:FlxTween;
+	//var colorSubTween:FlxTween;
 	var replayButton:FlxButton;
 	
 	function setAllLabelsOffset(button:FlxButton, x:Float, y:Float)
@@ -152,7 +152,7 @@ class CreditsState extends MusicBeatState
 		for (i in 0...creditsStuff.length)
 		{
 			var isSelectable:Bool = !unselectableCheck(i);
-			var optionText:Alphabet = new Alphabet(0, 70 * i, creditsStuff[i][0], !isSelectable, false);
+			var optionText:Alphabet = new Alphabet(0, 70 * i, creditsStuff[i][0], !isSelectable, false, null, null, isSelectable);
 			optionText.isMenuItem = true;
 			optionText.screenCenter(X);
 			optionText.yAdd -= 70;
@@ -191,17 +191,22 @@ class CreditsState extends MusicBeatState
 
 		FlxG.mouse.visible = true;
 
-		replayButton = new FlxButton(FlxG.width*0.80, FlxG.height*0.90, "Play End Credits", function()
+		
+		replayButton = new FlxButton(FlxG.width-200-10, FlxG.height-70-10, "", function()
 		{
 			MusicBeatState.switchState(new ChartCredits("ChartCredits"));
 		});
-		replayButton.color= FlxColor.RED;
+		replayButton.frames = Paths.getSparrowAtlas('ui/creditsbutton');
+		replayButton.animation.addByPrefix('normal', 'idle', 24, false);
+		replayButton.animation.addByPrefix('highlight', 'selected', 24, false);
+		replayButton.animation.addByPrefix('press', 'selected', 24, false);
+		replayButton.animation.play('normal');
+
 		replayButton.setGraphicSize(200, 70);
 		replayButton.updateHitbox();
-		//replayButton.color = FlxColor.RED;
-		replayButton.label.fieldWidth = 200;
-		replayButton.label.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER);
-		setAllLabelsOffset(replayButton, 2, 24);
+		//replayButton.label.fieldWidth = 200;
+		//replayButton.label.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER);
+		//setAllLabelsOffset(replayButton, 2, 24);
 		add(replayButton);
 
 		bg.color = getCurrentBGColor();
@@ -262,15 +267,16 @@ class CreditsState extends MusicBeatState
 			intendedColor = newColor;
 			colorTween = FlxTween.color(bg, 1, bg.color, intendedColor, {
 				onComplete: function(twn:FlxTween) {
-					if(colorSubTween != null) {
+					colorTween = null;
+					/*if(colorSubTween != null) {
 						colorSubTween.cancel();
 					}
 					colorSubTween = FlxTween.color(replayButton, 0.25, replayButton.color, intendedColor, {
 						onComplete: function(twn:FlxTween) {
 							colorSubTween = null;
 						}
-					});
-					colorTween = null;
+					});*/
+					
 				}
 			});
 		}
