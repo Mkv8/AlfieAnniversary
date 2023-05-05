@@ -13,6 +13,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import flixel.ui.FlxButton;
+import FancyButton;
 
 #if MODS_ALLOWED
 import sys.FileSystem;
@@ -35,7 +36,7 @@ class CreditsState extends MusicBeatState
 	var intendedColor:Int;
 	var colorTween:FlxTween;
 	//var colorSubTween:FlxTween;
-	var replayButton:FlxButton;
+	var replayButton:FancyButton;
 	
 	function setAllLabelsOffset(button:FlxButton, x:Float, y:Float)
 	{
@@ -192,7 +193,7 @@ class CreditsState extends MusicBeatState
 		FlxG.mouse.visible = true;
 
 		
-		replayButton = new FlxButton(FlxG.width-200-10, FlxG.height-70-10, "", function()
+		replayButton = new FancyButton(FlxG.width-200-10, FlxG.height-70-10, "", function()
 		{
 			MusicBeatState.switchState(new ChartCredits("ChartCredits"));
 		});
