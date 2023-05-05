@@ -8,24 +8,29 @@ class FancyButton extends FlxButton{
     }
 
     override public function updateStatusAnimation(){
-        //trace(animation.name+" -> "+statusAnimations[status]);
-        if(animation.name == "highlight" && statusAnimations[status]=="normal"){
-            
-            animation.finishCallback = (name:String) -> {
-                animation.play("normal", true);
-                animation.finishCallback=null;
-            };
-
-            animation.play("highlight",true, true);
-
-        }
+        var curAnim = animation.name;
+        var newAnim = statusAnimations[status];
+        //trace(curAnim +" -> "+newAnim);
         
-        if(statusAnimations[status]=="normal"){
-            return; //Don't play "normal", let the other animation finish
-        }
-        else{
-            animation.finishCallback=null;
-            animation.play(statusAnimations[status], true);
+        switch (newAnim){
+            case 'normal':
+                if(!animation.finished && curAnim == "highlight"){
+                    animation.reverse();
+                }
+                else if(curAnim != 'normal'){ 
+                    //Edge case fix lol, happens after holding down click, activating 'pressed'
+                    animation.play("highlight", true, true); 
+                    animation.finishCallback = (name:String) -> {
+                        animation.play("normal", true);
+                        animation.finishCallback=null;
+                    }; 
+                }
+            case 'highlight':
+                //Don't directly play "normal" or "pressed", just play "highlight" and reverse it
+                animation.finishCallback=null;
+                animation.play(newAnim, true);  
+            case 'pressed':
+                
         }
     }
 }
