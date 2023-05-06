@@ -148,6 +148,7 @@ class ClientPrefs {
 		FlxG.save.data.gameplaySettings = gameplaySettings;
 		FlxG.save.data.controllerMode = controllerMode;
 
+
 		FlxG.save.flush();
 
 		var save:FlxSave = new FlxSave();
@@ -165,6 +166,7 @@ class ClientPrefs {
 			FlxG.save.data.windowSettings = [for (_ in 0...maxWindows) true];
 		}
 		#end
+
 
 		if(FlxG.save.data.downScroll != null) {
 			downScroll = FlxG.save.data.downScroll;

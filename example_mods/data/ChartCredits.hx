@@ -21,7 +21,7 @@ import("AttachedSprite");
 import("Alphabet");
 import("ChartCredits");
 import("Reflect");
-
+Paths.currentLevel = null;
 var u;
 var songLength = 1.0;
 

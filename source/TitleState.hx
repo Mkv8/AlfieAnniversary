@@ -141,6 +141,7 @@ class TitleState extends MusicBeatState
 		FlxG.sound.volumeUpKeys = volumeUpKeys;
 		FlxG.keys.preventDefaultKeys = [TAB];
 
+
 		PlayerSettings.init();
 
 		curWacky = getIntroText();
@@ -171,6 +172,11 @@ class TitleState extends MusicBeatState
 		}
 
 		FlxG.mouse.visible = false;
+
+		if(FlxG.save.data.hasWatchedCredits == true) {
+			LockManager.hasWatchedCredits = true;
+		}
+
 
 		if(FlxG.save.data.flashing == null && !FlashingState.leftState) {
 			FlxTransitionableState.skipNextTransIn = true;

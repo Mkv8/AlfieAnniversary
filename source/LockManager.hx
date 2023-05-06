@@ -1,5 +1,7 @@
 package;
 
+import flixel.FlxG;
+
 class LockManager {
 	public static var allSongs = [
 		"Forest Fire",
@@ -32,7 +34,6 @@ class LockManager {
 	}
 
 	public static function getNewlyUnlockedSongs() {
-		//lastUnlocked = getUnlockedSongs();
 		var curUnlocked = getUnlockedSongs();
 		var unlocked = [];
 		for(song in curUnlocked) {
@@ -97,5 +98,41 @@ class LockManager {
         }
         return arr;
     }
+
+	public static var hasWatchedCredits:Bool = false;
+
+	/*public static function sendToCredits(beatenSongs:String) {
+
+		beatenSongs = allSongs;
+
+		for(beatenSongs in allSongs) {
+            if(hasBeaten(beatenSongs) && !hasWatchedCredits) {
+				MusicBeatState.switchState(new ChartCredits());
+
+				hasWatchedCredits = true;
+            }
+        }*/
+
+		public static function getAllSongsLeft() {
+			var arr = [];
+			for(song in allSongs) {
+				if(!hasBeaten(song)) {
+					arr.push(song);
+				}
+			}
+			return arr;
+		}
+
+		public static function shouldGoToCredits() {
+			if(hasWatchedCredits) return false;
+		
+			if(getAllSongsLeft().length == 0) {
+				hasWatchedCredits = true;
+				FlxG.save.data.hasWatchedCredits = true;
+				FlxG.save.flush();
+				return true;
+			}
+			return false;
+		}
 
 }

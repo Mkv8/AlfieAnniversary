@@ -253,6 +253,7 @@ class PlayState extends MusicBeatState
 	var circles:BGSprite;
 	var blackbg:FlxSpriteExtra;
 
+
 	var week1old:BGSprite;
 	var week1:BGSprite;
 	var mansionbg:BGSprite;
@@ -275,6 +276,9 @@ class PlayState extends MusicBeatState
 	var animemultiply:BGSprite;
 	var animeoverlay:BGSprite;
 	var animeadd:BGSprite;
+	var animevfx:BGSprite;
+	var animesmoke:BGSprite;
+
 
 	var bge:BGSprite;
 
@@ -701,6 +705,20 @@ class PlayState extends MusicBeatState
 			animeoverlay.alpha = 0.45;
 			animeoverlay.blend = OVERLAY;
 			//add(animeoverlay);
+
+			animevfx = new BGSprite('animedots', 1, 1, 1, 1);
+			animevfx.alpha = 0.0001;
+
+			light1 = new BGSprite('animelight1', 1, 1, 1, 1);
+			light1.alpha = 0.0001;
+			light1.blend = OVERLAY;
+
+			light2 = new BGSprite('animelight2', 1, 1, 1, 1);
+			light2.alpha = 0.0001;
+			light2.blend = ADD;
+
+			animesmoke = new BGSprite('animesmoke', 1, 1, 1, 1);
+			animesmoke.alpha = 0.0001;
 
 			scanlines = new BGSprite('scanlines2', 1, 1, 1, 1);
 			scanlines.updateHitbox();
@@ -1221,11 +1239,18 @@ class PlayState extends MusicBeatState
 				add(animemap);
 				animemap.antialiasing = true;
 
+				blackbg = new FlxSpriteExtra(-1, -1).makeSolid(FlxG.width * 3, FlxG.height * 2, 0xFF0A0808);
+				blackbg.updateHitbox();
+				blackbg.screenCenter(XY);
+				blackbg.blend = MULTIPLY;
+				blackbg.alpha = 0;
+				add(blackbg);
+
 				var shaders:Array<BitmapFilter> = [new ShaderFilter(new VCRShader())];
 
 				FlxG.game.setFilters(shaders);
 				FlxG.game.filtersEnabled = true;
-
+				
 			case 'newstage': //goat remake
 				goatstage1 = new BGSprite('stage1', -1530, -720, 1, 1);
 				goatstageblank = new BGSprite('stage2blank', -1530, -720, 1, 1);
@@ -1302,8 +1327,14 @@ class PlayState extends MusicBeatState
 			add(animemultiply);
 			add(animeadd);
 			add(animeoverlay);
+			add(animevfx);
+			add(light1);
+			add(light2);
+			add(animesmoke);
 			add(scanlines);
 			scanlines.alpha = 0.15;
+			add(blackOverlay);
+
 
 
 		}
@@ -3958,13 +3989,18 @@ class PlayState extends MusicBeatState
 
 				if (storyPlaylist.length <= 0)
 				{
-					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 
 					cancelMusicFadeTween();
 					if(FlxTransitionableState.skipNextTransIn) {
 						CustomFadeTransition.nextCamera = null;
 					}
-					MusicBeatState.switchState(new StoryMenuState());
+
+					if(LockManager.shouldGoToCredits()) {
+						LoadingState.loadAndSwitchState(new ChartCredits(), true);
+					} else {
+						MusicBeatState.switchState(new StoryMenuState());
+						FlxG.sound.playMusic(Paths.music('freakyMenu'));
+					}
 
 					// if ()
 					if(!ClientPrefs.getGameplaySetting('practice', false) && !ClientPrefs.getGameplaySetting('botplay', false)) {
@@ -5787,6 +5823,57 @@ class PlayState extends MusicBeatState
 					}
 				}
 			}
+
+		if (formattedSong == 'spooks' && curStage == '90s' && !ClientPrefs.lowQuality)
+			{
+
+				switch (curBeat)
+				{
+					case 132:
+					{
+					FlxG.camera.flash(FlxColor.WHITE,1,false);
+					animevfx.alpha = 1;
+					light1.alpha = 0.65;
+					light2.alpha = 1;
+
+					}
+					case 192:
+					{
+					FlxTween.tween(animevfx, {alpha: 0}, 1);
+					FlxTween.tween(light1, {alpha: 0}, 1);
+					FlxTween.tween(light2, {alpha: 0}, 1);
+					FlxTween.tween(blackbg, {alpha: 0.6}, 2.5);
+					}
+					case 200:
+					{
+					FlxTween.tween(animesmoke, {alpha: 0.8}, 2);
+					}
+					case 232:
+					{
+					FlxTween.tween(animesmoke, {alpha: 0}, 2);
+					}
+					case 256:
+					{
+					FlxG.camera.flash(FlxColor.WHITE,1,false);
+					blackbg.alpha = 0.0001;
+					}
+					case 288:
+					{
+					FlxTween.tween(animevfx, {alpha: 1}, 1);
+					FlxTween.tween(light1, {alpha: 0.65}, 1);
+					FlxTween.tween(light2, {alpha: 1}, 1);
+					}
+					case 356:
+					{
+					FlxTween.tween(animesmoke, {alpha: 0.3}, 0.5);
+					}
+					case 384:
+					{
+					blackOverlay.alpha = 1;
+					}
+				}
+			}
+
 
 		switch (curStage)
 		{
