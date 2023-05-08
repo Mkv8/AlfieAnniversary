@@ -118,7 +118,7 @@ class CreditsState extends MusicBeatState
 			['Coquers_',			'coquers',			'Shattered (Game Over Music), Mansion Match, G.O.A.T Remake, Heart Attack',	'https://www.youtube.com/c/coquers_',	'D15E56'],
 			['Car',					'car',				'Candle-Lit Clash',										'https://www.youtube.com/c/carcarwoah',	'FF3021'],
 			['SplatterDash',		'splatter',			'INTERRUPTED, All Saints Scramble Remix, Pasta Night (AFK Mix)',	'https://twitter.com/splatterdash_ng',	'72B2F2'],
-			['Jospi',				'jospi',			'Take It Slow (Pause Music), Megamix (Credits Song), Minimize, Jelly Jamboree',	'https://twitter.com/jospi_music',	'96FAFF'],
+			['Jospi',				'jospi',			'Take It Slow (Pause Music), Megamix (Credits Song), Minimize, Jelly Jamboree',	'https://www.youtube.com/channel/UCTIyjdp0YJtGT0lZPpaZ2oA',	'96FAFF'],
 			['JunoSongs',			'juno',				'Lyrics and singer for Spooks',							'https://www.youtube.com/@JunoSongs',	'B563DB'],
 			[''],
 			['Charting'],
