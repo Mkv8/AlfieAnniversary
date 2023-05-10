@@ -260,11 +260,13 @@ class PauseSubState extends MusicBeatSubstate
 				case "Exit to menu":
 
 					if(PlayState.instance.formattedSong == "minimize" && PlayState.instance.isMinimizeBroken == true)
-						{
-							PlayState.instance.health = -10;
-							close();
-							return;
-						}
+					{
+						PlayState.instance.health = -10;
+						close();
+						return;
+					}
+
+					PlayState.instance.exiting = true;
 
 					PlayState.deathCounter = 0;
 					PlayState.seenCutscene = false;

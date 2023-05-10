@@ -42,6 +42,9 @@ class GameOverSubstate extends MusicBeatSubstate
 	override function create()
 	{
 		TransparentWindow.disableTransparent();
+		#if mac
+		Main.macBackground.visible = false;
+		#end
 		Lib.application.window.borderless = false;
 		Main.fpsVar.visible = true; // Transparent
 
@@ -51,7 +54,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		DiscordClient.changePresence("just died lmao what a dweeb !", null);
 		#end
 		super.create();
-		
+
 	}
 
 	public function new(x:Float, y:Float, camX:Float, camY:Float)
@@ -143,6 +146,8 @@ class GameOverSubstate extends MusicBeatSubstate
 			FlxG.sound.music.stop();
 			PlayState.deathCounter = 0;
 			PlayState.seenCutscene = false;
+
+			PlayState.instance.exiting = true;
 
 			if (PlayState.isStoryMode)
 				MusicBeatState.switchState(new StoryMenuState());

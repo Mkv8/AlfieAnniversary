@@ -1,5 +1,7 @@
 package;
 
+import lime.app.Application;
+import shaders.MacNoteAlphaShader;
 import flixel.util.FlxDestroyUtil;
 import shaders.VCRShader;
 import shaders.OldTVShader;
@@ -82,6 +84,12 @@ class PlayState extends MusicBeatState
 {
 	public static var STRUM_X = 42;
 	public static var STRUM_X_MIDDLESCROLL = -278;
+
+	public static var origWinX:Null<Float> = null;
+	public static var origWinY:Null<Float> = null;
+	public static var origWinWidth:Null<Float> = null;
+	public static var origWinHeight:Null<Float> = null;
+	public static var origWinFullScreen:Null<Bool> = null;
 
 	public static var ratingStuff:Array<Dynamic> = [
 		['You Suck!', 0.2], //From 0% to 19%
@@ -374,13 +382,6 @@ class PlayState extends MusicBeatState
 	var detailsPausedText:String = "";
 	#end
 
-	#if ACHIEVEMENTS_ALLOWED
-	//Achievement shit
-	var keysPressed:Array<Bool> = [];
-	var boyfriendIdleTime:Float = 0.0;
-	var boyfriendIdled:Bool = false;
-	#end
-
 	// Lua shit
 	public static var instance:PlayState;
 	public var luaArray:Array<FunkinLua> = [];
@@ -425,8 +426,8 @@ class PlayState extends MusicBeatState
 	}
 
 	public function shake(sprite:FlxSprite, intensity:Float = 0.025){
-		sprite.offset.x = FlxG.random.float(-intensity * sprite.width, intensity * sprite.width);
-		sprite.offset.y = FlxG.random.float(-intensity * sprite.height, intensity * sprite.height);
+		sprite.offset.x += FlxG.random.float(-intensity * sprite.width, intensity * sprite.width);
+		sprite.offset.y += FlxG.random.float(-intensity * sprite.height, intensity * sprite.height);
 	}
 
 	public function setRatingPositions() {
@@ -502,7 +503,7 @@ class PlayState extends MusicBeatState
 		camOther = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
-		camGame.bgColor = FlxColor.fromRGB(2, 3, 5);
+		//camGame.bgColor = FlxColor.fromRGB(2, 3, 5);
 
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
@@ -894,19 +895,19 @@ class PlayState extends MusicBeatState
 		}
 
 		if(formattedSong == 'minimize')
-			{
-				coming4u = new BGSprite('comingforyou', 0, -420, 1, 1, ['comingblack'], false);
-				coming4u.updateHitbox();
-				//coming4u.setGraphicSize(FlxG.width, FlxG.height);
-				coming4u.cameras = [camOther];
-				coming4u.screenCenter(X);
-				coming4u.alpha = 1;
-				coming4u.x += 115;
-				add(coming4u);
-				coming4u.animation.pause();
-				coming4u.animation.curAnim.curFrame = 1;
+		{
+			coming4u = new BGSprite('comingforyou', 0, -420, 1, 1, ['comingblack'], false);
+			coming4u.updateHitbox();
+			//coming4u.setGraphicSize(FlxG.width, FlxG.height);
+			coming4u.cameras = [camOther];
+			coming4u.screenCenter(X);
+			coming4u.alpha = 1;
+			coming4u.x += 115;
+			add(coming4u);
+			coming4u.animation.pause();
+			coming4u.animation.curAnim.curFrame = 1;
 
-			}
+		}
 
 		if(formattedSong == 'pasta-night') {
 			pastaoverlay = new BGSprite('pasta/pastaoverlay', -960, 540, 1, 1);
@@ -1262,7 +1263,7 @@ class PlayState extends MusicBeatState
 
 				FlxG.game.setFilters(shaders);
 				FlxG.game.filtersEnabled = true;
-				
+
 			case 'newstage': //goat remake
 				goatstage1 = new BGSprite('stage1', -1530, -720, 1, 1);
 				goatstageblank = new BGSprite('stage2blank', -1530, -720, 1, 1);
@@ -1316,6 +1317,10 @@ class PlayState extends MusicBeatState
 				fakeweek = new BGSprite('fakeweek', -600, -300, 1, 1);
 				fakeweek.scale.set(1.10, 1.10);
 				add(fakeweek);
+
+				#if mac
+				Main.macBackground.visible = false;
+				#end
 
 			case 'pasta':
 				pastabg = new BGSprite('pasta/pastaground', -960, 540, 1, 1, ['pastabg0'], false);
@@ -1646,7 +1651,7 @@ class PlayState extends MusicBeatState
 		ratingText.pixelPerfectRender = true;
     	ratingText.letterSpacing = 0;
 
-		setRatingPositions();		
+		setRatingPositions();
 		ratingText.updateHitbox();
 		ratingText.scale.set(0.6,0.6);
 		comboLayer.add(ratingText);
@@ -2522,11 +2527,12 @@ class PlayState extends MusicBeatState
 		callOnLuas('onSongStart', []);
 
 		if(curStage == 'hotline') {
-		new FlxTimer().start(0.2, function(tmr:FlxTimer)
+			new FlxTimer().start(0.2, function(tmr:FlxTimer)
 			{
 				remove(black, true);
 				black.destroy();
-			}); }
+			});
+		}
 	}
 
 	var debugNum:Int = 0;
@@ -2750,8 +2756,8 @@ class PlayState extends MusicBeatState
 		}
 
 		switch(event.event) {
-			case 'Kill Henchmen': //Better timing so that the kill sound matches the beat intended
-				return 280; //Plays 280ms before the actual position
+			//case 'Kill Henchmen': //Better timing so that the kill sound matches the beat intended
+			//	return 280; //Plays 280ms before the actual position
 		}
 		return 0;
 	}
@@ -2982,10 +2988,14 @@ class PlayState extends MusicBeatState
         if (FlxG.keys.pressed.W){object.y--;}
 		if (FlxG.keys.justPressed.SPACE){trace(object);}*/
 
-		if (ratingText.visible && ratingText.color == 0xFF391F16){
-			shake(ratingText);
-		}else if(ratingText.offset.x!=0||ratingText.offset.y!=0){
-			ratingText.offset.set(0,0);
+		if(ratingText.visible) {
+			ratingText.screenCenter(X);
+			ratingText.updateHitbox();
+			if (ratingText.color == 0xFF391F16){
+				shake(ratingText);
+			}/*else if(ratingText.offset.x!=0||ratingText.offset.y!=0){
+				ratingText.offset.set(0,0);
+			}*/
 		}
 		if(ClientPrefs.framerate <= maxLuaFPS){
 
@@ -4698,12 +4708,32 @@ class PlayState extends MusicBeatState
 		grpNoteSplashes.add(splash);
 	}
 
+	public var exiting = false;
+
 	private var preventLuaRemove:Bool = false;
 	override function destroy() {
 
 		TransparentWindow.disableTransparent();
 		Lib.application.window.borderless = false;
 		Main.fpsVar.visible = true; // Transparent
+
+		if(endingSong || exiting) {
+			if(origWinFullScreen != null) Lib.application.window.fullscreen = origWinFullScreen;
+
+			if(origWinWidth != null && origWinHeight != null) {
+				Application.current.window.resize(
+					Std.int(origWinWidth),
+					Std.int(origWinHeight)
+				);
+			}
+			if(origWinX != null) Lib.application.window.x = Std.int(origWinX);
+			if(origWinY != null) Lib.application.window.y = Std.int(origWinY);
+			origWinWidth = null;
+			origWinX = null;
+			origWinY = null;
+			origWinHeight = null;
+			origWinFullScreen = null;
+		}
 
 
 		preventLuaRemove = true;
@@ -4734,6 +4764,10 @@ class PlayState extends MusicBeatState
 		gfMap = null;
 
 		FlxG.game.filtersEnabled = false;
+
+		#if mac
+		Main.macBackground.visible = false;
+		#end
 
 		super.destroy();
 
@@ -5784,151 +5818,181 @@ class PlayState extends MusicBeatState
 			}
 
 		if (formattedSong == 'minimize' && curStage == 'fake' && !ClientPrefs.lowQuality)
+		{
+
+			switch (curBeat)
 			{
-
-				switch (curBeat)
+				case 17:
 				{
-					case 17:
-					{
-						for(note in unspawnNotes) if(note != null) note.noteSplashDisabled = true;
-						for(note in notes.members) if(note != null) note.noteSplashDisabled = true;
-						dad.alpha = 0.0001;
-						coming4u.animation.resume();
-					}
-					case 31:
-					{
-						camHUD.alpha = 1;
-						enableCameraBopping = false;
-						blackOverlay.alpha = 1;
-						coming4u.animation.pause();
-						boyfriend.screenCenter(XY);
-						dad.screenCenter(XY);
-						dad.scrollFactor.set(0,0);
-						boyfriend.alpha = 0.0001;
-						gf.alpha = 0.0001;
-						fakeweek.alpha = 0.0001;
-					}
+					for(note in unspawnNotes) if(note != null) note.noteSplashDisabled = true;
+					for(note in notes.members) if(note != null) note.noteSplashDisabled = true;
+					dad.alpha = 0.0001;
+					coming4u.animation.resume();
+				}
+				case 31:
+				{
+					camHUD.alpha = 1;
+					enableCameraBopping = false;
+					blackOverlay.alpha = 1;
+					coming4u.animation.pause();
+					boyfriend.screenCenter(XY);
+					dad.screenCenter(XY);
+					dad.scrollFactor.set(0,0);
+					boyfriend.alpha = 0.0001;
+					gf.alpha = 0.0001;
+					fakeweek.alpha = 0.0001;
+				}
 
-					case 37:
-					{
-						coming4u.alpha = 0;
-						FlxTween.tween(blackOverlay, {alpha: 0}, 1.7);
-						FlxTween.tween(dad, {alpha: 1}, 1.7);
-					}
+				case 37:
+				{
+					coming4u.alpha = 0;
+					FlxTween.tween(blackOverlay, {alpha: 0}, 1.7);
+					FlxTween.tween(dad, {alpha: 1}, 1.7);
+				}
 
-					case 104:
-					{
-						remove(blackOverlay);
-						FlxTween.tween(dad, {alpha: 0}, 2.5);
-						Main.instance.flashShader.color = 1.0;
-					}
+				case 104:
+				{
+					remove(blackOverlay);
+					FlxTween.tween(dad, {alpha: 0}, 2.5);
+					Main.instance.flashShader.color = 1.0;
+				}
 
-					case 112:
-					{
-						Main.instance.flashShader.apply = 1;
+				case 112:
+				{
+					Main.instance.flashShader.apply = 1;
 
-						FlxTween.tween(Main.instance.flashShader, {apply: 0}, 0.5);
-						isMinimizeBroken = true;
-						//FlxG.camera.flash(FlxColor.WHITE,0.5,false);
-						#if windows
-						Lib.application.window.borderless = true;
-						Lib.application.window.fullscreen = false;
-						#end
-						TransparentWindow.enableTransparent();
-						Main.fpsVar.visible = false; // Transparent
-						#if windows
-						for(note in unspawnNotes) if(note != null && note.isSustainNote) note.multAlpha = 1;
-						for(note in notes.members) if(note != null && note.isSustainNote) note.multAlpha = 1;
-						camGame.setFilters([new ShaderFilter(new TransparentHudShader())]);
-						camHUD.setFilters([new ShaderFilter(new TransparentHudShader())]);
-						camOther.setFilters([new ShaderFilter(new TransparentHudShader())]);
-						#end
-						dad.alpha = 1;
-					}
+					camGame.bgColor = FlxColor.fromRGB(2, 3, 5);
 
-					case 116:
-					{
-						Main.instance.flashShader.color = 1/255;
+					FlxTween.tween(Main.instance.flashShader, {apply: 0}, 0.5);
+					isMinimizeBroken = true;
+					//FlxG.camera.flash(FlxColor.WHITE,0.5,false);
 
-					}
+					if(origWinFullScreen == null) origWinFullScreen = Lib.application.window.fullscreen;
 
-					case 891:
-					{
-						FlxTween.tween(Main.instance.flashShader, {apply: 1}, 0.6);
+					if(origWinX == null) origWinX = Application.current.window.x;
+					if(origWinY == null) origWinY = Application.current.window.y;
+					if(origWinWidth == null) origWinWidth = Application.current.window.width;
+					if(origWinHeight == null) origWinHeight = Application.current.window.height;
+					Application.current.window.resize(
+						Std.int(Application.current.window.display.bounds.width),
+						Std.int(Application.current.window.display.bounds.height)
+					);
 
-					}
+					#if windows
+					Lib.application.window.borderless = true;
+					Lib.application.window.fullscreen = false;
+					#end
+					#if mac
+					camGame.bgColor.alpha = 0;
+					Main.macBackground.visible = true;
+					Application.current.window.fullscreen = true;
+					Application.current.window.borderless = true;
 
-					case 892:
-					{
-						canPause = false;
-						Main.instance.flashShader.apply = 0;
-						Lib.application.window.borderless = false;
-						TransparentWindow.disableTransparent();
-						camGame.setFilters([]);
-						camHUD.setFilters([]);
-						camOther.setFilters([]);
-						camHUD.alpha = 0.0001;
+					var shader = new MacNoteAlphaShader();
+					shader.downscroll.value = [ClientPrefs.downScroll ? 1 : 0];
 
-					}
+					camHUD.setFilters([new ShaderFilter(shader)]);
+					#end
+					TransparentWindow.enableTransparent();
+					Main.fpsVar.visible = false; // Transparent
+					#if windows
+					for(note in unspawnNotes) if(note != null && note.isSustainNote) note.multAlpha = 1;
+					for(note in notes.members) if(note != null && note.isSustainNote) note.multAlpha = 1;
+					camGame.setFilters([new ShaderFilter(new TransparentHudShader())]);
+					camHUD.setFilters([new ShaderFilter(new TransparentHudShader())]);
+					camOther.setFilters([new ShaderFilter(new TransparentHudShader())]);
+					#end
+					dad.alpha = 1;
+				}
 
-					case 924:
-					{
-						isMinimizeBroken = false;
+				case 116:
+				{
+					Main.instance.flashShader.color = 1/255;
 
-						dad.alpha = 0.0001;
-					}
+				}
+
+				case 891:
+				{
+					FlxTween.tween(Main.instance.flashShader, {apply: 1}, 0.6);
+
+				}
+
+				case 892:
+				{
+					canPause = false;
+					Main.instance.flashShader.apply = 0;
+					Lib.application.window.borderless = false;
+					TransparentWindow.disableTransparent();
+					camGame.setFilters([]);
+					camHUD.setFilters([]);
+					camOther.setFilters([]);
+					camHUD.alpha = 0.0001;
+					camGame.bgColor = 0xFF000000;
+					#if mac
+					camGame.bgColor.alpha = 255;
+					Main.macBackground.visible = false;
+					#end
+
+				}
+
+				case 924:
+				{
+					isMinimizeBroken = false;
+
+					dad.alpha = 0.0001;
 				}
 			}
+		}
 
 		if (formattedSong == 'spooks' && curStage == '90s' && !ClientPrefs.lowQuality)
+		{
+
+			switch (curBeat)
 			{
-
-				switch (curBeat)
+				case 132:
 				{
-					case 132:
-					{
-					FlxG.camera.flash(FlxColor.WHITE,1,false);
-					animevfx.alpha = 1;
-					light1.alpha = 0.65;
-					light2.alpha = 1;
+				FlxG.camera.flash(FlxColor.WHITE,1,false);
+				animevfx.alpha = 1;
+				light1.alpha = 0.65;
+				light2.alpha = 1;
 
-					}
-					case 192:
-					{
-					FlxTween.tween(animevfx, {alpha: 0}, 1);
-					FlxTween.tween(light1, {alpha: 0}, 1);
-					FlxTween.tween(light2, {alpha: 0}, 1);
-					FlxTween.tween(blackbg, {alpha: 0.6}, 2.5);
-					}
-					case 200:
-					{
-					FlxTween.tween(animesmoke, {alpha: 0.8}, 2);
-					}
-					case 232:
-					{
-					FlxTween.tween(animesmoke, {alpha: 0}, 2);
-					}
-					case 256:
-					{
-					FlxG.camera.flash(FlxColor.WHITE,1,false);
-					blackbg.alpha = 0.0001;
-					}
-					case 288:
-					{
-					FlxTween.tween(animevfx, {alpha: 1}, 1);
-					FlxTween.tween(light1, {alpha: 0.65}, 1);
-					FlxTween.tween(light2, {alpha: 1}, 1);
-					}
-					case 356:
-					{
-					FlxTween.tween(animesmoke, {alpha: 0.3}, 0.5);
-					}
-					case 384:
-					{
-					blackOverlay.alpha = 1;
-					}
+				}
+				case 192:
+				{
+				FlxTween.tween(animevfx, {alpha: 0}, 1);
+				FlxTween.tween(light1, {alpha: 0}, 1);
+				FlxTween.tween(light2, {alpha: 0}, 1);
+				FlxTween.tween(blackbg, {alpha: 0.6}, 2.5);
+				}
+				case 200:
+				{
+				FlxTween.tween(animesmoke, {alpha: 0.8}, 2);
+				}
+				case 232:
+				{
+				FlxTween.tween(animesmoke, {alpha: 0}, 2);
+				}
+				case 256:
+				{
+				FlxG.camera.flash(FlxColor.WHITE,1,false);
+				blackbg.alpha = 0.0001;
+				}
+				case 288:
+				{
+				FlxTween.tween(animevfx, {alpha: 1}, 1);
+				FlxTween.tween(light1, {alpha: 0.65}, 1);
+				FlxTween.tween(light2, {alpha: 1}, 1);
+				}
+				case 356:
+				{
+				FlxTween.tween(animesmoke, {alpha: 0.3}, 0.5);
+				}
+				case 384:
+				{
+				blackOverlay.alpha = 1;
 				}
 			}
+		}
 
 
 		switch (curStage)
