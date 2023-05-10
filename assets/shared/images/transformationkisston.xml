@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="transformationkisston.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="transition10000" x="10" y="10" width="547" height="271" frameX="0" frameY="0" frameWidth="548" frameHeight="272"/>
+	<SubTexture name="transition10001" x="10" y="10" width="547" height="271" frameX="0" frameY="0" frameWidth="548" frameHeight="272"/>
+	<SubTexture name="transition10002" x="577" y="10" width="547" height="271" frameX="-1" frameY="0" frameWidth="548" frameHeight="272"/>
+	<SubTexture name="transition10003" x="577" y="10" width="547" height="271" frameX="-1" frameY="0" frameWidth="548" frameHeight="272"/>
+	<SubTexture name="transition10004" x="1144" y="10" width="547" height="271" frameX="-1" frameY="0" frameWidth="548" frameHeight="272"/>
+	<SubTexture name="transition10005" x="1144" y="10" width="547" height="271" frameX="-1" frameY="0" frameWidth="548" frameHeight="272"/>
+	<SubTexture name="transition10006" x="10" y="301" width="547" height="271" frameX="0" frameY="0" frameWidth="548" frameHeight="272"/>
+	<SubTexture name="transition10007" x="10" y="301" width="547" height="271" frameX="0" frameY="0" frameWidth="548" frameHeight="272"/>
+	<SubTexture name="transition10008" x="577" y="301" width="547" height="271" frameX="0" frameY="-1" frameWidth="548" frameHeight="272"/>
+	<SubTexture name="transition10009" x="577" y="301" width="547" height="271" frameX="0" frameY="-1" frameWidth="548" frameHeight="272"/>
+	<SubTexture name="transition10010" x="1144" y="301" width="547" height="271" frameX="-1" frameY="0" frameWidth="548" frameHeight="272"/>
+	<SubTexture name="transition10011" x="1144" y="301" width="547" height="271" frameX="-1" frameY="0" frameWidth="548" frameHeight="272"/>
+	<SubTexture name="transition10012" x="1144" y="301" width="547" height="271" frameX="-1" frameY="0" frameWidth="548" frameHeight="272"/>
+	<SubTexture name="transition10013" x="1144" y="301" width="547" height="271" frameX="-1" frameY="0" frameWidth="548" frameHeight="272"/>
+	<SubTexture name="transition10014" x="1144" y="301" width="547" height="271" frameX="-1" frameY="0" frameWidth="548" frameHeight="272"/>
+	<SubTexture name="transition10015" x="1711" y="301" width="1" height="1" frameX="-274" frameY="-136" frameWidth="548" frameHeight="272"/>
+	<SubTexture name="transition20000" x="10" y="592" width="483" height="337" frameX="0" frameY="-13" frameWidth="483" frameHeight="361"/>
+	<SubTexture name="transition20001" x="10" y="592" width="483" height="337" frameX="0" frameY="-13" frameWidth="483" frameHeight="361"/>
+	<SubTexture name="transition20002" x="513" y="592" width="483" height="337" frameX="0" frameY="-13" frameWidth="483" frameHeight="361"/>
+	<SubTexture name="transition20003" x="513" y="592" width="483" height="337" frameX="0" frameY="-13" frameWidth="483" frameHeight="361"/>
+	<SubTexture name="transition20004" x="1016" y="592" width="483" height="337" frameX="0" frameY="-13" frameWidth="483" frameHeight="361"/>
+	<SubTexture name="transition20005" x="1016" y="592" width="483" height="337" frameX="0" frameY="-13" frameWidth="483" frameHeight="361"/>
+	<SubTexture name="transition20006" x="1519" y="592" width="483" height="337" frameX="0" frameY="-13" frameWidth="483" frameHeight="361"/>
+	<SubTexture name="transition20007" x="1519" y="592" width="483" height="337" frameX="0" frameY="-13" frameWidth="483" frameHeight="361"/>
+	<SubTexture name="transition20008" x="10" y="949" width="474" height="361" frameX="-4" frameY="0" frameWidth="483" frameHeight="361"/>
+	<SubTexture name="transition20009" x="10" y="949" width="474" height="361" frameX="-4" frameY="0" frameWidth="483" frameHeight="361"/>
+	<SubTexture name="transition20010" x="504" y="949" width="474" height="344" frameX="-4" frameY="-9" frameWidth="483" frameHeight="361"/>
+	<SubTexture name="transition20011" x="504" y="949" width="474" height="344" frameX="-4" frameY="-9" frameWidth="483" frameHeight="361"/>
+	<SubTexture name="transition20012" x="998" y="949" width="483" height="337" frameX="0" frameY="-13" frameWidth="483" frameHeight="361"/>
+	<SubTexture name="transition20013" x="998" y="949" width="483" height="337" frameX="0" frameY="-13" frameWidth="483" frameHeight="361"/>
+	<SubTexture name="transition20014" x="998" y="949" width="483" height="337" frameX="0" frameY="-13" frameWidth="483" frameHeight="361"/>
+	<SubTexture name="transition20015" x="998" y="949" width="483" height="337" frameX="0" frameY="-13" frameWidth="483" frameHeight="361"/>
+</TextureAtlas>

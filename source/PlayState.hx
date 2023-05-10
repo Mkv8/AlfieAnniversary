@@ -841,6 +841,18 @@ class PlayState extends MusicBeatState
 			kissuhoh.screenCenter(XY);
 			kissuhoh.blend = MULTIPLY;
 			kissuhoh.alpha = 0;
+
+			skaclock = new BGSprite('transformationkisston', 0, 0, 1, 1, ['transition10', 'transition20'], false);
+			skaclock.updateHitbox();
+			skaclock.screenCenter(XY);
+			skaclock.alpha = 0.0001;
+			skaclock.animation.play('transition10');
+			skaclock.animation.pause();
+			skaclock.cameras = [camOther];
+			skaclock.animation.curAnim.curFrame = 1;
+			skaclock.scale.set(1.20, 1.20);
+
+
 		}
 
 		if(formattedSong == 'jelly-jamboree') {
@@ -1370,6 +1382,8 @@ class PlayState extends MusicBeatState
 			add(bkissoverlay);
 			add(kissuhoh);
 			add(blackOverlay);
+			blackOverlay.cameras = [camOther];
+			add(skaclock);
 		}
 
 		if(curStage == 'waterfall') {
@@ -1387,6 +1401,21 @@ class PlayState extends MusicBeatState
 		if(curStage == 'pasta') {
 			add(pastatable);
 		}
+
+		if(curStage == 'dark') {
+			black = new BGSprite('black', 0, 0, 1, 1);
+			black.scale.set(2.5, 2.5);
+			add(black);
+		
+
+
+		}
+		if(curStage == 'hotline') {
+		black = new BGSprite('black', 0, 0, 1, 1);
+		black.scale.set(2.5, 2.5);
+		add(black);
+
+		} 
 
 		// "GLOBAL" SCRIPTS
 		#if LUA_ALLOWED
@@ -1766,6 +1795,12 @@ class PlayState extends MusicBeatState
 			healthBar.alpha = 0;
 			camHUD.alpha = 0.0001;
 		}
+
+		if (formattedSong == 'after-dark' && curStage == 'dark')
+			{
+				camHUD.alpha = 0.0001;
+			}
+
 		if (formattedSong == 'mansion-match')
 		{
 			scoreTxt = new FlxFixedText(0, healthBarBG.y + 36, FlxG.width, "", 20);
@@ -1980,14 +2015,14 @@ class PlayState extends MusicBeatState
 			startCountdown();
 		}
 
-		if (daSong == 'after-dark')
+		/*if (daSong == 'after-dark')
 		{
 			black = new BGSprite('black', 0, 0, 1, 1);
 			black.scale.set(2.5, 2.5);
 			add(black);
-		}
+		}*/
 
-		if (daSong == 'mansion-match')
+		/*if (daSong == 'mansion-match')
 		{
 			black = new BGSprite('black', 0, 0, 1, 1);
 			black.scale.set(2.5, 2.5);
@@ -1997,7 +2032,7 @@ class PlayState extends MusicBeatState
 				remove(black, true);
 				black.destroy();
 			});
-		}
+		}*/
 
 		if (daSong == 'candlelit-clash')
 		{
@@ -2485,6 +2520,13 @@ class PlayState extends MusicBeatState
 		#end
 		setOnLuas('songLength', songLength);
 		callOnLuas('onSongStart', []);
+
+		if(curStage == 'hotline') {
+		new FlxTimer().start(0.2, function(tmr:FlxTimer)
+			{
+				remove(black, true);
+				black.destroy();
+			}); }
 	}
 
 	var debugNum:Int = 0;
@@ -4873,6 +4915,7 @@ class PlayState extends MusicBeatState
 				FlxTween.tween(redglow, {alpha: 1}, 0.5);
 				FlxTween.tween(scanlines, {alpha: 0.3}, 0.5);
 				FlxTween.tween(vignette, {alpha: 0.5}, 0.5);
+				camHUD.alpha = 1;
 			}
 
 			if(eventNum == 1 && curBeat >= 188) {
@@ -5652,9 +5695,22 @@ class PlayState extends MusicBeatState
 				case 143:
 				{
 					FlxTween.tween(blackOverlay, {alpha: 1}, 1);
+					FlxTween.tween(camHUD, {alpha: 0}, 1);
 				}
+				case 154:
+				{
+					skaclock.alpha = 1;
+					skaclock.animation.resume();
+				}
+				case 164:
+				{
+					skaclock.animation.play('transition20');
+				}
+
 				case 168:
 				{
+					camHUD.alpha = 1;
+					skaclock.alpha = 0;
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
 					blackOverlay.alpha = 0.0001;
 					FlxTween.tween(kissuhoh, {alpha: 0.8}, 0.5 );
