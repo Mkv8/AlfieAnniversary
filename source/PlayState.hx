@@ -1251,7 +1251,7 @@ class PlayState extends MusicBeatState
 				add(animemap);
 				animemap.antialiasing = true;
 
-				blackbg = new FlxSpriteExtra(-1, -1).makeSolid(FlxG.width * 3, FlxG.height * 2, 0xFF0A0808);
+				blackbg = new FlxSpriteExtra(-1, -1).makeSolid(FlxG.width * 3, FlxG.height * 3, 0xFF0A0808);
 				blackbg.updateHitbox();
 				blackbg.screenCenter(XY);
 				blackbg.blend = MULTIPLY;
