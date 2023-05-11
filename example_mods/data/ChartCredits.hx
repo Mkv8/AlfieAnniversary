@@ -83,8 +83,8 @@ var subtitle2 = subtitleAdd("");
 var megamix = new FlxSprite(355, 500);
 //megamix.loadGraphic(Paths.image('megamix', 'preload'));
 megamix.frames = Paths.getSparrowAtlas('megamix');
-megamix.animation.addByPrefix('bump', 'megamix', 24, false);
-//megamix.animation.play('bump');
+megamix.animation.addByPrefix('bump', 'megamix', 0, false);
+megamix.animation.play('bump');
 megamix.scale.set(0.7, 0.7);
 megamix.updateHitbox();
 megamix.screenCenter();
@@ -97,44 +97,44 @@ var carStuff = [];
 var logoBl = new FlxSprite(565, 60);
 logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 logoBl.antialiasing = ClientPrefs.globalAntialiasing;
-logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
-//logoBl.animation.play('bump');
+logoBl.animation.addByPrefix('bump', 'logo bumpin', 0, false);
+logoBl.animation.play('bump');
 logoBl.screenCenter();
 logoBl.y-=60;
 logoBl.updateHitbox();
 
 var bopping = [];
 var icons = [];
-function bopEverything(){
-	for( x in bopping){
-		var initialScaleX = x.scale.x + 0;
-		var initialScaleY = x.scale.y + 0;
+function bopEverything() {
+	for(spr in bopping) {
+		var initialScaleX = spr.scale.x + 0;
+		var initialScaleY = spr.scale.y + 0;
 
-		x.scale.x+=0.04;
-		x.scale.y+=0.04;
-		FlxTween.tween(x.scale, {x: initialScaleX, y:initialScaleY}, 0.4, {ease: FlxEase.cubeInOut});
+		spr.scale.x+=0.04;
+		spr.scale.y+=0.04;
+		FlxTween.tween(spr.scale, {x: initialScaleX, y:initialScaleY}, 0.4, {ease: FlxEase.cubeInOut});
 	}
 
 }
 
-function bopIcons(){
-	for( x in icons){
-		var initialScaleX = x.scale.x + 0;
-		var initialScaleY = x.scale.y + 0;
+function bopIcons() {
+	for(spr in icons) {
+		var initialScaleX = spr.scale.x + 0;
+		var initialScaleY = spr.scale.y + 0;
 
-		x.scale.x+=0.04;
-		x.scale.y+=0.04;
-		FlxTween.tween(x.scale, {x: initialScaleX, y:initialScaleY}, 0.6, {ease: FlxEase.cubeInOut});
+		spr.scale.x+=0.04;
+		spr.scale.y+=0.04;
+		FlxTween.tween(spr.scale, {x: initialScaleX, y:initialScaleY}, 0.6, {ease: FlxEase.cubeInOut});
 	}
 
 }
 
-function bopThis(x:Dynamic, time:Float, amount:Float){
-	var initialScaleX = x.scale.x + 0;
-	var initialScaleY = x.scale.y + 0;
-	x.scale.x+=amount;
-	x.scale.y+=amount;
-	FlxTween.tween(x.scale, {x: initialScaleX, y:initialScaleY}, time, {ease: FlxEase.cubeInOut});
+function bopThis(spr:Dynamic, time:Float, amount:Float) {
+	var initialScaleX = spr.scale.x + 0;
+	var initialScaleY = spr.scale.y + 0;
+	spr.scale.x+=amount;
+	spr.scale.y+=amount;
+	FlxTween.tween(spr.scale, {x: initialScaleX, y:initialScaleY}, time, {ease: FlxEase.cubeInOut});
 }
 //makeLuaText("pop","Hello World", 200, 200, 200);
 
@@ -291,10 +291,10 @@ function beatHit()
 		bopEverything();
 		bopIcons();
 		if(curBeat<40){
-			new FlxTimer().start(Conductor.crochet/1000 - 0.3, function(tmr:FlxTimer){
-				bopThis(megamix, 0.6, 0.04);
-				bopThis(logoBl, 0.6, 0.04);
-			});
+			bopThis(megamix, 0.6, 0.04);
+			bopThis(logoBl, 0.6, 0.04);
+			//new FlxTimer().start(Conductor.crochet/1000 - 0.3, function(tmr:FlxTimer){
+			//});
 		}
 	}
 	var fadeIn = 2;
