@@ -307,8 +307,10 @@ function beatHit()
 			bop();
 			//single bops with nothing special
 		}
+	}
 
-
+	switch (curBeat)
+	{
 		case 3:
 		{
 			FlxG.mouse.visible=false;
