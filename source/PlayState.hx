@@ -2989,13 +2989,10 @@ class PlayState extends MusicBeatState
 		if (FlxG.keys.justPressed.SPACE){trace(object);}*/
 
 		if(ratingText.visible) {
-			ratingText.screenCenter(X);
 			ratingText.updateHitbox();
 			if (ratingText.color == 0xFF391F16){
 				shake(ratingText);
-			}/*else if(ratingText.offset.x!=0||ratingText.offset.y!=0){
-				ratingText.offset.set(0,0);
-			}*/
+			}
 		}
 		if(ClientPrefs.framerate <= maxLuaFPS){
 
@@ -4441,9 +4438,6 @@ class PlayState extends MusicBeatState
 				startDelay: Conductor.crochet * 0.002
 			});
 
-		}
-		else{
-			ratingText.visible = false;
 		}
 		combo = 0;
 		
