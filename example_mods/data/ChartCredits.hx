@@ -324,8 +324,8 @@ function beatHit()
 		case 15: {
 			logoBl.alpha = 0.00001;
 			game.add(logoBl);
-			new FlxTimer().start(Conductor.crochet/1000 - 0.3, function(tmr:FlxTimer){
-				FlxTween.tween(logoBl, {alpha: 1}, 0.3);
+			new FlxTimer().start(Conductor.crochet/1000 - 0.135, function(tmr:FlxTimer){
+				FlxTween.tween(logoBl, {alpha: 1}, 0.135);
 			});
 		}
 		case 16:
@@ -339,8 +339,8 @@ function beatHit()
 		case 23: {
 			megamix.alpha = 0.00001;
 			game.add(megamix);
-			new FlxTimer().start(Conductor.crochet/1000 - 0.3, function(tmr:FlxTimer){
-				FlxTween.tween(megamix, {alpha: 1}, 0.3);
+			new FlxTimer().start(Conductor.crochet/1000 - 0.135, function(tmr:FlxTimer){
+				FlxTween.tween(megamix, {alpha: 1}, 0.135);
 			});
 		}
 		case 24:
