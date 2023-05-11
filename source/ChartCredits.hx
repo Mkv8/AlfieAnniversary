@@ -37,6 +37,7 @@ import FunkinLua.CustomSubstate;
 
 import Type.ValueType;
 
+using StringTools;
 
 class ChartCredits extends PlayState
 {
@@ -72,13 +73,13 @@ class ChartCredits extends PlayState
 
 	public function initHaxeModule()
 	{
-		
+
 		hscript = null; //man I hate this but idk how else to do it lol
 		try{
 			if(hscript == null)
 			{
 				trace('initializing haxe interp for CustomBeatState');
-				hscript = new HScript(); 
+				hscript = new HScript();
 				hscript.interp.variables.set('game', cast(this,MusicBeatState));
 				hscript.interp.variables.set('controls', controls);
 				hscript.interp.variables.set('creditsInfo', new Map<String, Array<String>>() );
@@ -93,22 +94,22 @@ class ChartCredits extends PlayState
 				if(startingVariables!=null){
 					for(v in startingVariables.keys()){
 						hscript.interp.variables.set(v, startingVariables.get(v));
-					}					
+					}
 					startingVariables=null;
 				}
-				
+
 				luaArray.push(new FunkinLua("assets/data/blank.lua"));
 				trace(Lua_helper.callbacks.keys());
 				for(v in Lua_helper.callbacks.keys()){
-					ChartCredits.hscript.interp.variables.set(v,  
+					ChartCredits.hscript.interp.variables.set(v,
 						Lua_helper.callbacks.get(v)
-					);	
-					
+					);
+
 					/*	function(a,?b:Null<Dynamic>,?c:Null<Dynamic>,?d:Null<Dynamic>,?e:Null<Dynamic>,?f:Null<Dynamic>){
 							trace(v);
 							try{
 								Reflect.callMethod(luaArray[0], Lua_helper.callbacks.get(v), [a,b,c,d,e,f]);
-							}	
+							}
 							catch (err){
 								trace(err);
 							}
@@ -127,8 +128,9 @@ class ChartCredits extends PlayState
 	public function runHScript(name:String, hscript:FunkinLua.HScript, ?modFolder:String="", ?isCustomState:Bool=false){
 		try{
 			var path:String = "mods/"+modFolder+"/"+name; // Paths.getTextFromFile(name);
+			path = path.replace("//", "/");
 			var y = '';
-			//PLEASE WORK 
+			//PLEASE WORK
 			if (FileSystem.exists(path)){
 				trace(path);
 				y = File.getContent(path);
@@ -174,7 +176,7 @@ class ChartCredits extends PlayState
 
 	public static function customErrorFunction(message:String,details:String):Void{
 		trace("\n[DISPLAYING ERROR STATE]\n");
-		
+
 		var errorState = new ChartCredits("ErrorState", [
 			"lastStateName"=>"ChartCredits",
 			"errMsg"=>message,
@@ -211,11 +213,11 @@ class ChartCredits extends PlayState
 		initHaxeModule();
 		runHScript("data/"+name+".hx",hscript, curMod, true);
 		#end
-		quickCallHscript("create",[]);	
-		
-		
+		quickCallHscript("create",[]);
+
+
 	}
-	
+
 	public function new(nameInput:String = null, ?startingVars:Map<String,Dynamic>) {
         super();
 		if(nameInput != null) {
@@ -223,7 +225,7 @@ class ChartCredits extends PlayState
         }
 		if(startingVars !=null){
 			//startingVariables = startingVars; //Doesn't work
-			startingVariables = [for( k in startingVars.keys() ) k => startingVars.get(k)]; 
+			startingVariables = [for( k in startingVars.keys() ) k => startingVars.get(k)];
 		}
     }
 
@@ -233,7 +235,7 @@ class ChartCredits extends PlayState
 	override function onFocus(){super.bypass_onFocus();}
 	override function onFocusLost(){super.bypass_onFocusLost();}
 	override function openSubState(SubState:FlxSubState){super.bypass_openSubState(SubState);}
-	
+
 	override function stepHit(){
 		quickCallHscript("pre_stepHit",[]);
 		super.bypass_stepHit();
@@ -249,7 +251,7 @@ class ChartCredits extends PlayState
 		quickCallHscript("beatHit",[]);
 		//FlxG.log.add('beat');
 	}
-	
+
 	override function update(elapsed:Float)
 	{
 		quickCallHscript("update",[elapsed]);
@@ -269,5 +271,5 @@ class ChartCredits extends PlayState
 		luaArray = [];
 		super.bypass_destroy();
 	}
-	
+
 }
