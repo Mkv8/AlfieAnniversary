@@ -198,10 +198,11 @@ class CreditsState extends MusicBeatState
 			MusicBeatState.switchState(new ChartCredits("ChartCredits"));
 		});
 		replayButton.frames = Paths.getSparrowAtlas('ui/creditsbutton');
-		replayButton.animation.addByPrefix('normal', 'idle', 24, false);
-		replayButton.animation.addByPrefix('highlight', 'selected', 24, false);
-		replayButton.animation.addByPrefix('press', 'selected', 24, false);
+		replayButton.animation.addByPrefix('normal', 'idle', 30, false);
+		replayButton.animation.addByPrefix('highlight', 'selected', 30, false);
+		replayButton.animation.addByPrefix('press', 'selected', 30, false);
 		replayButton.animation.play('normal');
+		replayButton.antialiasing = ClientPrefs.globalAntialiasing;
 
 		replayButton.setGraphicSize(200, 70);
 		replayButton.updateHitbox();

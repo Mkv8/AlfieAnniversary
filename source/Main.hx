@@ -129,7 +129,6 @@ class Main extends Sprite
 		var bgWidth = stage.stageWidth;
 		var bgHeight = stage.stageHeight;
 
-
 		var ratio:Float =  bgWidth  / bgHeight;
 
 		bgHeight =  height;

@@ -1411,7 +1411,7 @@ class PlayState extends MusicBeatState
 			black = new BGSprite('black', 0, 0, 1, 1);
 			black.scale.set(2.5, 2.5);
 			add(black);
-		
+
 
 
 		}
@@ -1420,7 +1420,7 @@ class PlayState extends MusicBeatState
 		black.scale.set(2.5, 2.5);
 		add(black);
 
-		} 
+		}
 
 		// "GLOBAL" SCRIPTS
 		#if LUA_ALLOWED
@@ -2988,12 +2988,6 @@ class PlayState extends MusicBeatState
         if (FlxG.keys.pressed.W){object.y--;}
 		if (FlxG.keys.justPressed.SPACE){trace(object);}*/
 
-		if(ratingText.visible) {
-			ratingText.updateHitbox();
-			if (ratingText.color == 0xFF391F16){
-				shake(ratingText);
-			}
-		}
 		if(ClientPrefs.framerate <= maxLuaFPS){
 
 			callOnLuas('onUpdate', [elapsed]);
@@ -3376,6 +3370,13 @@ class PlayState extends MusicBeatState
 		}
 
 		updateHealthGraphics();
+
+		if(ratingText.visible && ratingText.alpha > 0) {
+			ratingText.centerOffsets();
+			if (ratingText.color == 0xFF391F16){
+				shake(ratingText);
+			}
+		}
 
 		switch (curStage)
 		{
@@ -4225,7 +4226,7 @@ class PlayState extends MusicBeatState
 				});
 			}
 		}
-		
+
 	}
 
 	private function onKeyPress(event:KeyboardEvent):Void
@@ -4425,7 +4426,7 @@ class PlayState extends MusicBeatState
 			setRatingPositions();
 			ratingText.antialiasing=true;
 			ratingText.color = 0xFF391F16;
-			
+
 			if(rateTween!=null)
 				rateTween.cancel();
 
@@ -4440,7 +4441,7 @@ class PlayState extends MusicBeatState
 
 		}
 		combo = 0;
-		
+
 		health -= daNote.missHealth * healthLoss;
 		if(instakillOnMiss)
 		{
@@ -5148,18 +5149,19 @@ class PlayState extends MusicBeatState
 			switch (curBeat)
 			{
 				case 210:
-				{trace('hello??');
-				new FlxTimer().start(0.35, function(tmr:FlxTimer){
-					black.alpha = 1;
-					dad.alpha = 0;
-					gf.alpha = 0;
-					remove(dad);
-					remove(gf);
-					boyfriend.playAnim('dies',true, false);
-					deathsound.play(true);
-					camHUD.alpha = 0;
-					});	
-					
+				{
+					trace('hello??');
+					new FlxTimer().start(0.35, function(tmr:FlxTimer){
+						black.alpha = 1;
+						dad.alpha = 0;
+						gf.alpha = 0;
+						remove(dad);
+						remove(gf);
+						boyfriend.playAnim('dies',true, false);
+						deathsound.play(true);
+						camHUD.alpha = 0;
+					});
+
 				}
 			}
 		}
@@ -5886,6 +5888,9 @@ class PlayState extends MusicBeatState
 					shader.downscroll.value = [ClientPrefs.downScroll ? 1 : 0];
 
 					camHUD.setFilters([new ShaderFilter(shader)]);
+					if(!ClientPrefs.downScroll) {
+						scoreTxt.cameras = [camOther];
+					}
 					#end
 					TransparentWindow.enableTransparent();
 					Main.fpsVar.visible = false; // Transparent
@@ -5908,6 +5913,11 @@ class PlayState extends MusicBeatState
 				case 891:
 				{
 					FlxTween.tween(Main.instance.flashShader, {apply: 1}, 0.6);
+					#if mac
+					if(!ClientPrefs.downScroll) {
+						FlxTween.tween(scoreTxt, {alpha: 0}, 0.6);
+					}
+					#end
 
 				}
 

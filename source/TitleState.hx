@@ -156,11 +156,11 @@ class TitleState extends MusicBeatState
 
 		FlxG.save.bind('funkin', 'ninjamuffin99');
 
-		if(!initialized && FlxG.save.data != null && FlxG.save.data.fullscreen)
+		/*if(!initialized && FlxG.save.data != null && FlxG.save.data.fullscreen)
 		{
 			FlxG.fullscreen = FlxG.save.data.fullscreen;
 			//trace('LOADED FULLSCREEN SETTING!!');
-		}
+		}*/
 
 		ClientPrefs.loadPrefs();
 

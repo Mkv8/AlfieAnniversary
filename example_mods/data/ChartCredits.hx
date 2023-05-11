@@ -49,13 +49,13 @@ function bop()
 }
 
 function timer(dur:Float, func:Dynamic) {
-    new FlxTimer().start(dur, func);
+	new FlxTimer().start(dur, func);
 }
 
 function createName(){
 	var t0 = new FlxBitmapText(font);
 	var oneLetter = new FlxBitmapText(font);
-	
+
 }
 
 function animateNameEntry(){
@@ -77,8 +77,8 @@ function subtitleAdd(subtitle:String):FlxBitmapText{
 var beatTween = null;
 var scaleTo = 0.75;
 
-var subtitle1 = subtitleAdd(""); 
-var subtitle2 = subtitleAdd(""); 
+var subtitle1 = subtitleAdd("");
+var subtitle2 = subtitleAdd("");
 
 var megamix = new FlxSprite(355, 500);
 //megamix.loadGraphic(Paths.image('megamix', 'preload'));
@@ -137,7 +137,7 @@ function bopThis(x:Dynamic, time:Float, amount:Float){
 	FlxTween.tween(x.scale, {x: initialScaleX, y:initialScaleY}, time, {ease: FlxEase.cubeInOut});
 }
 //makeLuaText("pop","Hello World", 200, 200, 200);
-		
+
 function getLuaText(s:String){
 	return game.modchartTexts.get(s);
 }
@@ -166,7 +166,7 @@ function subTitleSwoop(name:String, x:Int, y:Int){
 
 
 function swoopNameTo(name:Dynamic, x:Int, y:Int){
-	
+
 	FlxTween.tween(name, {x: name.x+x, y:name.y+y}, 0.25, {ease: FlxEase.cubeInOut});
 }
 
@@ -193,7 +193,7 @@ function splitEnter(threeNames:Array<String>){
 	bopping.push(split1);
 	split1.screenCenter(FlxAxes.XY);
 	split2.screenCenter(FlxAxes.XY);
-	swoopNameTo(split1,-FlxG.width/4-80-hypnoAdd,-250+hypnoAdd);			
+	swoopNameTo(split1,-FlxG.width/4-80-hypnoAdd,-250+hypnoAdd);
 	swoopNameTo(split2,-FlxG.width/4-80-hypnoAdd,30+hypnoAdd);
 
 	var split1 = creditsStuff.get(threeNames[1]);
@@ -201,7 +201,7 @@ function splitEnter(threeNames:Array<String>){
 	bopping.push(split1);
 	split1.screenCenter(FlxAxes.XY);
 	split2.screenCenter(FlxAxes.XY);
-	swoopNameTo(split1,FlxG.width/4+80+hypnoAdd,-250+hypnoAdd);			
+	swoopNameTo(split1,FlxG.width/4+80+hypnoAdd,-250+hypnoAdd);
 	swoopNameTo(split2,FlxG.width/4+80+hypnoAdd,30+hypnoAdd);
 
 	if(threeNames[2]!=''){
@@ -209,11 +209,11 @@ function splitEnter(threeNames:Array<String>){
 		var split2 = activateText(threeNames[2]);
 		if(hypno){
 			split2.fieldWidth = FlxG.width/2;
-		} 
+		}
 		bopping.push(split1);
 		split1.screenCenter(FlxAxes.XY);
 		split2.screenCenter(FlxAxes.XY);
-		swoopNameTo(split1,0,hypno?20:-50);			
+		swoopNameTo(split1,0,hypno?20:-50);
 		swoopNameTo(split2,0,hypno?300:230);
 	}
 }
@@ -221,19 +221,19 @@ function splitEnter(threeNames:Array<String>){
 function splitLeave(threeNames:Array<String>){
 	var split1 = creditsStuff.get(threeNames[0]);
 	var split2 = getLuaText(threeNames[0]);
-	swoopNameTo(split1,-FlxG.width/4*10,-200*10);			
+	swoopNameTo(split1,-FlxG.width/4*10,-200*10);
 	swoopNameTo(split2,-FlxG.width/4*10,100*10);
 
 	var split1 = creditsStuff.get(threeNames[1]);
 	var split2 = getLuaText(threeNames[1]);
-	swoopNameTo(split1,FlxG.width/4*10,-200*10);			
+	swoopNameTo(split1,FlxG.width/4*10,-200*10);
 	swoopNameTo(split2,FlxG.width/4*10,100*10);
 
 	if(threeNames[2]!=''){
 		var split1 = creditsStuff.get(threeNames[2]);
 		var split2 = getLuaText(threeNames[2]);
-		swoopNameTo(split1,0,1000);			
-		swoopNameTo(split2,0,300*10);	
+		swoopNameTo(split1,0,1000);
+		swoopNameTo(split2,0,300*10);
 	}
 }
 
@@ -247,11 +247,11 @@ function ascendLeave(allNames:Array<String>){
 			var j = split1.y/140;
 			FlxTween.tween(split1, {x: split1.x, y:-FlxG.height/2-(allNames.length-j)*140}, 10, {ease: FlxEase.LINEAR});
 		}
-		
+
 		var split2 = getLuaText(allNames[i] );
 		var k = split2.y/140;
 		FlxTween.tween(split2, {x: split2.x, y:-FlxG.height/2-(allNames.length-k)*140}, 10, {ease: FlxEase.LINEAR});
-	
+
 	}
 
 }
@@ -287,18 +287,18 @@ function beatHit()
 
 	//FlxTween.tween(FlxG.camera, {zoom: lol}, 1);
 
-	if(curBeat%4){
+	if(curBeat%4 == 0){
 		bopEverything();
 		bopIcons();
 		if(curBeat<40){
 			new FlxTimer().start(Conductor.crochet/1000 - 0.3, function(tmr:FlxTimer){
 				bopThis(megamix, 0.6, 0.04);
 				bopThis(logoBl, 0.6, 0.04);
-			});	
+			});
 		}
 	}
 	var fadeIn = 2;
-			
+
 	switch (curBeat)
 	{
 
@@ -312,7 +312,7 @@ function beatHit()
 		case 3:
 		{
 			FlxG.mouse.visible=false;
-			
+
 			//var t = getLuaText("pop");
 			//getLuaText("pop").setFormat(Paths.font("vcr.ttf"), 32,0xFFFFFF, "center", FlxTextBorderStyle.OUTLINE, 0xFF000000);
 			//getLuaText("pop").borderSize=3;
@@ -321,19 +321,32 @@ function beatHit()
 			//addLuaText("pop");
 			//addLuaText("pop");
 		}
+		case 15: {
+			logoBl.alpha = 0.00001;
+			game.add(logoBl);
+			new FlxTimer().start(Conductor.crochet/1000 - 0.3, function(tmr:FlxTimer){
+				FlxTween.tween(logoBl, {alpha: 1}, 0.3);
+			});
+		}
 		case 16:
 		{
-			
+
 			bop();
-			game.add(logoBl);
+			//game.add(logoBl);
 			//bopping.push(logoBl);
 			//Display Vs Alfie logo image (logoBumpin.png, but it doesnt have to be that one, it can be just a cropped logo as well)
+		}
+		case 23: {
+			megamix.alpha = 0.00001;
+			game.add(megamix);
+			new FlxTimer().start(Conductor.crochet/1000 - 0.3, function(tmr:FlxTimer){
+				FlxTween.tween(megamix, {alpha: 1}, 0.3);
+			});
 		}
 		case 24:
 		{
 			bop();
-			
-			game.add(megamix);
+
 			//bopping.push(megamix);
 			//Display subtitle Megamix below the logo (megamix.png, same case as the logo)
 		}
@@ -347,11 +360,11 @@ function beatHit()
 			game.remove(megamix);
 			titleSwoop("ARTWORK", 0, 0);
 			//logo and megamix go away, there's a bit ARTWORK:  title at the top (like the image i sent in the GC)
-		}		
+		}
 		case 48:
 		{
 			bop();
-			
+
 			var name = creditsStuff.get("Mkv8");
 			name.screenCenter(FlxAxes.XY);
 			name.y -=150;
@@ -364,22 +377,22 @@ function beatHit()
 			bopping =[];
 			creditsStuff.get("Mkv8").x=-2000;
 			getLuaText("Mkv8").x=-2000;
-			
+
 			var name = creditsStuff.get("Gigab00ts");
 			name.screenCenter(FlxAxes.XY);
 			name.x -= FlxG.width/4+80;
 			name.y -=250;
 			subTitleSwoop("Gigab00ts", FlxG.width/4-80, FlxG.height/2+100);
-			
+
 			var name2 = creditsStuff.get("Josszzol");
 			name2.screenCenter(FlxAxes.XY);
 			name2.x += FlxG.width/4+80;
 			name2.y -=250;
 			subTitleSwoop("Josszzol", FlxG.width*3/4+80, FlxG.height/2+100);
-			
+
 			bopping.push(name);
 			bopping.push(name2);
-			
+
 			bop();
 			//Mk goes away, displays in its place "Gigab00ts, creator of Kisston" and "Josszzol, creator of Filip", with the giga and joss icons respectively
 		}
@@ -387,13 +400,13 @@ function beatHit()
 		{
 			bop();
 
-			
+
 			var name2 = creditsStuff.get("Aurum");
 			name2.screenCenter(FlxAxes.XY);
 			name2.y -=50;
 			subTitleSwoop("Aurum", FlxG.width/2, FlxG.height/2+300);
 			bopping.push(name2);
-			
+
 			//below them there's Aurum and their icon
 		}
 		case 88:
@@ -418,7 +431,7 @@ function beatHit()
 			game.camHUD.flash(-1,1,false);
 
 			//artists stuff goes away, title goes from ARTWORK to PROGRAMMING
-		}	
+		}
 		case 96:
 		{
 			bop();
@@ -428,50 +441,50 @@ function beatHit()
 			bopping.push(name);
 			subTitleSwoop("Mkv8-2",FlxG.width/2,FlxG.height/2+200);
 			//Mkv8 and icon again
-		}	
+		}
 		case 104:
 		{
 			bop();
 			creditsStuff.get("Mkv8").x=-2000;
 			getLuaText("Mkv8-2").x=-2000;
-			
+
 			var name = creditsStuff.get("Ne_Eo");
 			name.screenCenter(FlxAxes.XY);
 			name.x -= FlxG.width/4+80;
 			name.y -=250;
 			subTitleSwoop("Ne_Eo", FlxG.width/4-80, FlxG.height/2+100);
-			
+
 			var name2 = creditsStuff.get("Whatify");
 			name2.screenCenter(FlxAxes.XY);
 			name2.x += FlxG.width/4+80;
 			name2.y -=250;
 			subTitleSwoop("Whatify", FlxG.width*3/4+80, FlxG.height/2+100);
-			
+
 			bopping.push(name);
 			bopping.push(name2);
-			
+
 			var name2 = creditsStuff.get("Shadowfi");
 			name2.screenCenter(FlxAxes.XY);
 			name2.y -=50;
 			subTitleSwoop("Shadowfi", FlxG.width/2, FlxG.height/2+250);
 			bopping.push(name2);
-			
+
 			//MKv8 goes away, and in comes Ne_Eo, Whatify, and Shadowfi for the programmer section
 			//i put myself separated cuz idk both with the timing of the song it seemed good, and also while I did a lot of work, you guys did all the big stuff so
 			//yall deserve more time on screen
 		}
 		case 110, 142, 150, 158:
-		{	
+		{
 			new FlxTimer().start(0.28, function(tmr:FlxTimer){
 				bop();
-			});	
+			});
 		}
 		case 117:
 		{
 			bop();
 
-			
-			swoopNameTo(creditsStuff.get("Ne_Eo"),-2000,0);			
+
+			swoopNameTo(creditsStuff.get("Ne_Eo"),-2000,0);
 			swoopNameTo(getLuaText("Ne_Eo"),-2000,0);
 
 			//Neo goes away
@@ -480,15 +493,15 @@ function beatHit()
 		{
 			new FlxTimer().start(0.28, function(tmr:FlxTimer){
 				bop();
-				swoopNameTo(creditsStuff.get("Whatify"),2000,0);			
+				swoopNameTo(creditsStuff.get("Whatify"),2000,0);
 				swoopNameTo(getLuaText("Whatify"),2000,0);
 				//whatify goes away
-			});	
+			});
 		}
-		case 120: 
+		case 120:
 		{
 			bop();
-			swoopNameTo(creditsStuff.get("Shadowfi"),0,2000);			
+			swoopNameTo(creditsStuff.get("Shadowfi"),0,2000);
 			swoopNameTo(getLuaText("Shadowfi"),0,2000);
 			//shadowfi goes away
 		}
@@ -497,23 +510,23 @@ function beatHit()
 			bopping =[];
 			bop();
 			titleSwoop("PROGRAMMING", 0, -1050, false);
-			
+
 			getLuaText("MUSIC").text="M";
 			titleSwoop("MUSIC", 0, 0);
 			//programming stuff goes away
 			game.camHUD.flash(-1,1,false);
 
 		}
-		case 126: 
+		case 126:
 		{
 			new FlxTimer().start(0.28, function(tmr:FlxTimer){
 				bop();
 				getLuaText("MUSIC").text="MU";
 				titleSwoop("MUSIC", 0, 0);
 				//the start of the word Music comes in, "mu"
-			});	
+			});
 		}
-		case 128: 
+		case 128:
 		{
 			bop();
 			getLuaText("MUSIC").text="MUSIC";
@@ -522,13 +535,13 @@ function beatHit()
 			splitEnter(['AidanXD','Meta','Kamex']);
 		}
 
-		case 152: 
+		case 152:
 		{
 			bop();
 			FlxG.mouse.visible=true;
 			FlxG.mouse.cursorContainer.alpha = 0;
 			FlxTween.tween(FlxG.mouse.cursorContainer, {alpha: 1}, fadeIn, {ease: FlxEase.quartInOut});
-			splitLeave(['AidanXD','Meta','Kamex']);	
+			splitLeave(['AidanXD','Meta','Kamex']);
 			splitEnter(['RayZord','Coquers_','Car']);
 
 		}
@@ -541,14 +554,14 @@ function beatHit()
 			bop();
 
 		}
-		case 200: 
+		case 200:
 		{
 			FlxG.mouse.visible=false;
 			FlxG.mouse.cursorContainer.alpha = 1;
-			
+
 			titleSwoop("MUSIC", 0, -0, false);
 			titleSwoop("CHARTING", 0, -0);
-			splitLeave(['SplatterDash','Jospi','JunoSongs']);	
+			splitLeave(['SplatterDash','Jospi','JunoSongs']);
 			splitEnter(['Sayge', 'ChubbyGamer', 'PpavlikosS']);
 			game.camHUD.flash(-1,1,false);
 			bop();
@@ -581,15 +594,15 @@ function beatHit()
 		{
 			ascendLeave(["SPECIAL THANKS",'Hotline 024 team', 'Ourple Guy team', 'Hypnos Lullaby Team']);
 			ascendEnter(['Past Vs Alfie members'
-			'Flippy and Gegcoin',	
-			'MattDoes_',			
-			'Tesseption',			
-			'FlarinthK',			
-			'SirSins',				
+			'Flippy and Gegcoin',
+			'MattDoes_',
+			'Tesseption',
+			'FlarinthK',
+			'SirSins',
 			'Alfie and Filip fan Server',
-			'Fans and Supporters',	
+			'Fans and Supporters',
 			'And you']);
-		}		
+		}
 
 		case 304:
 		{
@@ -598,7 +611,7 @@ function beatHit()
 		}
 	}
 
-	
+
 }
 
 
@@ -607,18 +620,18 @@ function returnToMenu(){
 	FlxG.sound.play(Paths.sound('cancelMenu'));
 	game.persistentUpdate = false;
 	MusicBeatState.switchState(new MainMenuState());
-	FlxG.sound.playMusic(Paths.music('freakyMenu'), 1, true);	
+	FlxG.sound.playMusic(Paths.music('freakyMenu'), 1, true);
 	FlxG.sound.music.volume = initialVolume;
 }
 
 function update(elapsed:Float){
 	if (controls.BACK)
 	{
-		returnToMenu();	
+		returnToMenu();
 	}
 	if (controls.RESET)
 	{
-		MusicBeatState.resetState();	
+		MusicBeatState.resetState();
 	}
 	if(FlxG.keys.justPressed.TWO) { //Go 10 seconds into the future :O
 		FlxG.sound.music.pause();
@@ -635,7 +648,7 @@ function update(elapsed:Float){
 	u.updateHitbox();
 	u.screenCenter(FlxAxes.X);
 	Conductor.songPosition = FlxG.sound.music.time;
-	
+
 
 	var curTime:Float = Conductor.songPosition;
 	if(curTime < 0) curTime = 0;
@@ -672,8 +685,8 @@ function generateCredits(){
 	{
 		var i = pisspoop[j];
 		//if(creditsStuff.get(i[0])==null){
-			
-			var optionText:Alphabet = 
+
+			var optionText:Alphabet =
 			new Alphabet(
 				0, 		//x
 				70 * j, //y
@@ -687,18 +700,19 @@ function generateCredits(){
 
 			optionText.fontColor=0xFFFFFFFF;
 			var formattedName= i[0].split(".").join();
-			
+
 			var dash2 = creditsInfo.get(formattedName)==null?"":"-2";
-				
+
 			creditsStuff.set(formattedName+dash2,optionText);
-			
+
 			optionText.x=-5000;
-			
+
 			if(!unselectableCheck(i)){
 				var icon:AttachedSprite = new AttachedSprite('credits/' + i[1]);
 				icon.xAdd = optionText.width/2-icon.width/2;
-				icon.yAdd = -icon.height/2 +195; 
+				icon.yAdd = -icon.height/2 +195;
 				icon.sprTracker = optionText;
+				icon.antialiasing = ClientPrefs.globalAntialiasing;
 				icons.push(icon);
 				makeLuaText(formattedName+dash2,i[2], FlxG.width*0.1, 70 * j, FlxG.width*0.8);
 				getLuaText(formattedName+dash2).setFormat(Paths.font("vcr.ttf"), 24,0xFFFFFF, "center", FlxTextBorderStyle.OUTLINE, 0xFF000000);
@@ -715,7 +729,7 @@ function generateCredits(){
 				getLuaText(formattedName).borderSize=3;
 			}
 			game.add(optionText);
-			
+
 			if(formattedName=="Car"){
 				carStuff.push(optionText);
 			}
@@ -725,10 +739,10 @@ function generateCredits(){
 			creditsInfo.set( i[0], [ i[0], unselectableCheck(i) ? i[1] : '' ]);
 		else
 			creditsInfo.set( i[0]+"2", [ i[0], unselectableCheck(i) ? i[1] : '' ]);
-		
+
 		creditsInfo.get(i[0]).push(i.length>4 ? i[3] : '' );
 
-		
+
 	}
 }
 
@@ -740,27 +754,27 @@ function create(){
 	FlxG.sound.playMusic(Paths.music('Megamix'));
 	FlxG.sound.music.volume = 0.5;
 	songLength = FlxG.sound.music.length;
-	
+
 	var initialScale = 1;
 	var newScale = FlxG.width/2275;
-	
+
 	u = new BGSprite('credits_video', 1,1,true, true);
 	u.scale.set(initialScale,initialScale);
 	u.updateHitbox();
 	u.screenCenter(FlxAxes.XY);
 	u.y+=3655/2*1-FlxG.height/2;
 	u.antialiasing = true;
-	
+
 	game.add(u);
 	FlxTween.tween(u, {y: -2275/2}, 2, {ease: FlxEase.expoInOut, startDelay: 2.0});
 	FlxTween.tween(u.scale, {x: newScale, y:newScale}, 3, {ease: FlxEase.expoInOut, startDelay: 1.0});
 	/*beatTxt.scale.set(1,1);
 	game.add(beatTxt);
 	beatTxt.text= "[Beat hit here]";
-	
+
 	beatTxt.screenCenter(FlxAxes.XY);
 	beatTxt.y=60;*/
-	
+
 	generateCredits();
 }
 
@@ -774,13 +788,13 @@ pisspoop = [ //Name - Icon name - Description - Link - BG Color
 	['Josszzol',			'joss',				'Creator of Filip',	'https://twitter.com/abbledacker',		'FFBF47'],
 	['Gigab00ts',			'giga',				'Creator of Kisston',	'https://twitter.com/GigaB00ts',	'81DB7F'],
 	['Aurum',				'jade',				' ',						'https://twitter.com/AurumArt_',		'9D58BF'],
-	
+
 	['PROGRAMMING'],
 	['Mkv8',				'mk',				' ',							'https://twitter.com/Mkv8Art',			'D23B48'],
 	['Ne_Eo',				'neo',				' ',	'https://twitter.com/Ne_Eo_Twitch',	'8A5F5C'],
 	['Whatify',				'WhatIcon',			' ',			'https://twitter.com/Sonamaker1',		'5A66A6'],
 	['Shadowfi',			'shadowdelic',		' ',			'https://twitter.com/Shadowfi1385',		'9D58BF'],
-	
+
 	['MUSIC'],
 	['Aidan.XD',			'aidan',			' ',	'https://www.youtube.com/channel/UCvIvCI3NRiJEYpyes58LhqQ',	'FF9D87'],
 	['Meta',				'meta',				' ',			'https://metahumanboi.carrd.co/',		'4F3F5C'],
@@ -791,19 +805,19 @@ pisspoop = [ //Name - Icon name - Description - Link - BG Color
 	['SplatterDash',		'splatter',			' ',	'https://twitter.com/splatterdash_ng',	'72B2F2'],
 	['Jospi',				'jospi',			' ',	'https://twitter.com/jospi_music',	'96FAFF'],
 	['JunoSongs',			'juno',				' ',							'https://www.youtube.com/@JunoSongs',	'B563DB'],
-	
+
 	['CHARTING'],
 	['Sayge',				'sayge',			' ',			'https://twitter.com/Sayge3D',			'FFA44F'],
 	['ChubbyGamer',			'chubby',			' ','https://twitter.com/ChubbyAlt',	'C78A58'],
 	['PpavlikosS',			'pav',				' ',							'https://twitter.com/ppavlikoss',		'BAE2FF'],
-	
+
 	['MISC'],
 	['David H.',			'blank',			'Album cover Artwork',									' ',									'72A3ED'],
-	['Smokeyy',				'smokeyy',			'Release trailer',										'https://twitter.com/Smokiixx',			'716A73'],			
+	['Smokeyy',				'smokeyy',			'Release trailer',										'https://twitter.com/Smokiixx',			'716A73'],
 	['Hotline 024 team',	'nikku',			'Thank you Saruky and the H024 team','https://gamebanana.com/mods/373298',			'FF3021'],
 	['Ourple Guy team',		'guy',				'Thank you Kiwiquest and the Ourple Guy team','https://gamebanana.com/mods/357511',			'BD51DB'],
 	['Hypnos Lullaby Team',	'hypno',			'Thank you Punkett, iKenny, and TheInnuendo','https://fridaynightfunking.fandom.com/wiki/Friday_Night_Funkin%27_Lullaby',			'F7BF45'],
-	
+
 	['SPECIAL THANKS'],
 	['Past Vs Alfie members','blank',			' ',' ',			'D23B48'],
 	['Flippy and Gegcoin',	'blank',			' ',							' ',									'BDBCC4'],
