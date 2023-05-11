@@ -208,6 +208,7 @@ class PauseSubState extends MusicBeatSubstate
 		if (pauseMusic.volume < 0.5)
 			pauseMusic.volume += 0.01 * elapsed;
 
+
 		super.update(elapsed);
 
 		var upP = controls.UI_UP_P;
@@ -222,6 +223,9 @@ class PauseSubState extends MusicBeatSubstate
 		{
 			changeSelection(1);
 		}
+		
+		if(controls.BACK) {close();}
+
 
 		if (accepted)
 		{

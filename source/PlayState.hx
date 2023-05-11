@@ -5861,10 +5861,10 @@ class PlayState extends MusicBeatState
 
 					FlxTween.tween(Main.instance.flashShader, {apply: 0}, 0.5);
 					isMinimizeBroken = true;
-					//FlxG.camera.flash(FlxColor.WHITE,0.5,false);
-
+					//FlxG.camera.flash(FlxColor.WHITE,0.5,false);	
+									
 					if(origWinFullScreen == null) origWinFullScreen = Lib.application.window.fullscreen;
-
+					#if mac
 					if(origWinX == null) origWinX = Application.current.window.x;
 					if(origWinY == null) origWinY = Application.current.window.y;
 					if(origWinWidth == null) origWinWidth = Application.current.window.width;
@@ -5873,6 +5873,7 @@ class PlayState extends MusicBeatState
 						Std.int(Application.current.window.display.bounds.width),
 						Std.int(Application.current.window.display.bounds.height)
 					);
+					#end
 
 					#if windows
 					Lib.application.window.borderless = true;
