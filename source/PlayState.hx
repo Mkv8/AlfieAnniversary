@@ -431,27 +431,30 @@ class PlayState extends MusicBeatState
 	}
 
 	public function setRatingPositions() {
-		var top = FlxG.height-180;
+		var high_position_y 	= 130;				//For upscroll
+		var low_position_y 		= FlxG.height-180;	//For downscroll
+		var middle_scroll_offset= -360; 		//Negative values for "left of center" 
+
 		ratingText.screenCenter(X);
+		
 		switch (ratingPosition) {
 			case DownScroll(middleScroll):
 				//trace('Downscroll; Middle:$middleScroll!');
 				if (!middleScroll && !sectionMiddleScroll){
-					ratingText.y = top;
+					ratingText.y = low_position_y;
 				}
 				else {
-					ratingText.x -= 360;
-					ratingText.y = 180;
+					ratingText.x += middle_scroll_offset;
+					ratingText.y = high_position_y;
 				}
 			case UpScroll(middleScroll):
 				//trace('Upscroll; Middle:$middleScroll!');
-				ratingText.y = 180;
 				if (!middleScroll && !sectionMiddleScroll){
-					ratingText.y = 180;
+					ratingText.y = high_position_y;
 				}
 				else {
-					ratingText.x -= 360;
-					ratingText.y = top;
+					ratingText.x += middle_scroll_offset;
+					ratingText.y = low_position_y;
 				}
 
 		}
