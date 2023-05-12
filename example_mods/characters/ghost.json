@@ -65,8 +65,8 @@
 	"healthicon": "alfie",
 	"flip_x": false,
 	"healthbar_colors": [
-		0,
 		255,
+		0,
 		0
 	],
 	"camera_position": [

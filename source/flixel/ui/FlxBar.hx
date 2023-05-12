@@ -191,7 +191,7 @@ class FlxBar extends FlxSprite
 		}
 
 		fillDirection = direction;
-		createFilledBar(0xff005100, 0xff00F400, showBorder);
+		createFilledBar(0xffff0000, 0xff00F400, showBorder);
 		setRange(min, max);
 	}
 

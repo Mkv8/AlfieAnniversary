@@ -1796,6 +1796,11 @@ class PlayState extends MusicBeatState
 
 		}
 
+		if (formattedSong == 'spectral-sonnet-beta')
+		{
+			
+		}
+
 		if (formattedSong == 'minimize' && curStage == 'fake')
 		{
 			iconP2.alpha = 0;
@@ -2141,6 +2146,9 @@ class PlayState extends MusicBeatState
 	}
 
 	public function reloadHealthBarColors() {
+
+		if(formattedSong == "spectral-sonnet-beta") {return;}
+
 		healthBar.createFilledBar(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
 			FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
 
@@ -5162,6 +5170,7 @@ class PlayState extends MusicBeatState
 						remove(gf);
 						boyfriend.playAnim('dies',true, false);
 						deathsound.play(true);
+						boyfriend.specialAnim = true;
 						camHUD.alpha = 0;
 					});
 
@@ -5313,10 +5322,13 @@ class PlayState extends MusicBeatState
 					//lcandlebg.alpha = 1;
 					candlelitpaintings.animation.play("lcandlebg");
 					candlelitpaintings.alpha = 1;
+
+				}
+				case 957:
+				{
 					upperBlackBar.exists = true;
 					bottomBlackBar.exists = true;
 				}
-
 				case 976:
 				{
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
@@ -5844,6 +5856,13 @@ class PlayState extends MusicBeatState
 
 				case 37:
 				{
+
+				if (ClientPrefs.middleScroll) {
+					for(note in notes.members) if(note != null && !note.mustPress) note.visible = false;
+					for(note in unspawnNotes) if(note != null && !note.mustPress) note.visible = false;
+					for(note in opponentStrums.members) {note.exists = false;}
+				} //god this looks so good amirite bois
+
 					coming4u.alpha = 0;
 					FlxTween.tween(blackOverlay, {alpha: 0}, 1.7);
 					FlxTween.tween(dad, {alpha: 1}, 1.7);
