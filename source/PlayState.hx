@@ -1767,7 +1767,7 @@ class PlayState extends MusicBeatState
 			iconP2.alpha = 0;
 			healthBar.color = 0xFF000000;
 			iconP1.color = 0xFF000000;
-
+			iconP1.alpha = ClientPrefs.healthBarAlpha;
 		}
 
 		if (formattedSong == 'interrupted')
