@@ -1137,34 +1137,6 @@ class PlayState extends MusicBeatState
 				candlelitpaintings.antialiasing = candlebg.antialiasing;
 				add(candlelitpaintings);
 
-				/*acandlebg = new BGSprite('acandlebg', 0, -280, 1, 1);
-				acandlebg.updateHitbox();
-				acandlebg.scale.set(1.4, 1.4);
-				acandlebg.alpha = 0.00001;
-
-				add(acandlebg);
-
-				ecandlebg = new BGSprite('ecandlebg', 0, -280, 1, 1);
-				ecandlebg.updateHitbox();
-				ecandlebg.scale.set(1.4, 1.4);
-				ecandlebg.alpha = 0.00001;
-
-				add(ecandlebg);
-
-				hcandlebg = new BGSprite('hcandlebg', 0, -280, 1, 1);
-				hcandlebg.updateHitbox();
-				hcandlebg.scale.set(1.4, 1.4);
-				hcandlebg.alpha = 0.00001;
-
-				add(hcandlebg);
-
-				lcandlebg = new BGSprite('lcandlebg', 0, -280, 1, 1);
-				lcandlebg.updateHitbox();
-				lcandlebg.scale.set(1.4, 1.4);
-				lcandlebg.alpha = 0.00001;
-
-				add(lcandlebg);*/
-
 				brokencandlebg = new BGSprite('candlebgbroken', 0, -280, 1, 1);
 				brokencandlebg.updateHitbox();
 				brokencandlebg.scale.set(1.4, 1.4);
@@ -1190,6 +1162,8 @@ class PlayState extends MusicBeatState
 				candlebells.alpha = 0.00001;
 				add(candlebells);
 
+				if (!ClientPrefs.lowQuality) {
+				FlxG.game.setFilters(cshaders); }
 
 
 			case 'mansiontop':
@@ -1262,10 +1236,11 @@ class PlayState extends MusicBeatState
 				blackbg.alpha = 0;
 				add(blackbg);
 
+				if (!ClientPrefs.lowQuality) {
 				var shaders:Array<BitmapFilter> = [new ShaderFilter(new VCRShader())];
 
 				FlxG.game.setFilters(shaders);
-				FlxG.game.filtersEnabled = true;
+				FlxG.game.filtersEnabled = true; }
 
 			case 'newstage': //goat remake
 				goatstage1 = new BGSprite('stage1', -1530, -720, 1, 1);
@@ -1344,13 +1319,14 @@ class PlayState extends MusicBeatState
 		#end
 
 		if(curStage == '90s') {
+			if (!ClientPrefs.lowQuality) {
 			add(animemultiply);
 			add(animeadd);
 			add(animeoverlay);
 			add(animevfx);
 			add(light1);
 			add(light2);
-			add(animesmoke);
+			add(animesmoke); }
 			add(scanlines);
 			scanlines.alpha = 0.15;
 			add(blackOverlay);
@@ -1367,8 +1343,9 @@ class PlayState extends MusicBeatState
 		if(curStage == 'ourple') {
 			add(blackOverlay);
 			blackOverlay.alpha = 1;
+			if (!ClientPrefs.lowQuality) {
 			add(ourpletheory);
-			add(ourplelogo);
+			add(ourplelogo); }
 			add(scanlines);
 			scanlines.alpha = 0.5;
 			boyfriendGroup.alpha = 0.0001;
@@ -1376,8 +1353,9 @@ class PlayState extends MusicBeatState
 		}
 
 		if(curStage == 'skalloween') {
+			if (!ClientPrefs.lowQuality) {
 			add(skamultiply);
-			add(skaOverlay);
+			add(skaOverlay);}
 			add(skacrowd);
 			add(vignette);
 			add(blackOverlay);
@@ -1386,18 +1364,21 @@ class PlayState extends MusicBeatState
 		}
 
 		if(curStage == 'kpark') {
+			if (!ClientPrefs.lowQuality) {
 			add(bkissmultiply);
 			add(bkissoverlay);
-			add(kissuhoh);
+			add(kissuhoh); }
 			add(blackOverlay);
 			blackOverlay.cameras = [camOther];
-			add(skaclock);
+			if (!ClientPrefs.lowQuality) {
+			add(skaclock); }
 		}
 
 		if(curStage == 'waterfall') {
+			if (!ClientPrefs.lowQuality) {
 			add(watermultiply);
 			add(wateradd);
-			add(wateroverlay);
+			add(wateroverlay); }
 			add(blackOverlay);
 			add(scanlines);
 			scanlines.alpha = 0.12;
@@ -4887,11 +4868,13 @@ class PlayState extends MusicBeatState
 		}
 
 		//shillton
-		if (formattedSong == 'forest-fire' && curStage == 'shillton' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'forest-fire' && curStage == 'shillton')
 		{
 			if(eventNum == 0 && curBeat >= 1) {
 				eventNum++;
+				if (!ClientPrefs.lowQuality) {
 				add(oldstripes);
+				}
 				add(vignette);
 				FlxTween.tween(vignette, {alpha: 1}, 1);
 				FlxTween.tween(camHUD, {alpha: 0}, 1);
@@ -4906,55 +4889,71 @@ class PlayState extends MusicBeatState
 
 			if(eventNum == 2 && curBeat >= 79) {
 				eventNum++;
-				FlxTween.tween(oldstripes, {alpha: 1}, 1);
+				if (!ClientPrefs.lowQuality) {
+					FlxTween.tween(oldstripes, {alpha: 1}, 1);
+				}
 				FlxTween.tween(vignette, {alpha: 0}, 1);
 			}
 			if(eventNum == 3 && curBeat >= 111) {
 				eventNum++;
-				FlxTween.tween(oldstripes, {alpha: 0}, 1);
-				FlxTween.tween(black, {alpha: 0.5}, 1);
+				if (!ClientPrefs.lowQuality) {
+					FlxTween.tween(oldstripes, {alpha: 0}, 1);
+					FlxTween.tween(black, {alpha: 0.5}, 1);
+				}
 				FlxTween.tween(vignette, {alpha: 1}, 1);
 			}
 			if(eventNum == 4 && curBeat >= 143) {
 				eventNum++;
-				FlxTween.tween(black, {alpha: 0}, 1);
+				if (!ClientPrefs.lowQuality) {
+					FlxTween.tween(black, {alpha: 0}, 1);
+				}
 			}
 			if(eventNum == 5 && curBeat >= 175) {
 				eventNum++;
-				FlxTween.tween(oldstripes, {alpha: 1}, 1);
+				if (!ClientPrefs.lowQuality) {
+					FlxTween.tween(oldstripes, {alpha: 1}, 1);
+				}
 				FlxTween.tween(vignette, {alpha: 0}, 1);
 			}
 			if(eventNum == 6 && curBeat >= 207) {
 				eventNum++;
-				FlxTween.tween(black, {alpha: 0.5}, 1);
+				if (!ClientPrefs.lowQuality) {
+					FlxTween.tween(black, {alpha: 0.5}, 1);
+				}
 			}
 			if(eventNum == 7 && curBeat >= 271) {
 				eventNum++;
-				FlxTween.tween(black, {alpha: 0}, 1);
+				if (!ClientPrefs.lowQuality) {
+					FlxTween.tween(black, {alpha: 0}, 1);
+				}
 			}
 			if(eventNum == 8 && curBeat >= 303) {
 				eventNum++;
-				FlxTween.tween(oldstripes, {alpha: 0}, 1);
+				if (!ClientPrefs.lowQuality) {
+					FlxTween.tween(oldstripes, {alpha: 0}, 1);
+				}
 				FlxTween.tween(vignette, {alpha: 1}, 1);
 			}
 		}
 
 
 
-		if (formattedSong == 'after-dark' && curStage == 'dark' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'after-dark' && curStage == 'dark')
 		{
 			if(eventNum == 0 && curBeat >= 8) {
 				eventNum++;
 				dad.alpha = 0.3;
 				dad.scale.set(1.05, 1.05);
 				FlxTween.tween(black, {alpha: 0}, 0.5);
+				if (!ClientPrefs.lowQuality) {
 				add(redglow);
 				add(scanlines);
-				add(darksparks);
 				add(vignette);
 				FlxTween.tween(redglow, {alpha: 1}, 0.5);
 				FlxTween.tween(scanlines, {alpha: 0.3}, 0.5);
 				FlxTween.tween(vignette, {alpha: 0.5}, 0.5);
+				}
+				add(darksparks);
 				camHUD.alpha = 1;
 			}
 
@@ -5150,12 +5149,20 @@ class PlayState extends MusicBeatState
 					remove(vignette);
 					remove(blackOverlay);
 				}
+				case 160: {
+					FlxTween.tween(flowers1, {alpha: 1}, 0.3);
+					FlxTween.tween(flowers2, {alpha: 1}, 0.3);
+					FlxTween.tween(flowers3, {alpha: 1}, 0.3);
+					FlxTween.tween(flowers4, {alpha: 1}, 0.3);
+
+				}
+
 			}
 		}
 
 
 
-		if (formattedSong == 'spectral-sonnet-beta' && curStage == 'siivagunner' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'spectral-sonnet-beta' && curStage == 'siivagunner')
 		{
 			switch (curBeat)
 			{
@@ -5224,6 +5231,26 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		if (formattedSong == 'goated' && curStage == 'erect' && ClientPrefs.lowQuality)
+			{
+				switch (curBeat)
+				{
+					case 256 | 456:
+					{
+						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						black.alpha = 0.5;
+
+					}
+	
+
+					case 384 | 624:
+					{
+						FlxTween.tween(black, {alpha: 0}, 1);
+					}
+	
+				}
+			}
+
 		if (formattedSong == 'candlelit-clash' && curStage == 'candlelit' && !ClientPrefs.lowQuality)
 		{
 
@@ -5248,20 +5275,21 @@ class PlayState extends MusicBeatState
 				case 212:
 				{
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
+					if (!ClientPrefs.lowQuality) {
 					brokencandlebg.alpha = 1;
-					FlxG.game.setFilters(cshaders);
 					FlxG.game.filtersEnabled = true;
 					candledark.alpha = 0;
-					candleglow.alpha = 0;
+					candleglow.alpha = 0; }
 				}
 
 				case 276:
 				{
+					if (!ClientPrefs.lowQuality) {
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
 					brokencandlebg.alpha = 0;
 					FlxG.game.filtersEnabled = false;
 					candledark.alpha = 1;
-					candleglow.alpha = 1;
+					candleglow.alpha = 1;}
 
 				}
 
@@ -5277,14 +5305,16 @@ class PlayState extends MusicBeatState
 				case 340:
 				{
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
-					FlxTween.tween(candlebells, {alpha: 1}, 2);
+					if (!ClientPrefs.lowQuality) {
+					FlxTween.tween(candlebells, {alpha: 1}, 2);}
 					FlxTween.tween(black, {alpha: 0.4}, 2);
 
 				}
 
 				case 435:
 				{
-					FlxTween.tween(candlebells, {alpha: 0}, 3);
+					if (!ClientPrefs.lowQuality) {
+					FlxTween.tween(candlebells, {alpha: 0}, 3);}
 					FlxTween.tween(black, {alpha: 0}, 2);
 				}
 
@@ -5338,10 +5368,12 @@ class PlayState extends MusicBeatState
 
 				case 1132:
 				{
-					FlxG.sound.play(Paths.sound('intro3' + introSoundsSuffix), 0.6);
+					if (!ClientPrefs.lowQuality) {
+					FlxG.sound.play(Paths.sound('intro3' + introSoundsSuffix), 0.6);}
 				}
 				case 1133:
 				{
+					if (!ClientPrefs.lowQuality) {
 					countdownReady = new FlxSprite().loadGraphic(Paths.image('ready'));
 					countdownReady.scrollFactor.set();
 					countdownReady.updateHitbox();
@@ -5357,10 +5389,11 @@ class PlayState extends MusicBeatState
 							countdownReady.destroy();
 						}
 					});
-					FlxG.sound.play(Paths.sound('intro2' + introSoundsSuffix), 0.6);
+					FlxG.sound.play(Paths.sound('intro2' + introSoundsSuffix), 0.6);}
 				}
 				case 1134:
 					{
+						if (!ClientPrefs.lowQuality) {
 					countdownSet = new FlxSprite().loadGraphic(Paths.image('set'));
 					countdownSet.scrollFactor.set();
 					countdownSet.screenCenter();
@@ -5375,10 +5408,11 @@ class PlayState extends MusicBeatState
 							countdownSet.destroy();
 						}
 					});
-					FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);
+					FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);}
 					}
 				case 1135:
 					{
+						if (!ClientPrefs.lowQuality) {
 					countdownGo = new FlxSprite().loadGraphic(Paths.image('go'));
 					countdownGo.scrollFactor.set();
 					countdownGo.updateHitbox();
@@ -5394,18 +5428,20 @@ class PlayState extends MusicBeatState
 							countdownGo.destroy();
 						}
 					});
-					FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);
+					FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);}
 					}
 
 				case 1136:
 				{
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
-					FlxTween.tween(funkyassoverlay, {alpha: 1}, 0.5);
+					if (!ClientPrefs.lowQuality) {
+					FlxTween.tween(funkyassoverlay, {alpha: 1}, 0.5);}
 				}
 
 				case 1200:
 				{
-					FlxTween.tween(funkyassoverlay, {alpha: 0}, 1);
+					if (!ClientPrefs.lowQuality) {
+					FlxTween.tween(funkyassoverlay, {alpha: 0}, 1);}
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
 					dad.alpha = 0.6;
 				}
@@ -5419,7 +5455,7 @@ class PlayState extends MusicBeatState
 		}
 
 
-		if (formattedSong == 'goat-remake' && curStage == 'newstage' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'goat-remake' && curStage == 'newstage')
 		{
 
 			switch (curBeat)
@@ -5454,6 +5490,7 @@ class PlayState extends MusicBeatState
 				case 136:
 				{
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
+					if (!ClientPrefs.lowQuality) {
 					goatold.alpha = 1;
 					goatmultiply.alpha = 0;
 					goatadd.alpha = 0;
@@ -5464,12 +5501,13 @@ class PlayState extends MusicBeatState
 					iconP1.color = 0xFF000000;
 					gf.color = 0xFF000000;
 					add(vignette);
-					vignette.alpha = 1;
+					vignette.alpha = 1;}
 				}
 				case 168:
 				{
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
 					//remove(goatold);
+					if (!ClientPrefs.lowQuality) {
 					goatold.alpha = 0;
 					goatmultiply.alpha = 1;
 					goatadd.alpha = 1;
@@ -5480,6 +5518,7 @@ class PlayState extends MusicBeatState
 					dad.color = 0xFFFFFFFF;
 					iconP2.color = 0xFFFFFFFF;
 					remove(vignette);
+					}
 					//vignette.alpha = 1;
 					monitors.animation.play('whitty');
 				}
@@ -5502,6 +5541,7 @@ class PlayState extends MusicBeatState
 
 				case 328:
 				{
+					if (!ClientPrefs.lowQuality) {
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
 					goatold.alpha = 1;
 					goatmultiply.alpha = 0;
@@ -5513,7 +5553,7 @@ class PlayState extends MusicBeatState
 					iconP1.color = 0xFF000000;
 					gf.color = 0xFF000000;
 					add(vignette);
-					vignette.alpha = 1;
+					vignette.alpha = 1;}
 				}
 				case 360:
 				{
@@ -5523,7 +5563,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (formattedSong == 'interrupted' && curStage == 'ourple' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'interrupted' && curStage == 'ourple')
 		{ //dad 1 is phone dad 2 is ourplemark dad 3 is guy and dad 4 is crying
 
 			switch (curBeat)
@@ -5577,12 +5617,14 @@ class PlayState extends MusicBeatState
 				}
 				case 513:
 				{
-					FlxTween.tween(ourpletheory, {alpha: 1}, 155 * Conductor.stepCrochet / 1000);
+					if (!ClientPrefs.lowQuality) {
+					FlxTween.tween(ourpletheory, {alpha: 1}, 155 * Conductor.stepCrochet / 1000);}
 
 				}
 				case 525:
 				{
-					FlxTween.tween(ourplelogo, {alpha: 1}, 107 * Conductor.stepCrochet / 1000);
+					if (!ClientPrefs.lowQuality) {
+					FlxTween.tween(ourplelogo, {alpha: 1}, 107 * Conductor.stepCrochet / 1000);}
 
 				}
 				case 558:
@@ -5615,7 +5657,7 @@ class PlayState extends MusicBeatState
 		}
 
 
-		if (formattedSong == 'all-saints-scramble' && curStage == 'skalloween' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'all-saints-scramble' && curStage == 'skalloween')
 			{
 
 				switch (curBeat)
@@ -5693,20 +5735,23 @@ class PlayState extends MusicBeatState
 					case 320:
 					{
 						FlxG.camera.flash(FlxColor.WHITE,1,false);
+						if (!ClientPrefs.lowQuality) {
 						grayscale.apply = 1;
-						vignette.alpha = 1;
+						vignette.alpha = 1;}
 					}
 
 					case 350:
 					{
+						if (!ClientPrefs.lowQuality) {
 						FlxTween.tween(grayscale, {apply: 0}, 8 * Conductor.stepCrochet / 1000);
-						FlxTween.tween(vignette, {alpha: 0}, 8 * Conductor.stepCrochet / 1000);
+						FlxTween.tween(vignette, {alpha: 0}, 8 * Conductor.stepCrochet / 1000);}
 
 					}
 
 					case 416:
 					{
-						skafunky.alpha = 1;
+						if (!ClientPrefs.lowQuality) {
+						skafunky.alpha = 1;}
 					}
 
 					case 672:
@@ -5717,25 +5762,28 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-		if (formattedSong == 'heart-attack' && curStage == 'kpark' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'heart-attack' && curStage == 'kpark')
 		{
 
 			switch (curBeat)
 			{
 				case 2:
 				{
+					if (!ClientPrefs.lowQuality) {
 					add(funkyassoverlay);
-					add(munchoverlay);
+					add(munchoverlay);}
 				}
 
 				case 36:
 				{
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
-					funkyassoverlay.alpha = 0.45;
+					if (!ClientPrefs.lowQuality) {
+					funkyassoverlay.alpha = 0.45;}
 				}
 				case 100:
 				{
-					FlxTween.tween(funkyassoverlay, {alpha: 0}, 2.5);
+					if (!ClientPrefs.lowQuality) {
+					FlxTween.tween(funkyassoverlay, {alpha: 0}, 2.5);}
 				}
 				case 143:
 				{
@@ -5744,29 +5792,34 @@ class PlayState extends MusicBeatState
 				}
 				case 154:
 				{
+					if (!ClientPrefs.lowQuality) {
 					skaclock.alpha = 1;
-					skaclock.animation.resume();
+					skaclock.animation.resume();}
 				}
 				case 164:
 				{
-					skaclock.animation.play('transition20');
+					if (!ClientPrefs.lowQuality) {
+					skaclock.animation.play('transition20');}
 				}
 
 				case 168:
 				{
 					camHUD.alpha = 1;
-					skaclock.alpha = 0;
+					if (!ClientPrefs.lowQuality) {
+					FlxTween.tween(kissuhoh, {alpha: 0.8}, 0.5 );
+					skaclock.alpha = 0;}
 					FlxG.camera.flash(FlxColor.WHITE,1,false);
 					blackOverlay.alpha = 0.0001;
-					FlxTween.tween(kissuhoh, {alpha: 0.8}, 0.5 );
 				}
 				case 232:
 				{
-					FlxTween.tween(munchoverlay, {alpha: 0.45}, 0.4);
+					if (!ClientPrefs.lowQuality) {
+					FlxTween.tween(munchoverlay, {alpha: 0.45}, 0.4);}
 				}
 				case 268:
 				{
-					FlxTween.tween(munchoverlay, {alpha: 0}, 2);
+					if (!ClientPrefs.lowQuality) {
+					FlxTween.tween(munchoverlay, {alpha: 0}, 2);}
 				}
 				case 303:
 				{
@@ -5775,7 +5828,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (formattedSong == 'jelly-jamboree' && curStage == 'waterfall' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'jelly-jamboree' && curStage == 'waterfall')
 			{
 
 				switch (curBeat)
@@ -5786,8 +5839,9 @@ class PlayState extends MusicBeatState
 					}
 					case 20:
 					{
+						if (!ClientPrefs.lowQuality) {
 						FlxTween.tween(wateradd, {alpha: 0.8}, 1);
-						FlxTween.tween(wateroverlay, {alpha: 1}, 1);
+						FlxTween.tween(wateroverlay, {alpha: 1}, 1);}
 					}
 					case 22 | 266:
 					{
@@ -5801,22 +5855,26 @@ class PlayState extends MusicBeatState
 					}
 					case 101 | 109 | 117 | 125 | 293 | 301 | 309 | 317:
 					{
+						if (!ClientPrefs.lowQuality) {
 						grayscale.apply = 1;
-						FlxG.game.filtersEnabled = true;
+						FlxG.game.filtersEnabled = true;}
 					}
 					case 102 | 110 | 118 | 126 | 294 | 302 | 310 | 318:
 					{
-						grayscale.apply = 0.25;
+						if (!ClientPrefs.lowQuality) {
+						grayscale.apply = 0.25;}
 					}
 					case 103 | 111 | 119 | 127 | 295 | 303  | 311 | 319 | 261:
 					{
+						if (!ClientPrefs.lowQuality) {
 						grayscale.apply = 0;
-						FlxG.game.filtersEnabled = true;
+						FlxG.game.filtersEnabled = true;}
 					}
 					case 104 | 112 | 120 | 128 | 296 | 304 | 312 | 320 | 262:
 					{
+						if (!ClientPrefs.lowQuality) {
 						grayscale.apply = 0;
-						FlxG.game.filtersEnabled = false;
+						FlxG.game.filtersEnabled = false;}
 					}
 					case 324:
 					{
@@ -5828,7 +5886,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-		if (formattedSong == 'minimize' && curStage == 'fake' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'minimize' && curStage == 'fake')
 		{
 
 			switch (curBeat)
@@ -5872,11 +5930,17 @@ class PlayState extends MusicBeatState
 				{
 					remove(blackOverlay);
 					FlxTween.tween(dad, {alpha: 0}, 2.5);
-					Main.instance.flashShader.color = 1.0;
+					if (!ClientPrefs.lowQuality) {
+					Main.instance.flashShader.color = 1.0;}
 				}
 
 				case 112:
 				{
+					if (ClientPrefs.lowQuality) {
+					FlxG.camera.flash(FlxColor.WHITE,1,false);
+					}
+
+					if (!ClientPrefs.lowQuality) {
 					Main.instance.flashShader.apply = 1;
 
 					camGame.bgColor = FlxColor.fromRGB(2, 3, 5);
@@ -5924,54 +5988,61 @@ class PlayState extends MusicBeatState
 					camHUD.setFilters([new ShaderFilter(new TransparentHudShader())]);
 					camOther.setFilters([new ShaderFilter(new TransparentHudShader())]);
 					#end
+					}
 					dad.alpha = 1;
 				}
 
 				case 116:
 				{
-					Main.instance.flashShader.color = 1/255;
+					if (!ClientPrefs.lowQuality) {
+					Main.instance.flashShader.color = 1/255;}
 
 				}
 
 				case 891:
 				{
+					if (!ClientPrefs.lowQuality) {
 					FlxTween.tween(Main.instance.flashShader, {apply: 1}, 0.6);
 					#if mac
 					if(!ClientPrefs.downScroll) {
 						FlxTween.tween(scoreTxt, {alpha: 0}, 0.6);
 					}
-					#end
+					#end}
 
 				}
 
 				case 892:
 				{
 					canPause = false;
+					if (!ClientPrefs.lowQuality) {
 					Main.instance.flashShader.apply = 0;
 					Lib.application.window.borderless = false;
 					TransparentWindow.disableTransparent();
 					camGame.setFilters([]);
 					camHUD.setFilters([]);
-					camOther.setFilters([]);
+					camOther.setFilters([]);}
 					camHUD.alpha = 0.0001;
 					camGame.bgColor = 0xFF000000;
+					if (!ClientPrefs.lowQuality) {
 					#if mac
 					camGame.bgColor.alpha = 255;
 					Main.macBackground.visible = false;
 					#end
+					}
 
 				}
 
 				case 924:
 				{
-					isMinimizeBroken = false;
+					if (!ClientPrefs.lowQuality) {
+					isMinimizeBroken = false;}
 
 					dad.alpha = 0.0001;
 				}
 			}
 		}
 
-		if (formattedSong == 'spooks' && curStage == '90s' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'spooks' && curStage == '90s')
 		{
 
 			switch (curBeat)
@@ -5979,25 +6050,29 @@ class PlayState extends MusicBeatState
 				case 132:
 				{
 				FlxG.camera.flash(FlxColor.WHITE,1,false);
+				if (!ClientPrefs.lowQuality) {
 				animevfx.alpha = 1;
 				light1.alpha = 0.65;
-				light2.alpha = 1;
+				light2.alpha = 1;}
 
 				}
 				case 192:
 				{
+				if (!ClientPrefs.lowQuality) {
 				FlxTween.tween(animevfx, {alpha: 0}, 1);
 				FlxTween.tween(light1, {alpha: 0}, 1);
-				FlxTween.tween(light2, {alpha: 0}, 1);
+				FlxTween.tween(light2, {alpha: 0}, 1);}
 				FlxTween.tween(blackbg, {alpha: 0.6}, 2.5);
 				}
 				case 200:
 				{
-				FlxTween.tween(animesmoke, {alpha: 0.8}, 2);
+				if (!ClientPrefs.lowQuality) {
+				FlxTween.tween(animesmoke, {alpha: 0.8}, 2);}
 				}
 				case 232:
 				{
-				FlxTween.tween(animesmoke, {alpha: 0}, 2);
+				if (!ClientPrefs.lowQuality) {
+				FlxTween.tween(animesmoke, {alpha: 0}, 2);}
 				}
 				case 256:
 				{
@@ -6006,13 +6081,15 @@ class PlayState extends MusicBeatState
 				}
 				case 288:
 				{
+				if (!ClientPrefs.lowQuality) {
 				FlxTween.tween(animevfx, {alpha: 1}, 1);
 				FlxTween.tween(light1, {alpha: 0.65}, 1);
-				FlxTween.tween(light2, {alpha: 1}, 1);
+				FlxTween.tween(light2, {alpha: 1}, 1);}
 				}
 				case 356:
 				{
-				FlxTween.tween(animesmoke, {alpha: 0.3}, 0.5);
+				if (!ClientPrefs.lowQuality) {
+				FlxTween.tween(animesmoke, {alpha: 0.3}, 0.5);}
 				}
 				case 384:
 				{
