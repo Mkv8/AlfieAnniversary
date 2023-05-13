@@ -3,6 +3,14 @@ local anglevar = 1;
 local intensity = 0
 local intensity2 = 3
 local enabled = false
+
+function onCreate()
+	if not cameraZoomOnBeat then
+		close(true)
+		return
+	end
+end
+
 function onBeatHit()
 	if enabled then
 		if curBeat % 2 == 0 then
@@ -46,3 +54,4 @@ function onEvent(n,v,b)
 		end
 	end
 end
+

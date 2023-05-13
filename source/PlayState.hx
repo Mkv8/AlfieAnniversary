@@ -1086,12 +1086,13 @@ class PlayState extends MusicBeatState
 				circles.scale.set(1.05, 1.05);
 				circles.alpha = 0.00001;
 				add(circles);
-
+				
+				if (!ClientPrefs.lowQuality) {
 				var shaders:Array<BitmapFilter> = [
 					new ShaderFilter(new VCRShader()),
-					#if !mac new ShaderFilter(new OldTVShader()) #end
+					#if !mac new ShaderFilter(new OldTVShader()) #end 
 				];
-
+				
 				//camHUD.setFilters(shaders);
 				//camHUD.filtersEnabled = true;
 				//camGame.setFilters(shaders);
@@ -1100,7 +1101,7 @@ class PlayState extends MusicBeatState
 				//camOther.filtersEnabled = true;
 
 				FlxG.game.setFilters(shaders);
-				FlxG.game.filtersEnabled = true;
+				FlxG.game.filtersEnabled = true; }
 
 				case 'shillton': //Forest Fire
 				town = new BGSprite('bgold', -2000, -800, 1, 1);

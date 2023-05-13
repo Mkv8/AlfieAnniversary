@@ -34,6 +34,8 @@ class PauseSubState extends MusicBeatSubstate
 	var bells:FlxBackdrop;
 	var overlay:FlxSprite;
 	var bars:FlxSprite;
+	
+	public var skipFirstFrame = true;
 
 	public function new(x:Float, y:Float)
 	{
@@ -205,6 +207,9 @@ class PauseSubState extends MusicBeatSubstate
 
 	override function update(elapsed:Float)
 	{
+
+		if(skipFirstFrame) {skipFirstFrame = false; return;}
+
 		if (pauseMusic.volume < 0.5)
 			pauseMusic.volume += 0.01 * elapsed;
 
@@ -231,9 +236,32 @@ class PauseSubState extends MusicBeatSubstate
 		{
 			var daSelected:String = menuItems[curSelected];
 			if(daSelected != 'BACK' && difficultyChoices.contains(daSelected)) {
-				var name:String = PlayState.SONG.song.toLowerCase();
-				var poop = Highscore.formatSong(name, curSelected);
-				PlayState.SONG = Song.loadFromJson(poop, name);
+				//var name:String = PlayState.SONG.song.toLowerCase();
+				//var poop = Highscore.formatSong(name, curSelected);
+				var diffic = Highscore.formatSong("", curSelected);
+				if (PlayState.instance.formattedSong != "pasta-night") {
+					var name:String = PlayState.SONG.song.toLowerCase();
+						PlayState.SONG = Song.loadFromJson(name + diffic, name);
+				}
+				else
+				{
+					var kisston = Song.loadFromJson("pasta-night" + diffic + '-k', "pasta-night");
+					var alfie = Song.loadFromJson("pasta-night" + diffic + '-a', "pasta-night");
+					var filip = Song.loadFromJson("pasta-night" + diffic + '-f', "pasta-night");
+		
+					switch(PlayState.bihNum)
+					{
+						case 0:
+							PlayState.SONG = kisston;
+							PlayState.ectSONGS = [filip, alfie];
+						case 1:
+							PlayState.SONG = filip;
+							PlayState.ectSONGS = [kisston, alfie];
+						case 2:
+							PlayState.SONG = alfie;
+							PlayState.ectSONGS = [kisston, filip];
+					}
+				}
 				PlayState.storyDifficulty = curSelected;
 				MusicBeatState.resetState();
 				FlxG.sound.music.volume = 0;
