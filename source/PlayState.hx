@@ -899,7 +899,12 @@ class PlayState extends MusicBeatState
 
 		if(formattedSong == 'minimize')
 		{
+			if (!ClientPrefs.flashing) {
+			coming4u = new BGSprite('comingNoFlash', 0, -420, 1, 1, ['comingblack'], false);
+			} else {
 			coming4u = new BGSprite('comingforyou', 0, -420, 1, 1, ['comingblack'], false);
+			}
+
 			coming4u.updateHitbox();
 			//coming4u.setGraphicSize(FlxG.width, FlxG.height);
 			coming4u.cameras = [camOther];
@@ -5253,7 +5258,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 
-		if (formattedSong == 'candlelit-clash' && curStage == 'candlelit' && !ClientPrefs.lowQuality)
+		if (formattedSong == 'candlelit-clash' && curStage == 'candlelit')
 		{
 
 			switch (curBeat)

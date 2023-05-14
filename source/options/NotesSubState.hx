@@ -86,6 +86,7 @@ class NotesSubState extends MusicBeatSubstate
 
 		hsbText = new Alphabet(0, 0, "Hue    Saturation  Brightness", false, false, 0, 0.65);
 		hsbText.x = posX + 240;
+		hsbText.fontColor = 0xffffffff;
 		add(hsbText);
 
 		changeSelection();
