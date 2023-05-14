@@ -77,8 +77,8 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
-		var option:Option = new Option('Health Bar Transparency',
-			'How much transparent should the health bar and icons be.',
+		var option:Option = new Option('Health Bar Opacity',
+			'Sets the alpha (opacity) of the health bar and icons. Lower percent = more transparent.',
 			'healthBarAlpha',
 			'percent',
 			1);
