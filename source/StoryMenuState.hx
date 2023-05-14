@@ -31,7 +31,7 @@ class StoryMenuState extends MusicBeatState
 	// defaults to True
 	public static var weekCompleted:Map<String, Bool> = new Map<String, Bool>();
 	public static var forceUnlock:Bool = false;
-
+  public static var pastaSuffix:String = "";
 	var scoreText:FlxText;
 
 	private static var lastDifficultyName:String = '';
@@ -515,12 +515,15 @@ class StoryMenuState extends MusicBeatState
 			switch(curBih)
 			{
 				case 0:
+					StoryMenuState.pastaSuffix = '-k';
 					PlayState.SONG = kisston;
 					PlayState.ectSONGS = [filip, alfie];
 				case 1:
+					StoryMenuState.pastaSuffix = '-f';
 					PlayState.SONG = filip;
 					PlayState.ectSONGS = [kisston, alfie];
 				case 2:
+					StoryMenuState.pastaSuffix = '-a';
 					PlayState.SONG = alfie;
 					PlayState.ectSONGS = [kisston, filip];
 			}
