@@ -1766,6 +1766,7 @@ class PlayState extends MusicBeatState
 		{
 			iconP2.alpha = 0;
 			healthBar.color = 0xFF000000;
+			healthBar.alpha = ClientPrefs.healthBarAlpha;
 			iconP1.color = 0xFF000000;
 			iconP1.alpha = ClientPrefs.healthBarAlpha;
 		}
@@ -5471,8 +5472,10 @@ class PlayState extends MusicBeatState
 					dadGroup.alpha = 1;
 					iconP2.alpha = 1;
 					healthBar.color = 0xFFFFFFFF;
+					healthBar.alpha = ClientPrefs.healthBarAlpha;
 					boyfriend.color = 0xFFFFFFFF;
 					iconP1.color = 0xFFFFFFFF;
+					iconP1.alpha = ClientPrefs.healthBarAlpha;
 					gf.color = 0xFFFFFFFF;
 				}
 
@@ -5496,10 +5499,13 @@ class PlayState extends MusicBeatState
 					goatmultiply.alpha = 0;
 					goatadd.alpha = 0;
 					healthBar.color = 0xFF000000;
+					healthBar.alpha = ClientPrefs.healthBarAlpha;
 					boyfriend.color = 0xFF000000;
 					dad.color = 0xFF000000;
 					iconP2.color = 0xFF000000;
 					iconP1.color = 0xFF000000;
+					iconP2.alpha = ClientPrefs.healthBarAlpha;
+					iconP1.alpha = ClientPrefs.healthBarAlpha;
 					gf.color = 0xFF000000;
 					add(vignette);
 					vignette.alpha = 1;}
@@ -5513,11 +5519,15 @@ class PlayState extends MusicBeatState
 					goatmultiply.alpha = 1;
 					goatadd.alpha = 1;
 					healthBar.color = 0xFFFFFFFF;
+					
 					boyfriend.color = 0xFFFFFFFF;
 					iconP1.color = 0xFFFFFFFF;
 					gf.color = 0xFFFFFFFF;
 					dad.color = 0xFFFFFFFF;
 					iconP2.color = 0xFFFFFFFF;
+					healthBar.alpha = ClientPrefs.healthBarAlpha;
+					iconP2.alpha = ClientPrefs.healthBarAlpha;
+					iconP1.alpha = ClientPrefs.healthBarAlpha;
 					remove(vignette);
 					}
 					//vignette.alpha = 1;
@@ -5553,6 +5563,9 @@ class PlayState extends MusicBeatState
 					iconP2.color = 0xFF000000;
 					iconP1.color = 0xFF000000;
 					gf.color = 0xFF000000;
+					healthBar.alpha = ClientPrefs.healthBarAlpha;
+					iconP2.alpha = ClientPrefs.healthBarAlpha;
+					iconP1.alpha = ClientPrefs.healthBarAlpha;
 					add(vignette);
 					vignette.alpha = 1;}
 				}
