@@ -35,6 +35,8 @@ class CassetteUnlockState extends MusicBeatSubstate
 	{
 		super.create();
 
+		var parent:StoryMenuState = cast @:privateAccess this._parentState;
+
 		unlocktext = new Alphabet(0, 70, "New songs unlocked!", true);
 		unlocktext.scale.set(0.9, 0.9);
 		unlocktext.screenCenter(X);
@@ -54,9 +56,9 @@ class CassetteUnlockState extends MusicBeatSubstate
 		blur.blur = 0.0;
 		blur.brightness = 1.0;
 
-		cam = new FlxCamera();
+		cam = parent.camOverlay;//new FlxCamera();
 		cam.bgColor.alpha = 0;
-		FlxG.cameras.add(cam, false);
+		//FlxG.cameras.add(cam, false);
 		FlxG.cameras.list[FlxG.cameras.list.indexOf(cam) - 1].setFilters([new ShaderFilter(blur)]);
 
 		//var bg = new FlxSpriteExtra().makeSolid(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -96,8 +98,6 @@ class CassetteUnlockState extends MusicBeatSubstate
 		//ref.alpha = 0.00001;
 		//ref.screenCenter();
 		//add(ref);
-
-		var parent:StoryMenuState = cast @:privateAccess this._parentState;
 
 		parent.grpCassette.members[parent.weekMap["week93"]].loadDifficulty();
 		parent.grpCassette.members[parent.weekMap["week94"]].loadDifficulty();
@@ -179,7 +179,7 @@ class CassetteUnlockState extends MusicBeatSubstate
 	override function destroy()
 	{
 		FlxG.cameras.list[FlxG.cameras.list.indexOf(cam) - 1].setFilters([]);
-		FlxG.cameras.remove(cam, true);
+		//FlxG.cameras.remove(cam, true);
 		unlocktext.kill();
 		unlocktext2.kill();
 

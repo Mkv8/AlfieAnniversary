@@ -1,5 +1,8 @@
 package;
 
+import openfl.filters.ShaderFilter;
+import shaders.FastBlurShader;
+import flixel.FlxCamera;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -29,7 +32,6 @@ class StoryMenuState extends MusicBeatState
 	// Not recommended, as people usually download your mod for, you know,
 	// playing just the modded week then delete it.
 	// defaults to True
-	public static var weekCompleted:Map<String, Bool> = new Map<String, Bool>();
 	public static var forceUnlock:Bool = false;
 	var scoreText:FlxText;
 
@@ -86,6 +88,9 @@ class StoryMenuState extends MusicBeatState
 
 	var newUnlockedSongs:Array<String>;
 
+	public var camGame:FlxCamera;
+	public var camOverlay:FlxCamera;
+
 	override function create()
 	{
 		Paths.clearStoredMemory();
@@ -96,9 +101,16 @@ class StoryMenuState extends MusicBeatState
 		if(curWeek >= WeekData.weeksList.length) _curWeek = 0;
 		persistentUpdate = persistentDraw = true;
 
+		camGame = new FlxCamera();
+		camOverlay = new FlxCamera();
+		camOverlay.bgColor.alpha = 0;
+
+		FlxG.cameras.reset(camGame);
+		FlxG.cameras.add(camOverlay, false);
+
 		newUnlockedSongs = LockManager.getNewlyUnlockedSongs();
 
-		scoreText = new FlxFixedText(10, 10, 0, "SCORE: 49324858", 36);
+		scoreText = new FlxFixedText(10, 10, 0, "SCORE: 0", 36);
 		scoreText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 
 		lockedTxt = new FlxFixedText(0, 100, 0, "SONG LOCKED!\nPlay other songs to unlock. ", 60);
@@ -194,12 +206,10 @@ class StoryMenuState extends MusicBeatState
 		}
 		curDifficulty = Math.round(Math.max(0, CoolUtil.difficulties.indexOf(lastDifficultyName)));
 
-		
 		changeDifficulty();
 
 		add(bgSprite);
 
-	
 		add(scoreText);
 		add(txtWeekTitle);
 
@@ -218,15 +228,16 @@ class StoryMenuState extends MusicBeatState
 
 
 	function makeOverlay() {
-		blackOverlay = new FlxSpriteExtra(0, 0).makeSolid(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+		/*blackOverlay = new FlxSpriteExtra(0, 0).makeSolid(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
 		blackOverlay.screenCenter();
 		blackOverlay.alpha = 0;
-		add(blackOverlay);
+		add(blackOverlay);*/
 
 		bihText = new FlxFixedText(FlxG.width * 0.7, -300, 0, "Choose your player", 40);
-		bihText.setFormat("VCR OSD Mono", 90, FlxColor.WHITE, RIGHT);
+		bihText.setFormat("VCR OSD Mono", 82, FlxColor.WHITE, RIGHT);
 		add(bihText);
 		bihText.screenCenter(X);
+		bihText.cameras = [camOverlay];
 
 		var names = ["icon-kisstonpasta", "icon-filippasta", "icon-alfiepasta"];
 		var poses = [new FlxPoint(268,452),new FlxPoint(568,452),new FlxPoint(868,452)];
@@ -236,6 +247,7 @@ class StoryMenuState extends MusicBeatState
 			var i = new HealthIcon(names[e], false);
 			i.alpha = 0;
 			i.setPosition(poses[e].x,poses[e].y);
+			i.cameras = [camOverlay];
 			add(i);
 			icons.push(i);
 		}
@@ -245,6 +257,7 @@ class StoryMenuState extends MusicBeatState
 		handSelect.angle = 90;
 		handSelect.updateHitbox();
 		handSelect.alpha = 0;
+		handSelect.cameras = [camOverlay];
 		add(handSelect);
 	}
 
@@ -406,6 +419,7 @@ class StoryMenuState extends MusicBeatState
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			movedBack = true;
+			CustomFadeTransition.nextCamera = camOverlay;
 			MusicBeatState.switchState(new MainMenuState());
 		}
 
@@ -432,13 +446,24 @@ class StoryMenuState extends MusicBeatState
 		}
 	}
 
+	var blur:FastBlurShader;
+
 	function openChoosing() {
 		choosingbih = true;
 
 		for (i in icons)
 			FlxTween.tween(i, {alpha: 1}, 0.75);
 
-		FlxTween.tween(blackOverlay, {alpha: 0.75}, 0.75);
+		if(blur == null) {
+			blur = new FastBlurShader();
+		}
+		blur.blur = 0.0;
+		blur.brightness = 1.0;
+		camGame.setFilters([new ShaderFilter(blur)]);
+
+		FlxTween.tween(blur, {brightness: 1-0.75, blur: 0.05}, 0.75);
+
+		//FlxTween.tween(blackOverlay, {alpha: 0.75}, 0.75);
 		FlxTween.tween(handSelect, {alpha: 1}, 0.75);
 		FlxTween.tween(bihText, {y: bihText.y + 400}, 0.75, {ease: FlxEase.backOut});
 	}
@@ -557,6 +582,8 @@ class StoryMenuState extends MusicBeatState
 	function loadSong() {
 		timer(1, function(tmr:FlxTimer)
 		{
+			CustomFadeTransition.nextCamera = camOverlay;
+
 			if(Paths.formatToSongPath(PlayState.SONG.song) == "heart-attack" || Paths.formatToSongPath(PlayState.SONG.song) == "jelly-jamboree" )
 			{
 				LoadingState.loadAndSwitchState(new MeetState(), true);
@@ -741,14 +768,13 @@ class StoryMenuState extends MusicBeatState
 		lockedTxt.alpha = 0.0001;
 		songsLeft.alpha = 0.0001;
 
-	
 		if(!grpCassette.members[curWeek].isUnlocked) {
 			bgSprite.visible = false;
 			lockedTxt.alpha = 1;
 
-				if(howManySongsLeft.length <= 4) {
-					songsLeft.alpha = 1;
-				}
+			if(howManySongsLeft.length <= 4) {
+				songsLeft.alpha = 1;
+			}
 		}
 
 		PlayState.storyWeek = curWeek;

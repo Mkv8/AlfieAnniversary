@@ -433,10 +433,10 @@ class PlayState extends MusicBeatState
 	public function setRatingPositions() {
 		var high_position_y 	= 130;				//For upscroll
 		var low_position_y 		= FlxG.height-180;	//For downscroll
-		var middle_scroll_offset= -360; 		//Negative values for "left of center" 
+		var middle_scroll_offset= -360; 		//Negative values for "left of center"
 
 		ratingText.screenCenter(X);
-		
+
 		switch (ratingPosition) {
 			case DownScroll(middleScroll):
 				//trace('Downscroll; Middle:$middleScroll!');
@@ -1091,13 +1091,13 @@ class PlayState extends MusicBeatState
 				circles.scale.set(1.05, 1.05);
 				circles.alpha = 0.00001;
 				add(circles);
-				
+
 				if (!ClientPrefs.lowQuality) {
 				var shaders:Array<BitmapFilter> = [
 					new ShaderFilter(new VCRShader()),
-					#if !mac new ShaderFilter(new OldTVShader()) #end 
+					#if !mac new ShaderFilter(new OldTVShader()) #end
 				];
-				
+
 				//camHUD.setFilters(shaders);
 				//camHUD.filtersEnabled = true;
 				//camGame.setFilters(shaders);
@@ -1786,7 +1786,7 @@ class PlayState extends MusicBeatState
 
 		if (formattedSong == 'spectral-sonnet-beta')
 		{
-			
+
 		}
 
 		if (formattedSong == 'minimize' && curStage == 'fake')
@@ -4038,7 +4038,6 @@ class PlayState extends MusicBeatState
 
 				if (storyPlaylist.length <= 0)
 				{
-
 					cancelMusicFadeTween();
 					if(FlxTransitionableState.skipNextTransIn) {
 						CustomFadeTransition.nextCamera = null;
@@ -4053,14 +4052,11 @@ class PlayState extends MusicBeatState
 
 					// if ()
 					if(!ClientPrefs.getGameplaySetting('practice', false) && !ClientPrefs.getGameplaySetting('botplay', false)) {
-						StoryMenuState.weekCompleted.set(WeekData.weeksList[storyWeek], true);
-
 						if (SONG.validScore)
 						{
 							Highscore.saveWeekScore(WeekData.getWeekFileName(), campaignScore, storyDifficulty);
 						}
 
-						FlxG.save.data.weekCompleted = StoryMenuState.weekCompleted;
 						FlxG.save.flush();
 					}
 					changedDifficulty = false;
@@ -5248,13 +5244,13 @@ class PlayState extends MusicBeatState
 						black.alpha = 0.5;
 
 					}
-	
+
 
 					case 384 | 624:
 					{
 						FlxTween.tween(black, {alpha: 0}, 1);
 					}
-	
+
 				}
 			}
 
@@ -5524,7 +5520,7 @@ class PlayState extends MusicBeatState
 					goatmultiply.alpha = 1;
 					goatadd.alpha = 1;
 					healthBar.color = 0xFFFFFFFF;
-					
+
 					boyfriend.color = 0xFFFFFFFF;
 					iconP1.color = 0xFFFFFFFF;
 					gf.color = 0xFFFFFFFF;
@@ -5966,8 +5962,8 @@ class PlayState extends MusicBeatState
 
 					FlxTween.tween(Main.instance.flashShader, {apply: 0}, 0.5);
 					isMinimizeBroken = true;
-					//FlxG.camera.flash(FlxColor.WHITE,0.5,false);	
-									
+					//FlxG.camera.flash(FlxColor.WHITE,0.5,false);
+
 					if(origWinFullScreen == null) origWinFullScreen = Lib.application.window.fullscreen;
 					#if mac
 					if(origWinX == null) origWinX = Application.current.window.x;

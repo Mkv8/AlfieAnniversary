@@ -90,14 +90,14 @@ class LockManager {
 	}
 
 	public static function getSongsLeft() {
-        var arr = [];
-        for(song in allSongs) {
-            if(!hasBeaten(song) && !lockedSongs.contains(song)) {
-                arr.push(song);
-            }
-        }
-        return arr;
-    }
+		var arr = [];
+		for(song in allSongs) {
+			if(!hasBeaten(song) && !lockedSongs.contains(song)) {
+				arr.push(song);
+			}
+		}
+		return arr;
+	}
 
 	public static var hasWatchedCredits:Bool = false;
 
@@ -106,33 +106,33 @@ class LockManager {
 		beatenSongs = allSongs;
 
 		for(beatenSongs in allSongs) {
-            if(hasBeaten(beatenSongs) && !hasWatchedCredits) {
+			if(hasBeaten(beatenSongs) && !hasWatchedCredits) {
 				MusicBeatState.switchState(new ChartCredits());
 
 				hasWatchedCredits = true;
-            }
-        }*/
-
-		public static function getAllSongsLeft() {
-			var arr = [];
-			for(song in allSongs) {
-				if(!hasBeaten(song)) {
-					arr.push(song);
-				}
 			}
-			return arr;
 		}
+	}*/
 
-		public static function shouldGoToCredits() {
-			if(hasWatchedCredits) return false;
-		
-			if(getAllSongsLeft().length == 0) {
-				hasWatchedCredits = true;
-				FlxG.save.data.hasWatchedCredits = true;
-				FlxG.save.flush();
-				return true;
+	public static function getAllSongsLeft() {
+		var arr = [];
+		for(song in allSongs) {
+			if(!hasBeaten(song)) {
+				arr.push(song);
 			}
-			return false;
 		}
+		return arr;
+	}
 
+	public static function shouldGoToCredits() {
+		if(hasWatchedCredits) return false;
+
+		if(getAllSongsLeft().length == 0) {
+			hasWatchedCredits = true;
+			FlxG.save.data.hasWatchedCredits = true;
+			FlxG.save.flush();
+			return true;
+		}
+		return false;
+	}
 }
