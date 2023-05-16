@@ -1157,6 +1157,7 @@ class PlayState extends MusicBeatState
 
 				if (!ClientPrefs.lowQuality) {
 					FlxG.game.setFilters(cshaders);
+					FlxG.game.filtersEnabled = false;
 				}
 
 
