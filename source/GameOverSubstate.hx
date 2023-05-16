@@ -46,7 +46,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		Main.macBackground.visible = false;
 		#end
 		Lib.application.window.borderless = false;
-		Main.fpsVar.visible = true; // Transparent
+		Main.fpsVar.visible = ClientPrefs.showFPS; // Transparent
 
 		instance = this;
 		PlayState.instance.callOnLuas('onGameOverStart', []);
@@ -57,7 +57,7 @@ class GameOverSubstate extends MusicBeatSubstate
 
 	}
 
-	public function new(x:Float, y:Float, camX:Float, camY:Float)
+	public function new(x:Float, y:Float)
 	{
 		super();
 

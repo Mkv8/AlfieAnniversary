@@ -1998,6 +1998,11 @@
 						"MoveArrow",
 						"7",
 						"-320, 0, 0, 1, 0.001"
+					],
+					[
+						"Set Property Bool",
+						"sectionMiddleScroll",
+						"true"
 					]
 				]
 			],

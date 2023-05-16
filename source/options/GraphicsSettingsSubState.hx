@@ -65,17 +65,6 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.maxValue = 240;
 		option.displayFormat = '%v FPS';
 		option.onChange = onChangeFramerate;
-		var option:Option = new Option('Framerate',
-			"Pretty self explanatory, isn't it?",
-			'framerate',
-			'int',
-			60);
-		addOption(option);
-
-		option.minValue = 60;
-		option.maxValue = 240;
-		option.displayFormat = '%v FPS';
-		option.onChange = onChangeFramerate;
 
 		var option:Option = new Option('Cap Lua at 60 fps',
 			"Enable this if it crashes on long songs randomly",

@@ -71,7 +71,7 @@ class PauseSubState extends MusicBeatSubstate
 
 		var bg:FlxSprite = null;
 
-		if(isBroken) {
+		if(!isBroken) {
 			bg = new FlxSpriteExtra().makeSolid(FlxG.width, FlxG.height, FlxColor.BLACK);
 			bg.alpha = 0.0001;
 			bg.scrollFactor.set();
