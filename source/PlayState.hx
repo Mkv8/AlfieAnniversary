@@ -2993,6 +2993,8 @@ class PlayState extends MusicBeatState
 	public static var maxLuaFPS = 30;
 	var fpsElapsed:Array<Float> = [0,0,0];
 	var numCalls:Array<Float> = [0,0,0];
+	var setUpdater:Float->Void = null;
+	var setUpdaterPost:Float->Void = null;
 	var freeze = false;
 	override public function update(elapsed:Float)
 	{
@@ -3027,6 +3029,9 @@ class PlayState extends MusicBeatState
 			}
 		} else {
 			callOnLuas('onUpdate', [elapsed]);
+		}
+		if(setUpdater!=null){
+			setUpdater(elapsed);
 		}
 
 		if(!inCutscene) {
@@ -3402,6 +3407,9 @@ class PlayState extends MusicBeatState
 			callOnLuas('onUpdatePost', [elapsed]);
 		}
 
+		if(setUpdaterPost!=null){
+			setUpdaterPost(elapsed);
+		}
 		updateHealthGraphics();
 
 		if(ratingText.visible && ratingText.alpha > 0) {

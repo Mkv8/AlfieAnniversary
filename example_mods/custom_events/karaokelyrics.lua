@@ -33,8 +33,24 @@ function onCreate()
 	setTextFont('sunglyric', font)
 	addLuaText('sunglyric');
 end
+--[[
 function onUpdatePost()
 	setProperty('sunglyric.x', getProperty('setlyric.x')) -- make sure sung text is always ontop of set text
+end
+]]
+--Below is an example replacement
+function setUpdatePost()
+    runHaxeCode([[
+    function onUpdatePost(elapsed:Float) {
+	    var a = game.modchartTexts.get("sunglyric");
+		var b = game.modchartTexts.get("setlyric");
+		if(a!=null && b!=null){
+			a.x = b.x;
+			a.y = b.y;
+		}
+    }
+    game.setUpdaterPost = onUpdatePost;
+    ]])
 end
 function onEvent(name, value1, value2)
 	if name == 'karaokelyrics' then
