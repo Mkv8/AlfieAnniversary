@@ -2086,6 +2086,8 @@ class PlayState extends MusicBeatState
 
 		Conductor.safeZoneOffset = (ClientPrefs.safeFrames / 60) * 1000;
 		callOnLuas('onCreatePost', []);
+		callOnLuas('setUpdate', []);
+		callOnLuas('setUpdatePost', []);
 		function reorderCharacters(input:Array<Character>){
 			for(character in input){
 				if(character!=null){
