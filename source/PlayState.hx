@@ -959,20 +959,6 @@ class PlayState extends MusicBeatState
 		if(PlayState.SONG.stage == null || PlayState.SONG.stage.length < 1) {
 			switch (songName)
 			{
-				case 'spookeez' | 'south' | 'monster':
-					curStage = 'spooky';
-				case 'pico' | 'blammed' | 'philly' | 'philly-nice':
-					curStage = 'philly';
-				case 'milf' | 'satin-panties' | 'high':
-					curStage = 'limo';
-				case 'cocoa' | 'eggnog':
-					curStage = 'mall';
-				case 'winter-horrorland':
-					curStage = 'mallEvil';
-				case 'senpai' | 'roses':
-					curStage = 'school';
-				case 'thorns':
-					curStage = 'schoolEvil';
 				default:
 					curStage = 'stage';
 			}
@@ -1093,22 +1079,23 @@ class PlayState extends MusicBeatState
 				add(circles);
 
 				if (!ClientPrefs.lowQuality) {
-				var shaders:Array<BitmapFilter> = [
-					new ShaderFilter(new VCRShader()),
-					#if !mac new ShaderFilter(new OldTVShader()) #end
-				];
+					var shaders:Array<BitmapFilter> = [
+						new ShaderFilter(new VCRShader()),
+						#if !mac new ShaderFilter(new OldTVShader()) #end
+					];
 
-				//camHUD.setFilters(shaders);
-				//camHUD.filtersEnabled = true;
-				//camGame.setFilters(shaders);
-				//camGame.filtersEnabled = true;
-				//camOther.setFilters(shaders);
-				//camOther.filtersEnabled = true;
+					//camHUD.setFilters(shaders);
+					//camHUD.filtersEnabled = true;
+					//camGame.setFilters(shaders);
+					//camGame.filtersEnabled = true;
+					//camOther.setFilters(shaders);
+					//camOther.filtersEnabled = true;
 
-				FlxG.game.setFilters(shaders);
-				FlxG.game.filtersEnabled = true; }
+					FlxG.game.setFilters(shaders);
+					FlxG.game.filtersEnabled = true;
+				}
 
-				case 'shillton': //Forest Fire
+			case 'shillton': //Forest Fire
 				town = new BGSprite('bgold', -2000, -800, 1, 1);
 				town.updateHitbox();
 				add(town);
@@ -1169,7 +1156,8 @@ class PlayState extends MusicBeatState
 				add(candlebells);
 
 				if (!ClientPrefs.lowQuality) {
-				FlxG.game.setFilters(cshaders); }
+					FlxG.game.setFilters(cshaders);
+				}
 
 
 			case 'mansiontop':
@@ -1243,10 +1231,11 @@ class PlayState extends MusicBeatState
 				add(blackbg);
 
 				if (!ClientPrefs.lowQuality) {
-				var shaders:Array<BitmapFilter> = [new ShaderFilter(new VCRShader())];
+					var shaders:Array<BitmapFilter> = [new ShaderFilter(new VCRShader())];
 
-				FlxG.game.setFilters(shaders);
-				FlxG.game.filtersEnabled = true; }
+					FlxG.game.setFilters(shaders);
+					FlxG.game.filtersEnabled = true;
+				}
 
 			case 'newstage': //goat remake
 				goatstage1 = new BGSprite('stage1', -1530, -720, 1, 1);
@@ -2987,19 +2976,23 @@ class PlayState extends MusicBeatState
         if (FlxG.keys.pressed.W){object.y--;}
 		if (FlxG.keys.justPressed.SPACE){trace(object);}*/
 
-		if(ClientPrefs.framerate <= maxLuaFPS){
+		if(ClientPrefs.capLua60fps) {
+			if(ClientPrefs.framerate <= maxLuaFPS){
 
-			callOnLuas('onUpdate', [elapsed]);
-		}
-		else {
-			numCalls[0]+=1;
-			fpsElapsed[0]+=elapsed;
-			if(numCalls[0] >= Std.int(ClientPrefs.framerate/maxLuaFPS)){
-				//trace("New Update");
-				callOnLuas('onUpdate', [fpsElapsed[0]]);
-				fpsElapsed[0]=0;
-				numCalls[0]=0;
+				callOnLuas('onUpdate', [elapsed]);
 			}
+			else {
+				numCalls[0]+=1;
+				fpsElapsed[0]+=elapsed;
+				if(numCalls[0] >= Std.int(ClientPrefs.framerate/maxLuaFPS)){
+					//trace("New Update");
+					callOnLuas('onUpdate', [fpsElapsed[0]]);
+					fpsElapsed[0]=0;
+					numCalls[0]=0;
+				}
+			}
+		} else {
+			callOnLuas('onUpdate', [elapsed]);
 		}
 
 		if(!inCutscene) {
@@ -3017,7 +3010,7 @@ class PlayState extends MusicBeatState
 			#end
 		}
 
-		if (SONG.song.contains("Pastanight") || SONG.song == "Pasta Night")
+		if (formattedSong == "pasta-night")
 		{
 			switch(PlayState.bihNum)
 			{
@@ -3056,7 +3049,7 @@ class PlayState extends MusicBeatState
 					FlxG.sound.music.pause();
 					vocals.pause();
 				}
-				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+				openSubState(new PauseSubState());
 
 				#if desktop
 				DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter().replace("icon-", ""));
@@ -3092,45 +3085,46 @@ class PlayState extends MusicBeatState
 		if (!freeze)
 		{
 			if (startingSong)
-				{
-					if (startedCountdown)
-					{
-						Conductor.songPosition += elapsed * 1000;
-						if (Conductor.songPosition >= 0)
-							startSong();
-					}
-				}
-				else
+			{
+				if (startedCountdown)
 				{
 					Conductor.songPosition += elapsed * 1000;
-
-					if (!paused)
-					{
-						if(updateTime) {
-							var curTime:Float = Conductor.songPosition - ClientPrefs.noteOffset;
-							if(curTime < 0) curTime = 0;
-							songPercent = (curTime / songLength);
-
-							var songCalc:Float = (songLength - curTime);
-							if(ClientPrefs.timeBarType == 'Time Elapsed') songCalc = curTime;
-
-							var secondsTotal:Int = Math.floor(songCalc / 1000);
-							if(secondsTotal < 0) secondsTotal = 0;
-
-							if(ClientPrefs.timeBarType != 'Song Name')
-								timeTxt.text = FlxStringUtil.formatTime(secondsTotal, false);
-						}
-					}
-
-					// Conductor.lastSongPos = FlxG.sound.music.time;
+					if (Conductor.songPosition >= 0)
+						startSong();
 				}
+			}
+			else
+			{
+				Conductor.songPosition += elapsed * 1000;
+
+				if (!paused)
+				{
+					if(updateTime) {
+						var curTime:Float = Conductor.songPosition - ClientPrefs.noteOffset;
+						if(curTime < 0) curTime = 0;
+						songPercent = (curTime / songLength);
+
+						var songCalc:Float = (songLength - curTime);
+						if(ClientPrefs.timeBarType == 'Time Elapsed') songCalc = curTime;
+
+						var secondsTotal:Int = Math.floor(songCalc / 1000);
+						if(secondsTotal < 0) secondsTotal = 0;
+
+						if(ClientPrefs.timeBarType != 'Song Name')
+							timeTxt.text = FlxStringUtil.formatTime(secondsTotal, false);
+					}
+				}
+
+				// Conductor.lastSongPos = FlxG.sound.music.time;
+			}
 		}
 
 
 		if (camZooming)
 		{
-			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125), 0, 1));
-			camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125), 0, 1));
+			var lerpVal = CoolUtil.boundTo(1 - (elapsed * 3.125), 0, 1);
+			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, lerpVal);
+			camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, lerpVal);
 		}
 
 		FlxG.watch.addQuick("beatShit", curBeat);
@@ -3353,11 +3347,12 @@ class PlayState extends MusicBeatState
 		setOnLuas('botPlay', cpuControlled);
 
 
-		//Workaround for luajit memory leak at higher fps
-		if(ClientPrefs.framerate <= maxLuaFPS){
-			callOnLuas('onUpdatePost', [elapsed]);
-		}
-		else {
+		if(ClientPrefs.capLua60fps) {
+			//Workaround for luajit memory leak at higher fps
+			if(ClientPrefs.framerate <= maxLuaFPS){
+				callOnLuas('onUpdatePost', [elapsed]);
+			}
+			else {
 			numCalls[1]+=1;
 			fpsElapsed[1]+=elapsed;
 			if(numCalls[1] >= Std.int(ClientPrefs.framerate/maxLuaFPS)){
@@ -3366,6 +3361,9 @@ class PlayState extends MusicBeatState
 				fpsElapsed[1]=0;
 				numCalls[1]=0;
 			}
+			}
+		} else {
+			callOnLuas('onUpdatePost', [elapsed]);
 		}
 
 		updateHealthGraphics();
@@ -4817,19 +4815,21 @@ class PlayState extends MusicBeatState
 			notes.sort(FlxSort.byY, ClientPrefs.downScroll ? FlxSort.ASCENDING : FlxSort.DESCENDING);
 		}
 
-		if (SONG.notes[Math.floor(curStep / 16)] != null)
+		var sec = SONG.notes[Math.floor(curStep / 16)];
+
+		if (sec != null)
 		{
-			if (SONG.notes[Math.floor(curStep / 16)].changeBPM)
+			if (sec.changeBPM)
 			{
-				Conductor.changeBPM(SONG.notes[Math.floor(curStep / 16)].bpm);
+				Conductor.changeBPM(sec.bpm);
 				//FlxG.log.add('CHANGED BPM!');
 				setOnLuas('curBpm', Conductor.bpm);
 				setOnLuas('crochet', Conductor.crochet);
 				setOnLuas('stepCrochet', Conductor.stepCrochet);
 			}
-			setOnLuas('mustHitSection', SONG.notes[Math.floor(curStep / 16)].mustHitSection);
-			setOnLuas('altAnim', SONG.notes[Math.floor(curStep / 16)].altAnim);
-			setOnLuas('gfSection', SONG.notes[Math.floor(curStep / 16)].gfSection);
+			setOnLuas('mustHitSection', sec.mustHitSection);
+			setOnLuas('altAnim', sec.altAnim);
+			setOnLuas('gfSection', sec.gfSection);
 			// else
 			// Conductor.changeBPM(SONG.bpm);
 		}
@@ -6160,6 +6160,8 @@ class PlayState extends MusicBeatState
 			if(exclusions.contains(script.scriptName))
 				continue;
 
+			FunkinLua.currentScript = script;
+
 			var ret:Dynamic = script.call(event, args);
 			if(ret == FunkinLua.Function_StopLua && !ignoreStops)
 				break;
@@ -6176,8 +6178,9 @@ class PlayState extends MusicBeatState
 
 	public function setOnLuas(variable:String, arg:Dynamic) {
 		#if LUA_ALLOWED
-		for (i in 0...luaArray.length) {
-			luaArray[i].set(variable, arg);
+		for(script in luaArray) {
+			FunkinLua.currentScript = script;
+			script.set(variable, arg);
 		}
 		#end
 	}

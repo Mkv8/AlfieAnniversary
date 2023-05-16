@@ -24,7 +24,7 @@ class ClientPrefs {
 		ClientPrefs.downScroll = check;
 
 		return check;
-	}	
+	}
 	private static function set_middleScroll(check:Bool):Bool {
 		if(downScroll){
 			PlayState.ratingPosition = DownScroll(check);
@@ -36,7 +36,7 @@ class ClientPrefs {
 		ClientPrefs.middleScroll = check;
 
 		return check;
-	}	
+	}
 
 	public static var showFPS:Bool = true;
 	public static var flashing:Bool = true;
@@ -44,6 +44,7 @@ class ClientPrefs {
 	public static var noteSplashes:Bool = true;
 	public static var lowQuality:Bool = false;
 	public static var framerate:Int = 60;
+	public static var capLua60fps:Bool = false;
 	public static var camZooms:Bool = true;
 	public static var hideHud:Bool = false;
 	public static var noteOffset:Int = 0;
@@ -116,6 +117,7 @@ class ClientPrefs {
 	}
 
 	public static function saveSettings() {
+		FlxG.save.data.capLua60fps = capLua60fps;
 		FlxG.save.data.downScroll = downScroll;
 		FlxG.save.data.middleScroll = middleScroll;
 		FlxG.save.data.showFPS = showFPS;
@@ -168,6 +170,9 @@ class ClientPrefs {
 		#end
 
 
+		if(FlxG.save.data.capLua60fps != null) {
+			capLua60fps = FlxG.save.data.capLua60fps;
+		}
 		if(FlxG.save.data.downScroll != null) {
 			downScroll = FlxG.save.data.downScroll;
 		}
