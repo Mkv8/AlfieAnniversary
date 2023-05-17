@@ -3148,6 +3148,20 @@ class HScript
 			}
 			return false;
 		});
+
+		interp.variables.set('addLuaToHscript', function(the_set_of_all_things_can_contain_itself:Bool)
+		{
+			if(the_set_of_all_things_can_contain_itself){
+				trace(Lua_helper.callbacks.keys());
+				for(v in Lua_helper.callbacks.keys()){
+					interp.variables.set(v,
+						Lua_helper.callbacks.get(v)
+					);
+				}
+			}
+		});
+
+		
 	}
 
 	public function execute(codeToRun:String):Dynamic
