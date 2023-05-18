@@ -96,6 +96,7 @@ class ControlsSubState extends MusicBeatSubstate {
 				optionText.screenCenter(X);
 				optionText.forceX = optionText.x;
 				optionText.yAdd = -55;
+				optionText.fontColor = 0xFFffffff;
 			} else {
 				optionText.forceX = 200;
 			}
@@ -277,12 +278,14 @@ class ControlsSubState extends MusicBeatSubstate {
 		var text1 = new AttachedText(InputFormatter.getKeyName(keys[0]), 400, -55);
 		text1.setPosition(optionText.x + 400, optionText.y - 55);
 		text1.sprTracker = optionText;
+		text1.fontColor = 0xFFffffff;
 		grpInputs.push(text1);
 		add(text1);
 
 		var text2 = new AttachedText(InputFormatter.getKeyName(keys[1]), 650, -55);
 		text2.setPosition(optionText.x + 650, optionText.y - 55);
 		text2.sprTracker = optionText;
+		text2.fontColor = 0xFFffffff;
 		grpInputsAlt.push(text2);
 		add(text2);
 	}
