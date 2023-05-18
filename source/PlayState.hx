@@ -1323,9 +1323,9 @@ class PlayState extends MusicBeatState
 				fakeweek.scale.set(1.10, 1.10);
 				add(fakeweek);
 
-				#if mac
-				Main.macBackground.visible = false;
-				#end
+				#if mac Main.macBackground.visible = false; #end
+				#if linux Main.linuxBackground.visible = false; #end
+				
 
 			case 'pasta':
 				pastabg = new BGSprite('pasta/pastaground', -960, 540, 1, 1, ['pastabg0'], false);
@@ -4821,9 +4821,8 @@ class PlayState extends MusicBeatState
 
 		FlxG.game.filtersEnabled = false;
 
-		#if mac
-		Main.macBackground.visible = false;
-		#end
+		#if mac Main.macBackground.visible = false; #end
+		#if linux Main.linuxBackground.visible = false; #end
 
 		super.destroy();
 
@@ -6052,7 +6051,7 @@ class PlayState extends MusicBeatState
 						//FlxG.camera.flash(FlxColor.WHITE,0.5,false);
 
 						if(origWinFullScreen == null) origWinFullScreen = Lib.application.window.fullscreen;
-						#if mac
+						#if !windows
 						if(origWinX == null) origWinX = Application.current.window.x;
 						if(origWinY == null) origWinY = Application.current.window.y;
 						if(origWinWidth == null) origWinWidth = Application.current.window.width;
@@ -6067,9 +6066,10 @@ class PlayState extends MusicBeatState
 						Lib.application.window.borderless = true;
 						Lib.application.window.fullscreen = false;
 						#end
-						#if mac
+						#if !windows
 						camGame.bgColor.alpha = 0;
-						Main.macBackground.visible = true;
+						#if mac Main.macBackground.visible = true; #end
+						#if linux Main.linuxBackground.visible = true; #end
 						Application.current.window.fullscreen = true;
 						Application.current.window.borderless = true;
 
@@ -6081,6 +6081,7 @@ class PlayState extends MusicBeatState
 							scoreTxt.cameras = [camOther];
 						}
 						#end
+
 						TransparentWindow.enableTransparent();
 						Main.fpsVar.visible = false; // Transparent
 						#if windows
@@ -6106,7 +6107,7 @@ class PlayState extends MusicBeatState
 				{
 					if (!ClientPrefs.lowQuality) {
 						FlxTween.tween(Main.instance.flashShader, {apply: 1}, 0.6);
-						#if mac
+						#if !windows
 						if(!ClientPrefs.downScroll) {
 							FlxTween.tween(scoreTxt, {alpha: 0}, 0.6);
 						}
@@ -6129,10 +6130,12 @@ class PlayState extends MusicBeatState
 					camHUD.alpha = 0.0001;
 					camGame.bgColor = 0xFF000000;
 					if (!ClientPrefs.lowQuality) {
-						#if mac
+						#if !windows
 						camGame.bgColor.alpha = 255;
-						Main.macBackground.visible = false;
+						#if mac Main.macBackground.visible = false; #end
+						#if linux Main.linuxBackground.visible = false; #end
 						#end
+						
 					}
 
 				}

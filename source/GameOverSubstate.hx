@@ -42,9 +42,8 @@ class GameOverSubstate extends MusicBeatSubstate
 	override function create()
 	{
 		TransparentWindow.disableTransparent();
-		#if mac
-		Main.macBackground.visible = false;
-		#end
+		#if mac Main.macBackground.visible = false; #end
+		#if linux Main.linuxBackground.visible = false; #end
 		Lib.application.window.borderless = false;
 		Main.fpsVar.visible = ClientPrefs.showFPS; // Transparent
 

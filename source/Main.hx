@@ -20,6 +20,10 @@ import shaders.FlashShader;
 class MacBackground extends BitmapData {}
 #end
 
+#if linux
+@:bitmap("assets/linuxbackground.png")
+class LinuxBackground extends BitmapData {}
+#end
 
 class Main extends Sprite
 {
@@ -34,6 +38,7 @@ class Main extends Sprite
 	public static var fpsVar:FPS;
 
 	public static var macBackground:Bitmap;
+	public static var linuxBackground:Bitmap;
 
 	public var flashShader = new FlashShader();
 
@@ -95,6 +100,13 @@ class Main extends Sprite
 		addChild(macBackground);
 		#end
 
+		#if linux
+		linuxBackground = new Bitmap(new LinuxBackground(0, 0));
+		linuxBackground.smoothing = true;
+		linuxBackground.visible = false;
+		addChild(linuxBackground);
+		#end
+
 		ClientPrefs.loadDefaultKeys();
 		// fuck you, persistent caching stays ON during sex
 		FlxGraphic.defaultPersist = true;
@@ -122,7 +134,7 @@ class Main extends Sprite
 	}
 
 	function onResize(event:Event = null) {
-		#if mac
+		#if !windows
 		var width = stage.stageWidth;
 		var height = stage.stageHeight;
 
@@ -135,12 +147,15 @@ class Main extends Sprite
 		bgWidth =  Math.floor(height * ratio);
 
 		trace(ratio, scaleY, bgWidth, bgHeight);
+		var bg = 
+			#if mac macBackground #end 
+			#if linux linuxBackground #end 
+			#if windows null /*how tf would this happen*/ #end;
+		bg.width = bgWidth;
+		bg.height = bgHeight;
 
-		macBackground.width = bgWidth;
-		macBackground.height = bgHeight;
-
-		macBackground.x = 0.5 * (width - macBackground.width);
-		macBackground.y = height - macBackground.height;
+		bg.x = 0.5 * (width - bg.width);
+		bg.y = height - bg.height;
 		#end
 	}
 }
