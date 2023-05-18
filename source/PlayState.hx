@@ -5,7 +5,7 @@ import shaders.MacNoteAlphaShader;
 import flixel.util.FlxDestroyUtil;
 import shaders.VCRShader;
 import shaders.OldTVShader;
-#if linux 
+#if (linux || mac)
 import shaders.OldTVShaderLinux;
 #end
 import shaders.TransparentHudShader;
@@ -1108,8 +1108,8 @@ class PlayState extends MusicBeatState
 				if (!ClientPrefs.lowQuality) {
 					var shaders:Array<BitmapFilter> = [
 						new ShaderFilter(new VCRShader()),
-						#if !(mac||linux) new ShaderFilter(new OldTVShader()) #end
-						#if linux new ShaderFilter(new OldTVShaderLinux()) #end
+						#if !(mac || linux) new ShaderFilter(new OldTVShader()) #end
+						#if (linux || mac) new ShaderFilter(new OldTVShaderLinux()) #end
 					];
 
 					//camHUD.setFilters(shaders);
