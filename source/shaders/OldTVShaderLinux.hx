@@ -60,8 +60,6 @@ void main() {
 
 	vec4 col = flixel_texture2D(bitmap, uv);
 
-	//blur, from https://www.shadertoy.com/view/Xltfzj
-
 	//for the black on the left
 	if (uv.x < 0.0) {
 		col = id.xxxy;
@@ -94,6 +92,7 @@ void main() {
 		col = mix(col, vec4(i,i,i,i), mixPercent);
 	}
 
+	/*
 	//white sploches
 	float updateRate3 = 75.0;
 	float uvyMul2 = 400.0;
@@ -111,7 +110,7 @@ void main() {
 			adjVal = clamp(adjVal, 0.0, 1.0);
 			col = vec4(mix(col.rgb, id.yyy, adjVal), col.a);
 		}
-	}
+	}*/
 
 	gl_FragColor = col;
 }')
