@@ -1418,6 +1418,9 @@ class PlayState extends MusicBeatState
 		}
 		if(curStage == 'fake') {
 			add(blackOverlay);
+			if(origWinFullScreen == null) origWinFullScreen = Lib.application.window.fullscreen;
+			Lib.application.window.fullscreen = false;
+
 		}
 		if(curStage == 'pasta') {
 			add(pastatable);
@@ -6063,8 +6066,8 @@ class PlayState extends MusicBeatState
 						#end
 
 						#if windows
-						Lib.application.window.borderless = true;
 						Lib.application.window.fullscreen = false;
+						Lib.application.window.borderless = true;
 						#end
 						#if !windows
 						camGame.bgColor.alpha = 0;
